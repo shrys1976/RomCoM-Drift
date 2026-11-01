@@ -1,5 +1,64 @@
 {
-  "status": "READY_FOR_OWNER_REVIEW",
+  "status": "BLOCKED",
+  "block_reason": "nli_alignment_pending_owner_review",
+  "phase": "2.1",
+  "nli_alignment_approved": false,
+  "mix_report": {
+    "by_task_intensity": {
+      "toxicity:reconstructed_intensity_25": {
+        "hindi_origin_tokens": 119,
+        "english_origin_tokens": 757895,
+        "language_switches": 238,
+        "eligible_for_switch": 119,
+        "taxonomy_replacements": 0,
+        "missing_dictionary": 0,
+        "hindi_origin_proportion": 0.00015698918489632117,
+        "english_origin_proportion": 0.9998430108151036,
+        "replacement_rate": 0.0
+      },
+      "toxicity:reconstructed_intensity_50": {
+        "hindi_origin_tokens": 13473,
+        "english_origin_tokens": 744541,
+        "language_switches": 25265,
+        "eligible_for_switch": 484338,
+        "taxonomy_replacements": 0,
+        "missing_dictionary": 470865,
+        "hindi_origin_proportion": 0.017774078051328867,
+        "english_origin_proportion": 0.9822259219486711,
+        "replacement_rate": 0.0
+      },
+      "toxicity:reconstructed_intensity_75": {
+        "hindi_origin_tokens": 70703,
+        "english_origin_tokens": 687311,
+        "language_switches": 103685,
+        "eligible_for_switch": 696547,
+        "taxonomy_replacements": 0,
+        "missing_dictionary": 625844,
+        "hindi_origin_proportion": 0.09327400285482854,
+        "english_origin_proportion": 0.9067259971451714,
+        "replacement_rate": 0.0
+      }
+    },
+    "zero_switch_examples": {
+      "toxicity:reconstructed_intensity_25": {
+        "count": 6884,
+        "rate": 0.9834285714285714
+      },
+      "toxicity:reconstructed_intensity_50": {
+        "count": 1889,
+        "rate": 0.26985714285714285
+      },
+      "toxicity:reconstructed_intensity_75": {
+        "count": 56,
+        "rate": 0.008
+      }
+    }
+  },
+  "leakage_check": {
+    "leaked_source_ids": [],
+    "leaked_hashes": [],
+    "ok": true
+  },
   "inventory_stats": {
     "native_words": 24999,
     "variants": 44202,
@@ -53,7 +112,7 @@
       "benign_config": "Dolly_T",
       "n_toxic_raw": 5000,
       "n_benign_sampled": 2000,
-      "benign_status": "sampled_Dolly_T_train_head_2000",
+      "benign_status": "reused",
       "files": [
         "Toxic_Matrix_train.jsonl",
         "Indic_ShareLlama_benign_sample.jsonl"
@@ -61,25 +120,17 @@
     }
   },
   "row_counts": {
-    "nli_source": 14490,
-    "paraphrase_source": 2002,
+    "nli_source_eligible": 14490,
+    "nli_included_in_processed": false,
+    "paraphrase_source_eligible": 2002,
+    "paraphrase_reconstruction_kept": 0,
+    "paraphrase_excluded": 2002,
     "toxicity_source": 7000,
-    "nli_base": 43470,
-    "paraphrase_base": 6006,
+    "nli_base": 0,
+    "paraphrase_base": 0,
     "toxicity_base": 21000,
+    "paraphrase_build_stats": {},
     "stream_counts": {
-      "EXP-01:validation:nli": 7470,
-      "EXP-02:validation:nli": 7470,
-      "EXP-03:validation:nli": 7470,
-      "EXP-01:train:nli": 36000,
-      "EXP-02:train:nli": 36000,
-      "EXP-03:train:nli": 36000,
-      "EXP-01:validation:paraphrase": 1200,
-      "EXP-02:validation:paraphrase": 1200,
-      "EXP-03:validation:paraphrase": 1200,
-      "EXP-01:train:paraphrase": 4806,
-      "EXP-02:train:paraphrase": 4806,
-      "EXP-03:train:paraphrase": 4806,
       "EXP-01:validation:toxicity": 4200,
       "EXP-02:validation:toxicity": 4200,
       "EXP-03:validation:toxicity": 4200,
@@ -89,19 +140,26 @@
     },
     "qa": {
       "train.jsonl": {
-        "n_EXP-01": 57606,
-        "n_EXP-02": 57606,
-        "n_EXP-03": 57606,
+        "n_EXP-01": 16800,
+        "n_EXP-02": 16800,
+        "n_EXP-03": 16800,
         "ids_match": true,
-        "labels_match": true
+        "labels_match": true,
+        "source_ids_and_splits_match": true
       },
       "validation.jsonl": {
-        "n_EXP-01": 12870,
-        "n_EXP-02": 12870,
-        "n_EXP-03": 12870,
+        "n_EXP-01": 4200,
+        "n_EXP-02": 4200,
+        "n_EXP-03": 4200,
         "ids_match": true,
-        "labels_match": true
+        "labels_match": true,
+        "source_ids_and_splits_match": true
       }
+    },
+    "noise_stats": {
+      "per_token_distance_match_rate": 1.0,
+      "tokens_evaluated": 73194,
+      "failed_resample_attempts": 941
     }
   },
   "split_stats": {
@@ -110,30 +168,57 @@
     "nli_overlap": 0,
     "para_overlap": 0,
     "tox_overlap": 0,
-    "test_in_training": false
+    "protected_test_leakage": {
+      "leaked_source_ids": [],
+      "leaked_hashes": [],
+      "ok": true
+    },
+    "quarantined_nli": 0,
+    "quarantined_paraphrase": 0,
+    "quarantined_toxicity": 0
   },
   "coverage": {
-    "latin_token_occurrences": 506920,
-    "mapped_occurrences": 124760,
-    "occurrence_coverage": 0.24611378521265684,
-    "latin_types": 12390,
-    "mapped_types": 3929,
-    "type_coverage": 0.31711057304277646
+    "toxicity:reconstructed_intensity_25": {
+      "occurrence_coverage": 0.9850689370353898,
+      "type_coverage": 0.8461538461538461,
+      "hindi_derived_occurrences": 15739,
+      "english_token_occurrences": 188812,
+      "unknown_rate": 0.014931062964610204,
+      "ambiguous_rate": 0.0
+    },
+    "toxicity:reconstructed_intensity_50": {
+      "occurrence_coverage": 0.4659284623708513,
+      "type_coverage": 0.7,
+      "hindi_derived_occurrences": 67461,
+      "english_token_occurrences": 188812,
+      "unknown_rate": 0.07920131631609374,
+      "ambiguous_rate": 0.45487022131305493
+    },
+    "toxicity:reconstructed_intensity_75": {
+      "occurrence_coverage": 0.4262198928312574,
+      "type_coverage": 0.6541353383458647,
+      "hindi_derived_occurrences": 238689,
+      "english_token_occurrences": 188812,
+      "unknown_rate": 0.024433467817955582,
+      "ambiguous_rate": 0.549346639350787
+    }
   },
   "qa": {
     "train.jsonl": {
-      "n_EXP-01": 57606,
-      "n_EXP-02": 57606,
-      "n_EXP-03": 57606,
+      "n_EXP-01": 16800,
+      "n_EXP-02": 16800,
+      "n_EXP-03": 16800,
       "ids_match": true,
-      "labels_match": true
+      "labels_match": true,
+      "source_ids_and_splits_match": true
     },
     "validation.jsonl": {
-      "n_EXP-01": 12870,
-      "n_EXP-02": 12870,
-      "n_EXP-03": 12870,
+      "n_EXP-01": 4200,
+      "n_EXP-02": 4200,
+      "n_EXP-03": 4200,
       "ids_match": true,
-      "labels_match": true
+      "labels_match": true,
+      "source_ids_and_splits_match": true
     }
   },
   "config_hash": "edb6448d4a679db665b04d01fcee6f79684e2dea7b1c9fe491746b07114ff54e"

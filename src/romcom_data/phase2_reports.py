@@ -131,7 +131,18 @@ Only classification/refusal **targets** are code-mixed.
 - Input-side eligible Romanized Hindi coverage is expected to be near zero unless the source prompt already contains it.
 - Target-side romanization **must not** be interpreted as evidence of improved Romanized-Hindi **input** understanding.
 - Original prompt bytes are preserved. Labels `toxic` / `non_toxic` are preserved.
-- Benign rows come from IndicAlign `Indic_ShareLlama` sample for balance, separately identifiable via `is_benign`.
+- Benign rows: deterministic shuffle of IndicAlign `Dolly_T` (`Dolly_T_benign_sample.jsonl`), separately identifiable via `is_benign`.
+- User/assistant turns are stored separately; prompts are not concatenated with refusals.
+""",
+    )
+
+    _write(
+        "code_mix_distribution_report.md",
+        f"""## Measured mixing (not benchmark-equivalent)
+
+Intensities are labeled `reconstructed_intensity_25/50/75`.
+
+{json.dumps(ctx.get("mix_report", {}), indent=2, default=str)}
 """,
     )
 
@@ -141,9 +152,13 @@ Only classification/refusal **targets** are code-mixed.
 
 Same source IDs, splits, labels, and row counts across EXP-01/02/03.
 
-- EXP-01: Dakshina unique max-count canonical (ties broken lexicographically for inventory; tokens with remaining multi-way surface ties left unchanged in text if flagged).
+- EXP-01: Dakshina canonical; tied top-frequency variants use lexicographic fallback (reproducibility only).
 - EXP-02: p_variant=0.35 attestation-weighted non-canonical Dakshina variants from EXP-01.
-- EXP-03: random Latin edits at the same EXP-02 token positions, matched edit-op count.
+- EXP-03: reuses EXP-02 token mask; per-token Levenshtein distance matched to EXP-02 selection.
+
+## Noise stats
+
+{json.dumps(ctx.get("row_counts", {}).get("noise_stats", {}), indent=2, default=str)}
 
 ## QA
 
@@ -155,12 +170,16 @@ Same source IDs, splits, labels, and row counts across EXP-01/02/03.
         "final_data_handoff_report.md",
         f"""## Status
 
-**{ctx.get("status", "READY_FOR_OWNER_REVIEW")}**
+**{ctx.get("status", "READY_FOR_OWNER_REVIEW")}** (Phase {ctx.get("phase", "2.1")})
+
+Block reason: `{ctx.get("block_reason", "")}`
+
+NLI alignment approved: {ctx.get("nli_alignment_approved", False)}
 
 ## Primary task sources (reconstructed Indi-RomCoM methodology)
 
 - NLI: Divyanshu/indicxnli (owner-approved CC BY 4.0)
-- Paraphrase: ai4bharat/IndicXParaphrase (owner-approved CC0)
+- Paraphrase: omitted unless independent English pivots exist (see `paraphrase_source_semantics.md`)
 - Toxicity: ai4bharat/indic-align Toxic_Matrix (owner-approved CC BY 4.0)
 
 These are **not** the official Indi-RomCoM training release.

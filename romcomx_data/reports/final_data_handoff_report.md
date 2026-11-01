@@ -1,16 +1,20 @@
 # final data handoff report
 
-- Timestamp (UTC): 2026-11-01T09:12:43.046811+00:00
+- Timestamp (UTC): 2026-11-01T11:11:55.377409+00:00
 - Code version: romcom_data 0.1.0
 
 ## Status
 
-**READY_FOR_OWNER_REVIEW**
+**BLOCKED** (Phase 2.1)
+
+Block reason: `nli_alignment_pending_owner_review`
+
+NLI alignment approved: False
 
 ## Primary task sources (reconstructed Indi-RomCoM methodology)
 
 - NLI: Divyanshu/indicxnli (owner-approved CC BY 4.0)
-- Paraphrase: ai4bharat/IndicXParaphrase (owner-approved CC0)
+- Paraphrase: omitted unless independent English pivots exist (see `paraphrase_source_semantics.md`)
 - Toxicity: ai4bharat/indic-align Toxic_Matrix (owner-approved CC BY 4.0)
 
 These are **not** the official Indi-RomCoM training release.
@@ -18,25 +22,17 @@ These are **not** the official Indi-RomCoM training release.
 ## Counts
 
 {
-  "nli_source": 14490,
-  "paraphrase_source": 2002,
+  "nli_source_eligible": 14490,
+  "nli_included_in_processed": false,
+  "paraphrase_source_eligible": 2002,
+  "paraphrase_reconstruction_kept": 0,
+  "paraphrase_excluded": 2002,
   "toxicity_source": 7000,
-  "nli_base": 43470,
-  "paraphrase_base": 6006,
+  "nli_base": 0,
+  "paraphrase_base": 0,
   "toxicity_base": 21000,
+  "paraphrase_build_stats": {},
   "stream_counts": {
-    "EXP-01:validation:nli": 7470,
-    "EXP-02:validation:nli": 7470,
-    "EXP-03:validation:nli": 7470,
-    "EXP-01:train:nli": 36000,
-    "EXP-02:train:nli": 36000,
-    "EXP-03:train:nli": 36000,
-    "EXP-01:validation:paraphrase": 1200,
-    "EXP-02:validation:paraphrase": 1200,
-    "EXP-03:validation:paraphrase": 1200,
-    "EXP-01:train:paraphrase": 4806,
-    "EXP-02:train:paraphrase": 4806,
-    "EXP-03:train:paraphrase": 4806,
     "EXP-01:validation:toxicity": 4200,
     "EXP-02:validation:toxicity": 4200,
     "EXP-03:validation:toxicity": 4200,
@@ -46,19 +42,26 @@ These are **not** the official Indi-RomCoM training release.
   },
   "qa": {
     "train.jsonl": {
-      "n_EXP-01": 57606,
-      "n_EXP-02": 57606,
-      "n_EXP-03": 57606,
+      "n_EXP-01": 16800,
+      "n_EXP-02": 16800,
+      "n_EXP-03": 16800,
       "ids_match": true,
-      "labels_match": true
+      "labels_match": true,
+      "source_ids_and_splits_match": true
     },
     "validation.jsonl": {
-      "n_EXP-01": 12870,
-      "n_EXP-02": 12870,
-      "n_EXP-03": 12870,
+      "n_EXP-01": 4200,
+      "n_EXP-02": 4200,
+      "n_EXP-03": 4200,
       "ids_match": true,
-      "labels_match": true
+      "labels_match": true,
+      "source_ids_and_splits_match": true
     }
+  },
+  "noise_stats": {
+    "per_token_distance_match_rate": 1.0,
+    "tokens_evaluated": 73194,
+    "failed_resample_attempts": 941
   }
 }
 

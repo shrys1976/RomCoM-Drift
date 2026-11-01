@@ -41,7 +41,7 @@
     "benign_config": "Dolly_T",
     "n_toxic_raw": 5000,
     "n_benign_sampled": 2000,
-    "benign_status": "sampled_Dolly_T_train_head_2000",
+    "benign_status": "reused",
     "files": [
       "Toxic_Matrix_train.jsonl",
       "Indic_ShareLlama_benign_sample.jsonl"

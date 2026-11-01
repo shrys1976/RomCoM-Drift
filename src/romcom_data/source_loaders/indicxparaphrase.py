@@ -60,6 +60,8 @@ def load_normalized_paraphrase(meta: dict[str, Any]) -> list[dict[str, Any]]:
                 "sentence1_native": s1,
                 "sentence2_native": s2,
                 "sentence_en": en,
+                "sentence1_en": en,
+                "sentence2_en": "",
                 "sentence1_is_devanagari": bool(DEVANAGARI.search(s1)),
                 "sentence2_is_devanagari": bool(DEVANAGARI.search(s2)),
                 "original_label": original_label,

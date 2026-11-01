@@ -45,9 +45,18 @@ from romcom_data.source_loaders.indicxparaphrase import (
 )
 from romcom_data.source_loaders.toxic_matrix import acquire_toxic_matrix, load_normalized_toxicity
 from romcom_data.source_loaders.xnli_english import attach_xnli_english
-from romcom_data.splitting import assign_splits
+from romcom_data.mix_metrics import aggregate_mix_report
+from romcom_data.nli_alignment import write_alignment_sample
+from romcom_data.paraphrase_gate import document_en_field_semantics, filter_paraphrase_for_reconstruction
+from romcom_data.phase2_coverage import coverage_by_task_intensity
+from romcom_data.split_freeze import (
+    freeze_task_splits,
+    leakage_check_protected_test,
+    nli_alignment_approved,
+    write_protected_test_manifest,
+)
 from romcom_data.stable_hash import derive_rng
-from romcom_data.text_utils import tokenize_conservative
+from romcom_data.augmentation import levenshtein_distance
 
 
 def _copy_raw() -> None:
@@ -162,36 +171,6 @@ def stream_task(
     return dict(counts)
 
 
-def coverage_summary(bases: list[dict[str, Any]], romanizer: DakshinaRomanizer) -> dict[str, Any]:
-    total_tokens = 0
-    latin_tokens = 0
-    mapped = 0
-    types: set[str] = set()
-    mapped_types: set[str] = set()
-    for row in bases:
-        texts = []
-        inp = row.get("input") or {}
-        texts.extend(str(v) for v in inp.values())
-        for text in texts:
-            for tok in tokenize_conservative(text):
-                if not tok.is_latin_word:
-                    continue
-                total_tokens += 1
-                latin_tokens += 1
-                types.add(tok.text.casefold())
-                if romanizer.lookup_alias(tok.text):
-                    mapped += 1
-                    mapped_types.add(tok.text.casefold())
-    return {
-        "latin_token_occurrences": latin_tokens,
-        "mapped_occurrences": mapped,
-        "occurrence_coverage": mapped / latin_tokens if latin_tokens else 0,
-        "latin_types": len(types),
-        "mapped_types": len(mapped_types),
-        "type_coverage": len(mapped_types) / len(types) if types else 0,
-    }
-
-
 def qa_matching_ids() -> dict[str, Any]:
     result: dict[str, Any] = {}
     for split in ("train.jsonl", "validation.jsonl"):
@@ -213,14 +192,71 @@ def qa_matching_ids() -> dict[str, Any]:
                         lab[str(row.get("label"))] += 1
             ids[cond] = sid
             labels[cond] = dict(lab)
+        meta_match = True
+        for cond in ("EXP-02", "EXP-03"):
+            if len(ids["EXP-01"]) != len(ids[cond]):
+                meta_match = False
+                break
+        if meta_match and ids["EXP-01"]:
+            by_id: dict[str, dict[str, dict[str, Any]]] = {c: {} for c in ids}
+            for cond, folder in (
+                ("EXP-01", EXP01),
+                ("EXP-02", EXP02),
+                ("EXP-03", EXP03),
+            ):
+                with (folder / split).open(encoding="utf-8") as fh:
+                    for line in fh:
+                        row = json.loads(line)
+                        by_id[cond][row["example_id"]] = row
+            eids = set(by_id["EXP-01"])
+            for cond in ("EXP-02", "EXP-03"):
+                if set(by_id[cond]) != eids:
+                    meta_match = False
+            if meta_match:
+                for eid in eids:
+                    r1 = by_id["EXP-01"][eid]
+                    for cond in ("EXP-02", "EXP-03"):
+                        r2 = by_id[cond][eid]
+                        if (
+                            r1.get("source_id") != r2.get("source_id")
+                            or r1.get("label") != r2.get("label")
+                            or r1.get("project_split") != r2.get("project_split")
+                        ):
+                            meta_match = False
+                            break
         result[split] = {
             "n_EXP-01": len(ids["EXP-01"]),
             "n_EXP-02": len(ids["EXP-02"]),
             "n_EXP-03": len(ids["EXP-03"]),
             "ids_match": ids["EXP-01"] == ids["EXP-02"] == ids["EXP-03"],
             "labels_match": labels["EXP-01"] == labels["EXP-02"] == labels["EXP-03"],
+            "source_ids_and_splits_match": meta_match,
         }
     return result
+
+
+def noise_match_stats() -> dict[str, Any]:
+    matched = 0
+    total = 0
+    failed_attempts = 0
+    for cond_path in (TRACES / "EXP-03" / "traces.jsonl",):
+        if not cond_path.is_file():
+            continue
+        with cond_path.open(encoding="utf-8") as fh:
+            for line in fh:
+                rec = json.loads(line)
+                for tok in rec.get("tokens") or []:
+                    if tok.get("operation") != "random_noise":
+                        continue
+                    total += 1
+                    if tok.get("distance_match"):
+                        matched += 1
+                    failed_attempts += max(0, int(tok.get("resample_attempts", 0)) - 1)
+    return {
+        "per_token_distance_match_rate": matched / total if total else 0,
+        "tokens_evaluated": total,
+        "failed_resample_attempts": failed_attempts,
+    }
 
 
 def human_sample(n: int = 100) -> None:
@@ -367,10 +403,68 @@ def main() -> int:
                     break
         nli = other + sampled
 
-    nli = attach_xnli_english(nli)
-    nli = assign_splits(nli, "nli")
-    para = assign_splits(para, "paraphrase")
-    tox = assign_splits(tox, "toxicity")
+    nli_freeze = freeze_task_splits(nli, "nli")
+    para_freeze = freeze_task_splits(para, "paraphrase")
+    tox_freeze = freeze_task_splits(tox, "toxicity")
+
+    all_test = (
+        nli_freeze["test_rows"]
+        + para_freeze["test_rows"]
+        + tox_freeze["test_rows"]
+    )
+    write_protected_test_manifest(all_test, MANIFESTS / "protected_test_manifest.csv")
+
+    nli = attach_xnli_english(nli_freeze["eligible_rows"])
+    para_eligible = para_freeze["eligible_rows"]
+    para_kept, para_excluded, para_filter_stats = filter_paraphrase_for_reconstruction(
+        para_eligible
+    )
+    tox = tox_freeze["eligible_rows"]
+
+    nli_status_path = MANIFESTS / "nli_alignment_status.json"
+    if not nli_status_path.is_file():
+        save_json(
+            nli_status_path,
+            {
+                "owner_approved": False,
+                "note": "Set owner_approved true after reviewing reports/nli_alignment_sample.csv",
+            },
+        )
+    write_alignment_sample(nli, REPORTS / "nli_alignment_sample.csv", n=200)
+    nli_approved = nli_alignment_approved(nli_status_path)
+
+    para_semantics_path = REPORTS / "paraphrase_source_semantics.md"
+    para_semantics_path.write_text(
+        document_en_field_semantics(
+            PROJECT_ROOT / "romcomx_data/raw/indicxparaphrase/hi.tsv"
+        )
+        + "\n\n"
+        + json.dumps(para_filter_stats, indent=2)
+        + "\n",
+        encoding="utf-8",
+    )
+    quarantine_path = REPORTS / "quarantined_split_groups.csv"
+    with quarantine_path.open("w", encoding="utf-8", newline="") as fh:
+        w = csv.DictWriter(
+            fh,
+            fieldnames=["task", "source_id", "group_id", "original_split", "exclusion_reason"],
+        )
+        w.writeheader()
+        for task, fr in (
+            ("nli", nli_freeze),
+            ("paraphrase", para_freeze),
+            ("toxicity", tox_freeze),
+        ):
+            for row in fr["quarantined_rows"]:
+                w.writerow(
+                    {
+                        "task": task,
+                        "source_id": row.get("source_id"),
+                        "group_id": row.get("group_id"),
+                        "original_split": row.get("original_split"),
+                        "exclusion_reason": row.get("exclusion_reason"),
+                    }
+                )
 
     for path in (
         EXP01 / "train.jsonl",
@@ -399,19 +493,30 @@ def main() -> int:
         "EXP-03": TRACES / "EXP-03" / "traces.jsonl",
     }
 
-    romanizer = DakshinaRomanizer()
+    romanizer = DakshinaRomanizer(INVENTORIES / "dakshina_hi_variant_inventory.tsv")
     split_rows: list[dict[str, Any]] = []
     counts: Counter[str] = Counter()
-    nli_base = build_nli_base(nli, romanizer)
-    para_base = build_paraphrase_base(para, romanizer)
+    nli_base: list[dict[str, Any]] = []
+    if nli_approved:
+        nli_base = build_nli_base(nli, romanizer)
+        counts.update(stream_task(nli_base, romanizer, p_variant, writers, traces, split_rows))
+    para_base, para_build_stats = build_paraphrase_base(para_kept, romanizer)
+    if para_base:
+        counts.update(stream_task(para_base, romanizer, p_variant, writers, traces, split_rows))
     tox_base = build_toxicity_base(tox, romanizer)
-    counts.update(stream_task(nli_base, romanizer, p_variant, writers, traces, split_rows))
-    counts.update(stream_task(para_base, romanizer, p_variant, writers, traces, split_rows))
     counts.update(stream_task(tox_base, romanizer, p_variant, writers, traces, split_rows))
 
     _write_split_manifest(split_rows, MANIFESTS / "source_split_manifest.csv")
-    coverage = coverage_summary(nli_base[:2000] + para_base + tox_base[:2000], romanizer)
+    all_bases = nli_base + para_base + tox_base
+    coverage = coverage_by_task_intensity(all_bases, romanizer)
+    mix_report = aggregate_mix_report(all_bases)
     qa = qa_matching_ids()
+    noise_stats = noise_match_stats()
+    gen_ids = {r["source_id"] for r in split_rows}
+    gen_hashes = {r.get("source_row_hash", "") for r in split_rows if r.get("source_row_hash")}
+    leakage = leakage_check_protected_test(
+        MANIFESTS / "protected_test_manifest.csv", gen_ids, gen_hashes
+    )
     human_sample(100)
 
     rels = [p.relative_to(PROJECT_ROOT) for p in HANDOFF.rglob("*") if p.is_file()]
@@ -428,14 +533,19 @@ def main() -> int:
     save_json(MANIFESTS / "data_provenance.json", provenance)
 
     row_counts = {
-        "nli_source": len(nli),
-        "paraphrase_source": len(para),
+        "nli_source_eligible": len(nli),
+        "nli_included_in_processed": nli_approved,
+        "paraphrase_source_eligible": len(para_eligible),
+        "paraphrase_reconstruction_kept": len(para_kept),
+        "paraphrase_excluded": len(para_excluded),
         "toxicity_source": len(tox),
         "nli_base": len(nli_base),
         "paraphrase_base": len(para_base),
         "toxicity_base": len(tox_base),
+        "paraphrase_build_stats": para_build_stats,
         "stream_counts": dict(counts),
         "qa": qa,
+        "noise_stats": noise_stats,
     }
     split_stats = {
         "nli_train_sources": len({r["source_id"] for r in nli if r.get("project_split") == "train"}),
@@ -445,18 +555,42 @@ def main() -> int:
             & {r["source_id"] for r in nli if r.get("project_split") == "validation"}
         ),
         "para_overlap": len(
-            {r["source_id"] for r in para if r.get("project_split") == "train"}
-            & {r["source_id"] for r in para if r.get("project_split") == "validation"}
+            {r["source_id"] for r in para_eligible if r.get("project_split") == "train"}
+            & {r["source_id"] for r in para_eligible if r.get("project_split") == "validation"}
         ),
         "tox_overlap": len(
             {r["source_id"] for r in tox if r.get("project_split") == "train"}
             & {r["source_id"] for r in tox if r.get("project_split") == "validation"}
         ),
-        "test_in_training": any(r.get("original_split") == "test" for r in nli + para + tox),
+        "protected_test_leakage": leakage,
+        "quarantined_nli": nli_freeze["n_quarantined"],
+        "quarantined_paraphrase": para_freeze["n_quarantined"],
+        "quarantined_toxicity": tox_freeze["n_quarantined"],
     }
 
+    gates_ok = (
+        qa.get("train.jsonl", {}).get("ids_match")
+        and qa.get("train.jsonl", {}).get("source_ids_and_splits_match")
+        and leakage.get("ok")
+        and nli_approved
+    )
+    if not nli_approved:
+        status = "BLOCKED"
+        block_reason = "nli_alignment_pending_owner_review"
+    elif not gates_ok:
+        status = "NOT_READY"
+        block_reason = "qa_or_leakage_failed"
+    else:
+        status = "READY_FOR_OWNER_REVIEW"
+        block_reason = ""
+
     ctx = {
-        "status": "READY_FOR_OWNER_REVIEW" if qa.get("train.jsonl", {}).get("ids_match") else "NOT_READY",
+        "status": status,
+        "block_reason": block_reason,
+        "phase": "2.1",
+        "nli_alignment_approved": nli_approved,
+        "mix_report": mix_report,
+        "leakage_check": leakage,
         "inventory_stats": {k: v for k, v in inv_stats.items() if k not in {"alias_df", "inv_df"}},
         "source_meta": {"nli": nli_meta, "paraphrase": para_meta, "toxicity": tox_meta},
         "row_counts": row_counts,

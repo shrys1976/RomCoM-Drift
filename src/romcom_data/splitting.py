@@ -47,9 +47,20 @@ def assign_splits(
     official_dev = [r for r in eligible if r.get("original_split") in {"dev", "validation"}]
 
     if official_train and official_dev:
+        para_root = paraphrase_groups(eligible) if task == "paraphrase" else {}
         train_ids = {r["source_id"] for r in official_train}
         for r in eligible:
-            r["project_split"] = "train" if r["source_id"] in train_ids or r["original_split"] == "train" else "validation"
+            if task == "nli":
+                r["group_id"] = nli_group_key(r)
+            elif task == "paraphrase":
+                r["group_id"] = para_root[_norm(r["sentence1_native"])]
+            else:
+                r["group_id"] = r["source_id"]
+            r["project_split"] = (
+                "train"
+                if r["source_id"] in train_ids or r["original_split"] == "train"
+                else "validation"
+            )
             if r["original_split"] in {"dev", "validation"}:
                 r["project_split"] = "validation"
         return eligible

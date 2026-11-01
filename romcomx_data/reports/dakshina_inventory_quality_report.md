@@ -1,6 +1,6 @@
 # dakshina inventory quality report
 
-- Timestamp (UTC): 2026-11-01T09:12:43.045326+00:00
+- Timestamp (UTC): 2026-11-01T11:11:55.375516+00:00
 - Code version: romcom_data 0.1.0
 
 ## Recomputed inventory

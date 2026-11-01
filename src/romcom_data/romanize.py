@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from romcom_data.canonical_tie import pick_canonical_variant
 from romcom_data.paths import INTERIM, PROJECT_ROOT, RAW_DAKSHINA_HI
 from romcom_data.text_utils import DEVANAGARI, case_fold_key, nfc
 
@@ -101,9 +102,8 @@ class DakshinaRomanizer:
                 ]
                 if not pairs:
                     continue
-                max_c = max(c for _, c in pairs)
-                tied = sorted({v for v, c in pairs if c == max_c})
-                self.native_to_canonical[str(native)] = tied[0]
+                chosen, _, _ = pick_canonical_variant(pairs)
+                self.native_to_canonical[str(native)] = chosen
                 self.native_to_variants[str(native)] = pairs
             self.alias_to_native: dict[str, str] = {}
             self.ambiguous_aliases: set[str] = set()
@@ -127,8 +127,7 @@ class DakshinaRomanizer:
             if len(canon_rows):
                 canon = str(canon_rows.iloc[0][var_col])
             else:
-                max_c = max(c for _, c in pairs)
-                canon = sorted({v for v, c in pairs if c == max_c})[0]
+                canon, _, _ = pick_canonical_variant(pairs)
             self.native_to_canonical[str(native)] = canon
             self.native_to_variants[str(native)] = pairs
 

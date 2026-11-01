@@ -3,6 +3,7 @@ from __future__ import annotations
 import random
 from typing import Any
 
+from romcom_data.canonical_tie import pick_canonical_variant
 from romcom_data.romanize import DakshinaRomanizer
 from romcom_data.stable_hash import derive_example_seed, derive_rng
 from romcom_data.text_utils import case_fold_key, tokenize_conservative
@@ -52,26 +53,86 @@ def levenshtein_ops(a: str, b: str) -> list[tuple[str, int, str]]:
     return ops
 
 
-def apply_random_ops(token: str, ops: list[tuple[str, int, str]], rng: random.Random) -> str:
+def levenshtein_distance(a: str, b: str) -> int:
+    n, m = len(a), len(b)
+    dp = [[0] * (m + 1) for _ in range(n + 1)]
+    for i in range(n + 1):
+        dp[i][0] = i
+    for j in range(m + 1):
+        dp[0][j] = j
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            cost = 0 if a[i - 1] == b[j - 1] else 1
+            dp[i][j] = min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost)
+    return dp[n][m]
+
+
+def _one_random_edit(token: str, rng: random.Random) -> str:
+    if not token:
+        return rng.choice(LATIN_CHARS)
+    op = rng.choice(("sub", "ins", "del"))
     chars = list(token)
-    for op, idx, _ch in ops:
+    if op == "sub":
+        i = rng.randrange(len(chars))
+        orig = chars[i]
+        cand = rng.choice(LATIN_CHARS)
+        while cand == orig.casefold() and len(LATIN_CHARS) > 1:
+            cand = rng.choice(LATIN_CHARS)
+        chars[i] = cand.upper() if orig.isupper() else cand
+    elif op == "ins":
+        i = rng.randrange(len(chars) + 1)
+        chars.insert(i, rng.choice(LATIN_CHARS))
+    elif len(chars) > 1:
+        i = rng.randrange(len(chars))
+        chars.pop(i)
+    return "".join(chars)
+
+
+def noise_token_at_distance(
+    token: str,
+    target_dist: int,
+    rng: random.Random,
+    forbidden: set[str],
+    max_attempts: int = 48,
+) -> tuple[str, bool, int]:
+    if target_dist == 0:
+        return token, False, 0
+    for attempt in range(1, max_attempts + 1):
+        current = token
+        steps = max(target_dist * 3, 4)
+        for _ in range(steps):
+            current = _one_random_edit(current, rng)
+            dist = levenshtein_distance(token.casefold(), current.casefold())
+            if (
+                dist == target_dist
+                and current.casefold() not in forbidden
+                and current.casefold() != token.casefold()
+            ):
+                return current, True, attempt
+    return token, False, max_attempts
+
+
+def apply_random_ops_reverse(token: str, ops: list[tuple[str, int, str]], rng: random.Random) -> str:
+    """Apply edit ops from end to start so indices stay valid."""
+    chars = list(token)
+    for op, idx, ch in reversed(ops):
         if not chars:
             chars = [rng.choice(LATIN_CHARS)]
             continue
         if op == "sub":
-            i = min(idx, len(chars) - 1)
+            i = min(max(idx, 0), len(chars) - 1)
             orig = chars[i]
-            cand = rng.choice(LATIN_CHARS)
-            while cand == orig.casefold() and len(LATIN_CHARS) > 1:
+            cand = ch if ch and ch.isalpha() else rng.choice(LATIN_CHARS)
+            while cand.casefold() == orig.casefold() and len(LATIN_CHARS) > 1:
                 cand = rng.choice(LATIN_CHARS)
             chars[i] = cand.upper() if orig.isupper() else cand
         elif op == "ins":
             i = min(max(idx, 0), len(chars))
-            chars.insert(i, rng.choice(LATIN_CHARS))
+            chars.insert(i, ch if ch and ch.isalpha() else rng.choice(LATIN_CHARS))
         elif op == "del" and len(chars) > 1:
-            i = min(idx, len(chars) - 1)
+            i = min(max(idx, 0), len(chars) - 1)
             chars.pop(i)
-    result = "".join(ch for ch in chars if ch.isalpha()) or rng.choice(LATIN_CHARS)
+    result = "".join(chars) if chars else rng.choice(LATIN_CHARS)
     return result
 
 
@@ -129,21 +190,18 @@ def canonicalize_text(
         variants = span["variants"]
         if not variants:
             continue
-        max_c = max(c for _, c in variants)
-        tied = sorted({v for v, c in variants if c == max_c})
-        if len(tied) > 1:
+        chosen, max_c, tied = pick_canonical_variant(variants)
+        new = _preserve_case(span["token"], chosen)
+        if tied:
             traces.append(
                 {
                     "field": field,
-                    "original": span["token"],
-                    "operation": "unchanged",
-                    "reason": "canonical_tie",
+                    "operation": "canonical_tie_fallback",
+                    "reason": "lexicographic_reproducibility_not_empirical_preference",
                     "native": span["native"],
-                    "offsets": [span["start"], span["end"]],
+                    "tied_highest_frequency": True,
                 }
             )
-            continue
-        new = _preserve_case(span["token"], tied[0])
         if new != span["token"]:
             repl[(span["start"], span["end"])] = new
             traces.append(
@@ -223,28 +281,29 @@ def noise_from_changes(
         start, end = ch["offsets"]
         token = canonical_text[start:end]
         selected = ch["selected"]
-        ops = levenshtein_ops(token.casefold(), selected.casefold())
-        if not ops:
-            ops = [("sub", 0, "x")]
         native = ch.get("native")
+        target_dist = levenshtein_distance(token.casefold(), selected.casefold())
         known = {v.casefold() for v, _ in romanizer.native_to_variants.get(native, [])} if native else set()
-        noisy = token
-        for _ in range(max_resample):
-            noisy = apply_random_ops(token, ops, rng)
-            if noisy.casefold() not in known and noisy.casefold() != token.casefold():
-                break
+        noisy, matched, attempts = noise_token_at_distance(
+            token, target_dist, rng, known, max_attempts=max_resample
+        )
         noisy = _preserve_case(token, noisy)
         repl[(start, end)] = noisy
         traces.append(
             {
                 "field": field,
                 "original": token,
+                "canonical_token": token,
+                "exp02_selected": selected,
                 "selected": noisy,
                 "operation": "random_noise",
-                "edit_ops": [op for op, _, _ in ops],
-                "edit_magnitude": len(ops),
+                "edit_magnitude": target_dist,
+                "target_levenshtein_distance": target_dist,
+                "distance_match": matched,
+                "resample_attempts": attempts,
                 "native": native,
                 "offsets": [start, end],
+                "mask_from_exp02": True,
             }
         )
     return replace_token_spans(canonical_text, repl)

@@ -125,9 +125,6 @@ def reconstruct_field(
 ) -> tuple[str, list[dict[str, Any]], str]:
     english = english or ""
     hindi_native = hindi_native or ""
-    if intensity == "75" and hindi_native and DEVANAGARI.search(hindi_native):
-        text, traces = mix_indic_frame(english, hindi_native, romanizer, field_name)
-        return text, traces, "indic_frame_75"
     if english.strip():
         text, traces = mix_from_english(english, intensity, romanizer, field_name)
         return text, traces, "english_matrix_taxonomy"

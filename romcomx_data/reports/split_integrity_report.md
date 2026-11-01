@@ -1,6 +1,6 @@
 # split integrity report
 
-- Timestamp (UTC): 2026-11-01T09:12:43.046264+00:00
+- Timestamp (UTC): 2026-11-01T11:11:55.376183+00:00
 - Code version: romcom_data 0.1.0
 
 ## Policy
@@ -19,5 +19,12 @@
   "nli_overlap": 0,
   "para_overlap": 0,
   "tox_overlap": 0,
-  "test_in_training": false
+  "protected_test_leakage": {
+    "leaked_source_ids": [],
+    "leaked_hashes": [],
+    "ok": true
+  },
+  "quarantined_nli": 0,
+  "quarantined_paraphrase": 0,
+  "quarantined_toxicity": 0
 }

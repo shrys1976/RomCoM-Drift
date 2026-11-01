@@ -75,8 +75,8 @@ def export_phase2_inventories(inv: pd.DataFrame, out_dir: Path | None = None) ->
     pd.DataFrame(rows).to_csv(out / "dakshina_hi_alias_index.tsv", sep="\t", index=False)
 
     freq = (
-        inv.groupby("number_of_variants")
-        .size()
+        inv.groupby("number_of_variants")["native_word"]
+        .nunique()
         .reset_index(name="native_word_count")
     )
     freq.to_csv(out / "variant_frequency_report.csv", index=False)
@@ -88,7 +88,9 @@ def export_phase2_inventories(inv: pd.DataFrame, out_dir: Path | None = None) ->
             out / "ambiguity_report.csv", index=False
         )
 
-    ties = inv[inv["canonical_tie"]].drop_duplicates("native")
-    ties[["native", "canonical_candidate", "variant_count_for_native"]].to_csv(
-        out / "canonical_tie_report.csv", index=False
-    )
+    tie_rows = inv[inv["canonical_tie"]].copy()
+    if len(tie_rows):
+        max_counts = tie_rows.groupby("native_word")["attestation_count"].transform("max")
+        tie_rows = tie_rows[tie_rows["attestation_count"] == max_counts]
+        tie_rows = tie_rows.sort_values(["native_word", "romanized_variant"])
+    tie_rows.to_csv(out / "canonical_tie_report.csv", index=False)
