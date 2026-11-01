@@ -1,0 +1,62 @@
+{
+  "local_artifacts": [
+    {
+      "artifact": "indic_forward_train",
+      "path": "romcomx_data/raw/indicxnli/forward__train__xnli_hi.json",
+      "sha256": "ae4d2d59c807a70e699fbc51ad2cc5bf5b1030c0cdfd443c3fa44c1b446a4b3c",
+      "size_bytes": 219214334
+    },
+    {
+      "artifact": "indic_forward_dev",
+      "path": "romcomx_data/raw/indicxnli/forward__dev__xnli_hi.json",
+      "sha256": "7b0c52e0d0f42625b8128aed61a1bc61929558e78be4bc92b892adfac9726f1b",
+      "size_bytes": 1320152
+    },
+    {
+      "artifact": "xnli_mt_train_en_tsv",
+      "path": "romcomx_data/raw/xnli_mt/XNLI-MT-1.0/multinli/multinli.train.en.tsv",
+      "sha256": "bf2f6249149240d79b59ba649829dde49f7c9665efc9c9b818e78334c8f9d627",
+      "size_bytes": 73265948
+    },
+    {
+      "artifact": "xnli_10_dev_tsv",
+      "path": "romcomx_data/raw/xnli_mt/XNLI-1.0/xnli.dev.tsv",
+      "sha256": "618976b23ddf482e4eaae3746435949a02ca5db00ef724e2a14c5f913f9cfa1e",
+      "size_bytes": 22020265
+    }
+  ],
+  "huggingface_facebook_xnli": {
+    "dataset_id": "facebook/xnli",
+    "config": "en",
+    "revision": "b8dd5d7af51114dbda02c0e3f6133f332186418e",
+    "last_modified": "2024-01-05 08:30:52+00:00",
+    "splits_loaded": {
+      "train": 392702,
+      "dev": 2490,
+      "test": 5010
+    }
+  },
+  "huggingface_indicxnli": {
+    "dataset_id": "Divyanshu/indicxnli",
+    "backward_train_hf_path": "backward/train/xnli_hi.json",
+    "backward_train_available_on_hf": false,
+    "revision": "7092c27872e919f31d0496fb8b9c47bd2cba3f6c"
+  },
+  "indicxnli_generation_repo": {
+    "url": "https://github.com/divyanshuaggarwal/IndicXNLI",
+    "make_dataset_path": "src/make_dataset.py",
+    "requirements_datasets_version": "1.16.1",
+    "commit_lookup_error": "HTTP Error 422: Unprocessable Entity"
+  },
+  "generation_snapshots": {
+    "current_project_venv": true,
+    "datasets_1_16_1_isolated_env": {
+      "path": "indicxnli/snapshots/xnli_en_train_generation_1.16.1.jsonl",
+      "sha256": "16173bec3ebced29492c270e969c458b6911f2c4a49ff19f267950070179e649"
+    }
+  },
+  "archive_urls": {
+    "XNLI-MT-1.0": "https://dl.fbaipublicfiles.com/XNLI/XNLI-MT-1.0.zip",
+    "XNLI-1.0": "https://dl.fbaipublicfiles.com/XNLI/XNLI-1.0.zip"
+  }
+}

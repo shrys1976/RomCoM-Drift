@@ -161,4 +161,8 @@ def nli_alignment_approved(manifest_path: Path) -> bool:
     if not manifest_path.is_file():
         return False
     data = json.loads(manifest_path.read_text(encoding="utf-8"))
-    return bool(data.get("owner_approved"))
+    return bool(
+        data.get("owner_approved")
+        and data.get("train_mapping_reliable")
+        and data.get("investigation_complete")
+    )

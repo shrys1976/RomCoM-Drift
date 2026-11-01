@@ -22,6 +22,7 @@ EXP03 = PROCESSED / "EXP-03_matched_noise"
 MANIFESTS = HANDOFF / "manifests"
 TRACES = HANDOFF / "traces"
 REPORTS = HANDOFF / "reports"
+NLI_INVESTIGATION = HANDOFF / "nli_investigation"
 SRC_MIRROR = HANDOFF / "src"
 
 
@@ -42,6 +43,7 @@ def ensure_handoff_layout() -> None:
         TRACES / "EXP-02",
         TRACES / "EXP-03",
         REPORTS,
+        NLI_INVESTIGATION,
         SRC_MIRROR / "source_loaders",
         SRC_MIRROR / "preprocessing",
         SRC_MIRROR / "augmentation",

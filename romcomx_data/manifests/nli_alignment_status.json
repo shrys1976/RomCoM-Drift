@@ -1,4 +1,8 @@
 {
   "owner_approved": false,
-  "note": "Set owner_approved true after reviewing reports/nli_alignment_sample.csv"
+  "investigation_complete": true,
+  "train_mapping_reliable": false,
+  "dev_mapping_reliable": true,
+  "block_reason": "awaiting_owner_review_investigation_sample",
+  "note": "Review reports/nli_alignment_sample.csv: dev English is mapped; train English is withheld. Set owner_approved after dev alignment sign-off."
 }

@@ -1,0 +1,8 @@
+{
+  "owner_approved": false,
+  "investigation_complete": true,
+  "train_mapping_reliable": false,
+  "dev_mapping_reliable": true,
+  "block_reason": "train_mapping_not_established",
+  "note": "NLI processed datasets must remain absent until owner approves sample v2."
+}
