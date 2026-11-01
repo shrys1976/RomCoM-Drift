@@ -75,6 +75,16 @@ def test_identical_toxic_prompts_share_a_group():
     assert grouped["group_of"]["a"] != grouped["group_of"]["c"]
 
 
+def test_cross_class_identical_prompts_share_a_group():
+    from romcom_data.toxicity_freeze import group_retained_user_prompts
+
+    toxic = [{"doc_id": "t1", "hin_Deva": [["shared prompt text", "refusal"]]}]
+    benign = [{"doc_id": "b1", "source_row_index": 1, "hin_Deva": [["shared prompt text", "answer"]]}]
+    grouped = group_retained_user_prompts(toxic, benign, None)
+    assert grouped["group_of"]["toxic-t1"] == grouped["group_of"]["benign-b1"]
+    assert grouped["cross_class_multi_member_groups"] == 1
+
+
 def test_hindi_field_is_canonical_and_latn_is_rejected():
     row = {
         "hin_Deva": [["उपयोगकर्ता", "सहायक"]],

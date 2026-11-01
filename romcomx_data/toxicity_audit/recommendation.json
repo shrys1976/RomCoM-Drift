@@ -33,6 +33,6 @@
   "secondary_register_fit": "Generation-only comparison of Hindi refusal targets versus ordinary Dolly answers, after owner approval. Classification is confounded by the template.",
   "benign_file_replaced": false,
   "head_slice_not_used": true,
-  "source_manifest": "85bddf9a31a24bfff93eca66e6171c7bbeabd8c37e5d20f8cf10a21bca94b830",
+  "source_manifest": "58d85ddaf78bb05600bc802049c8ce12ef8886f4439bfe87b9ca9fd25e1673ae",
   "tie_disposition": "retain_on_source_list_order"
 }

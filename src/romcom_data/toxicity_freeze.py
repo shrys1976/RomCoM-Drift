@@ -53,16 +53,36 @@ class _UnionFind:
             self.parent[rb] = ra
 
 
-def group_user_prompts(rows: list[dict[str, Any]], vectors: list[list[float]] | None) -> dict[str, Any]:
-    """Group toxic user prompts before any split. Roles and source IDs stay unchanged."""
+def _member_id_for_row(row: dict[str, Any], *, source: str) -> str:
+    doc_id = str(row["doc_id"])
+    if source == "toxic":
+        return f"toxic-{doc_id}"
+    if source == "benign":
+        return f"benign-{doc_id}"
+    raise ValueError(f"unknown source {source!r}")
+
+
+def group_user_prompts(
+    rows: list[dict[str, Any]],
+    vectors: list[list[float]] | None,
+    *,
+    member_ids: list[str] | None = None,
+) -> dict[str, Any]:
+    """Group user prompts before any split. Roles and source IDs stay unchanged."""
     uf = _UnionFind()
     prepared: list[dict[str, Any]] = []
-    for row in rows:
+    for index, row in enumerate(rows):
         user, _assistant = _pair(row, "hin_Deva")
         doc_id = str(row["doc_id"])
-        uf.add(doc_id)
+        member_id = (
+            member_ids[index]
+            if member_ids is not None
+            else doc_id
+        )
+        uf.add(member_id)
         prepared.append(
             {
+                "member_id": member_id,
                 "doc_id": doc_id,
                 "source_row_index": row.get("source_row_index"),
                 "user": user,
@@ -75,13 +95,13 @@ def group_user_prompts(rows: list[dict[str, Any]], vectors: list[list[float]] | 
     prefix_buckets: dict[str, list[str]] = defaultdict(list)
     template_buckets: dict[str, list[str]] = defaultdict(list)
     for item in prepared:
-        exact_buckets[item["norm"]].append(item["doc_id"])
+        exact_buckets[item["norm"]].append(item["member_id"])
         prefix = item["norm"][:80]
         if len(prefix) >= 40:
-            prefix_buckets[prefix].append(item["doc_id"])
+            prefix_buckets[prefix].append(item["member_id"])
         template = " ".join(item["tokens"][:6])
         if template:
-            template_buckets[template].append(item["doc_id"])
+            template_buckets[template].append(item["member_id"])
 
     def _link(buckets: dict[str, list[str]]) -> int:
         linked = 0
@@ -96,7 +116,7 @@ def group_user_prompts(rows: list[dict[str, Any]], vectors: list[list[float]] | 
 
     exact_links = _link(exact_buckets)
     prefix_links = _link(prefix_buckets)
-    by_id = {item["doc_id"]: item for item in prepared}
+    by_id = {item["member_id"]: item for item in prepared}
     template_links = 0
     template_family_sizes = Counter(len(members) for members in template_buckets.values())
     for members in template_buckets.values():
@@ -122,12 +142,15 @@ def group_user_prompts(rows: list[dict[str, Any]], vectors: list[list[float]] | 
         similarity = matrix @ matrix.T
         pairs = (similarity >= NEAR_DUP_COSINE).triu(diagonal=1).nonzero()
         for pair in pairs.tolist():
-            uf.union(prepared[pair[0]]["doc_id"], prepared[pair[1]]["doc_id"])
+            uf.union(
+                prepared[pair[0]]["member_id"],
+                prepared[pair[1]]["member_id"],
+            )
             semantic_links += 1
 
     groups: dict[str, list[str]] = defaultdict(list)
     for item in prepared:
-        groups[uf.find(item["doc_id"])].append(item["doc_id"])
+        groups[uf.find(item["member_id"])].append(item["member_id"])
     multi = {key: members for key, members in groups.items() if len(members) > 1}
     return {
         "n": len(prepared),
@@ -146,11 +169,43 @@ def group_user_prompts(rows: list[dict[str, Any]], vectors: list[list[float]] | 
         },
         "near_duplicate_cosine": NEAR_DUP_COSINE,
         "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
-        "group_of": {item["doc_id"]: uf.find(item["doc_id"]) for item in prepared},
+        "group_of": {
+            item["member_id"]: uf.find(item["member_id"]) for item in prepared
+        },
         "multi_member_group_ids": {
             key: members for key, members in multi.items()
         },
     }
+
+
+def group_retained_user_prompts(
+    toxic_rows: list[dict[str, Any]],
+    benign_rows: list[dict[str, Any]],
+    vectors: list[list[float]] | None,
+) -> dict[str, Any]:
+    """Group toxic and benign Hindi user prompts in one union-find (cross-source links)."""
+    ordered: list[dict[str, Any]] = []
+    member_ids: list[str] = []
+    for row in toxic_rows:
+        ordered.append(row)
+        member_ids.append(_member_id_for_row(row, source="toxic"))
+    for row in benign_rows:
+        ordered.append(row)
+        member_ids.append(_member_id_for_row(row, source="benign"))
+    grouped = group_user_prompts(ordered, vectors, member_ids=member_ids)
+    grouped["population"] = (
+        "retained toxic and benign user prompts, hin_Deva slot 0, single union-find"
+    )
+    cross_class = 0
+    for members in grouped["multi_member_group_ids"].values():
+        classes = {
+            "toxic" if member.startswith("toxic-") else "benign"
+            for member in members
+        }
+        if len(classes) > 1:
+            cross_class += 1
+    grouped["cross_class_multi_member_groups"] = cross_class
+    return grouped
 
 
 def _embed_users(texts: list[str]) -> list[list[float]]:
@@ -159,11 +214,39 @@ def _embed_users(texts: list[str]) -> list[list[float]]:
     return _embed_texts(texts)
 
 
+def stratification_label_for_group(
+    records: list[dict[str, Any]], group_id: str
+) -> str:
+    """Pool for split assignment. Mixed prompt groups use toxic if any member is toxic."""
+    labels = {record["label"] for record in records if record["group_id"] == group_id}
+    if "toxic" in labels:
+        return "toxic"
+    return "non_toxic"
+
+
+def _split_sizes(n: int, ratios: tuple[float, float, float]) -> tuple[int, int, int]:
+    if n <= 0:
+        return (0, 0, 0)
+    raw = [n * ratios[0], n * ratios[1], n * ratios[2]]
+    floors = [int(value) for value in raw]
+    while sum(floors) < n:
+        deficit = n - sum(floors)
+        order = sorted(range(3), key=lambda index: raw[index] - floors[index], reverse=True)
+        for index in order[:deficit]:
+            floors[index] += 1
+    while sum(floors) > n:
+        order = sorted(range(3), key=lambda index: raw[index] - floors[index])
+        for index in order:
+            if floors[index] > 0 and sum(floors) > n:
+                floors[index] -= 1
+    return (floors[0], floors[1], floors[2])
+
+
 def assign_group_splits(
     records: list[dict[str, Any]],
     *,
     seed: int = 42,
-    ratios: tuple[float, float, float] = (0.9, 0.1, 0.0),
+    ratios: tuple[float, float, float] = (0.8, 0.1, 0.1),
 ) -> dict[str, str]:
     """Assign each prompt group to one split. Stratified by label. Seed 42."""
     by_label: dict[str, list[str]] = defaultdict(list)
@@ -173,7 +256,7 @@ def assign_group_splits(
         if group_id in seen:
             continue
         seen.add(group_id)
-        by_label[record["label"]].append(group_id)
+        by_label[stratification_label_for_group(records, group_id)].append(group_id)
 
     names = ("train", "validation", "test")
     assignment: dict[str, str] = {}
@@ -181,14 +264,7 @@ def assign_group_splits(
         rng = derive_rng(seed, "toxicity-freeze", label)
         ordered = list(group_ids)
         rng.shuffle(ordered)
-        n = len(ordered)
-        n_train = int(round(n * ratios[0]))
-        n_val = int(round(n * ratios[1]))
-        if ratios[2] == 0:
-            n_train = n - n_val if n > 1 else n
-            n_val = n - n_train
-        elif n_train + n_val > n:
-            n_val = max(0, n - n_train)
+        n_train, n_val, n_test = _split_sizes(len(ordered), ratios)
         cuts = (n_train, n_train + n_val)
         for index, group_id in enumerate(ordered):
             if index < cuts[0]:
@@ -228,7 +304,8 @@ def build_freeze_records(
     *,
     tie_doc_ids: set[str],
     tie_disposition: str,
-    prompt_groups: dict[str, str],
+    toxic_group_of: dict[str, str],
+    benign_group_of: dict[str, str],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     retained: list[dict[str, Any]] = []
     excluded: list[dict[str, Any]] = []
@@ -256,7 +333,7 @@ def build_freeze_records(
             continue
         record["exclusion_status"] = "retained"
         record["exclusion_reason"] = ""
-        record["group_id"] = prompt_groups[doc_id]
+        record["group_id"] = toxic_group_of[_member_id_for_row(row, source="toxic")]
         retained.append(record)
 
     for row in benign_rows:
@@ -274,7 +351,7 @@ def build_freeze_records(
             "text_field": "hin_Deva",
             "original_split": "train",
             "user_prompt_sha256": hashlib.sha256(nfc(user).encode("utf-8")).hexdigest(),
-            "group_id": f"benign-{doc_id}",
+            "group_id": benign_group_of[_member_id_for_row(row, source="benign")],
         }
         if doc_id in tie_doc_ids and tie_disposition == "quarantine":
             record["exclusion_status"] = "quarantined"

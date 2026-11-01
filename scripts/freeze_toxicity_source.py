@@ -13,25 +13,29 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from romcom_data.handoff_paths import RAW_TOX, TOXICITY_AUDIT
-from romcom_data.toxicity_audit import build_audit_zip, build_recommendation, determine_status, load_jsonl, task_definition
+from romcom_data.toxicity_audit import (
+    build_audit_zip,
+    build_recommendation,
+    determine_status,
+    load_jsonl,
+    task_definition,
+)
 from romcom_data.toxicity_freeze import (
     EXCLUDED_TOXIC_DOC_IDS,
+    _pair,
     assign_group_splits,
     build_freeze_records,
     checksum_file,
     cross_split_groups,
     generation_rubric,
-    group_user_prompts,
+    group_retained_user_prompts,
     naive_row_leak_count,
     write_manifest,
     _embed_users,
-    _pair,
 )
 
-
 TIE_DISPOSITION = "retain_on_source_list_order"
-FROZEN_RATIOS = (0.9, 0.1, 0.0)
-DIAGNOSTIC_RATIOS = (0.8, 0.1, 0.1)
+FROZEN_RATIOS = (0.8, 0.1, 0.1)
 
 
 def main() -> int:
@@ -42,18 +46,20 @@ def main() -> int:
     tie_ids = {item["doc_id"] for item in ties}
 
     kept_toxic = [row for row in toxic_rows if row["doc_id"] not in EXCLUDED_TOXIC_DOC_IDS]
-    users = [_pair(row, "hin_Deva")[0] for row in kept_toxic]
+    all_rows = kept_toxic + benign_rows
+    users = [_pair(row, "hin_Deva")[0] for row in all_rows]
     vectors = _embed_users(users)
-    grouped = group_user_prompts(kept_toxic, vectors)
+    grouped = group_retained_user_prompts(kept_toxic, benign_rows, vectors)
+    group_of = grouped["group_of"]
     retained, excluded = build_freeze_records(
         toxic_rows,
         benign_rows,
         tie_doc_ids=tie_ids,
         tie_disposition=TIE_DISPOSITION,
-        prompt_groups=grouped["group_of"],
+        toxic_group_of=group_of,
+        benign_group_of=group_of,
     )
     frozen_assignment = assign_group_splits(retained, ratios=FROZEN_RATIOS)
-    diagnostic_assignment = assign_group_splits(retained, ratios=DIAGNOSTIC_RATIOS)
     for record in retained:
         record["project_split"] = frozen_assignment[record["group_id"]]
     manifest_rows = retained + excluded
@@ -96,18 +102,18 @@ def main() -> int:
             "manifest_rows": len(manifest_rows),
         },
         "frozen_split": {
-            "rule": "90/10 train/validation at prompt-group level, stratified by label, seed 42. No test split is carved.",
-            "ratios": {"train": 0.9, "validation": 0.1, "test": 0.0},
-            "counts": dict(split_counts),
-            "by_label": {f"{label}:{split}": count for (label, split), count in sorted(label_split.items())},
-            "groups_crossing_frozen_splits": cross_split_groups(retained, frozen_assignment),
-        },
-        "diagnostic_80_10_10": {
-            "purpose": "Check that a later test boundary would not split a near-duplicate group.",
-            "groups_crossing_splits_when_groups_are_atomic": cross_split_groups(retained, diagnostic_assignment),
-            "near_duplicate_groups_that_would_cross_if_split_by_row": naive_row_leak_count(
-                retained, DIAGNOSTIC_RATIOS
+            "rule": (
+                "80/10/10 train/validation/test at prompt-group level, stratified by label "
+                "(mixed groups assigned using the toxic pool if any member is toxic), seed 42. "
+                "Validation is for tuning only. Test is the held-out final evaluation split."
             ),
+            "ratios": {"train": 0.8, "validation": 0.1, "test": 0.1},
+            "external_holdout": None,
+            "counts": dict(split_counts),
+            "by_label": {
+                f"{label}:{split}": count for (label, split), count in sorted(label_split.items())
+            },
+            "groups_crossing_frozen_splits": cross_split_groups(retained, frozen_assignment),
         },
         "manifest_sha256": checksum_file(manifest_path),
         "manifest_id": manifest_digest,
@@ -116,27 +122,46 @@ def main() -> int:
         "scoring": "not_run",
     }
     leakage = {
-        "population": "retained toxic user prompts, hin_Deva slot 0",
+        "population": grouped["population"],
         "excluded_before_grouping": list(EXCLUDED_TOXIC_DOC_IDS),
         "method": (
-            "Union exact normalized prompts, identical 80-character prefixes, "
-            "first-6-token families whose full token Jaccard is at least 0.5, "
+            "Single union-find over retained toxic and benign Hindi user prompts. "
+            "Links: exact normalized text, identical 80-character prefixes, "
+            "first-6-token families with full token Jaccard at least 0.5, "
             "and embedding cosine at least 0.85. Source IDs are not rewritten."
         ),
-        "n": grouped["n"],
+        "n_toxic": len(kept_toxic),
+        "n_benign": len(benign_rows),
+        "n_total": grouped["n"],
         "group_count": grouped["group_count"],
         "multi_member_groups": grouped["multi_member_groups"],
         "rows_in_multi_member_groups": grouped["rows_in_multi_member_groups"],
+        "cross_class_multi_member_groups": grouped["cross_class_multi_member_groups"],
         "largest_group": grouped["largest_group"],
         "links": grouped["links"],
         "first6_token_family_size_histogram": grouped["first6_token_family_size_histogram"],
         "near_duplicate_cosine": grouped["near_duplicate_cosine"],
         "embedding_model": grouped["embedding_model"],
         "frozen_group_cross_split_count": summary["frozen_split"]["groups_crossing_frozen_splits"],
-        "diagnostic_80_10_10": summary["diagnostic_80_10_10"],
+        "near_duplicate_groups_that_would_cross_if_split_by_row": naive_row_leak_count(
+            retained, FROZEN_RATIOS
+        ),
         "multi_member_groups_detail": [
-            {"group_id": key, "doc_ids": members, "size": len(members)}
-            for key, members in sorted(grouped["multi_member_group_ids"].items(), key=lambda item: -len(item[1]))
+            {
+                "group_id": key,
+                "member_ids": members,
+                "size": len(members),
+                "cross_class": len(
+                    {
+                        "toxic" if member.startswith("toxic-") else "benign"
+                        for member in members
+                    }
+                )
+                > 1,
+            }
+            for key, members in sorted(
+                grouped["multi_member_group_ids"].items(), key=lambda item: -len(item[1])
+            )
         ],
     }
     disposition = {
@@ -215,7 +240,14 @@ def main() -> int:
     zip_path = build_audit_zip(ROOT / "RomCoM_X_Phase_2_1_Toxicity_Audit.zip")
     print(json.dumps(summary["counts"], indent=2))
     print(json.dumps(summary["frozen_split"], indent=2))
-    print(json.dumps(summary["diagnostic_80_10_10"], indent=2))
+    print(json.dumps(
+        {
+            "groups_crossing_splits": leakage["frozen_group_cross_split_count"],
+            "cross_class_groups": leakage["cross_class_multi_member_groups"],
+            "row_wise_leak_groups": leakage["near_duplicate_groups_that_would_cross_if_split_by_row"],
+        },
+        indent=2,
+    ))
     print(f"Wrote {zip_path}")
     return 0
 
@@ -225,7 +257,7 @@ def _checklist(summary: dict, disposition: dict) -> str:
     split = summary["frozen_split"]["counts"]
     return f"""# Owner decision checklist
 
-Verdict remains CONDITIONAL_GO. Licenses were approved on 2026-11-01 and are not flattened.
+Verdict remains CONDITIONAL_GO. Task definition and source decisions approved. Licenses were approved on 2026-11-01 and are not flattened.
 
 ## Recorded in this freeze
 
@@ -236,9 +268,10 @@ Verdict remains CONDITIONAL_GO. Licenses were approved on 2026-11-01 and are not
 - [x] Not Romanized-input understanding. Not general code-mixed safety robustness.
 - [x] Five benign embedding ties retained on source-list role order. Not quarantined.
 - [x] Two toxic role-conflict rows excluded. Roles were not flipped.
-- [x] Toxic user prompts grouped before the split. Groups do not cross the frozen split.
+- [x] Toxic and benign user prompts grouped in one union-find before the split.
+- [x] Frozen 80/10/10 train/validation/test. Validation is not the final test.
 - [x] Source manifest frozen. Augmentation, training, and scoring were not run.
-- [x] Future scores use the generation rubric. Classification accuracy is not an outcome.
+- [x] Future scores use the generation rubric. Benign over-refusal is required. Classification accuracy is not an outcome.
 
 ## Confirm before any augmentation
 
@@ -251,6 +284,7 @@ Verdict remains CONDITIONAL_GO. Licenses were approved on 2026-11-01 and are not
 
 ## Do not approve
 
+- Using validation as the final held-out evaluation split.
 - Classification accuracy as a result.
 - A claim about Romanized-input understanding.
 - A claim of general code-mixed safety robustness.
