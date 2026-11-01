@@ -399,36 +399,31 @@ def map_dev_rows(
     indic_fwd: list[dict[str, Any]],
     xnli_en: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], dict[str, int]]:
-    by_pair = {r["pair_id"]: r for r in xnli_en if r.get("pair_id")}
-    by_key = index_by_composite(xnli_en)
+    """Map dev Hindi to English by shared row index in XNLI-1.0 dev (en filter).
+
+    Indic forward dev has no pairID; pair_id on manifest rows is English-side reference only.
+    """
     stats: Counter[str] = Counter()
     manifest: list[dict[str, Any]] = []
+    method = "same_index_xnli_10_en"
     for i, hi in enumerate(indic_fwd):
-        en_row = xnli_en[i] if i < len(xnli_en) else None
-        if not en_row:
+        if i >= len(xnli_en):
             stats["unmatched"] += 1
             continue
-        method = "pair_id"
-        en = by_pair.get(en_row["pair_id"], en_row)
-        if en_row["pair_id"] not in by_pair:
-            cands = by_key.get(en_row["composite_key"], [])
-            if len(cands) == 1:
-                en = cands[0]
-                method = "exact_composite_key"
-            else:
-                en = en_row
-                method = "same_index_xnli_10_en"
+        en = xnli_en[i]
         label_ok = en["label"] == hi["label"]
         if label_ok:
-            stats["unique_match"] += 1
+            stats["same_index_label_agreement"] += 1
         else:
             stats["label_conflict"] += 1
         manifest.append(
             {
                 "indic_row_index": i,
                 "original_split": "dev",
-                "pair_id": en.get("pair_id", en_row.get("pair_id", "")),
-                "english_row_index": en.get("row_index", i),
+                "pair_id": en.get("pair_id", ""),
+                "pair_id_used_for_join": False,
+                "english_row_index": i,
+                "english_source_dataset": en.get("source_dataset", "XNLI-1.0"),
                 "mapping_method": method,
                 "composite_key": en["composite_key"],
                 "label_indic": hi["label"],
@@ -504,8 +499,8 @@ def write_owner_investigation_sample(
     n: int = 200,
     dev_rows: int = 41,
 ) -> int:
-    """200-row owner sample: verified dev English + train Hindi without fabricated English."""
-    rng = derive_rng(42, "nli-investigation-owner", "sample")
+    """200-row owner sample: 41 bilingual dev + 159 Hindi-only train (no fabricated English)."""
+    rng = derive_rng(42, "nli-investigation-owner-rev2", "sample")
     dev_pool = [r for r in dev_manifest if r.get("label_agreement")]
     rng.shuffle(dev_pool)
     dev_pick = dev_pool[:dev_rows]
@@ -515,9 +510,11 @@ def write_owner_investigation_sample(
     train_pick = train_idx[:train_n]
     fields = [
         "sample_version",
+        "sample_row_kind",
         "indic_row_index",
         "english_row_index",
         "pair_id",
+        "pair_id_used_for_join",
         "original_split",
         "mapping_method",
         "composite_key",
@@ -528,27 +525,37 @@ def write_owner_investigation_sample(
         "hypothesis_hi",
         "premise_en",
         "hypothesis_en",
-        "same_premise",
-        "same_hypothesis",
+        "owner_judgment_premise_aligned",
+        "owner_judgment_hypothesis_aligned",
+        "owner_judgment_label_consistent",
         "reviewer",
         "notes",
     ]
     rows_out: list[dict[str, Any]] = []
     for row in dev_pick:
         out = {k: "" for k in fields}
-        out["sample_version"] = "investigation_2026_11_01"
+        out["sample_version"] = "investigation_2026_11_01_rev2"
+        out["sample_row_kind"] = "bilingual_dev"
+        out["pair_id_used_for_join"] = "false"
         for key in fields:
-            if key in row and key != "sample_version":
+            if key in row and key not in ("sample_version", "sample_row_kind", "pair_id_used_for_join"):
                 out[key] = row[key]
+        out["owner_judgment_premise_aligned"] = ""
+        out["owner_judgment_hypothesis_aligned"] = ""
+        out["owner_judgment_label_consistent"] = ""
+        out["reviewer"] = ""
+        out["notes"] = ""
         rows_out.append(out)
     for i in train_pick:
         hi = hi_train[i]
         rows_out.append(
             {
-                "sample_version": "investigation_2026_11_01",
+                "sample_version": "investigation_2026_11_01_rev2",
+                "sample_row_kind": "hindi_only_train",
                 "indic_row_index": i,
                 "english_row_index": "",
                 "pair_id": "",
+                "pair_id_used_for_join": "",
                 "original_split": "train",
                 "mapping_method": "train_english_withheld_pending_provenance",
                 "composite_key": "",
@@ -559,10 +566,11 @@ def write_owner_investigation_sample(
                 "hypothesis_hi": hi["hypothesis_hi"],
                 "premise_en": "",
                 "hypothesis_en": "",
-                "same_premise": "",
-                "same_hypothesis": "",
+                "owner_judgment_premise_aligned": "",
+                "owner_judgment_hypothesis_aligned": "",
+                "owner_judgment_label_consistent": "",
                 "reviewer": "",
-                "notes": "Do not approve train English from HF index join; backward train required.",
+                "notes": "Hindi-only placeholder; train English withheld (392702 mappings blocked).",
             }
         )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -594,10 +602,17 @@ def build_alignment_metrics(
             "train_english_mapped": sum(1 for r in full_manifest if r.get("original_split") == "train"),
         },
         "dev": {
+            "mapping_method": "same_index_xnli_10_en",
+            "pair_id_independent_join": False,
+            "pair_id_on_manifest_is_english_reference_only": True,
             "indic_rows": len(hi_dev),
-            "unique_match": dev_stats.get("unique_match", 0),
+            "same_index_label_agreement": dev_stats.get("same_index_label_agreement", 0),
             "label_conflict": dev_stats.get("label_conflict", 0),
             "unmatched": dev_stats.get("unmatched", 0),
+            "semantic_alignment": (
+                "Not established by label agreement alone; owner must complete "
+                "owner_judgment_* columns in nli_alignment_sample.csv."
+            ),
         },
         "train": {
             "indic_rows": n_train,
@@ -714,8 +729,7 @@ def ensure_investigation_artifacts(
     make_dst = NLI_INVESTIGATION / "make_dataset.py"
     if not make_dst.is_file():
         urlretrieve(INDICXNLI_MAKE_DATASET_URL, make_dst)
-    method_src = Path(__file__).resolve()
-    shutil.copy2(method_src, NLI_INVESTIGATION / "alignment_method.py")
+    shutil.copy2(Path(__file__).resolve(), NLI_INVESTIGATION / "alignment_method.py")
     for name in (
         "nli_alignment_investigation_report.md",
         "nli_alignment_sample.csv",
@@ -729,9 +743,12 @@ def ensure_investigation_artifacts(
             shutil.copy2(src, NLI_INVESTIGATION / name)
     readme = NLI_INVESTIGATION / "README.txt"
     readme.write_text(
-        "RomCoM-X Phase 2.1 NLI alignment investigation bundle.\n"
-        "Approve dev mapping via nli_alignment_sample.csv (41 dev rows with English).\n"
-        "Train English rows are intentionally blank until backward train provenance exists.\n",
+        "RomCoM-X Phase 2.1 NLI alignment investigation bundle (rev2).\n\n"
+        "nli_alignment_sample.csv: 200 rows total = 41 bilingual dev + 159 Hindi-only train.\n"
+        "Dev English comes from same-index XNLI-1.0 en dev (not an independent pairID join).\n"
+        "Owner: fill owner_judgment_premise_aligned, owner_judgment_hypothesis_aligned,\n"
+        "owner_judgment_label_consistent for each bilingual dev row before semantic sign-off.\n\n"
+        "All 392702 train English mappings remain withheld.\n",
         encoding="utf-8",
     )
     return NLI_INVESTIGATION
@@ -830,9 +847,9 @@ def run_investigation() -> dict[str, Any]:
         hi_train
     )
 
-    dev_reliable = dev_stats.get("unique_match", 0) == len(hi_dev)
+    dev_label_check_ok = dev_stats.get("same_index_label_agreement", 0) == len(hi_dev)
     sample_n = 0
-    if dev_reliable:
+    if dev_label_check_ok:
         sample_n = write_owner_investigation_sample(
             dev_manifest,
             hi_train,
@@ -854,13 +871,40 @@ def run_investigation() -> dict[str, Any]:
         "generation_snapshot_available": gen_en is not None,
         "train_mapping_method_attempted": train_method,
         "indic_train_vs_xnli_mt_same_index_label_rate": indic_vs_mt_label,
-        "root_cause": (
-            "IndicXNLI train was built by translating whatever row order Hugging Face "
-            "returned for XNLI en train at generation time. Current facebook/xnli train "
-            "matches official XNLI-MT TSV at every index (composite keys 100%), but "
-            f"Indic forward train matches that order on labels at only {indic_vs_mt_label:.3%} "
-            "of rows. Index joins to current HF/XNLI-MT train are invalid for English alignment."
-        ),
+        "established_findings": {
+            "current_english_sources_agree": (
+                "facebook/xnli en train and XNLI-MT-1.0 multinli.train.en.tsv match at "
+                "every index (composite keys and labels 100%)."
+            ),
+            "indic_train_vs_current_english_order": (
+                f"Indic forward train same-index label agreement with current English: "
+                f"{indic_vs_mt_label:.3%} ({int(indic_vs_mt_label * len(hi_train))}/{len(hi_train)})."
+            ),
+            "production_train_english_join": "Withheld; do not use HF/XNLI-MT index join for train.",
+        },
+        "historical_root_cause": {
+            "status": "unresolved",
+            "summary": (
+                "Evidence shows IndicXNLI train order does not match current English sources; "
+                "the exact historical change (HF revision, cache, or unpublished generation "
+                "artifact) is not identified without generation-time English or revision proof."
+            ),
+            "required_to_resolve": [
+                "Original English training artifact used at IndicXNLI translation time",
+                "Exact Hugging Face datasets revision or snapshot from generation date",
+            ],
+        },
+        "dev_mapping": {
+            "method": "same_index_xnli_10_en",
+            "pair_id_independent_join": False,
+            "same_index_label_agreement_rate": dev_stats.get("same_index_label_agreement", 0)
+            / len(hi_dev)
+            if hi_dev
+            else 0,
+            "semantic_alignment": (
+                "Not proven by labels alone; owner judgment columns required in sample CSV."
+            ),
+        },
         "owner_next_steps": [
             "Provide Divyanshu/indicxnli backward train JSON locally if recovered from git LFS.",
             "Or export generation-era English with scripts/export_nli_generation_snapshot.py "
@@ -881,10 +925,20 @@ def run_investigation() -> dict[str, Any]:
         "train_mapping_reliable": train_reliable,
         "normalization": "NFC + outer strip; composite_key=sha256(prem\\0hyp)",
         "owner_review_sample_rows": sample_n,
-        "owner_review_sample_note": (
-            "41 dev rows include verified English; 159 train rows are Hindi-only "
-            "(English withheld until train provenance is established)."
-        ),
+        "owner_review_sample": {
+            "total_rows": 200,
+            "bilingual_dev_rows": 41,
+            "hindi_only_train_rows": 159,
+            "description": (
+                "Not 200 bilingual alignment examples. Only 41 dev rows include English; "
+                "159 train rows are Hindi-only with English withheld."
+            ),
+            "owner_judgment_columns": [
+                "owner_judgment_premise_aligned",
+                "owner_judgment_hypothesis_aligned",
+                "owner_judgment_label_consistent",
+            ],
+        },
     }
     if GENERATION_SNAPSHOT_1161_PATH.is_file():
         report["datasets_1_16_1_reload_label_agreement_with_indic_train"] = sum(
@@ -921,22 +975,17 @@ def run_investigation() -> dict[str, Any]:
     status = {
         "owner_approved": False,
         "investigation_complete": True,
-        "train_mapping_reliable": train_reliable,
-        "dev_mapping_reliable": dev_stats.get("unique_match", 0) == len(hi_dev),
-        "block_reason": "awaiting_owner_review_investigation_sample"
-        if sample_n and not train_reliable
-        else (
-            "awaiting_owner_review_sample_v2"
-            if sample_n and train_reliable
-            else (
-                "train_mapping_not_established"
-                if not train_reliable
-                else "dev_mapping_incomplete"
-            )
-        ),
+        "investigation_revision": "2026_11_01_rev2",
+        "train_mapping_reliable": False,
+        "train_english_mappings_withheld": 392702,
+        "dev_same_index_label_check_complete": dev_label_check_ok,
+        "dev_semantic_review_complete": False,
+        "dev_mapping_reliable": False,
+        "block_reason": "nli_train_blocked_dev_semantic_review_pending",
         "note": (
-            "Review reports/nli_alignment_sample.csv: dev English is mapped; "
-            "train English is withheld. Set owner_approved after dev alignment sign-off."
+            "Complete owner_judgment_* fields for 41 bilingual dev rows in "
+            "nli_alignment_sample.csv. Label agreement is not semantic sign-off. "
+            "Train English remains fully withheld."
         ),
     }
     (MANIFESTS / "nli_alignment_status.json").write_text(

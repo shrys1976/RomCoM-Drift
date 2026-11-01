@@ -4,10 +4,14 @@
     "train_english_mapped": 0
   },
   "dev": {
+    "mapping_method": "same_index_xnli_10_en",
+    "pair_id_independent_join": false,
+    "pair_id_on_manifest_is_english_reference_only": true,
     "indic_rows": 2490,
-    "unique_match": 2490,
+    "same_index_label_agreement": 2490,
     "label_conflict": 0,
-    "unmatched": 0
+    "unmatched": 0,
+    "semantic_alignment": "Not established by label agreement alone; owner must complete owner_judgment_* columns in nli_alignment_sample.csv."
   },
   "train": {
     "indic_rows": 392702,

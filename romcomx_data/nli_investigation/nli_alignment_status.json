@@ -3,6 +3,6 @@
   "investigation_complete": true,
   "train_mapping_reliable": false,
   "dev_mapping_reliable": true,
-  "block_reason": "train_mapping_not_established",
-  "note": "NLI processed datasets must remain absent until owner approves sample v2."
+  "block_reason": "awaiting_owner_review_investigation_sample",
+  "note": "Review reports/nli_alignment_sample.csv: dev English is mapped; train English is withheld. Set owner_approved after dev alignment sign-off."
 }

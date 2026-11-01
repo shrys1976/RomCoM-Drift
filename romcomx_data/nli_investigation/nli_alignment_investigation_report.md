@@ -41,7 +41,8 @@
   },
   "train_mapping_reliable": false,
   "normalization": "NFC + outer strip; composite_key=sha256(prem\\0hyp)",
-  "sample_v2_rows": 0,
+  "owner_review_sample_rows": 200,
+  "owner_review_sample_note": "41 dev rows include verified English; 159 train rows are Hindi-only (English withheld until train provenance is established).",
   "datasets_1_16_1_reload_label_agreement_with_indic_train": 0.3440165825485992,
   "datasets_1_16_1_note": "Re-loading xnli en train with datasets==1.16.1 today yields same row order as current HF; does not restore 2021 translation input."
 }

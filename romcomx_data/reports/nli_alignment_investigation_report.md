@@ -17,7 +17,25 @@
   "generation_snapshot_available": true,
   "train_mapping_method_attempted": "generation_snapshot_rejected_same_as_current_hf",
   "indic_train_vs_xnli_mt_same_index_label_rate": 0.3440165825485992,
-  "root_cause": "IndicXNLI train was built by translating whatever row order Hugging Face returned for XNLI en train at generation time. Current facebook/xnli train matches official XNLI-MT TSV at every index (composite keys 100%), but Indic forward train matches that order on labels at only 34.402% of rows. Index joins to current HF/XNLI-MT train are invalid for English alignment.",
+  "established_findings": {
+    "current_english_sources_agree": "facebook/xnli en train and XNLI-MT-1.0 multinli.train.en.tsv match at every index (composite keys and labels 100%).",
+    "indic_train_vs_current_english_order": "Indic forward train same-index label agreement with current English: 34.402% (135096/392702).",
+    "production_train_english_join": "Withheld; do not use HF/XNLI-MT index join for train."
+  },
+  "historical_root_cause": {
+    "status": "unresolved",
+    "summary": "Evidence shows IndicXNLI train order does not match current English sources; the exact historical change (HF revision, cache, or unpublished generation artifact) is not identified without generation-time English or revision proof.",
+    "required_to_resolve": [
+      "Original English training artifact used at IndicXNLI translation time",
+      "Exact Hugging Face datasets revision or snapshot from generation date"
+    ]
+  },
+  "dev_mapping": {
+    "method": "same_index_xnli_10_en",
+    "pair_id_independent_join": false,
+    "same_index_label_agreement_rate": 1.0,
+    "semantic_alignment": "Not proven by labels alone; owner judgment columns required in sample CSV."
+  },
   "owner_next_steps": [
     "Provide Divyanshu/indicxnli backward train JSON locally if recovered from git LFS.",
     "Or export generation-era English with scripts/export_nli_generation_snapshot.py (datasets==1.16.1) into romcomx_data/raw/indicxnli/snapshots/xnli_en_train_generation.jsonl."
@@ -37,12 +55,22 @@
     "label_agreement_if_used": 0.3440165825485992
   },
   "dev_mapping_stats": {
-    "unique_match": 2490
+    "same_index_label_agreement": 2490
   },
   "train_mapping_reliable": false,
   "normalization": "NFC + outer strip; composite_key=sha256(prem\\0hyp)",
   "owner_review_sample_rows": 200,
-  "owner_review_sample_note": "41 dev rows include verified English; 159 train rows are Hindi-only (English withheld until train provenance is established).",
+  "owner_review_sample": {
+    "total_rows": 200,
+    "bilingual_dev_rows": 41,
+    "hindi_only_train_rows": 159,
+    "description": "Not 200 bilingual alignment examples. Only 41 dev rows include English; 159 train rows are Hindi-only with English withheld.",
+    "owner_judgment_columns": [
+      "owner_judgment_premise_aligned",
+      "owner_judgment_hypothesis_aligned",
+      "owner_judgment_label_consistent"
+    ]
+  },
   "datasets_1_16_1_reload_label_agreement_with_indic_train": 0.3440165825485992,
   "datasets_1_16_1_note": "Re-loading xnli en train with datasets==1.16.1 today yields same row order as current HF; does not restore 2021 translation input."
 }

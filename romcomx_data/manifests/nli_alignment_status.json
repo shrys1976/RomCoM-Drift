@@ -1,8 +1,12 @@
 {
   "owner_approved": false,
   "investigation_complete": true,
+  "investigation_revision": "2026_11_01_rev2",
   "train_mapping_reliable": false,
-  "dev_mapping_reliable": true,
-  "block_reason": "awaiting_owner_review_investigation_sample",
-  "note": "Review reports/nli_alignment_sample.csv: dev English is mapped; train English is withheld. Set owner_approved after dev alignment sign-off."
+  "train_english_mappings_withheld": 392702,
+  "dev_same_index_label_check_complete": true,
+  "dev_semantic_review_complete": false,
+  "dev_mapping_reliable": false,
+  "block_reason": "nli_train_blocked_dev_semantic_review_pending",
+  "note": "Complete owner_judgment_* fields for 41 bilingual dev rows in nli_alignment_sample.csv. Label agreement is not semantic sign-off. Train English remains fully withheld."
 }

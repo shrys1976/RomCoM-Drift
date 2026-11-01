@@ -54,6 +54,27 @@ def test_toxic_turns_separate_roles():
     assert "toxic user" in prompt
 
 
+def test_map_dev_rows_same_index_not_pair_id_join():
+    from romcom_data.nli_provenance import map_dev_rows
+
+    hi = [{"label": 0, "premise_hi": "a", "hypothesis_hi": "b"}]
+    en = [
+        {
+            "label": 0,
+            "pair_id": "99",
+            "row_index": 0,
+            "composite_key": "k",
+            "premise_en": "e1",
+            "hypothesis_en": "e2",
+            "source_dataset": "XNLI-1.0",
+        }
+    ]
+    manifest, stats = map_dev_rows(hi, en)
+    assert manifest[0]["mapping_method"] == "same_index_xnli_10_en"
+    assert manifest[0]["pair_id_used_for_join"] is False
+    assert stats["same_index_label_agreement"] == 1
+
+
 def test_nli_alignment_not_approved_by_default(tmp_path: Path):
     p = tmp_path / "nli_alignment_status.json"
     p.write_text(json.dumps({"owner_approved": False}), encoding="utf-8")
