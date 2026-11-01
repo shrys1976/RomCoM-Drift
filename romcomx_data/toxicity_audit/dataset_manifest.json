@@ -1,0 +1,123 @@
+{
+  "repository": "ai4bharat/indic-align",
+  "revision": "032b6a9070e7f85f1a38e0506419f4590a20455a",
+  "revision_fetched_utc": "2026-11-01T14:09:24.274466+00:00",
+  "hf_config_discovery": {
+    "repository": "ai4bharat/indic-align",
+    "revision": "032b6a9070e7f85f1a38e0506419f4590a20455a",
+    "dataset_config_names": [
+      "Indic_ShareLlama",
+      "Dolly_T",
+      "OpenAssistant_T",
+      "WikiHow",
+      "IndoWordNet",
+      "Anudesh",
+      "Wiki_Conv",
+      "Wiki_Chat",
+      "HHRLHF_T",
+      "Toxic_Matrix"
+    ],
+    "toccix_name_found_on_hub": false,
+    "toxic_matrix_config_present": true,
+    "dolly_t_config_present": true,
+    "configs_matching_tox_substring": [
+      "Toxic_Matrix"
+    ],
+    "verified_toxic_source_config": "Toxic_Matrix",
+    "note": "Project uses HuggingFace config 'Toxic_Matrix' on ai4bharat/indic-align, not a separate 'TOCCIX' config name on the hub."
+  },
+  "toxic_config_used": "Toxic_Matrix",
+  "benign_config_intended": "Dolly_T",
+  "benign_file_on_disk": "Indic_ShareLlama_benign_sample.jsonl",
+  "local_files": [
+    {
+      "filename": "Indic_ShareLlama_benign_sample.jsonl",
+      "sha256": "126b59143d0bf1ae1c58ec961ed6c1850ea353e52b53de7c2fd6f458a4dea590",
+      "size_bytes": 50404404,
+      "line_count": 2000
+    },
+    {
+      "filename": "Toxic_Matrix_train.jsonl",
+      "sha256": "add219b23941e882df957955b1792d4958d7d32efc18524add5e5573d760c110",
+      "size_bytes": 19971421,
+      "line_count": 5000
+    }
+  ],
+  "license_evidence": {
+    "hf_card_license_field": null,
+    "hf_dataset_info_license_attr": null,
+    "hf_tags": [
+      "task_categories:text-generation",
+      "language:as",
+      "language:bn",
+      "language:gu",
+      "language:en",
+      "language:hi",
+      "language:kn",
+      "language:ml",
+      "language:mr",
+      "language:ne",
+      "language:or",
+      "language:pa",
+      "language:sa",
+      "language:ta",
+      "language:te",
+      "language:ur",
+      "license:cc-by-4.0",
+      "size_categories:10M<n<100M",
+      "format:parquet",
+      "modality:tabular",
+      "modality:text",
+      "library:datasets",
+      "library:dask",
+      "library:polars",
+      "library:mlcroissant",
+      "arxiv:2403.06350",
+      "region:us"
+    ],
+    "readme_license_mentions": [
+      "cc-by",
+      "license"
+    ],
+    "loader_hardcoded_license_warning": "toxic_matrix.py hardcodes CC-BY-4.0; audit uses HF card when available."
+  },
+  "readme_excerpt_chars": 4976,
+  "hf_toxic_matrix_schema": {
+    "hf_column_names": [
+      "doc_id",
+      "num_turns",
+      "eng_Latn",
+      "asm_Beng",
+      "asm_Latn",
+      "ben_Beng",
+      "ben_Latn",
+      "guj_Gujr",
+      "hin_Deva",
+      "hin_Latn",
+      "kan_Knda",
+      "kan_Latn",
+      "mal_Mlym",
+      "mal_Latn",
+      "mar_Deva",
+      "mar_Latn",
+      "npi_Deva",
+      "npi_Latn",
+      "ory_Orya",
+      "ory_Latn",
+      "pan_Guru",
+      "pan_Latn",
+      "san_Deva",
+      "san_Latn",
+      "tam_Taml",
+      "tam_Latn",
+      "tel_Telu",
+      "tel_Latn",
+      "urd_Arab",
+      "urd_Latn",
+      "__index_level_0__"
+    ],
+    "hf_features": "{'doc_id': Value('string'), 'num_turns': Value('float64'), 'eng_Latn': List(List(Value('string'))), 'asm_Beng': List(List(Value('string'))), 'asm_Latn': List(List(Value('string'))), 'ben_Beng': List(List(Value('string'))), 'ben_Latn': List(List(Value('string'))), 'guj_Gujr': List(List(Value('string'))), 'hin_Deva': List(List(Value('string'))), 'hin_Latn': List(List(Value('string'))), 'kan_Knda': List(List(Value('string'))), 'kan_Latn': List(List(Value('string'))), 'mal_Mlym': List(List(Value('string'))), 'mal_Latn': List(List(Value('string'))), 'mar_Deva': List(List(Value('string'))), 'mar_Latn': List(List(Value('string'))), 'npi_Deva': List(List(Value('string'))), 'npi_Latn': List(List(Value('string'))), 'ory_Orya': List(List(Value('string'))), 'ory_Latn': List(List(Value('string'))), 'pan_Guru': List(List(Value('string'))), 'pan_Latn': List(List(Value('string'))), 'san_Deva': List(List(Value('string'))), 'san_Latn': List(List(Value('string'))), 'tam_Taml': List(List(Value('string'))), 'tam_Latn': List(List(Value('string'))), 'tel_Telu': List(List(Value('string'))), 'tel_Latn': List(List(Value('string'))), 'urd_Arab': List(List(Value('string'))), 'urd_Latn': List(List(Value('string'))), '__index_level_0__': Value('int64')}",
+    "hf_train_row_count": 90352,
+    "sample_doc_id": "a101d066-2ae1-4162-b922-ed27011dafd4"
+  }
+}

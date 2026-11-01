@@ -1,0 +1,11 @@
+{
+  "status": "READY_FOR_OWNER_REVIEW",
+  "owner_review_scope": "hindi_native_only_paraphrase_path",
+  "blockers": [
+    "english_pivot_code_mixed_path_rejected"
+  ],
+  "quarantined_row_count": 1,
+  "license_owner_approved": true,
+  "dataset_rebuild_allowed": false,
+  "training_allowed": false
+}

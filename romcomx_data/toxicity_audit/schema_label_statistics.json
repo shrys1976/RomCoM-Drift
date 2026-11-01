@@ -1,0 +1,209 @@
+{
+  "schema": {
+    "columns_observed": {
+      "doc_id": 5000,
+      "eng_Latn": 5000,
+      "hin_Deva": 5000,
+      "hin_Latn": 5000
+    },
+    "column_types": {
+      "doc_id": [
+        "str"
+      ],
+      "eng_Latn": [
+        "list"
+      ],
+      "hin_Deva": [
+        "list"
+      ],
+      "hin_Latn": [
+        "list"
+      ]
+    },
+    "label_definition_in_source": "Row-level toxic vs benign is implied by Toxic_Matrix (toxic) vs benign sample file; no per-row label column in Toxic_Matrix JSONL.",
+    "conversation_structure": "eng_Latn is a list of [user, assistant] string pairs; roles are positional not named.",
+    "multi_block_conversations": 0,
+    "multi_pair_blocks": 5000,
+    "explicit_speaker_role_fields": false,
+    "chronological_order_preserved_in_list": true,
+    "parsed_turn_model": "romcom_data.toxic_turns.parse_conversation_turns"
+  },
+  "language_coverage": {
+    "rows_with_hin_Deva": 5000,
+    "rows_with_hin_Latn": 5000,
+    "rows_eng_Latn_only": 0,
+    "hindi_devanagari_coverage_pct": 100.0,
+    "romanized_hindi_coverage_pct": 100.0,
+    "primary_audit_language_field": "eng_Latn (loader uses for prompt/response parse)"
+  },
+  "integrity_toxic": {
+    "row_count": 5000,
+    "malformed_json_lines": 0,
+    "missing_eng_Latn": 0,
+    "empty_user_prompt_after_parse": 0,
+    "empty_assistant_response_after_parse": 0,
+    "duplicate_doc_id_count": 0,
+    "assistant_responses_with_refusal_markers": 5000,
+    "user_prompts_with_refusal_markers": 76,
+    "script_field_counts": {
+      "latin_heavy": 10000,
+      "devanagari_heavy": 5000,
+      "code_mixed_field": 4
+    },
+    "normalized_label": "toxic (all rows in Toxic_Matrix file)"
+  },
+  "integrity_benign": {
+    "benign_file": "Indic_ShareLlama_benign_sample.jsonl",
+    "row_count": 2000,
+    "empty_prompt_rows": 0,
+    "intended_config": "Dolly_T",
+    "configuration_note": "Dolly_T_benign_sample.jsonl missing; using Indic_ShareLlama_benign_sample.jsonl",
+    "schema": {
+      "columns_observed": {
+        "doc_id": 2000,
+        "num_turns": 2000,
+        "eng_Latn": 2000,
+        "asm_Beng": 2000,
+        "asm_Latn": 2000,
+        "ben_Beng": 2000,
+        "ben_Latn": 2000,
+        "guj_Gujr": 2000,
+        "hin_Deva": 2000,
+        "hin_Latn": 2000,
+        "kan_Knda": 2000,
+        "kan_Latn": 2000,
+        "mal_Mlym": 2000,
+        "mal_Latn": 2000,
+        "mar_Deva": 2000,
+        "mar_Latn": 2000,
+        "npi_Deva": 2000,
+        "npi_Latn": 2000,
+        "ory_Orya": 2000,
+        "ory_Latn": 2000,
+        "pan_Guru": 2000,
+        "pan_Latn": 2000,
+        "san_Deva": 2000,
+        "san_Latn": 2000,
+        "tam_Taml": 2000,
+        "tam_Latn": 2000,
+        "tel_Telu": 2000,
+        "tel_Latn": 2000,
+        "urd_Arab": 2000,
+        "urd_Latn": 2000
+      },
+      "column_types": {
+        "doc_id": [
+          "str"
+        ],
+        "num_turns": [
+          "float"
+        ],
+        "eng_Latn": [
+          "list"
+        ],
+        "asm_Beng": [
+          "list"
+        ],
+        "asm_Latn": [
+          "list"
+        ],
+        "ben_Beng": [
+          "list"
+        ],
+        "ben_Latn": [
+          "list"
+        ],
+        "guj_Gujr": [
+          "list"
+        ],
+        "hin_Deva": [
+          "list"
+        ],
+        "hin_Latn": [
+          "list"
+        ],
+        "kan_Knda": [
+          "list"
+        ],
+        "kan_Latn": [
+          "list"
+        ],
+        "mal_Mlym": [
+          "list"
+        ],
+        "mal_Latn": [
+          "list"
+        ],
+        "mar_Deva": [
+          "list"
+        ],
+        "mar_Latn": [
+          "list"
+        ],
+        "npi_Deva": [
+          "list"
+        ],
+        "npi_Latn": [
+          "list"
+        ],
+        "ory_Orya": [
+          "list"
+        ],
+        "ory_Latn": [
+          "list"
+        ],
+        "pan_Guru": [
+          "list"
+        ],
+        "pan_Latn": [
+          "list"
+        ],
+        "san_Deva": [
+          "list"
+        ],
+        "san_Latn": [
+          "list"
+        ],
+        "tam_Taml": [
+          "list"
+        ],
+        "tam_Latn": [
+          "list"
+        ],
+        "tel_Telu": [
+          "list"
+        ],
+        "tel_Latn": [
+          "list"
+        ],
+        "urd_Arab": [
+          "list"
+        ],
+        "urd_Latn": [
+          "list"
+        ]
+      },
+      "label_definition_in_source": "Row-level toxic vs benign is implied by Toxic_Matrix (toxic) vs benign sample file; no per-row label column in Toxic_Matrix JSONL.",
+      "conversation_structure": "eng_Latn is a list of [user, assistant] string pairs; roles are positional not named.",
+      "multi_block_conversations": 0,
+      "multi_pair_blocks": 2000,
+      "explicit_speaker_role_fields": false,
+      "chronological_order_preserved_in_list": true,
+      "parsed_turn_model": "romcom_data.toxic_turns.parse_conversation_turns"
+    },
+    "normalized_label": "non_toxic"
+  },
+  "normalized_loader": {
+    "normalized_record_count": 7000,
+    "toxic_records": 5000,
+    "benign_records": 2000,
+    "label_distribution": {
+      "toxic": 5000,
+      "non_toxic": 2000
+    },
+    "imbalance_ratio": 2.5,
+    "loader_skips_empty_prompt_or_response": true,
+    "paper_target_n": 10000,
+    "benign_pairing": "min(benign_rows, 10000 - toxic) from benign file"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "verdict": "CONDITIONAL_GO",
+  "scope": "hindi_toxicity_safety_register_secondary_evaluation",
+  "english_pivot": "not_applicable",
+  "blockers": [
+    "license_confirm_on_card",
+    "owner_accept_dolly_t_head_slice"
+  ],
+  "owner_decisions": [
+    "Confirm CC-BY-4.0. The dataset card license field is null; the hub tag is license:cc-by-4.0 and the README mentions cc-by.",
+    "Accept the on-disk benign file as Dolly_T train rows 0-1999 (filename Indic_ShareLlama_benign_sample.jsonl is wrong), or explicitly request a new seeded sample. Do not treat those as equivalent.",
+    "Accept the task as assistant refusal-register robustness under romanization, with user prompts unchanged. Do not approve it as toxic-input classification.",
+    "Accept the English eng_Latn binding in the current loader, or require a later switch to hin_Deva before any Hindi romanization experiment. This audit does not make that switch.",
+    "Accept the manual refusal review: templated clear refusals dominate; one sampled reply adds a concrete help redirect. Heuristic marker hits are not labels."
+  ],
+  "task_definition": {
+    "intended_task": "Assistant safety/refusal-register robustness under romanization. User prompts stay unchanged. Only eligible assistant turns are romanized.",
+    "not_this_task": "Not conventional toxic-input classification. The Toxic_Matrix label is not a turn-level toxicity tag on the user text. The assistant side of the toxic file is a refusal, and the benign side is an ordinary answer.",
+    "what_a_label_applies_to": "File-level class on the whole example: toxic source versus Dolly benign source. It is not a per-turn toxicity rating.",
+    "current_text_binding": "parse_conversation_turns reads eng_Latn. Hindi parallels are present but are not the strings the loader currently treats as the conversation.",
+    "transformation_constraints_unchanged": true
+  },
+  "task_suitability_summary": "Toxic_Matrix pairs harmful user prompts with templated assistant refusals. Dolly_T supplies ordinary answers. Labels are source-file classes, not turn-level toxicity ratings.",
+  "secondary_register_fit": "Fits assistant refusal-register robustness if the owner accepts the Dolly_T head slice, the license, and whether experiments use English eng_Latn or Hindi hin_Deva.",
+  "benign_file_replaced": false
+}

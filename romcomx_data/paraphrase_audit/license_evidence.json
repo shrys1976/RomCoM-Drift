@@ -1,0 +1,22 @@
+{
+  "hf_card_data_keys": [],
+  "hf_card_license_field": null,
+  "hf_dataset_info_license_attr": null,
+  "hf_tags": [
+    "size_categories:10K<n<100K",
+    "modality:text",
+    "library:datasets",
+    "library:mlcroissant",
+    "region:us"
+  ],
+  "readme_license_mentions": [],
+  "loader_hardcoded_cc0_warning": "source_loaders/indicxparaphrase.py hardcodes CC0; not used as audit evidence.",
+  "audit_conclusion": "HF card license field remains null. Owner approved the license for the Phase 2.1 paraphrase audit on 2026-11-01; confirmation blocker removed.",
+  "owner_approval": {
+    "approved": true,
+    "approved_on": "2026-11-01",
+    "approved_by": "owner",
+    "scope": "phase_2_1_paraphrase_audit",
+    "decision": "Owner approved the IndicXParaphrase license for this audit and removed the confirmation blocker. The HF card license field is still null."
+  }
+}

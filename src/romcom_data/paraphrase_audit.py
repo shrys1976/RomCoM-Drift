@@ -18,12 +18,23 @@ from huggingface_hub import HfApi, hf_hub_download
 from romcom_data.handoff_paths import HANDOFF, INVENTORIES, PARAPHRASE_AUDIT, RAW_PARA
 from romcom_data.paraphrase_gate import validate_reconstructed_pair
 from romcom_data.romanize import DakshinaRomanizer
-from romcom_data.stable_hash import derive_rng
+from romcom_data.splitting import _norm, assign_splits, paraphrase_groups
+from romcom_data.stable_hash import derive_rng, stable_hash_hex
 from romcom_data.text_utils import DEVANAGARI, LATIN, nfc, tokenize_conservative
 
 REPO = "ai4bharat/IndicXParaphrase"
 HF_FILE = "data/hi.tsv"
 ZIP_NAME = "RomCoM_X_Phase_2_1_Paraphrase_Audit.zip"
+OWNER_LICENSE_APPROVAL = {
+    "approved": True,
+    "approved_on": "2026-11-01",
+    "approved_by": "owner",
+    "scope": "phase_2_1_paraphrase_audit",
+    "decision": (
+        "Owner approved the IndicXParaphrase license for this audit and "
+        "removed the confirmation blocker. The HF card license field is still null."
+    ),
+}
 
 
 def sha256_file(path: Path) -> str:
@@ -32,6 +43,13 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: fh.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def load_or_pin_provenance(refresh_hf: bool = False) -> dict[str, Any]:
+    cached = PARAPHRASE_AUDIT / "dataset_manifest.json"
+    if cached.is_file() and not refresh_hf:
+        return json.loads(cached.read_text(encoding="utf-8"))
+    return pin_provenance()
 
 
 def pin_provenance() -> dict[str, Any]:
@@ -56,6 +74,7 @@ def pin_provenance() -> dict[str, Any]:
     dest.write_bytes(Path(local).read_bytes())
 
     field_defs_from_card = _extract_field_definitions(readme_excerpt)
+    license_evidence = gather_license_evidence(info, readme_excerpt)
     return {
         "repository": REPO,
         "revision": info.sha,
@@ -71,6 +90,31 @@ def pin_provenance() -> dict[str, Any]:
         "readme_excerpt_chars": len(readme_excerpt),
         "field_definitions_from_card": field_defs_from_card,
         "columns_in_tsv": ["en", "sentence1", "sentence2", "label"],
+        "license_evidence": license_evidence,
+    }
+
+
+def gather_license_evidence(info: Any, readme: str) -> dict[str, Any]:
+    card = info.card_data or {}
+    tags = list(getattr(info, "tags", []) or [])
+    license_mentions = re.findall(
+        r"(?i)(cc0|cc-by|creative commons|mit license|apache|license)",
+        readme,
+    )
+    return {
+        "hf_card_data_keys": sorted(card.keys()) if isinstance(card, dict) else [],
+        "hf_card_license_field": card.get("license") if isinstance(card, dict) else None,
+        "hf_dataset_info_license_attr": getattr(info, "license", None),
+        "hf_tags": tags,
+        "readme_license_mentions": sorted(set(license_mentions)),
+        "loader_hardcoded_cc0_warning": (
+            "source_loaders/indicxparaphrase.py hardcodes CC0; not used as audit evidence."
+        ),
+        "audit_conclusion": (
+            "License not declared on HF card metadata; owner must confirm terms before release."
+            if not card.get("license") and not getattr(info, "license", None)
+            else "See hf_card_license_field."
+        ),
     }
 
 
@@ -280,6 +324,127 @@ def audit_romanization(df: pd.DataFrame) -> dict[str, Any]:
     }
 
 
+def df_to_records(df: pd.DataFrame, revision: str) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    for idx, row in df.iterrows():
+        s1 = row["sentence1"]
+        s2 = row["sentence2"]
+        lab = int(row["label"])
+        sid = "para-" + stable_hash_hex(revision, str(idx), s1, s2)[:16]
+        records.append(
+            {
+                "source_id": sid,
+                "example_id": f"{sid}:{idx}",
+                "sentence1_native": s1,
+                "sentence2_native": s2,
+                "normalized_label": "paraphrase" if lab == 1 else "non_paraphrase",
+                "original_label": lab,
+                "original_split": "unspecified",
+                "source_revision": revision,
+            }
+        )
+    return records
+
+
+def find_identical_positive_quarantine(df: pd.DataFrame, revision: str) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    for idx, row in df.iterrows():
+        if int(row["label"]) != 1:
+            continue
+        if row["sentence1"] != row["sentence2"]:
+            continue
+        sid = "para-" + stable_hash_hex(revision, str(idx), row["sentence1"], row["sentence2"])[:16]
+        out.append(
+            {
+                "row_index": int(idx),
+                "source_id": sid,
+                "example_id": f"{sid}:{idx}",
+                "label": 1,
+                "sentence1": row["sentence1"],
+                "sentence2": row["sentence2"],
+                "exclusion_reason": "identical_positive_sentence1_equals_sentence2",
+            }
+        )
+    return out
+
+
+def _sentence_split_map(rows: list[dict[str, Any]]) -> dict[str, set[str]]:
+    mapping: dict[str, set[str]] = defaultdict(set)
+    for row in rows:
+        split = row.get("project_split", "unassigned")
+        for key in ("sentence1_native", "sentence2_native"):
+            mapping[_norm(row[key])].add(split)
+    return mapping
+
+
+def audit_leakage_connected_components(
+    df: pd.DataFrame, revision: str, quarantine_ids: set[str]
+) -> dict[str, Any]:
+    records = df_to_records(df, revision)
+    eligible = [r for r in records if r["source_id"] not in quarantine_ids]
+    roots = paraphrase_groups(eligible)
+    components: dict[str, set[str]] = defaultdict(set)
+    for sent, root in roots.items():
+        components[root].add(sent)
+
+    sim_rows = [dict(r) for r in eligible]
+    assign_splits(sim_rows, "paraphrase", seed=42)
+    cc_map = _sentence_split_map(sim_rows)
+    cc_leaks = [
+        sent for sent, splits in cc_map.items() if "train" in splits and "validation" in splits
+    ]
+
+    s1_only_rows: list[dict[str, Any]] = []
+    for r in eligible:
+        copy_r = dict(r)
+        copy_r["group_id"] = _norm(r["sentence1_native"])
+        s1_only_rows.append(copy_r)
+    groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for r in s1_only_rows:
+        groups[r["group_id"]].append(r)
+    items = list(groups.items())
+    rng = derive_rng(42, "paraphrase", "split-s1only-audit")
+    rng.shuffle(items)
+    train_keys: set[str] = set()
+    for i, (key, _) in enumerate(items):
+        if i < max(1, int(round(len(items) * 0.8))):
+            train_keys.add(key)
+    for key, members in groups.items():
+        split = "train" if key in train_keys else "validation"
+        for m in members:
+            m["project_split"] = split
+    s1_map = _sentence_split_map([m for ms in groups.values() for m in ms])
+    s1_leaks = [
+        sent for sent, splits in s1_map.items() if "train" in splits and "validation" in splits
+    ]
+
+    cross_column_risk = 0
+    for r in sim_rows:
+        s2n = _norm(r["sentence2_native"])
+        for other in sim_rows:
+            if other["source_id"] == r["source_id"]:
+                continue
+            if s2n == _norm(other["sentence1_native"]) and r["project_split"] != other["project_split"]:
+                cross_column_risk += 1
+
+    return {
+        "connected_component_count": len(components),
+        "largest_component_sentence_count": max((len(v) for v in components.values()), default=0),
+        "split_unit_required": "connected_component_on_sentence1_and_sentence2_union",
+        "sentence1_only_grouping_insufficient": len(s1_leaks) > 0 or cross_column_risk > 0,
+        "simulated_project_split_seed": 42,
+        "simulated_rows": len(sim_rows),
+        "sentence_leak_train_and_validation_cc_split": len(cc_leaks),
+        "leaked_sentences_cc_split_sample": cc_leaks[:10],
+        "sentence_leak_train_and_validation_sentence1_only_split": len(s1_leaks),
+        "leaked_sentences_s1_only_sample": s1_leaks[:10],
+        "cross_column_split_mismatch_pairs_observed": cross_column_risk,
+        "required_pipeline_grouping": (
+            "Use romcom_data.splitting.paraphrase_groups (union-find on both sentence columns)."
+        ),
+    }
+
+
 def audit_leakage_clusters(df: pd.DataFrame) -> dict[str, Any]:
     s1_clusters = df.groupby("sentence1").size()
     s2_clusters = df.groupby("sentence2").size()
@@ -289,10 +454,84 @@ def audit_leakage_clusters(df: pd.DataFrame) -> dict[str, Any]:
         "max_rows_per_sentence1": int(s1_clusters.max()),
         "max_rows_per_sentence2": int(s2_clusters.max()),
         "sentence1_clusters_with_multiple_rows": int((s1_clusters > 1).sum()),
-        "note": (
-            "Future project splits must group by shared sentence1 (or pair) to avoid leakage; "
-            "no split created in this audit."
+    }
+
+
+def romanization_integrity_documentation() -> str:
+    return """# Romanization integrity (audit)
+
+## Method (both sentences treated independently)
+
+1. **Tokenization:** `tokenize_conservative` per sentence (Latin words passthrough; Devanagari tokens romanized).
+2. **Dakshina hit:** Lookup native token in `dakshina_hi_variant_inventory.tsv`; canonical variant = highest attestation with tie-break policy from `pick_canonical_variant`.
+3. **OOV / no lexicon hit:** Devanagari tokens use `fallback_indic_map` (documented character map in `romanize.py`, not attested Dakshina).
+4. **Non-Devanagari:** Punctuation and non-Latin non-Devanagari pass through unchanged.
+5. **Labels:** Romanization is applied to input text only; `label` / `normalized_label` are never modified.
+
+## Collapse checks (post-normalization NFC on native; romanized output concatenated)
+
+- **Positive collapse:** `validate_reconstructed_pair` flags positives where romanized s1 == romanized s2 but native s1 != native s2.
+- **Negative false-identical:** negatives where romanized forms match while native differ.
+
+Counts are in `integrity_metrics.json` under `romanization`. No rows are silently dropped during audit.
+"""
+
+
+def audit_experimental_consistency_code() -> dict[str, Any]:
+    return {
+        "source_of_truth": "src/romcom_data/generate_exps.py::generate_one",
+        "exp01": "Canonical Dakshina spellings per eligible token on each input field independently.",
+        "exp02": "Same base record; `realistic_from_canonical` with per-field RNG `derive_rng(base_seed, example_id, EXP-02)`.",
+        "exp03": (
+            "Copies EXP-01 base; applies `noise_from_changes` using EXP-02 `changed_all` token spans "
+            "so matched-noise uses same positions and target edit distances as realistic-variant."
         ),
+        "shared_metadata": (
+            "phase2_pipeline.stream_task writes same example_id, source_id, label, project_split "
+            "for EXP-01/02/03; qa_matching_ids() verifies alignment when processed files exist."
+        ),
+        "paraphrase_fields": ["input.sentence1", "input.sentence2"],
+        "rebuild_performed_in_this_audit": False,
+        "when_paraphrase_enabled": (
+            "All three conditions will share identical source IDs, labels, and splits per example_id."
+        ),
+    }
+
+
+def determine_handoff_status(
+    license_evidence: dict[str, Any],
+    recommendation: dict[str, Any],
+    leakage: dict[str, Any],
+    quarantine: list[dict[str, Any]],
+) -> dict[str, Any]:
+    owner_approval = license_evidence.get("owner_approval") or {}
+    license_clear = bool(
+        license_evidence.get("hf_card_license_field")
+        or license_evidence.get("hf_dataset_info_license_attr")
+        or owner_approval.get("approved")
+    )
+    blockers: list[str] = []
+    if not license_clear:
+        blockers.append("license_not_declared_on_hf_card_owner_must_confirm")
+    if leakage.get("sentence_leak_train_and_validation_cc_split", 0) > 0:
+        blockers.append("simulated_cc_split_leaked_sentences")
+    if recommendation.get("english_pivot_code_mixed_verdict") == "NO_GO":
+        blockers.append("english_pivot_code_mixed_path_rejected")
+
+    status = (
+        "BLOCKED"
+        if leakage.get("sentence_leak_train_and_validation_cc_split", 0) > 0
+        else "READY_FOR_OWNER_REVIEW"
+    )
+
+    return {
+        "status": status,
+        "owner_review_scope": "hindi_native_only_paraphrase_path",
+        "blockers": blockers,
+        "quarantined_row_count": len(quarantine),
+        "license_owner_approved": bool(owner_approval.get("approved")),
+        "dataset_rebuild_allowed": False,
+        "training_allowed": False,
     }
 
 
@@ -383,29 +622,60 @@ def write_owner_sample(df: pd.DataFrame, path: Path, n_each: int = 25) -> int:
     return len(pick_idx)
 
 
-def run_paraphrase_audit() -> dict[str, Any]:
+def run_paraphrase_audit(*, refresh_hf: bool = False) -> dict[str, Any]:
     PARAPHRASE_AUDIT.mkdir(parents=True, exist_ok=True)
-    provenance = pin_provenance()
+    provenance = load_or_pin_provenance(refresh_hf=refresh_hf)
+    revision = provenance["revision"]
+    if not provenance.get("license_evidence"):
+        try:
+            info = HfApi().dataset_info(REPO, revision=revision)
+            readme_path = hf_hub_download(
+                repo_id=REPO, filename="README.md", repo_type="dataset", revision=revision
+            )
+            readme = Path(readme_path).read_text(encoding="utf-8")[:8000]
+            provenance["license_evidence"] = gather_license_evidence(info, readme)
+        except Exception as exc:
+            provenance["license_evidence"] = {"fetch_error": str(exc)}
     df = load_tsv()
     df = df.reset_index(drop=True)
     integrity = audit_integrity(df)
     pivot = audit_english_pivot(df)
     roman = audit_romanization(df)
-    leakage = audit_leakage_clusters(df)
+    leakage_basic = audit_leakage_clusters(df)
+    quarantine = find_identical_positive_quarantine(df, revision)
+    quarantine_ids = {q["source_id"] for q in quarantine}
+    leakage_cc = audit_leakage_connected_components(df, revision, quarantine_ids)
+    exp_consistency = audit_experimental_consistency_code()
     recommendation = build_recommendation(pivot, integrity, roman)
+    license_evidence = dict(provenance.get("license_evidence") or {})
+    license_evidence["owner_approval"] = OWNER_LICENSE_APPROVAL
+    if OWNER_LICENSE_APPROVAL["approved"]:
+        license_evidence["audit_conclusion"] = (
+            "HF card license field remains null. Owner approved the license "
+            "for the Phase 2.1 paraphrase audit on 2026-11-01; confirmation blocker removed."
+        )
+    provenance["license_evidence"] = license_evidence
+    handoff_status = determine_handoff_status(
+        license_evidence, recommendation, leakage_cc, quarantine
+    )
 
     metrics = {
         "integrity": integrity,
         "english_pivot": pivot,
         "romanization": roman,
-        "leakage_clusters": leakage,
+        "leakage_clusters_basic": leakage_basic,
+        "leakage_connected_components": leakage_cc,
+        "quarantine": quarantine,
+        "experimental_consistency": exp_consistency,
+        "handoff_status": handoff_status,
         "audit_utc": datetime.now(UTC).isoformat(),
+        "audit_revision": "2026_11_01_owner_review",
     }
 
     manifest = {**provenance, "audit_scope": "inspection_only_no_rebuild"}
 
     report = {
-        "title": "IndicXParaphrase Phase 2.1 audit",
+        "title": "IndicXParaphrase Phase 2.1 audit (revised)",
         "provenance": provenance,
         "known_generation_procedure": (
             "Single TSV from ai4bharat/IndicXParaphrase; columns en, sentence1, sentence2, label."
@@ -413,12 +683,17 @@ def run_paraphrase_audit() -> dict[str, Any]:
         "integrity_summary": integrity,
         "english_pivot_gate": pivot,
         "romanization_summary": roman,
-        "leakage_summary": leakage,
+        "leakage_summary": {**leakage_basic, **leakage_cc},
+        "quarantine_required": quarantine,
         "recommendation": recommendation,
+        "experimental_consistency": exp_consistency,
+        "handoff_status": handoff_status,
         "limitations": [
-            "No official train/validation/test; cluster-aware splitting required if used.",
-            "English-pivot code-mixed reconstruction rejected unless second aligned English exists.",
+            "No official train/validation/test; split on connected components (both sentence columns).",
+            "English-pivot code-mixed reconstruction rejected (NO_GO).",
+            "One identical positive row must stay quarantined.",
             "Romanization uses Dakshina inventory; fallback map tokens are not attested variants.",
+            "HF card license field remains null. Owner approved the license on 2026-11-01.",
         ],
     }
 
@@ -436,15 +711,56 @@ def run_paraphrase_audit() -> dict[str, Any]:
 
     sample_n = write_owner_sample(df, PARAPHRASE_AUDIT / "owner_review_sample.csv")
 
+    (PARAPHRASE_AUDIT / "quarantined_rows.csv").write_text(
+        _dicts_to_csv(quarantine,
+        ["row_index", "source_id", "example_id", "label", "sentence1", "sentence2", "exclusion_reason"]),
+        encoding="utf-8",
+    )
+    (PARAPHRASE_AUDIT / "license_evidence.json").write_text(
+        json.dumps(license_evidence, indent=2) + "\n", encoding="utf-8"
+    )
+    (PARAPHRASE_AUDIT / "leakage_report.md").write_text(
+        "# Paraphrase leakage report\n\n"
+        + json.dumps(leakage_cc, indent=2, ensure_ascii=False)
+        + "\n\n"
+        + "Sentence1-only grouping is insufficient when the same sentence text can appear in "
+        "sentence1 or sentence2 across rows. Use `paraphrase_groups` connected components.\n",
+        encoding="utf-8",
+    )
+    (PARAPHRASE_AUDIT / "romanization_integrity.md").write_text(
+        romanization_integrity_documentation(), encoding="utf-8"
+    )
+    (PARAPHRASE_AUDIT / "paraphrase_audit_status.json").write_text(
+        json.dumps(handoff_status, indent=2) + "\n", encoding="utf-8"
+    )
+
     (PARAPHRASE_AUDIT / "audit_log.txt").write_text(
         f"completed_utc={datetime.now(UTC).isoformat()}\n"
         f"rows={integrity['row_count']}\n"
         f"recommendation={recommendation['verdict']}\n"
+        f"handoff_status={handoff_status['status']}\n"
+        f"quarantined={len(quarantine)}\n"
         f"owner_sample_rows={sample_n}\n",
         encoding="utf-8",
     )
 
-    return {"report": report, "manifest": manifest, "metrics": metrics, "recommendation": recommendation}
+    return {
+        "report": report,
+        "manifest": manifest,
+        "metrics": metrics,
+        "recommendation": recommendation,
+        "handoff_status": handoff_status,
+    }
+
+
+def _dicts_to_csv(rows: list[dict[str, Any]], fields: list[str]) -> str:
+    import io
+
+    buf = io.StringIO()
+    w = csv.DictWriter(buf, fieldnames=fields, extrasaction="ignore")
+    w.writeheader()
+    w.writerows(rows)
+    return buf.getvalue()
 
 
 def build_audit_zip(zip_path: Path | None = None) -> Path:
@@ -455,6 +771,11 @@ def build_audit_zip(zip_path: Path | None = None) -> Path:
         "integrity_metrics.json",
         "owner_review_sample.csv",
         "recommendation.json",
+        "leakage_report.md",
+        "romanization_integrity.md",
+        "license_evidence.json",
+        "quarantined_rows.csv",
+        "paraphrase_audit_status.json",
         "audit_log.txt",
     )
     lines: list[str] = []

@@ -1,0 +1,38 @@
+{
+  "hf_card_license_field": null,
+  "hf_dataset_info_license_attr": null,
+  "hf_tags": [
+    "task_categories:text-generation",
+    "language:as",
+    "language:bn",
+    "language:gu",
+    "language:en",
+    "language:hi",
+    "language:kn",
+    "language:ml",
+    "language:mr",
+    "language:ne",
+    "language:or",
+    "language:pa",
+    "language:sa",
+    "language:ta",
+    "language:te",
+    "language:ur",
+    "license:cc-by-4.0",
+    "size_categories:10M<n<100M",
+    "format:parquet",
+    "modality:tabular",
+    "modality:text",
+    "library:datasets",
+    "library:dask",
+    "library:polars",
+    "library:mlcroissant",
+    "arxiv:2403.06350",
+    "region:us"
+  ],
+  "readme_license_mentions": [
+    "cc-by",
+    "license"
+  ],
+  "loader_hardcoded_license_warning": "toxic_matrix.py hardcodes CC-BY-4.0; audit uses HF card when available."
+}

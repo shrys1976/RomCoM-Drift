@@ -1,7 +1,7 @@
 {
   "repository": "ai4bharat/IndicXParaphrase",
   "revision": "181031f9e69c465e0c72fc84fd33b66114adb3e8",
-  "revision_fetched_utc": "2026-11-01T14:00:45.266358+00:00",
+  "revision_fetched_utc": "2026-11-01T14:07:04.346876+00:00",
   "hf_file": "data/hi.tsv",
   "local_path": "romcomx_data/raw/indicxparaphrase/hi.tsv",
   "local_sha256": "e35ac3463c2b7cf19160657b527c624f7f697f44326af3f251a8faf96e9f5c64",
@@ -20,5 +20,27 @@
     "sentence2",
     "label"
   ],
+  "license_evidence": {
+    "hf_card_data_keys": [],
+    "hf_card_license_field": null,
+    "hf_dataset_info_license_attr": null,
+    "hf_tags": [
+      "size_categories:10K<n<100K",
+      "modality:text",
+      "library:datasets",
+      "library:mlcroissant",
+      "region:us"
+    ],
+    "readme_license_mentions": [],
+    "loader_hardcoded_cc0_warning": "source_loaders/indicxparaphrase.py hardcodes CC0; not used as audit evidence.",
+    "audit_conclusion": "HF card license field remains null. Owner approved the license for the Phase 2.1 paraphrase audit on 2026-11-01; confirmation blocker removed.",
+    "owner_approval": {
+      "approved": true,
+      "approved_on": "2026-11-01",
+      "approved_by": "owner",
+      "scope": "phase_2_1_paraphrase_audit",
+      "decision": "Owner approved the IndicXParaphrase license for this audit and removed the confirmation blocker. The HF card license field is still null."
+    }
+  },
   "audit_scope": "inspection_only_no_rebuild"
 }

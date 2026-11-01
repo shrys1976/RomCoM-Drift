@@ -24,6 +24,7 @@ TRACES = HANDOFF / "traces"
 REPORTS = HANDOFF / "reports"
 NLI_INVESTIGATION = HANDOFF / "nli_investigation"
 PARAPHRASE_AUDIT = HANDOFF / "paraphrase_audit"
+TOXICITY_AUDIT = HANDOFF / "toxicity_audit"
 SRC_MIRROR = HANDOFF / "src"
 
 
@@ -46,6 +47,7 @@ def ensure_handoff_layout() -> None:
         REPORTS,
         NLI_INVESTIGATION,
         PARAPHRASE_AUDIT,
+        TOXICITY_AUDIT,
         SRC_MIRROR / "source_loaders",
         SRC_MIRROR / "preprocessing",
         SRC_MIRROR / "augmentation",

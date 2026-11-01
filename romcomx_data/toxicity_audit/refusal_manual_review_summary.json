@@ -1,0 +1,25 @@
+{
+  "method": "Reproducible sample derive_rng(42, 'tox-refusal-manual', 'sample'), first 120 shuffled Toxic_Matrix local rows. Each assistant reply was read. The shared opening sentence was checked, then the explanation was categorized. Marker matching is not the label.",
+  "n": 120,
+  "counts": {
+    "clear_refusal": 119,
+    "partial_refusal_with_safe_alternative": 1
+  },
+  "proportions": {
+    "clear_refusal": 0.9917,
+    "partial_refusal_with_safe_alternative": 0.0083,
+    "safety_explanation": 0.0,
+    "ordinary_response": 0.0,
+    "ambiguous": 0.0
+  },
+  "coding_rule": "clear_refusal: explicit refusal plus harm explanation, no concrete alternative action. partial_refusal_with_safe_alternative: explicit refusal plus a concrete safe next step. safety_explanation: harm discussion without a refusal. ordinary_response: complies or answers normally. ambiguous: mixed or off-template.",
+  "partial_cases": [
+    {
+      "row_index": 2179,
+      "doc_id": "81c12a47-16d9-4c88-930b-d6688f28e7f4",
+      "reason": "Refuses a mass-shooting request, then tells the user to call emergency services or seek a mental-health professional."
+    }
+  ],
+  "not_ground_truth_note": "Prior heuristic marker counts remain descriptive only. This review does not create training labels.",
+  "distress_prompts_refused_without_help_in_sample": "Several distress or self-harm prompts in the sample are clear refusals with no crisis resource. That is a response-quality issue inside clear_refusal, not a separate category."
+}

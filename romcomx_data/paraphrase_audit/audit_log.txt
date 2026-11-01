@@ -1,4 +1,6 @@
-completed_utc=2026-11-01T14:01:13.949145+00:00
+completed_utc=2026-11-01T14:19:31.412098+00:00
 rows=2002
 recommendation=CONDITIONAL_GO
+handoff_status=READY_FOR_OWNER_REVIEW
+quarantined=1
 owner_sample_rows=50

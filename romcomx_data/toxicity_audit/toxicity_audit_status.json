@@ -1,0 +1,10 @@
+{
+  "status": "READY_FOR_OWNER_REVIEW",
+  "blockers": [
+    "license_confirm_on_card",
+    "owner_accept_dolly_t_head_slice"
+  ],
+  "dataset_rebuild_allowed": false,
+  "training_allowed": false,
+  "owner_review_scope": "toxicity_hindi_native_target_side_mixing"
+}
