@@ -3,10 +3,16 @@ base_seed: 42
 seed_derivation: "sha256_hex_prefix_8(base_seed || example_id || condition) -> int"
 
 exp02:
+  p_variant: 0.35
   aggressiveness:
-    distribution: uniform
-    low: 0.10
+    distribution: constant
+    low: 0.35
     high: 0.35
+
+nli:
+  max_train_rows: 12000
+  subsample_seed: 42
+  note: "Full forward/train is stored in raw; processed package uses a seed-42 stratified subsample plus official dev as validation. Test is excluded."
 
 exp03:
   dakshina_collision_resample_max: 32

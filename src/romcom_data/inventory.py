@@ -93,12 +93,12 @@ def build_variant_inventory(
     canonical_info: dict[str, dict[str, Any]] = {}
     for native, grp in inv.groupby("native"):
         mc = int(grp["attestation_count"].max())
-        top = grp[grp["attestation_count"] == mc]["variant"].tolist()
+        top = sorted(grp[grp["attestation_count"] == mc]["variant"].tolist())
         tie = len(top) > 1
         canonical_info[native] = {
-            "canonical_candidate": top[0] if len(top) == 1 else None,
+            "canonical_candidate": top[0],
             "canonical_tie": tie,
-            "is_canonical": False,
+            "tie_break": "lexicographic_nfc" if tie else None,
         }
 
     inv = inv.merge(summary, on="native")
@@ -166,6 +166,13 @@ def build_variant_inventory(
     pd.DataFrame(english_collisions).to_csv(
         out_dir / "english_collision_aliases.tsv", sep="\t", index=False
     )
+
+    inv["native_word"] = inv["native"]
+    inv["romanized_variant"] = inv["variant"]
+    inv["canonical_romanization"] = inv["canonical_candidate"]
+    inv["number_of_variants"] = inv["variant_count_for_native"]
+    totals = inv.groupby("native")["attestation_count"].transform("sum")
+    inv["normalized_probability"] = inv["attestation_count"] / totals.replace(0, 1)
 
     return {
         "native_words": int(inv["native"].nunique()),

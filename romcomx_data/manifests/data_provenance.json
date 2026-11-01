@@ -1,0 +1,50 @@
+[
+  {
+    "task": "nli",
+    "repository": "Divyanshu/indicxnli",
+    "revision": "7092c27872e919f31d0496fb8b9c47bd2cba3f6c",
+    "license": "CC-BY-4.0",
+    "license_status": "cleared_for_internal_use",
+    "files": [
+      "backward__dev__xnli_hi.json",
+      "backward__test__xnli_hi.json",
+      "forward__dev__xnli_hi.json",
+      "forward__test__xnli_hi.json",
+      "forward__train__xnli_hi.json"
+    ],
+    "all_hi_files": [
+      "backward/dev/xnli_hi.json",
+      "backward/test/xnli_hi.json",
+      "forward/dev/xnli_hi.json",
+      "forward/test/xnli_hi.json",
+      "forward/train/xnli_hi.json"
+    ]
+  },
+  {
+    "task": "paraphrase",
+    "repository": "ai4bharat/IndicXParaphrase",
+    "revision": "181031f9e69c465e0c72fc84fd33b66114adb3e8",
+    "license": "CC0",
+    "license_status": "cleared_for_internal_use",
+    "files": [
+      "hi.tsv"
+    ],
+    "split_semantics": "Single language TSV with no official train/dev/test files. Not a test split; project 80/20 is created at source-group level."
+  },
+  {
+    "task": "toxicity",
+    "repository": "ai4bharat/indic-align",
+    "revision": "032b6a9070e7f85f1a38e0506419f4590a20455a",
+    "license": "CC-BY-4.0",
+    "license_status": "cleared_for_internal_use",
+    "toxic_config": "Toxic_Matrix",
+    "benign_config": "Dolly_T",
+    "n_toxic_raw": 5000,
+    "n_benign_sampled": 2000,
+    "benign_status": "sampled_Dolly_T_train_head_2000",
+    "files": [
+      "Toxic_Matrix_train.jsonl",
+      "Indic_ShareLlama_benign_sample.jsonl"
+    ]
+  }
+]
