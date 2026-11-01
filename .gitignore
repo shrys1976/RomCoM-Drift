@@ -9,3 +9,6 @@ wheels/
 # Virtual environments
 .venv
 plan.md
+
+# Local secrets
+.env

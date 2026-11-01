@@ -1,0 +1,30 @@
+
+======================================================================
+B. IndicXParaphrase
+======================================================================
+License metadata: None
+TSV files: ['data/as.tsv', 'data/bn.tsv', 'data/gu.tsv', 'data/hi.tsv', 'data/kn.tsv', 'data/ml.tsv', 'data/mr.tsv', 'data/or.tsv', 'data/pa.tsv', 'data/te.tsv']
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Shape: (2002, 4)
+Columns: ['en', 'sentence1', 'sentence2', 'label']
+                                                                                     en  ...  label
+0  on receiving the information, the police reached the spot, rushed the victims to ...  ...      1
+1  on receiving the information, the police reached the spot, rushed the victims to ...  ...      0
+2  he won the filmfare award for best supporting actor for his performance in the film.  ...      1
+3  he won the filmfare award for best supporting actor for his performance in the film.  ...      0
+4  chandigarh: punjab kala parishad would honour eminent punjabi litterateur jaswant...  ...      1
+
+[5 rows x 4 columns]
+Label distribution:
+ label
+1    1001
+0    1001
+Name: count, dtype: int64
+
+======================================================================
+C. IndicAlign Toxic_Matrix
+======================================================================
+CONFIGURATIONS: ['Indic_ShareLlama', 'Dolly_T', 'OpenAssistant_T', 'WikiHow', 'IndoWordNet', 'Anudesh', 'Wiki_Conv', 'Wiki_Chat', 'HHRLHF_T', 'Toxic_Matrix']
+Selected: Toxic_Matrix
+Splits: ['train']
+Features: {'doc_id': Value('string'), 'num_turns': Value('float64'), 'eng_Latn': List(List(Value('string'))), 'asm_Beng': List(List(Value('string'))), 'asm_Latn': List(List(Value('string'))), 'ben_Beng': List(List(Value('string'))), 'ben_Latn': List(List(Value('string'))), 'guj_Gujr': List(List(Value('string'))), 'hin_Deva': List(List(Value('string'))), 'hin_Latn': List(List(Value('string'))), 'kan_Knda': List(List(Value('string'))), 'kan_Latn': List(List(Value('string'))), 'mal_Mlym': List(List(Value('string'))), 'mal_Latn': List(List(Value('string'))), 'mar_Deva': List(List(Value('string'))), 'mar_Latn': List(List(Value('string'))), 'npi_Deva': List(List(Value('string'))), 'npi_Latn': List(List(Value('string'))), 'ory_Orya': List(List(Value('string'))), 'ory_Latn': List(List(Value('string'))), 'pan_Guru': List(List(Value('string'))), 'pan_Latn': List(List(Value('string'))), 'san_Deva': List(List(Value('string'))), 'san_Latn': List(List(Value('string'))), 'tam_Taml': List(List(Value('string'))), 'tam_Latn': List(List(Value('string'))), 'tel_Telu': List(List(Value('string'))), 'tel_Latn': List(List(Value('string'))), 'urd_Arab': List(List(Value('string'))), 'urd_Latn': List(List(Value('string'))), '__index_level_0__': Value('int64')}
