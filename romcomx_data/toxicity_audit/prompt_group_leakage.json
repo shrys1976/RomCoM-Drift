@@ -1,0 +1,2435 @@
+{
+  "population": "retained toxic user prompts, hin_Deva slot 0",
+  "excluded_before_grouping": [
+    "5b41220a-daba-4be9-98bc-d704d8a1c9b9",
+    "45a79f97-f684-4c1a-a8fe-ed17671db8ad"
+  ],
+  "method": "Union exact normalized prompts, identical 80-character prefixes, first-6-token families whose full token Jaccard is at least 0.5, and embedding cosine at least 0.85. Source IDs are not rewritten.",
+  "n": 4998,
+  "group_count": 4290,
+  "multi_member_groups": 239,
+  "rows_in_multi_member_groups": 947,
+  "largest_group": 118,
+  "links": {
+    "exact_normalized": 1,
+    "prefix80": 46,
+    "first6_tokens_and_token_jaccard_at_least_0_5": 884,
+    "embedding_cosine_at_least_0_85": 962
+  },
+  "first6_token_family_size_histogram": {
+    "1": 3022,
+    "2": 317,
+    "3": 111,
+    "4": 45,
+    "5": 23,
+    "6": 7,
+    "7": 7,
+    "8": 8,
+    "9": 4,
+    "10": 5,
+    "11": 5,
+    "12": 1,
+    "13": 2,
+    "14": 1,
+    "15": 1,
+    "17": 2,
+    "20": 1,
+    "23": 1,
+    "26": 1,
+    "27": 1,
+    "35": 1,
+    "89": 1,
+    "97": 1
+  },
+  "near_duplicate_cosine": 0.85,
+  "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "frozen_group_cross_split_count": 0,
+  "diagnostic_80_10_10": {
+    "purpose": "Check that a later test boundary would not split a near-duplicate group.",
+    "groups_crossing_splits_when_groups_are_atomic": 0,
+    "near_duplicate_groups_that_would_cross_if_split_by_row": 93
+  },
+  "multi_member_groups_detail": [
+    {
+      "group_id": "aa1f9b38-5a04-4e50-98e1-b373c557de5b",
+      "doc_ids": [
+        "01694c38-f04f-4e21-b139-49abf50ae1d5",
+        "d2a150dd-a1e3-4902-9448-bab070422292",
+        "ebaf56eb-e354-4810-ad18-e7ca3b4a42e4",
+        "d5ee04ae-40c3-43ad-a4d4-bfd828f04900",
+        "26b4aa0e-9ceb-4b9a-9db3-3c7f18ed7c6e",
+        "a1f3a787-13a3-4821-9939-d37c76177a3e",
+        "4efefbf4-e635-4569-a158-c95450b7fdb1",
+        "31143622-79b5-4387-9e04-330cdac4c786",
+        "54b12553-8efc-4a33-bf7d-1fe320e4ea5e",
+        "cb23e969-95c9-40fb-8bac-49e3f9000c8c",
+        "e59de4b2-1de4-413e-a6e1-76c30fadf59c",
+        "331d5133-0aa2-494a-8dab-acd33aa77218",
+        "7af34033-d577-4c9d-8b8e-6d0c96c84372",
+        "6b7308c9-a83a-4560-ae91-42609b876fec",
+        "b9ac93af-dcc1-423e-aea3-04ee4f524b53",
+        "3530ec60-30f9-4043-b7a6-135ab883973f",
+        "211765ac-565a-4ec8-93f6-a6dea8e4ed47",
+        "82650809-ec05-4473-ae5b-efb5a3eb403b",
+        "e5efadd0-ee72-45e3-93d5-d03cfaab1d22",
+        "82fa1aa4-3a68-4621-81b7-f1ef72aa08d1",
+        "9340c58a-331a-4bb9-8c51-2e75cc112b11",
+        "1603a6e7-8eed-455d-99c2-0b244b25a2e4",
+        "ac72debc-4448-4814-98e7-48690a5eaf2f",
+        "47b4bdd1-c526-4838-aba5-f15a0e0961b6",
+        "af25dff4-8599-400c-b4fb-24bcf98b4461",
+        "0a286a7c-8512-4d0c-ba47-85ef14466546",
+        "c1f8abbb-ec89-47dd-9d63-8924d605f4c8",
+        "6017c143-4da6-48b4-863c-c5f427c3013c",
+        "5989fe5a-13a3-495f-8d23-be95482135de",
+        "cbddc57c-aa0e-4482-8d29-31f2589af753",
+        "7f25bbf0-dac3-439f-ae28-20c7f3cfdd12",
+        "0b4f8743-59c9-401b-b608-f87f5f8dcbf9",
+        "6922b492-ee28-48c9-8126-0e5ece58dd0c",
+        "863ff7b5-fde9-412e-9062-46f9d6d7bc65",
+        "a4e3a1df-f993-4840-8989-31f560c2c456",
+        "7acf7caa-51ab-467c-98bd-cc87efb340f6",
+        "dbf2096b-85ce-4e70-9ca9-00a759adbe03",
+        "2e07c0e7-6deb-4fd5-8406-b6f0f4c7a2d2",
+        "8e0f50ea-8070-4d29-8276-e62e9f834112",
+        "aa1f9b38-5a04-4e50-98e1-b373c557de5b",
+        "9df4f4b8-b1e6-46cb-8798-63d6ceb06bca",
+        "a5df65f5-cc43-4839-990f-32dd3a9c81ee",
+        "47a7b639-679c-4d1c-b28d-5f8ef08c4729",
+        "4823ed01-b503-4a2e-bd09-72bd9f758b7a",
+        "2ae0ecf8-8d9b-442f-b6f8-da30ff5d8698",
+        "75c00cc7-c10a-47da-8e33-7f2898211844",
+        "e13112f3-a533-4017-83ef-0e462f535376",
+        "54211a84-21ac-4322-ae80-b20d8a8c1996",
+        "d08bd5e9-b54d-4909-bcb1-57a2e88c77d5",
+        "e9b57a7b-da3b-4926-8f7f-4ed819c4c358",
+        "92602634-a6cb-41ac-acef-7534a0bccf3a",
+        "f69160e7-162f-4dcf-bb92-78221a10ef92",
+        "5d2cc5ea-2f93-41f4-a2ce-a3ae11be7636",
+        "ab5fc8fa-186f-40a5-8bbd-315ff65de1c1",
+        "4e37390c-e028-4b77-a48e-748aa95d2e85",
+        "de1cf538-2cb4-4095-89df-edc941be7dc5",
+        "807f2230-50ef-4d9a-8d99-ff8f342087e8",
+        "dd6c00dc-1de8-4143-b18e-31106f538dec",
+        "c114c8aa-ecca-455c-9eda-ebbe8fabd105",
+        "caf4018e-47be-4a12-9813-19fa0e2bf362",
+        "47a81f53-3f90-4fe0-a827-24111084bcda",
+        "3f1e4bb3-37ae-418a-b617-0e851ebb0a11",
+        "29554da7-e622-4370-abb7-c3404a0a0472",
+        "be7aa576-411a-4ff6-b1be-e6827c1f118b",
+        "9ac2be25-2f80-43ad-a589-e1848daef464",
+        "c2cfea60-0898-4fa0-9b60-80a46a2bf0e8",
+        "2020cda7-6d51-4799-bfbf-3c17c34bfa76",
+        "0dce3157-2df8-4a30-8a52-7c0956766544",
+        "7412e9d5-6311-4759-a0fc-7fd3aa0850df",
+        "39611861-b14e-4858-82dc-f64853d0f857",
+        "2b88566e-fa8e-4f26-b393-9e0a13912480",
+        "55cd7c6e-ec1a-42ee-82d2-c9e0bb81d9ae",
+        "1496675f-a286-4109-8c62-8b97b1a82d2a",
+        "c1d97861-ab4c-4048-a8d2-7038ba586d37",
+        "3ac074df-7a9e-47d3-a7c1-bb188480e1f3",
+        "2c862ee5-8a20-4691-8285-2aacbfcfb216",
+        "079ef853-dffe-40f3-b532-a42add4fb38e",
+        "85c42ebb-684e-4687-ab11-50bd1634aa06",
+        "7658ddf5-d197-4c84-a55f-ecf14bf0fa54",
+        "3d3e8f85-debb-4dc8-826c-f971757c3904",
+        "cd0f699b-8060-4394-9b09-165aa7d3f0c9",
+        "79b5df35-5abf-4dcb-8f41-821418868847",
+        "36930b6a-20da-4548-8c5d-6826ccf188e0",
+        "b84a0293-53d2-4c79-a251-212967910745",
+        "8255552e-830f-46e6-ae3a-cf05ef06d5b0",
+        "1e57ad99-4bd0-433e-a9f9-8a53598a2f11",
+        "393746c7-ae0f-4594-b20f-b87330bf0211",
+        "c8317148-9699-4e17-9940-ff20915b1d3f",
+        "e33597d8-d291-41a4-a62d-fb9090f572f1",
+        "5c9ffad3-33ec-4cf7-8623-1b7d1f96c438",
+        "60524363-1c24-4afa-9d58-9a5d1a537fef",
+        "d9f7199b-50d7-48a2-bffa-5929e9a9213a",
+        "5154eb5f-1c23-4848-a7e8-86d3fdf278f7",
+        "c63bfabe-f1fe-49bd-aebe-df77d92c84bc",
+        "342f73b8-b559-4b7f-93f8-b2702afbcd03",
+        "f77d4e72-5c68-410b-a737-964233a17fe5",
+        "9ecd3cfe-29a1-4109-863e-fe5e1ad77551",
+        "64e1b173-d4fa-461a-b750-3b5945d7ae2f",
+        "af699514-a253-4c3e-8c91-45b8416bfac1",
+        "1086a0eb-da00-45f9-89be-fb630c57f099",
+        "c44c10c3-feb4-410e-874d-16a516d6ef27",
+        "59f6cd14-7a79-457d-b594-70ba5e8d0aba",
+        "28f536eb-3ddc-48fd-8827-3703e66b48ea",
+        "f66b9a88-e6eb-4e91-b4bd-6af8853a1bac",
+        "0e38db3d-fdb7-477f-9b5e-1bbb73894060",
+        "0a0d3375-52ac-4fd2-9695-a39450dac1af",
+        "43394903-8c66-43d2-94b2-555c1a842d30",
+        "fec23d53-d52b-4049-8935-c580f20fea34",
+        "1553ef6e-e2e4-4605-9de5-8b68619c52d6",
+        "3340abed-2337-4f36-ae3d-0f2d26bd03a1",
+        "98ed73d0-2b7a-41fb-99fe-ec1400f25aa6",
+        "8a4516c0-b823-446f-bc8f-f0045c7346fc",
+        "be34fe5f-2cee-4305-8e75-6ba5fb337900",
+        "83e5e436-3cc0-459f-b5c7-5efd54fef6f3",
+        "065cb882-ea1b-493f-ba22-236c2abdbf89",
+        "4db4c821-3e33-489f-b377-df70d93bd16c",
+        "eaa3295f-5686-4f5f-acd0-b4d08c0ab3d1",
+        "bc7825d0-daa9-4dfb-8318-531f814cf1ef"
+      ],
+      "size": 118
+    },
+    {
+      "group_id": "8f4d7cdd-28e3-4695-b5ce-8a1e1dbf4f76",
+      "doc_ids": [
+        "71ccd5b8-db88-4f5e-a469-6cbe8c90bae9",
+        "be96a41f-7d37-44cc-b6d8-b86b2a5a6891",
+        "82eb1fae-dedb-443e-92da-301519e64f3e",
+        "f51f11c6-7e23-4da5-b24f-fe89aca01474",
+        "fd7d73da-67a0-4f09-aba8-63ecfad22d26",
+        "65873216-a646-47ba-8622-5fa2bdf5697b",
+        "0bbfa40b-69a3-4630-80a6-ef4be4a798be",
+        "d6455c97-037d-4212-a039-20551133a0e1",
+        "abc41d27-8efa-42c1-b3c4-f4f543537d43",
+        "a3de7314-dfd4-44f6-89e8-a044fe9059eb",
+        "87975234-1348-49e8-8f59-bee25332bcce",
+        "b00fc586-370b-4886-8a27-0bb64e3a2361",
+        "9aa5d490-ed1a-465c-b883-291556979994",
+        "0f1477c2-bd1d-4fb7-8d6e-9f98422785b1",
+        "8f4d7cdd-28e3-4695-b5ce-8a1e1dbf4f76",
+        "3546e3d9-e4a9-440a-9af9-e3757493dc05",
+        "ef4cf284-a54b-4105-96e3-e06ebe75b007",
+        "20f59342-f935-4333-98d7-7236d9a05d06",
+        "4a3fe3ed-48ac-4205-bbf9-20ab1e71052c",
+        "921eef76-690a-4a4e-8b10-40b174182201",
+        "d537fe6d-c3c7-4fe7-b91f-6648fa01fafd",
+        "bc683568-3209-4f8c-ad9e-7105df6774f4",
+        "5445b01a-71e9-4c90-9e37-02fca00619fc",
+        "5bb3761f-1ec7-48a3-8b4e-4075c52b10f4",
+        "1aaaab6b-27eb-4cb5-b3be-ddad5cad2d9f",
+        "54efb8cf-8fc9-4f56-9e59-970f81531d78",
+        "6152338f-9594-4b14-8e61-66d384a6d37c",
+        "9a41a5c4-78e2-4d9f-b212-d239691768c9",
+        "f52d5230-813f-4fa9-b5c4-f1a4ebbc0611",
+        "9317000f-603b-4545-90a5-8257e2f91c0d",
+        "2f7693f1-4ef8-4bc9-937c-ecb42b1c696e",
+        "c6969933-4db3-48a9-8290-ac963af07215",
+        "728a9dbd-3a49-475a-bf1e-c9f4f8cd7df7",
+        "9a089501-93d5-4532-abab-bfb938d6be80",
+        "be8ef145-8f85-418b-8ef6-6c770405de75",
+        "628764de-1953-486f-8048-f8c039eb2dc6",
+        "7eb3b9f7-15ec-4862-8ceb-08d5249b290b",
+        "a1bfa02c-fb5b-49f2-9ce6-6130236c4a87",
+        "3b59321e-1a97-4915-bf26-f7852d51e7bb",
+        "18d9bf19-8041-4a8e-b8ef-dc5077632466",
+        "9c605da3-f7db-47f0-a9a1-d9f619eeba33",
+        "69d82464-d50b-4de8-b063-d9a43a270d7e",
+        "a438c78d-f322-4c50-b24c-a24d753bb289",
+        "d1f4413f-83f8-4e1b-bf8d-21bd0a7bfdba",
+        "ff04bdba-a754-487c-ae61-6befa084d165",
+        "e0c8ea29-8eeb-4e35-8067-ce73adb747d2",
+        "003e1c25-43c1-44dd-9a5f-90b6143c04a8",
+        "9ad53baf-cb06-4dd0-82ac-9cd9bf0a0c9e",
+        "0e884a3e-9287-4db7-bcae-97245b22692d",
+        "21f68a20-03a9-459b-80e3-101bfa8c8ba7",
+        "e97d089d-9882-48fd-a964-7023961e64a0",
+        "7a924e50-9bd8-4027-87e4-51338e1c79d8",
+        "5b56203d-2fbe-4f4b-9b04-504afd70eff0",
+        "e24429d2-ace1-4cf8-8629-6ed8b5e57dde",
+        "5f382e45-5e58-4404-a45d-92c19a20e850",
+        "f49e701d-838d-40db-8261-105c35131afd",
+        "840b460f-8935-4558-b285-5768b296538c",
+        "b6752662-cf84-4595-ab53-a8e2b4d38ee1",
+        "668c996e-7432-4f6e-8cc6-b1690d6cdb12",
+        "bdd76d62-95f7-4189-be9e-d6cf992c9236",
+        "6638a592-28e9-4f2a-a9b4-b4e9aac83536",
+        "095e89bb-7cf2-46ff-ac93-f64494019dc3",
+        "ddcee442-a8f1-4568-b508-e9481fce2a93",
+        "71014cbb-61c7-468b-a043-2cc686a9b0fc",
+        "bb00aff3-06eb-4498-94b8-a02f1672cf6b",
+        "b9fae495-3c96-4842-a170-cc56271b9add",
+        "940bcebe-3eb8-4dea-8757-405a05d39b7e",
+        "58625e01-71e7-4b9b-a7e1-2f09f7415215",
+        "3cb04991-a987-4b0c-b355-115948d5747b",
+        "02cf663f-a443-4493-ba23-040a62c4510a",
+        "49e5c78c-faa5-4560-9dd5-a59c86833c85",
+        "adbdd4f4-cd7b-4d4f-acc3-766922d5bb09"
+      ],
+      "size": 72
+    },
+    {
+      "group_id": "fcef3045-517d-4e4d-83f9-6d0ce30d6929",
+      "doc_ids": [
+        "018feb4a-31ab-4739-ac72-6906d2a383fe",
+        "907b325c-c193-4b45-9b84-79389cfbad41",
+        "75423c92-bee5-4460-9873-85d449a6396e",
+        "5789ba20-aa15-44dd-adc1-5fcbc6e6210f",
+        "f6492df9-378b-4442-8f0d-c470da4d7305",
+        "fd615191-248b-4f75-bca2-f18fab1aa8eb",
+        "0cb80c72-2d45-4ac0-ab37-b0def36919fc",
+        "41f4e5bf-f9cb-4b17-b4a7-5a2852fa04e9",
+        "57a59542-750f-472a-a84c-0d760a2644f0",
+        "8150d712-7b0e-41a6-8393-6471c16bdb39",
+        "2d5aea6e-04b4-4d51-833b-4a6f5ea34155",
+        "431dcb66-7d5c-49eb-86b3-d1a340e35582",
+        "3427077c-9596-4913-991c-53ef87618478",
+        "9baa1aaf-e7f5-4d4c-b5fa-dac16749f16e",
+        "5c4ef202-9f14-4144-bae0-58a5e499d34f",
+        "863c7e2e-8658-42e2-ac08-a605a944abf6",
+        "2486fbae-aae4-40e1-801a-ade7900073e3",
+        "e983dd07-e714-4432-bc3b-c48bbb7c4a6d",
+        "a6db2ceb-b6ab-4925-8d81-6e51c5ba1188",
+        "0ed56a23-6935-403b-80b0-52cc2609ed77",
+        "fdddcc9f-2f94-4eb1-b11e-5ee3f0301e65",
+        "f854096b-24c5-49bd-a7bc-a6c2bf1c2a9a",
+        "d5c11fa8-aec4-4849-836e-d0eac39ab136",
+        "11e7023d-754e-4a19-8243-fca17658659e",
+        "9e3a3322-67d7-43af-b8eb-dc558c3d6a69",
+        "5ec8ebf5-5c78-41e8-a633-ca896604312b",
+        "e9ee98ad-e939-421e-93cc-e68ae23545a5",
+        "9a9470ff-1286-4389-ba0e-a32137000cf5",
+        "d4240d2b-e7c7-451f-b4db-d4b344103501",
+        "626e0fc2-b209-4e97-878d-ceae35cbee02",
+        "2edd4773-8a00-4b47-ac80-8ac82345d07f",
+        "0080c79f-c821-429f-90cc-bf4434fea2c5",
+        "7dffc2e8-e161-4e8c-bfcf-aa07539c2fb9",
+        "8ffc1560-2afc-470a-be8e-baeccc4fac46",
+        "50565d30-02a7-496c-9163-f99bff87d41d",
+        "d05f41c6-1103-4c38-8556-5eea171e2456",
+        "b6d91756-199e-4e77-9b2c-786e05695d1f",
+        "575f4d11-7665-434f-b156-e8843edee76b",
+        "9ff7b9a3-f3ec-4a7b-bdac-f1a4f969302f",
+        "c70bee72-deef-4adb-9661-2f916fce2d44",
+        "293a20be-d2da-4a4e-80d6-159e8e6ccec1",
+        "fcef3045-517d-4e4d-83f9-6d0ce30d6929",
+        "574ae9c8-4ea5-40ad-9ac2-7947eafcf0ca",
+        "c63bd534-1aeb-4c9d-9ae1-642a5f250db6",
+        "ba739706-240e-44a0-aeda-37c1389f96b7",
+        "130c2790-4e37-47f9-9140-984e05e602ed",
+        "21c0558c-cdcb-4e6a-89a5-6ac6255c2ccb",
+        "de3baed7-d4df-461e-9be1-8b8dd7fb8561",
+        "8f9c73b4-4fa3-4e5b-8503-9bb9ca58055b",
+        "34053447-fbf1-4f93-85bd-8dc2466ae39a",
+        "a8cd6e15-3165-408d-91bd-3f1a21ad0e7d",
+        "a3258fbf-9557-414f-ad02-5e009e2ee320"
+      ],
+      "size": 52
+    },
+    {
+      "group_id": "68689f42-28bc-4fa5-9a38-42728172f06f",
+      "doc_ids": [
+        "96ff533e-2458-4588-8a17-308bfe956e27",
+        "7bcc29d0-bda5-4e8d-8eb9-c17ad6e60dc3",
+        "a487cd79-d9f0-4024-8fc3-15479cae3b81",
+        "891e9e6f-a7d6-455d-9a63-0ead5eb3a9b1",
+        "bd32d867-d208-4636-a394-cf469d4d091a",
+        "d10b48bf-3345-46ab-9259-75dd059486a4",
+        "ee65e2ee-c4c9-4fc9-bcc3-d31ec6550bb6",
+        "b549b72f-3f2f-4e19-afe1-ee431a175489",
+        "e5410ac8-be5c-471e-83f3-aebfeaf0f367",
+        "a601a55b-242b-424d-a030-936ddb22d029",
+        "66e9d9d7-13d9-470f-85d4-9cbd4209fd70",
+        "68689f42-28bc-4fa5-9a38-42728172f06f",
+        "239e3b83-af04-4c29-897e-1ed082097729",
+        "c95ce69d-2b3d-4b34-8e57-d24c76bf1844",
+        "d1b59039-8a78-4906-bbe2-764e12cc082e",
+        "d3f038a8-890b-459c-b5c7-4675b21ea3a4",
+        "83f062b1-6daa-4eac-b783-47926525c499",
+        "5e037d74-0199-461f-860e-e64b6e9a8f60",
+        "bbc03b2e-e4f8-475f-b6a4-542941b01ee9",
+        "b3aab06b-6897-4f83-980c-428b9e28d73c",
+        "bf8f21c7-1f00-42fc-a159-5bfd775c045e",
+        "ba920cef-24e4-4507-aac8-11d62d25041d",
+        "7bf7336c-4057-4cac-ac43-d56cfd60bf38",
+        "fa6d75a1-1144-4e44-8fe4-2c9679c5020d",
+        "b697075f-639e-410c-94e4-7058437ffee2"
+      ],
+      "size": 25
+    },
+    {
+      "group_id": "377c8209-d2fd-4694-a199-b19a6b0a88e4",
+      "doc_ids": [
+        "377c8209-d2fd-4694-a199-b19a6b0a88e4",
+        "1fad4e9b-cf3d-4db5-bd6b-7b6b37c58323",
+        "19713ed7-20f1-4ef4-99cc-16159b4ee72a",
+        "c26af079-dee3-4c85-a611-ec501c217a4c",
+        "8dd1da32-d2bc-4abb-b953-31eb665576fd",
+        "b4fbacbe-1209-4601-918e-106f40570e04",
+        "0b98623c-8f88-4432-95a8-de7aa60482e8",
+        "a2a0a818-1328-4251-8aaa-87d3fb6e1d64",
+        "884bb7aa-9371-431e-8611-7a4cb2280e0a",
+        "f67f104d-835b-4b00-90dc-a069d1f5d5ce",
+        "bc81c2c3-8617-41a5-8f35-219b738e2733",
+        "93e8bd6e-664b-43b5-8acf-0f5af3cb3eea",
+        "9dd58ec4-cc0b-43a8-b2ce-a8e18fcf0ed9",
+        "a96f47c7-c55d-4656-bceb-864a446e306f",
+        "dfbc7bb6-db55-4dd2-90cf-27f896b77d74",
+        "3fe077bb-d15a-4286-ad1a-10872bf499c2",
+        "527d7677-8bfc-400c-9d37-15cb1f78c3b1",
+        "460f519f-ce54-47be-b722-8003291b3d56"
+      ],
+      "size": 18
+    },
+    {
+      "group_id": "54d6f3eb-2eb9-4100-bda4-44f2ca04ab0f",
+      "doc_ids": [
+        "1c03ea97-831b-4274-8c9c-e4e82401d589",
+        "0b5cad60-83e0-4380-b4fd-a7d97d9fba47",
+        "02a51d8f-c770-40f0-ba3a-d5260459aeb1",
+        "958056d7-e23f-4a99-a02e-1fd60a0a91a8",
+        "9fbbf5b5-de54-48f6-87f3-e05ea61cc43c",
+        "32e5679b-16f4-41f1-b2fb-218a72739fe4",
+        "9ca2a4f6-3e74-49b3-8d78-c42ef52d74aa",
+        "bd5eb1e2-b821-4497-9774-90d01619e99e",
+        "2fdf15c6-a140-4374-8266-bf533d34bef8",
+        "2260f316-c980-40eb-a71c-9f5392aaa4d6",
+        "54d6f3eb-2eb9-4100-bda4-44f2ca04ab0f",
+        "0db3e838-1b8a-4621-b871-ca67cfb36bc5",
+        "e204f94c-8699-4ee4-ac69-bb6c8dc5a5f9",
+        "938a02e2-72a2-4e4c-9615-d4d9edae0c59",
+        "640b1dc7-8f73-4b87-ae58-3cc9b0e38de3",
+        "ec235bd8-f090-45e7-a2f5-3b1c6a6e0c49"
+      ],
+      "size": 16
+    },
+    {
+      "group_id": "00a022fe-88fc-4652-9ba0-6f74e445bac6",
+      "doc_ids": [
+        "f7423df3-39b1-434d-a213-9c17aba84482",
+        "408d780e-90e0-4ffe-91b7-af9b3d0ef416",
+        "00a022fe-88fc-4652-9ba0-6f74e445bac6",
+        "013a4268-3ed4-4c69-ad22-dfe788e05633",
+        "5e5b7b18-159b-4be2-b7b3-00c5f7526ddf",
+        "eed959df-eb95-4db1-bebf-b4b7754b9239",
+        "1d6699e8-4e44-4493-8784-a483b67e9b74",
+        "0643fd1a-7a1e-4fdc-9dad-44084b12af26",
+        "9cc68657-2930-49e7-9940-aa4fcaca59d4",
+        "4ecdb76b-0776-42d5-83d8-b259126c990d",
+        "5c4f56da-3d7a-4230-a6e3-15357c1f8c60",
+        "9239b912-747d-46d7-8057-4f044c795c28"
+      ],
+      "size": 12
+    },
+    {
+      "group_id": "0c94217c-c198-48ff-a16e-e729837117b0",
+      "doc_ids": [
+        "cb32ddbb-ce33-43d5-bbef-4e3a24e0a88b",
+        "d9f78064-2e51-4bab-9d77-7cc9ea4d2fc7",
+        "912a9fdf-0bf9-4ca4-ae70-8ee2aaf45469",
+        "ab33d3a6-7052-481d-a8ea-cd921f2b8da6",
+        "a4952603-0f05-4f91-9fa9-751b4938010a",
+        "23e19717-4ceb-4057-aa24-1520d55daf58",
+        "0c94217c-c198-48ff-a16e-e729837117b0",
+        "e97f5c98-90c6-4f96-973c-fa5d8ffdfc64",
+        "ded17e99-f947-475f-afcc-30a61f58fd8b",
+        "62ae97c1-8e50-4a21-a7c8-85d8bd1cc1b1",
+        "3b9fcf40-d2db-4d1d-a0e6-96332231b427",
+        "e75bd266-78c9-4547-a933-b8287ddce436"
+      ],
+      "size": 12
+    },
+    {
+      "group_id": "5982f604-f6e6-4011-99f8-bae618dddc2d",
+      "doc_ids": [
+        "e6aadb2d-58f1-40d4-9583-a28f56b6b2ab",
+        "5982f604-f6e6-4011-99f8-bae618dddc2d",
+        "d789db87-0c55-43ac-8c10-af963cadc8bc",
+        "8505d38b-db5a-4340-8b22-6d3f3e58401e",
+        "17972cbc-7cc4-4fd5-8d56-da74165b3004",
+        "a2977c5b-d31d-441d-a03b-902ea3404fa2",
+        "7f7b217e-d1e4-4d26-8f31-e1f9dda23714",
+        "f7e24b54-19e4-43fd-8b39-1f2dc8673f60",
+        "bf3cc5cd-8418-4e22-8fe1-8f80a0b33cba",
+        "f3878d3e-0f24-45c1-8086-40489bcfbd94",
+        "c4eb5136-de82-41cc-a986-7f9f25fc5958"
+      ],
+      "size": 11
+    },
+    {
+      "group_id": "286e2e31-49fe-4f88-ab4f-4a2b26d181ca",
+      "doc_ids": [
+        "41c14ef9-9198-405c-9a02-10fca8e61f0e",
+        "776b6cf7-3497-4992-9abc-31ba09b84551",
+        "71cdce3e-3197-46ce-8b77-2217076365e2",
+        "29ea06f0-078a-4d66-b451-19b8937903b0",
+        "286e2e31-49fe-4f88-ab4f-4a2b26d181ca",
+        "17f26394-88f0-42b2-ba16-91ddb0fb41f0",
+        "8a6afcfb-2926-48fe-a6e1-9c658e10c8c2",
+        "122855e2-3e70-4163-8552-0eb16d5380de",
+        "f301e9a7-4cd1-4945-bc29-edf6d8009f8b",
+        "83aba38b-91d6-4e4c-9311-22df1ca94328",
+        "19d7904b-765f-453a-84f6-8f1e16bbefae"
+      ],
+      "size": 11
+    },
+    {
+      "group_id": "93957003-ae90-41c4-8dba-172c20b2f8d8",
+      "doc_ids": [
+        "68eca284-b413-4fe6-9a43-0650ff5cf09a",
+        "a239e465-11f9-4f39-bf9a-ff75c0fbfb64",
+        "356a9043-1378-47a1-bc62-0ad792be1276",
+        "285aac1e-036f-4eb0-ab37-c4dafaeb3ab0",
+        "2dfe8d1e-7b23-4d94-8385-c75208947026",
+        "627f0f69-d634-4786-b7c1-c7af9cfd7ed6",
+        "68c2c97d-b58c-4330-a438-f9e8227574cd",
+        "e1c74db0-3d4b-48db-b152-56a323ec37ac",
+        "93957003-ae90-41c4-8dba-172c20b2f8d8",
+        "26c401ed-26b7-43b7-8d1f-4f2017d49495"
+      ],
+      "size": 10
+    },
+    {
+      "group_id": "0b089a43-1bd4-459c-b28c-39c59e3dea1e",
+      "doc_ids": [
+        "f07bcd92-9f8f-452e-881b-91caad5d12d1",
+        "0b089a43-1bd4-459c-b28c-39c59e3dea1e",
+        "c1f16f2d-f8b2-47e6-8c81-2709cd0e3ddf",
+        "8723f2e2-90e9-4363-8a3c-10316c41e2ff",
+        "c9077985-df6e-4b4f-9fb2-5aa5ff510ae1",
+        "d42f5664-8349-461f-a5e8-5fb99ab2aa84",
+        "d20c8a17-c248-4b1c-9867-9e9e7a31a278",
+        "1d4d32db-298c-4dce-a3ce-e563abaa49e8",
+        "7d5e6065-870d-46e0-9d05-af488900bd35",
+        "973c4b0a-d18c-454a-ab10-1bfd98827e25"
+      ],
+      "size": 10
+    },
+    {
+      "group_id": "4c434735-5688-41b7-af20-c79fa5f55b75",
+      "doc_ids": [
+        "4c434735-5688-41b7-af20-c79fa5f55b75",
+        "8c389be6-0aba-46fa-923c-140cbddadf6e",
+        "766c2c2d-c49f-4cd5-9307-9b1652bc810d",
+        "2b46b604-2a99-41f2-b49f-9457c841e8e0",
+        "4df1cd77-d341-4873-9e51-2be299c1a2f6",
+        "d7bd88a6-d742-4078-97f9-09b58225727e",
+        "04adc367-7fd1-47d8-881a-0bbf4a50af01",
+        "94177402-d02f-4606-a1f1-f295feba6acc",
+        "47145851-bb42-4f9f-af6e-d65226696b4b",
+        "16b4d281-5162-495e-9601-994b71305cbc"
+      ],
+      "size": 10
+    },
+    {
+      "group_id": "5d582786-a164-433b-bd84-dd21a3a47f7b",
+      "doc_ids": [
+        "5d582786-a164-433b-bd84-dd21a3a47f7b",
+        "0cd86338-29b8-4377-bf1a-0a262e2d3552",
+        "7aa4a93b-e5b1-4569-8bf8-342f1da10e5d",
+        "7f752238-44c5-451e-a6f2-687503519c2a",
+        "dbeae270-2614-48eb-95cc-3d87bffc87f5",
+        "f2c3b95d-956a-41a1-96d1-d64ea69c5663",
+        "dc8ddb09-8369-425a-931a-8273b57e7cdc",
+        "32347edd-83c2-43cb-8360-531313338945",
+        "ca9691b1-e8b6-4e4e-934a-b6a57360b1a3"
+      ],
+      "size": 9
+    },
+    {
+      "group_id": "1ab51706-6df4-47ba-879a-83b7a0b3c170",
+      "doc_ids": [
+        "cf934206-ee98-48f2-a012-8a301eb28907",
+        "36d6842e-2768-4f03-8adb-a69a08328723",
+        "1ab51706-6df4-47ba-879a-83b7a0b3c170",
+        "27bb80e3-0695-435e-be1f-69071d205ee0",
+        "a85e5691-3c9b-4eca-a50c-f355ff0f0a89",
+        "242ba15e-b803-4f27-9581-741c5c7d1de5",
+        "8a069713-1243-4dc6-9e3d-4a244c9603ee",
+        "c8516def-d9fe-47b6-9293-0bc1f9a2e168"
+      ],
+      "size": 8
+    },
+    {
+      "group_id": "aa6945bc-d3c3-42da-8db7-28ad0b600afe",
+      "doc_ids": [
+        "11909761-03cb-4a02-ae04-3c0a941bf75c",
+        "4c96b1c8-1498-4e54-9f12-ec69337c6d7e",
+        "051fa958-385a-450c-ac41-76705f182d9c",
+        "aa6945bc-d3c3-42da-8db7-28ad0b600afe",
+        "b21da25f-bce2-4347-b932-621446b1290e",
+        "677fc95a-81bc-4cde-b9b8-6999ebdcd34f",
+        "8835ee61-2c57-49a1-94cc-164879edca5d",
+        "1c963b21-26d1-4f60-a0d4-eab057f9b8ff"
+      ],
+      "size": 8
+    },
+    {
+      "group_id": "82ec538f-5a3d-43f9-82a0-f966888427c6",
+      "doc_ids": [
+        "82ec538f-5a3d-43f9-82a0-f966888427c6",
+        "27c059dd-ebad-4c81-8094-2f816db8f2a0",
+        "0773abb0-914d-4710-a921-7618f8e2286e",
+        "54324667-d30b-4fc0-9080-8ea6aa9a48be",
+        "112b1126-e394-4d2f-ac44-1e53068c4622",
+        "ca8f581d-a964-4cf6-ad41-ff81fd729819",
+        "57d3120b-c48f-4318-975f-b03ad665b641"
+      ],
+      "size": 7
+    },
+    {
+      "group_id": "e268b811-774d-42f6-ad7b-32f2849bf1f4",
+      "doc_ids": [
+        "e268b811-774d-42f6-ad7b-32f2849bf1f4",
+        "a651ef46-c08e-4020-8f5a-99396f913270",
+        "0ff5dbed-a326-4e79-bd9c-c7823782ce15",
+        "4e12cdde-6220-43a2-b6d0-128993f7e98e",
+        "5a3b7e25-dd4d-4404-8170-4fbe3da14b70",
+        "daf3e94a-35cc-4d1e-b140-65eec55dcbfa",
+        "c9c10c6b-c724-4b62-bf94-86b294d3d9b3"
+      ],
+      "size": 7
+    },
+    {
+      "group_id": "7e2a6f6c-aedd-4b08-8b48-7727e1a89273",
+      "doc_ids": [
+        "7e2a6f6c-aedd-4b08-8b48-7727e1a89273",
+        "f1e16630-b7d9-4ae4-a88a-fa926b8225bf",
+        "3c790232-4807-46c4-ac2a-d4141a1df7de",
+        "b11f2e39-0122-4c80-914b-251ba25040f7",
+        "bf2ac505-1bc2-4762-8cd1-67ed8533cd3a",
+        "3d792a05-4832-4cab-8194-f7163c0c5aad",
+        "2e300713-0994-47f6-9c28-13535d63ada9"
+      ],
+      "size": 7
+    },
+    {
+      "group_id": "06dfeb7d-c4de-453d-8727-7df041938306",
+      "doc_ids": [
+        "4b5ffe66-da6f-4fbb-8525-4c479a9ca03c",
+        "06dfeb7d-c4de-453d-8727-7df041938306",
+        "e558388f-8967-4323-8315-a50e033224ed",
+        "e3ed73ed-547c-4bcc-ba74-a1672c481673",
+        "b5f4676c-28d6-4ea8-a332-f6a5b7336a31",
+        "de838c9a-a57f-4228-b656-f6a995241c8f",
+        "a77ffc4e-abd7-466c-a2d4-12153391f1cf"
+      ],
+      "size": 7
+    },
+    {
+      "group_id": "a7bf2ce9-5a2a-42cb-a47c-d10a8b2e60ab",
+      "doc_ids": [
+        "b96c1d68-b609-4b56-9388-5cdf9591148c",
+        "c2c01244-d7bf-4970-8e4b-24524aa80077",
+        "a3cc7105-18f5-4a20-a170-d89cc905e64b",
+        "e3af054f-a9aa-4371-8a36-664f26328dd1",
+        "a7bf2ce9-5a2a-42cb-a47c-d10a8b2e60ab",
+        "5cc67141-6964-4066-b596-e23653bf498e"
+      ],
+      "size": 6
+    },
+    {
+      "group_id": "503f288c-96c3-4291-b7f2-899125c582d2",
+      "doc_ids": [
+        "503f288c-96c3-4291-b7f2-899125c582d2",
+        "3cf42a6f-35e5-46fb-b8cb-f129e277844c",
+        "478d49e1-fad5-4b7a-a66b-6cbf66ebddbc",
+        "f59fda6c-ec45-41e9-b2cc-1602c9971425",
+        "138ce887-e8aa-45de-b205-ebd33be44595",
+        "0a0a7b7e-e020-4c51-8c9e-9c2eb8ef55a3"
+      ],
+      "size": 6
+    },
+    {
+      "group_id": "707c3334-6345-421f-8ded-6b1dccdcb453",
+      "doc_ids": [
+        "a56163ef-d484-4aa9-8252-b2a1c7ee3c4e",
+        "707c3334-6345-421f-8ded-6b1dccdcb453",
+        "b8f28745-1ec6-49de-ba35-379b2d6051f2",
+        "a2751b3a-c22d-4b63-95ff-6a8e89c804a0",
+        "924da3d7-5663-4a02-94ee-41c94e87b4c9"
+      ],
+      "size": 5
+    },
+    {
+      "group_id": "02dfa6ee-a248-4d8f-8e4c-b9e6efa458ed",
+      "doc_ids": [
+        "02dfa6ee-a248-4d8f-8e4c-b9e6efa458ed",
+        "d47d5f96-d6ec-4845-a967-9a5544d17359",
+        "963fed6b-2594-41f9-9afe-5888cbfbdcc3",
+        "8a62c69f-5020-44c7-a81d-2231d4b54c33",
+        "321811a2-fc36-493c-8e34-16cebf6a0b5c"
+      ],
+      "size": 5
+    },
+    {
+      "group_id": "35f79e85-54a5-431c-af76-5d9a2a179656",
+      "doc_ids": [
+        "35f79e85-54a5-431c-af76-5d9a2a179656",
+        "b3c782d0-e51f-46be-a88b-4cad2b8bc15d",
+        "69c9e08b-c3c7-4df1-8eff-fc097f40e0ad",
+        "8d291626-2599-42b0-a25d-1a66cbf42505",
+        "1447591d-5791-4acd-affd-ba303622be58"
+      ],
+      "size": 5
+    },
+    {
+      "group_id": "1e29eba3-f075-4e8b-ae94-bcb62576c805",
+      "doc_ids": [
+        "35838e96-a83c-44c7-99dd-cd2f26b746f0",
+        "1e29eba3-f075-4e8b-ae94-bcb62576c805",
+        "3abdee37-6c5d-48c4-b4df-fc2ab0db8dd2",
+        "266af8d5-f5de-4cdb-b3b3-22357f323b74",
+        "61c2e68a-8de8-4ec3-8c3d-d8666f143c82"
+      ],
+      "size": 5
+    },
+    {
+      "group_id": "169193d0-4610-418c-bda2-0b863f71ce15",
+      "doc_ids": [
+        "3b6a4837-812e-4d4e-923e-789d35e36a59",
+        "d87eaace-8ced-4310-965f-6d1a110d1043",
+        "169193d0-4610-418c-bda2-0b863f71ce15",
+        "a56d000f-63ac-4794-bdf0-2c72694d3d3f",
+        "1982c4b6-c1ba-4d04-8782-ff3243b92659"
+      ],
+      "size": 5
+    },
+    {
+      "group_id": "bfdb6745-931e-456d-b945-2d3c6c3e0d4e",
+      "doc_ids": [
+        "bfdb6745-931e-456d-b945-2d3c6c3e0d4e",
+        "326d4494-54cb-4d3f-9de3-d880089c3cc4",
+        "83c95ae8-da28-42cc-a884-6dbafff89ecc",
+        "3c94c8cc-c1f6-4353-be55-f214510ef593",
+        "72e65159-b7de-4957-8bc0-122465de4958"
+      ],
+      "size": 5
+    },
+    {
+      "group_id": "0ee9a6e7-24bd-492e-9710-6569c5efb5e9",
+      "doc_ids": [
+        "0ee9a6e7-24bd-492e-9710-6569c5efb5e9",
+        "aaa65507-f123-4719-9d36-97433267e8a7",
+        "e69af7f6-850b-4359-bafe-29696e41aeb4",
+        "b52e4292-1226-4108-9cf8-fd0a32cacfe1"
+      ],
+      "size": 4
+    },
+    {
+      "group_id": "8362da0f-c2d5-4f05-ada3-70f4a9f51765",
+      "doc_ids": [
+        "f4a53a90-c3e8-41e3-a38a-48483fc71d4d",
+        "8362da0f-c2d5-4f05-ada3-70f4a9f51765",
+        "991b222a-da64-4703-a021-54e76627d8cb",
+        "4289bacf-38b5-4f63-a0e6-3ed020bd72ef"
+      ],
+      "size": 4
+    },
+    {
+      "group_id": "ccecdf3d-9199-4a17-91c3-0e41642372ae",
+      "doc_ids": [
+        "ccecdf3d-9199-4a17-91c3-0e41642372ae",
+        "f4f0f55f-be0d-42df-85f4-119d043aa31c",
+        "8825706a-3659-470f-b998-ce9d41b7a70e",
+        "e27306c8-87d6-4143-b047-ca90701190be"
+      ],
+      "size": 4
+    },
+    {
+      "group_id": "f49c2348-a9d4-4896-97fb-d94797f559ec",
+      "doc_ids": [
+        "f49c2348-a9d4-4896-97fb-d94797f559ec",
+        "655d001e-a8ad-4234-b7c9-ccad617f27c5",
+        "3607ba40-1ac8-4f4b-9fe6-9d7d2a045493",
+        "40140a67-715a-41eb-933b-bd04c1ce5164"
+      ],
+      "size": 4
+    },
+    {
+      "group_id": "4b517d39-3fc9-443d-b4d3-d6635afb5dc8",
+      "doc_ids": [
+        "8aa47f50-f388-40f8-b31f-6b975c33584d",
+        "4b517d39-3fc9-443d-b4d3-d6635afb5dc8",
+        "d677cf66-2c77-4ae1-8538-58dcebe9cdd5",
+        "3d17fc73-068b-4d4e-ad8b-af06d8087556"
+      ],
+      "size": 4
+    },
+    {
+      "group_id": "001c7231-15d4-42a2-989e-45d27b48ef50",
+      "doc_ids": [
+        "a1e1c7c6-8ddc-4d15-932d-d515dff255b4",
+        "001c7231-15d4-42a2-989e-45d27b48ef50",
+        "65b7ff09-a5e0-4d09-b95a-a8c9ea09bd65",
+        "160a00bb-ec7d-48e8-88bc-f56452ef45fa"
+      ],
+      "size": 4
+    },
+    {
+      "group_id": "eff82957-c4ad-4e96-9898-69ee04887955",
+      "doc_ids": [
+        "eff82957-c4ad-4e96-9898-69ee04887955",
+        "aece7836-503a-467e-9c72-0ac598126362",
+        "8ecd670a-7f37-4a56-97ea-5f4b6e07c613",
+        "aaa2213a-1dce-4ef7-8fe8-7d8dba00db87"
+      ],
+      "size": 4
+    },
+    {
+      "group_id": "54a69ad3-0e93-4d2c-94ec-0b8cb984d292",
+      "doc_ids": [
+        "21897108-779d-45b4-be11-d6e6e58f6153",
+        "607064d6-b85b-4aeb-9035-3ffcac52c351",
+        "54a69ad3-0e93-4d2c-94ec-0b8cb984d292",
+        "098d3763-7083-4271-8b26-f551d077c0c4"
+      ],
+      "size": 4
+    },
+    {
+      "group_id": "da1f9236-8258-4a83-a3d7-66d76d5df653",
+      "doc_ids": [
+        "da1f9236-8258-4a83-a3d7-66d76d5df653",
+        "29e3754b-3e0c-4f9b-a249-80bb23dfffea",
+        "1666d8b7-7103-4561-9015-47ba2679f1fe",
+        "84446e11-0388-4c30-9b99-f4d70f08cb2e"
+      ],
+      "size": 4
+    },
+    {
+      "group_id": "6fb4092e-4c39-4a8e-82b9-658a4837662b",
+      "doc_ids": [
+        "4133e652-ac4a-4186-b201-649edde3426b",
+        "6fb4092e-4c39-4a8e-82b9-658a4837662b",
+        "8681930e-6769-4010-b8ed-43af66a9e438",
+        "44fb6885-e556-4a6e-817c-8f4116be2338"
+      ],
+      "size": 4
+    },
+    {
+      "group_id": "3bcdb94a-1762-4a5e-8db1-48252e33fd08",
+      "doc_ids": [
+        "3bcdb94a-1762-4a5e-8db1-48252e33fd08",
+        "788519b2-94d8-4896-8c26-2a8c4fe610ba",
+        "d38cead6-d865-485f-bbcc-7ab9c879ba74"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "04148aa8-bcbb-4380-89ff-bc193d846e7c",
+      "doc_ids": [
+        "04148aa8-bcbb-4380-89ff-bc193d846e7c",
+        "61f644c1-315b-4baf-a170-ceddb1e17306",
+        "e43ea3c4-c215-430f-8bb4-9f25a7f63f50"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "454446b9-c2f0-4a37-b94d-3e69e38612b3",
+      "doc_ids": [
+        "454446b9-c2f0-4a37-b94d-3e69e38612b3",
+        "e515d086-928f-4768-a433-e7041f0697dc",
+        "20afc910-a1b3-49c1-b475-5503c698be03"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "19749a3d-c3c8-4e25-a31f-9b69ce39a4d8",
+      "doc_ids": [
+        "2a1237f0-4242-4d4d-b1a6-c602d1aa652e",
+        "19749a3d-c3c8-4e25-a31f-9b69ce39a4d8",
+        "64ce30dc-554e-4b89-b569-ec5122a86ac0"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "8b575674-7dd8-43c9-a826-feb26d60d817",
+      "doc_ids": [
+        "38a3d455-d47b-4dfd-8b5e-83a2fe982d26",
+        "8b575674-7dd8-43c9-a826-feb26d60d817",
+        "ff960fa1-b052-4902-917a-a96efa352c09"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "7bd7f880-1174-493b-ac80-ffded45a7f7d",
+      "doc_ids": [
+        "7bd7f880-1174-493b-ac80-ffded45a7f7d",
+        "4c89b479-9fd0-40a8-a6d6-c751bc8d0342",
+        "0036f230-2af4-48f6-a43a-8faa6e43ba76"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "9331fb8f-817d-4058-8c07-3414f886f0cd",
+      "doc_ids": [
+        "9331fb8f-817d-4058-8c07-3414f886f0cd",
+        "873a9a88-2ea4-4289-9e88-2fae765ebcea",
+        "055face3-6d57-4211-a99a-88669c71a08e"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "e6cf09c1-bb03-47a3-83de-a057b3124e59",
+      "doc_ids": [
+        "e6cf09c1-bb03-47a3-83de-a057b3124e59",
+        "51034c57-239b-46cb-8486-a5c21bbe7dfa",
+        "cdce39d2-a7c8-4d4d-a3fc-8f6094ad0704"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "f6e263fa-c8e2-4ffd-aba2-10f4a95f0cc8",
+      "doc_ids": [
+        "f6e263fa-c8e2-4ffd-aba2-10f4a95f0cc8",
+        "04ebdb72-21b1-45b7-9b4a-25037a252dcd",
+        "b795ed37-626e-45ac-bf5c-6f34a3307bb2"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "55f6a441-413c-4b27-a074-f6dd427dbf5b",
+      "doc_ids": [
+        "4abda649-80fc-4895-acb3-1e34953777a5",
+        "55f6a441-413c-4b27-a074-f6dd427dbf5b",
+        "cfb7431f-ca6b-46cc-a3a7-524c673c210e"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "f5309830-575d-46e1-aefb-5a1d77f35cd8",
+      "doc_ids": [
+        "f5309830-575d-46e1-aefb-5a1d77f35cd8",
+        "b561e304-2923-4136-af7c-96bdc61abeb6",
+        "1a88bbb6-aab8-4800-9a41-b46fde6ef9c7"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "218b23b0-ef49-462e-96e8-4a789e4e1a0e",
+      "doc_ids": [
+        "218b23b0-ef49-462e-96e8-4a789e4e1a0e",
+        "9911ce9c-cbaf-44aa-a4f4-46bb4cf753f3",
+        "beeb75ab-06c6-4c20-891f-996af7b2baf6"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "722fbfcd-3f25-4dd0-a817-6e7917a34b84",
+      "doc_ids": [
+        "722fbfcd-3f25-4dd0-a817-6e7917a34b84",
+        "f98bb12d-0b80-47fa-8f68-a9c05e98f174",
+        "7fcab2af-b409-4612-a376-9f9c66936647"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "2cf13e12-fe5a-4435-be70-e76a69d2ee81",
+      "doc_ids": [
+        "2cf13e12-fe5a-4435-be70-e76a69d2ee81",
+        "2c109d36-b18e-4716-a38f-921a2126ccae",
+        "3ed2b5dc-df34-435a-b0a4-9ed3e7c890f5"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "beae0af5-f398-4f3a-8897-3e8df2ae411e",
+      "doc_ids": [
+        "beae0af5-f398-4f3a-8897-3e8df2ae411e",
+        "3e414cc2-2033-4a21-b3e0-956ac9a5300a",
+        "e5aaefb9-720d-4723-b451-cbbb6bcfa237"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "e83a743c-5917-4b87-94ec-f9742e3345bb",
+      "doc_ids": [
+        "e83a743c-5917-4b87-94ec-f9742e3345bb",
+        "7ff461c4-e040-4805-9621-ab71eef7e68e",
+        "cc5b4c96-49e6-43c9-8f0b-103ad997144a"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "dc90820e-6b7e-4e0f-b520-06d848d3bfb2",
+      "doc_ids": [
+        "dc90820e-6b7e-4e0f-b520-06d848d3bfb2",
+        "558d0e54-6e1b-491e-b714-c01d7162230b",
+        "c6c2c06c-a28e-4218-b1f1-a6f883ba60ab"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "a74b483a-aecb-4254-9dfd-9115218734c3",
+      "doc_ids": [
+        "a74b483a-aecb-4254-9dfd-9115218734c3",
+        "dffab303-3e24-4fda-acbb-71054a8a2775",
+        "7fe29d48-3be6-4469-8231-3bc025fa8f2f"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "04b48ccf-ebc2-41c4-b49f-dbba0dd23ec5",
+      "doc_ids": [
+        "04b48ccf-ebc2-41c4-b49f-dbba0dd23ec5",
+        "43103f76-81b0-4f6f-a347-18d5688661d0",
+        "18de21c5-db09-41a2-b79b-336745a2e94c"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "e79a9a4c-7db1-4ad1-80e7-ce727343c828",
+      "doc_ids": [
+        "e79a9a4c-7db1-4ad1-80e7-ce727343c828",
+        "86b35016-6870-49ea-82e5-7be10be77328",
+        "074ff602-bfa6-4ef4-8ebd-f487c437cc9d"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "b82885c8-3d16-4975-a63b-b341908bad3c",
+      "doc_ids": [
+        "b82885c8-3d16-4975-a63b-b341908bad3c",
+        "62a3b43b-b643-450b-9650-80fccb1f834e",
+        "6cc09cbe-1d73-4c43-8be8-bee4d25b2930"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "db4b647a-e12d-4a48-a291-5d2bd0b0bc48",
+      "doc_ids": [
+        "db4b647a-e12d-4a48-a291-5d2bd0b0bc48",
+        "18147813-75bc-494e-bf34-4a6a166ba7dd",
+        "650708a5-f4d5-41e0-9090-727517597a3b"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "664f4c2e-4a21-4610-8538-fb1d8f67a898",
+      "doc_ids": [
+        "664f4c2e-4a21-4610-8538-fb1d8f67a898",
+        "7bcce5a7-b35f-4ecd-a4d8-f5c2a8405c54",
+        "b32628d4-0c4d-4b66-a5d7-598451f29bd8"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "e308bcfe-31bf-417f-8df6-a4fb4f21a860",
+      "doc_ids": [
+        "e308bcfe-31bf-417f-8df6-a4fb4f21a860",
+        "7e2aef78-59a4-4440-8215-0b52ac807f83",
+        "7fe3d06a-1d59-409b-a860-078a38bdc2a3"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "3c19db2b-892e-4b82-ac7e-23c9bca71e1e",
+      "doc_ids": [
+        "a153ec7f-0354-4fc8-bb9a-9a2947f9bb4b",
+        "3c19db2b-892e-4b82-ac7e-23c9bca71e1e",
+        "8b08645a-0ae7-46a7-8c63-1aac891dcf13"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "c2ee1d2c-c732-428a-9693-e353cf73fbc8",
+      "doc_ids": [
+        "c2ee1d2c-c732-428a-9693-e353cf73fbc8",
+        "334c89fa-245e-4fbd-9e14-9d219199c33c",
+        "857b5395-9bf9-4b64-8fd5-50c39e9e84cd"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "c1f901bf-aeee-4a82-bf19-5e3b5ead85ff",
+      "doc_ids": [
+        "f26f9361-84c7-4e71-8a80-aa41fb23338f",
+        "c1f901bf-aeee-4a82-bf19-5e3b5ead85ff",
+        "edf41e0a-2825-4b71-8486-444e66e68f3d"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "454891f2-5747-4bb5-9d41-506bd9d43c65",
+      "doc_ids": [
+        "454891f2-5747-4bb5-9d41-506bd9d43c65",
+        "acf4a533-8907-4094-9b82-b279be3a1667",
+        "b83a6e56-4313-413a-ba37-34c08ece5b88"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "634ed62f-104b-4555-9dfa-0af91e71f93c",
+      "doc_ids": [
+        "634ed62f-104b-4555-9dfa-0af91e71f93c",
+        "81410154-3a49-4a3d-9679-50e37cf68998",
+        "21b56fdb-dd94-4b58-93e2-41e8bbb2a668"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "0db87910-10fd-4817-ab08-2fcc323b7b61",
+      "doc_ids": [
+        "0db87910-10fd-4817-ab08-2fcc323b7b61",
+        "bb9d2d3f-1810-40e1-8ceb-6d358c642466",
+        "bf17d38e-a9a6-4db6-8da4-2837592b6e0d"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "330df439-2591-4ce1-92cc-a270c364781d",
+      "doc_ids": [
+        "330df439-2591-4ce1-92cc-a270c364781d",
+        "2ee7cb69-6787-4c68-912f-3c2de5217ba1",
+        "9cc374aa-5d50-4aa6-aec4-cb07592e8f58"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "b7b439fa-18b3-4b6b-ab29-6d4347ccb4f0",
+      "doc_ids": [
+        "b7b439fa-18b3-4b6b-ab29-6d4347ccb4f0",
+        "8fcdbf5d-503e-4867-ad09-c3033fdcff98",
+        "a25f451c-b012-460a-9d57-de5121fdbaa2"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "debbd206-97aa-44c4-8ddb-2d86dc51a439",
+      "doc_ids": [
+        "debbd206-97aa-44c4-8ddb-2d86dc51a439",
+        "c9ed0327-5d4f-4626-9438-95a812b409d1",
+        "b34425be-1d11-4e5f-b651-ae43ed19e22a"
+      ],
+      "size": 3
+    },
+    {
+      "group_id": "7920f689-7ad4-41aa-b551-efbda1a83df8",
+      "doc_ids": [
+        "7920f689-7ad4-41aa-b551-efbda1a83df8",
+        "a2f9a7d2-b8f5-4518-b114-f153f312697f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "c9c0cf74-9ba1-45b0-8bb4-944c10e25fd4",
+      "doc_ids": [
+        "c9c0cf74-9ba1-45b0-8bb4-944c10e25fd4",
+        "3dbf641a-e1e0-48c1-aebe-18ed204dd929"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "1219d6bc-90ca-486c-a05b-7aa633796f8d",
+      "doc_ids": [
+        "1219d6bc-90ca-486c-a05b-7aa633796f8d",
+        "27c5219f-c313-4859-b224-f9b64298797f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "aae6cdde-dd37-4314-9018-75f225ee2215",
+      "doc_ids": [
+        "aae6cdde-dd37-4314-9018-75f225ee2215",
+        "0c22007d-9b40-4dc1-97e2-d12c285b5ad5"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "f60b3de8-cca5-405b-a283-2d3c662c492d",
+      "doc_ids": [
+        "f60b3de8-cca5-405b-a283-2d3c662c492d",
+        "9e2014aa-47a4-42e7-8c08-0d1a6bca29a8"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "54aed599-5ac4-4396-8d8c-ffca7e7f5116",
+      "doc_ids": [
+        "54aed599-5ac4-4396-8d8c-ffca7e7f5116",
+        "fba3e032-c523-44ed-9abc-f4d9527a34ab"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "8e653f64-a88d-4ec4-9cfc-2b2a6a6f41a5",
+      "doc_ids": [
+        "8e653f64-a88d-4ec4-9cfc-2b2a6a6f41a5",
+        "581dc5dc-6c6b-4245-b81c-c4f71091bf2f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "894de6e5-0fe9-4143-98a6-bf11d7a8bb3e",
+      "doc_ids": [
+        "894de6e5-0fe9-4143-98a6-bf11d7a8bb3e",
+        "0fa36871-8360-42cd-b810-288f8001dc63"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "adde0a8c-2611-433a-9de9-644a133476c3",
+      "doc_ids": [
+        "adde0a8c-2611-433a-9de9-644a133476c3",
+        "934a6c8e-d74e-4597-be55-b15505a32dcc"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "63560437-177a-428f-b6f4-4e0cdefdd9a2",
+      "doc_ids": [
+        "63560437-177a-428f-b6f4-4e0cdefdd9a2",
+        "f637a1d1-5c6f-4618-b969-58b5f2058f05"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "df07da16-ee26-4757-ac9d-d5830413ccc9",
+      "doc_ids": [
+        "df07da16-ee26-4757-ac9d-d5830413ccc9",
+        "d204edc0-864d-4681-bf04-3f6028f4af72"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "8cc64852-532d-4786-9a4a-b6594eb09a86",
+      "doc_ids": [
+        "8cc64852-532d-4786-9a4a-b6594eb09a86",
+        "d37eaec9-a6d8-4455-9248-d4ab12dcf95d"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "3f702dd1-0611-4724-a68e-dacdc0e2376f",
+      "doc_ids": [
+        "3f702dd1-0611-4724-a68e-dacdc0e2376f",
+        "634b62c5-e357-4df3-869f-7502a99626b7"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "d4bbb077-caf8-44a6-b689-287acd6f073e",
+      "doc_ids": [
+        "d4bbb077-caf8-44a6-b689-287acd6f073e",
+        "d471933d-845e-47ef-b571-8dd018d6279e"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "8668914b-aa40-4f05-99c6-3d39ff3d8038",
+      "doc_ids": [
+        "8668914b-aa40-4f05-99c6-3d39ff3d8038",
+        "bdfad504-4acc-448e-baab-5dc312363ca7"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "b5b35c31-cee2-4079-abca-3727f7bf1708",
+      "doc_ids": [
+        "b5b35c31-cee2-4079-abca-3727f7bf1708",
+        "3011898f-df3f-4dc9-bcbe-169367bfd245"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "6db95101-1b88-44d3-8569-69ccbd4e9965",
+      "doc_ids": [
+        "6db95101-1b88-44d3-8569-69ccbd4e9965",
+        "5c4259b6-32dd-4b36-8977-448f9e442bf8"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "50a83eb6-ef17-4a28-b76f-1ef091b7e30e",
+      "doc_ids": [
+        "50a83eb6-ef17-4a28-b76f-1ef091b7e30e",
+        "1c8def5d-2aca-4262-814a-330575ed6587"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "119d665a-a723-4c79-9e32-ca9a8d77f489",
+      "doc_ids": [
+        "119d665a-a723-4c79-9e32-ca9a8d77f489",
+        "e2bc698c-d4c6-4f8e-a9b2-f4d07056fe11"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "6bf02a41-af1f-4644-89c9-fcb713b04f70",
+      "doc_ids": [
+        "6bf02a41-af1f-4644-89c9-fcb713b04f70",
+        "1d9f5a64-79fa-425e-aa83-03d34c5878ea"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "fd578c52-84cb-405b-8bd0-43c4838e17de",
+      "doc_ids": [
+        "fd578c52-84cb-405b-8bd0-43c4838e17de",
+        "ae0c8254-2a82-43d9-b33b-f6477ba618da"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "4611faef-bf01-4d6a-a9cb-b0fe0bec6a97",
+      "doc_ids": [
+        "4611faef-bf01-4d6a-a9cb-b0fe0bec6a97",
+        "5e6ce6a1-2c0b-4fb5-bd6f-48caa4ccd30a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "f9ed8b31-45d0-46eb-9313-759e5b04f045",
+      "doc_ids": [
+        "f9ed8b31-45d0-46eb-9313-759e5b04f045",
+        "2553958e-a53c-4990-a5df-dc4ed45ca235"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "1d98a72f-254b-4d93-bfd0-2b106472841f",
+      "doc_ids": [
+        "1d98a72f-254b-4d93-bfd0-2b106472841f",
+        "93472b0d-e688-482f-bcbc-89f843b71f5b"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "84d05d3a-5ba7-4b5a-b1c7-64d2f8176708",
+      "doc_ids": [
+        "84d05d3a-5ba7-4b5a-b1c7-64d2f8176708",
+        "7e4e177f-20b2-40cc-bf11-c7d1dfc57ace"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "4dbb4526-127a-454a-97e1-9b329da6e0a3",
+      "doc_ids": [
+        "4dbb4526-127a-454a-97e1-9b329da6e0a3",
+        "383652df-f870-45cf-bfcc-2d71f412db32"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "1a0eec47-b9fb-4d34-87df-c0bf06704e58",
+      "doc_ids": [
+        "1a0eec47-b9fb-4d34-87df-c0bf06704e58",
+        "ad2e9086-fc36-46dc-99ab-31be0b286ddb"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "9f8dfb7f-e420-4963-b11c-6abec2826b19",
+      "doc_ids": [
+        "9f8dfb7f-e420-4963-b11c-6abec2826b19",
+        "3c2a7f92-06df-45c0-b52b-2eb656271463"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "0db4855a-a17c-4608-9232-ef46ca254a30",
+      "doc_ids": [
+        "0db4855a-a17c-4608-9232-ef46ca254a30",
+        "62dc3860-d7a0-4ae6-a549-673afcfb1893"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "ec1f4940-6201-46d3-8bc9-4a3215ad94be",
+      "doc_ids": [
+        "ec1f4940-6201-46d3-8bc9-4a3215ad94be",
+        "afa72bbb-29b5-4940-bbf4-d71a2d51be5a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "5c697947-a18a-4f8a-8c41-b5ff323af05d",
+      "doc_ids": [
+        "5c697947-a18a-4f8a-8c41-b5ff323af05d",
+        "0719339c-bf10-4f5b-b354-a1b1e3f60452"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "0d3059ab-d65c-4637-8422-1da08415fd8c",
+      "doc_ids": [
+        "0d3059ab-d65c-4637-8422-1da08415fd8c",
+        "5cd54d92-2c9c-4288-8158-91b202593e54"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "46b59a2d-e59d-4465-8519-1e556918cacf",
+      "doc_ids": [
+        "46b59a2d-e59d-4465-8519-1e556918cacf",
+        "1c4921d2-24f6-4bcd-974a-c490abd213d5"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "7b584274-3f77-495b-8167-28afdf5d8070",
+      "doc_ids": [
+        "7b584274-3f77-495b-8167-28afdf5d8070",
+        "8fdb627b-c571-49f1-a7da-37a14a2d47e9"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "226fa6ef-2143-446f-b15c-e8b783507650",
+      "doc_ids": [
+        "226fa6ef-2143-446f-b15c-e8b783507650",
+        "9cf830bf-5fd6-4d05-9bbc-0538f5f23c22"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "2f91776f-255d-4b02-9374-98410f78e2d9",
+      "doc_ids": [
+        "2f91776f-255d-4b02-9374-98410f78e2d9",
+        "dcc39ce4-2273-41bb-9ea2-7e034fe1dc60"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "0d076180-cf76-4b4a-855d-1c8a77ea65c4",
+      "doc_ids": [
+        "0d076180-cf76-4b4a-855d-1c8a77ea65c4",
+        "450eb52e-eafd-405f-9282-f33c51548c6f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "85dc06f1-0c4d-4a21-8bb3-8f8f508bb54f",
+      "doc_ids": [
+        "85dc06f1-0c4d-4a21-8bb3-8f8f508bb54f",
+        "c80077ec-d0fa-4622-af79-ab09e08819e9"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "aadaeac8-de8c-41be-af6a-18107f5fe977",
+      "doc_ids": [
+        "aadaeac8-de8c-41be-af6a-18107f5fe977",
+        "2cfff214-e199-4334-8909-cb2eee14361b"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "c010ffd1-2fec-4248-b025-45b9e7a8edf8",
+      "doc_ids": [
+        "c010ffd1-2fec-4248-b025-45b9e7a8edf8",
+        "af0ce8e0-13a3-470c-956f-54917c9b1108"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "6880076e-c24c-481d-9cb0-c61ecdaefae4",
+      "doc_ids": [
+        "6880076e-c24c-481d-9cb0-c61ecdaefae4",
+        "97560d68-afdf-47c3-93ef-b27115512f86"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "249fc018-545a-4365-a890-d0e64a07f644",
+      "doc_ids": [
+        "249fc018-545a-4365-a890-d0e64a07f644",
+        "dbf0dee2-e05f-4e93-bc3d-f02aa658335a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "f716c287-a8dc-4be5-bd89-0fc0807f630f",
+      "doc_ids": [
+        "f716c287-a8dc-4be5-bd89-0fc0807f630f",
+        "8311dd92-eaaf-4d33-a86e-0ee86f20c902"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "af178cc4-6385-448c-8dd3-b4d8ee52355d",
+      "doc_ids": [
+        "af178cc4-6385-448c-8dd3-b4d8ee52355d",
+        "78e9a698-4cc7-4474-8799-c2f35240ceaa"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "9ace619f-1c38-4bc5-a5f1-acf0da2084a4",
+      "doc_ids": [
+        "9ace619f-1c38-4bc5-a5f1-acf0da2084a4",
+        "7571f99f-ea66-4a90-b5a3-0b7f78a77648"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "3603bca5-c8da-45c9-b3c7-d9c34e6bb838",
+      "doc_ids": [
+        "3603bca5-c8da-45c9-b3c7-d9c34e6bb838",
+        "2d963881-cde3-4f06-b653-353e2b902649"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "07b373bc-1049-4870-98a7-25895ba28c47",
+      "doc_ids": [
+        "07b373bc-1049-4870-98a7-25895ba28c47",
+        "baa4b60e-f5b1-4977-a7ea-90345edbb17f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "9d65141f-916a-493b-a0e3-783d9a14d05b",
+      "doc_ids": [
+        "9d65141f-916a-493b-a0e3-783d9a14d05b",
+        "1f120b5f-c5d1-480b-ab4f-3a68eb0eb217"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "55819f6d-33a4-43fc-9df2-4b1c74a9977e",
+      "doc_ids": [
+        "55819f6d-33a4-43fc-9df2-4b1c74a9977e",
+        "5b4ee476-4a6c-47c6-8ff8-f71f2e78686e"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "5cf96325-e2d9-431e-a226-2ddeecfcbfd1",
+      "doc_ids": [
+        "5cf96325-e2d9-431e-a226-2ddeecfcbfd1",
+        "902a7ed2-a540-4115-855c-793416980024"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "63fb1eb8-9399-4e1a-9d3a-5ae274e9aedf",
+      "doc_ids": [
+        "63fb1eb8-9399-4e1a-9d3a-5ae274e9aedf",
+        "a1cd56df-fd60-4947-8e97-5c38874f4f7b"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "8d3f5c76-6581-457b-8ae2-1f364ea1a1a1",
+      "doc_ids": [
+        "8d3f5c76-6581-457b-8ae2-1f364ea1a1a1",
+        "b957bd6c-cea2-4479-b4e8-d1d259f1e2d0"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "0d804a5a-3172-4122-9b18-eec82185b31e",
+      "doc_ids": [
+        "0d804a5a-3172-4122-9b18-eec82185b31e",
+        "1b7f2021-2df3-4201-a3e3-dcf581d4a0ef"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "404ca2fb-7f7e-4a67-9f19-203b7c440f20",
+      "doc_ids": [
+        "404ca2fb-7f7e-4a67-9f19-203b7c440f20",
+        "1e5ff251-5615-4b50-91c3-2fc128214f72"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "e195cad6-8d2c-4cda-8196-7d6d5131d1ff",
+      "doc_ids": [
+        "e195cad6-8d2c-4cda-8196-7d6d5131d1ff",
+        "a08c8c86-c9b0-4720-9cd8-2adc958e7dc4"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "2b71ed3f-1e6b-41d0-b4c2-531358a3c556",
+      "doc_ids": [
+        "2b71ed3f-1e6b-41d0-b4c2-531358a3c556",
+        "5cd1ddaf-679b-49e5-ad6a-15332857dd87"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "5c9d504e-a003-4ea1-a935-3ca93c3171b6",
+      "doc_ids": [
+        "5c9d504e-a003-4ea1-a935-3ca93c3171b6",
+        "50902a5a-805b-45d9-a4b1-ba7d8bbb1d3a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "1c4b9cd5-19f6-4d9d-9cbe-d273e04e9db3",
+      "doc_ids": [
+        "1c4b9cd5-19f6-4d9d-9cbe-d273e04e9db3",
+        "55526ff4-b61c-4af4-9acf-6ab3ec8a7104"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "824c20db-553c-4435-afa1-bd662e7550e5",
+      "doc_ids": [
+        "824c20db-553c-4435-afa1-bd662e7550e5",
+        "539399d3-bde5-4742-b773-f692b0c72834"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "29407120-b7c8-4fe3-ab30-98c701498b8f",
+      "doc_ids": [
+        "29407120-b7c8-4fe3-ab30-98c701498b8f",
+        "23c35829-444c-4575-9edc-2a22800fecbc"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "bc570584-c7ab-4576-9237-99961e0cb72e",
+      "doc_ids": [
+        "bc570584-c7ab-4576-9237-99961e0cb72e",
+        "4236694b-2ce7-46f2-8c3e-6b7b86656999"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "03b837ee-838d-4d07-a667-29da66c7117f",
+      "doc_ids": [
+        "03b837ee-838d-4d07-a667-29da66c7117f",
+        "ff77c4a4-2be0-452b-9e55-4b13edad7ad4"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "3c1632c9-4114-42a8-9555-12ea96b78f65",
+      "doc_ids": [
+        "3c1632c9-4114-42a8-9555-12ea96b78f65",
+        "68dffe4f-e56d-4f70-bd95-21d40f7f7e43"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "8f7c4e8f-0670-4eef-ad2f-607161e90778",
+      "doc_ids": [
+        "8f7c4e8f-0670-4eef-ad2f-607161e90778",
+        "c0fa9949-6653-442d-896b-6a7f985fb15a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "284e1993-42f1-45e5-997b-af3f998b50d8",
+      "doc_ids": [
+        "284e1993-42f1-45e5-997b-af3f998b50d8",
+        "4a899792-3adb-44ce-8395-ed97fdb9f46b"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "86adf07f-7f2e-4f66-a5ea-886d2d5430d5",
+      "doc_ids": [
+        "86adf07f-7f2e-4f66-a5ea-886d2d5430d5",
+        "e5f43471-d047-446c-af6f-b060623a24d7"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "97384d5d-290e-4391-9ba7-961b9882f1f0",
+      "doc_ids": [
+        "97384d5d-290e-4391-9ba7-961b9882f1f0",
+        "327bcc50-76b6-4e33-8967-61e32bcfddc8"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "90044cc5-778b-401b-8326-403d23c5bb50",
+      "doc_ids": [
+        "90044cc5-778b-401b-8326-403d23c5bb50",
+        "811bd777-4785-41bc-879c-d42374127e83"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "3020496b-0c6f-47d8-afea-5c9c973d96c8",
+      "doc_ids": [
+        "3020496b-0c6f-47d8-afea-5c9c973d96c8",
+        "d74fb73c-e68b-4c2f-936a-349c8a56f2e7"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "dc81d9bf-8f3e-48a6-aa78-1edbd1b5fc7e",
+      "doc_ids": [
+        "dc81d9bf-8f3e-48a6-aa78-1edbd1b5fc7e",
+        "3084bda6-7c81-406a-b157-3287b4c472cf"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "70714dd1-a396-41c4-9718-6d01cc6644d5",
+      "doc_ids": [
+        "70714dd1-a396-41c4-9718-6d01cc6644d5",
+        "dcc7fe91-e9c9-4d89-a7d3-bd4b16508f68"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "7b3fddb9-5da1-421b-9100-622997f7d1ba",
+      "doc_ids": [
+        "7b3fddb9-5da1-421b-9100-622997f7d1ba",
+        "a644d77e-2857-4df7-9190-9c0cafad8242"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "fae8b904-c0ba-4791-ba6c-bfa6cc5e9c21",
+      "doc_ids": [
+        "fae8b904-c0ba-4791-ba6c-bfa6cc5e9c21",
+        "ac54f573-7e15-46cc-b439-924195243aa9"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "7f610627-e351-4f4f-96f3-ac37d47bc756",
+      "doc_ids": [
+        "7f610627-e351-4f4f-96f3-ac37d47bc756",
+        "4d1206ca-8061-4ec8-8013-47b0d9de8287"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "1f86d864-07e5-41c7-be56-4e490f9d5ea8",
+      "doc_ids": [
+        "1f86d864-07e5-41c7-be56-4e490f9d5ea8",
+        "adffe501-cc49-4837-8fe1-c0c0ae701227"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "0fd39a82-a0bd-4ae3-9a2d-afcf6039437d",
+      "doc_ids": [
+        "0fd39a82-a0bd-4ae3-9a2d-afcf6039437d",
+        "0c1626f9-39da-46d3-9ac6-7314791a9678"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "0978b0f8-c0b9-4f8f-80bf-13b28cfb57bb",
+      "doc_ids": [
+        "0978b0f8-c0b9-4f8f-80bf-13b28cfb57bb",
+        "15bd0c39-f74d-472f-a20c-3e8336e3e8a2"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "74dcc18d-4e44-4812-8e7e-80f70f5c0024",
+      "doc_ids": [
+        "74dcc18d-4e44-4812-8e7e-80f70f5c0024",
+        "dc06fe7e-afc2-45e6-8e80-40a0bfb43fd7"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "2f115fae-d9ac-4d7d-8c65-7e3509af699e",
+      "doc_ids": [
+        "2f115fae-d9ac-4d7d-8c65-7e3509af699e",
+        "aa1bda33-593e-4df7-8077-6bb171663abd"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "84880cec-d45f-44b8-808e-e673d5ddda16",
+      "doc_ids": [
+        "84880cec-d45f-44b8-808e-e673d5ddda16",
+        "20ad9a1a-0535-461a-8385-b9bb5b7b66b2"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "14e9b5d6-db09-47f9-89c6-41b15d3a6092",
+      "doc_ids": [
+        "14e9b5d6-db09-47f9-89c6-41b15d3a6092",
+        "2cc34083-066d-426b-9a6c-aa7cc621d97a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "ecb66318-58a7-477b-8b6e-c1d495e31728",
+      "doc_ids": [
+        "ecb66318-58a7-477b-8b6e-c1d495e31728",
+        "5fe66386-40e8-43ee-abb3-8186896dc844"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "e741d1c7-9113-4228-ae21-80901116beb3",
+      "doc_ids": [
+        "e741d1c7-9113-4228-ae21-80901116beb3",
+        "89d9d38b-f32d-45c8-9b24-041fd9f5de54"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "1b5a15d8-a120-4ed6-bd7f-8ccf692f42be",
+      "doc_ids": [
+        "1b5a15d8-a120-4ed6-bd7f-8ccf692f42be",
+        "241a0575-88f8-498b-b023-e546370f7578"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "f4009bff-dac7-4af5-a6fd-3ed1ac285f5e",
+      "doc_ids": [
+        "f4009bff-dac7-4af5-a6fd-3ed1ac285f5e",
+        "a04bfda0-3e9d-4647-a929-fa29e04b9b73"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "dc1aa486-e1d8-4ff6-a90e-68a57e870286",
+      "doc_ids": [
+        "dc1aa486-e1d8-4ff6-a90e-68a57e870286",
+        "4ed0befe-4c12-4704-b8e1-519d92d0555f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "9f5e39c9-490b-4f3b-b634-99abe7415b84",
+      "doc_ids": [
+        "9f5e39c9-490b-4f3b-b634-99abe7415b84",
+        "358e2ee9-2c9e-486d-bfb0-bed1ddb0c37a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "0adee6e3-cd34-46ad-b06e-57304fe796b4",
+      "doc_ids": [
+        "0adee6e3-cd34-46ad-b06e-57304fe796b4",
+        "2606325c-79cc-4d5d-8f34-f5b28cba9780"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "8c5c3744-0bb1-4448-a1d7-8811dfce981d",
+      "doc_ids": [
+        "8c5c3744-0bb1-4448-a1d7-8811dfce981d",
+        "3c555fe2-df95-449e-a592-f07c8558a4e4"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "7bd6efb1-e0da-46c7-8a05-e68ba07a63ec",
+      "doc_ids": [
+        "7bd6efb1-e0da-46c7-8a05-e68ba07a63ec",
+        "00f68014-fe7e-4ffd-9d8d-8c04ac053af6"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "496934ac-c19c-4a27-8fd4-52cca838083a",
+      "doc_ids": [
+        "496934ac-c19c-4a27-8fd4-52cca838083a",
+        "af4a8541-a8f6-4719-8e2a-285d3e783e8c"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "e254d701-fd78-4657-b91e-b744327c1a37",
+      "doc_ids": [
+        "e254d701-fd78-4657-b91e-b744327c1a37",
+        "84ed0f18-55a0-4143-a8ec-d22589808d5c"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "ed9ba852-b791-4ea0-9efe-427e27f7bb46",
+      "doc_ids": [
+        "ed9ba852-b791-4ea0-9efe-427e27f7bb46",
+        "08b8e7e0-e49b-4c22-9622-4b07bbf5d96e"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "5ff136d7-f3f8-463e-b2ac-ac8042e2259e",
+      "doc_ids": [
+        "5ff136d7-f3f8-463e-b2ac-ac8042e2259e",
+        "6f8b6aec-ee19-442b-b436-b2df1a2291e2"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "6e74691e-ea2e-4b62-b170-097f7b27c1fe",
+      "doc_ids": [
+        "6e74691e-ea2e-4b62-b170-097f7b27c1fe",
+        "88388c3b-2bb9-4e0a-89f4-8c4fe241eb95"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "977add5d-e40c-4ddf-b157-b436d5d4e65c",
+      "doc_ids": [
+        "977add5d-e40c-4ddf-b157-b436d5d4e65c",
+        "2a14abf0-a3b3-49ea-9525-dd5874637eb8"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "276f1371-9e33-4280-a382-8d6dda9f2d9e",
+      "doc_ids": [
+        "276f1371-9e33-4280-a382-8d6dda9f2d9e",
+        "a4548d5f-c0ce-47f3-b749-1c91c52e2aad"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "603a8913-d3c5-400d-b56e-8ddb0a8426c4",
+      "doc_ids": [
+        "603a8913-d3c5-400d-b56e-8ddb0a8426c4",
+        "4e766cb6-fa77-45ba-90f0-35fbb53c6861"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "895eccea-5f97-4ac9-a015-7d41b9bf7665",
+      "doc_ids": [
+        "895eccea-5f97-4ac9-a015-7d41b9bf7665",
+        "ab7c0752-0ada-41c5-953a-61c3a5aa9edb"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "891e8858-6174-49ab-947f-f8d5c3b89541",
+      "doc_ids": [
+        "891e8858-6174-49ab-947f-f8d5c3b89541",
+        "1828230c-ec26-4f71-a556-9f362f76d883"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "8a8433e5-3ffd-4fa2-a3cb-4b9adafe4bdc",
+      "doc_ids": [
+        "8a8433e5-3ffd-4fa2-a3cb-4b9adafe4bdc",
+        "06404f2f-5273-474a-9fa1-f1aea5371497"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "4bca5658-8bd2-4aac-a54b-24626ed5989f",
+      "doc_ids": [
+        "4bca5658-8bd2-4aac-a54b-24626ed5989f",
+        "bb47499d-5f93-4be0-83fc-0d0af7eb82f0"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "78106284-5a89-4d1d-b346-ad2c034271af",
+      "doc_ids": [
+        "78106284-5a89-4d1d-b346-ad2c034271af",
+        "b023a17e-521b-40e5-94f8-6cd3777206a1"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "e7145799-f624-441c-88bf-f915998972b9",
+      "doc_ids": [
+        "e7145799-f624-441c-88bf-f915998972b9",
+        "3b799a8d-9ff1-4144-9354-1c3908f3ee1d"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "1fe2db5d-a2da-4180-af79-29ed24e2fa7b",
+      "doc_ids": [
+        "1fe2db5d-a2da-4180-af79-29ed24e2fa7b",
+        "f3a0756b-d31b-4c42-b628-cc35cb728255"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "f0d42041-f257-4b8c-ad06-d125a1fd26de",
+      "doc_ids": [
+        "f0d42041-f257-4b8c-ad06-d125a1fd26de",
+        "d66b3d83-67b9-49ce-8bf4-45a9e22db01f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "e85a70a6-a55d-44f4-b7de-40b6353482f9",
+      "doc_ids": [
+        "e85a70a6-a55d-44f4-b7de-40b6353482f9",
+        "2a4e1fd6-af25-4516-95d9-d06b7f921d5f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "65cb87d0-9b40-44c7-a3fd-9b03db1b2ca6",
+      "doc_ids": [
+        "65cb87d0-9b40-44c7-a3fd-9b03db1b2ca6",
+        "d9918f17-8799-40eb-8efe-ef5dfad522c7"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "957f3e6e-e3ea-4a1a-913b-a5ed39f5edc9",
+      "doc_ids": [
+        "957f3e6e-e3ea-4a1a-913b-a5ed39f5edc9",
+        "ea0fd73f-1812-4964-9377-e224aa85e62b"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "ad72da9d-d222-4086-bad7-43cc1b0aa430",
+      "doc_ids": [
+        "ad72da9d-d222-4086-bad7-43cc1b0aa430",
+        "8402fe8b-9319-4352-b009-6b60819fb754"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "4b1bfc29-d1e7-4a83-b497-4845422c47a7",
+      "doc_ids": [
+        "4b1bfc29-d1e7-4a83-b497-4845422c47a7",
+        "c5a0b025-6cf8-4398-ba37-2eaa58eddf6a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "ff496eea-a3b3-4958-a505-20c73f87b852",
+      "doc_ids": [
+        "ff496eea-a3b3-4958-a505-20c73f87b852",
+        "da1bdac3-4fb3-4261-abfe-3a767c17745c"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "bdaa96fe-5768-4f05-a761-b1d10b40895c",
+      "doc_ids": [
+        "bdaa96fe-5768-4f05-a761-b1d10b40895c",
+        "8d8e6872-3cbf-4125-9ee0-652ed1bdfd5f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "40b9e570-ac9d-416a-8ccd-db05b5e7dd5b",
+      "doc_ids": [
+        "40b9e570-ac9d-416a-8ccd-db05b5e7dd5b",
+        "f800c991-8e38-42b7-b347-2dd9274573dd"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "c57cc8ac-74c5-44d1-bdd9-79fd301ec57d",
+      "doc_ids": [
+        "c57cc8ac-74c5-44d1-bdd9-79fd301ec57d",
+        "7d4a9ed0-a7b3-450d-8b76-8a048d791cc3"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "3e2f7550-ebd4-4b09-9ef3-1d7405c8f8fb",
+      "doc_ids": [
+        "3e2f7550-ebd4-4b09-9ef3-1d7405c8f8fb",
+        "c10467c0-eb70-48e1-92e9-6259dc73684a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "947a36f4-0a7c-4ce0-9e87-0d379b1d702d",
+      "doc_ids": [
+        "947a36f4-0a7c-4ce0-9e87-0d379b1d702d",
+        "cfb4d39e-0d61-429b-a31f-9e595e4c78ad"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "c644a143-5f70-44cf-80d2-6b044a3195da",
+      "doc_ids": [
+        "c644a143-5f70-44cf-80d2-6b044a3195da",
+        "46b7572f-4c9b-4275-894f-f0ca967e4c8d"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "1942474b-df99-4c75-a12f-03eb4e04d42b",
+      "doc_ids": [
+        "1942474b-df99-4c75-a12f-03eb4e04d42b",
+        "0c2e701e-43fc-4e40-86b8-00c9575c127b"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "356d02d3-1bcb-43ae-9105-46f3d53f72d3",
+      "doc_ids": [
+        "356d02d3-1bcb-43ae-9105-46f3d53f72d3",
+        "a9448ccf-d043-4645-a50b-c1d649701314"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "4d86afdb-da6a-4758-9e2d-fc217391a96a",
+      "doc_ids": [
+        "4d86afdb-da6a-4758-9e2d-fc217391a96a",
+        "62efa7f2-e1bc-47c8-aa80-ad4ba6d79fbe"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "0a84bf56-1245-461d-9709-9edd30f28438",
+      "doc_ids": [
+        "0a84bf56-1245-461d-9709-9edd30f28438",
+        "319ca618-9f3d-4b21-a29c-495a464d315b"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "f734c996-a1b1-43d6-a072-ae315e02a788",
+      "doc_ids": [
+        "f734c996-a1b1-43d6-a072-ae315e02a788",
+        "611d15b0-2013-477b-a596-4be70d46bdd9"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "bf73bae1-75ff-4d52-9b75-73a010f6d244",
+      "doc_ids": [
+        "bf73bae1-75ff-4d52-9b75-73a010f6d244",
+        "ac621dcd-cb29-4b99-bce7-e3d1d739454a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "c050b9d6-829a-4097-a298-4ccb78276000",
+      "doc_ids": [
+        "c050b9d6-829a-4097-a298-4ccb78276000",
+        "308aff08-7c53-4d24-9889-2e1d4b191463"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "ec904387-2b1f-4d47-b7c7-2fd719b4280a",
+      "doc_ids": [
+        "ec904387-2b1f-4d47-b7c7-2fd719b4280a",
+        "6f6bf85b-1798-44c2-afa4-26b10070fd3e"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "0d8dec7d-c050-4ff8-8f25-d49bfede5691",
+      "doc_ids": [
+        "0d8dec7d-c050-4ff8-8f25-d49bfede5691",
+        "1b03b1f1-e950-4499-b149-b1a74cfa7806"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "483920ce-74bf-4fdb-a19f-53dfec6a88fa",
+      "doc_ids": [
+        "483920ce-74bf-4fdb-a19f-53dfec6a88fa",
+        "10cf4ba2-662c-4bb5-bf82-f1023ef89c6a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "3b4d1a62-caa3-4d17-8326-03efdd004a0b",
+      "doc_ids": [
+        "3b4d1a62-caa3-4d17-8326-03efdd004a0b",
+        "364303a6-4d6b-41cc-b13d-70939d24106c"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "97f57292-639a-410f-a9ea-9bbccc0b4186",
+      "doc_ids": [
+        "97f57292-639a-410f-a9ea-9bbccc0b4186",
+        "7bb17db1-37fa-4650-8d0a-2a9d9b5c0e6e"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "e7789971-b31c-47fe-807c-0626f67709f5",
+      "doc_ids": [
+        "e7789971-b31c-47fe-807c-0626f67709f5",
+        "e7c1f0bb-965b-4da1-ada8-67536f101f57"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "d4b1623f-bb65-446a-97b0-4f55b87a5a6a",
+      "doc_ids": [
+        "d4b1623f-bb65-446a-97b0-4f55b87a5a6a",
+        "0447fa12-50b0-4e92-8aed-bec10efa13c9"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "a8199bfa-ddda-43f7-8922-a4a459698d64",
+      "doc_ids": [
+        "a8199bfa-ddda-43f7-8922-a4a459698d64",
+        "983e295c-295e-4422-b6c2-b5d84729e5ba"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "aeb0f31f-0af4-425f-8871-ff14090c4f56",
+      "doc_ids": [
+        "aeb0f31f-0af4-425f-8871-ff14090c4f56",
+        "d6728b31-a3fb-48c8-9b0f-58ccbd9478a0"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "b43ddc69-08fb-4ed9-b226-788afe70e5c6",
+      "doc_ids": [
+        "b43ddc69-08fb-4ed9-b226-788afe70e5c6",
+        "c9b1883b-12b1-42ef-9025-503b5ec22360"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "cf434ee4-a42b-461c-981d-eab4950bb4fc",
+      "doc_ids": [
+        "cf434ee4-a42b-461c-981d-eab4950bb4fc",
+        "bceb1e0c-77f4-4c11-ad26-72693994b75f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "eb50a80d-0510-4201-a122-63da84275075",
+      "doc_ids": [
+        "eb50a80d-0510-4201-a122-63da84275075",
+        "462e6d28-9bbb-4c99-9e49-ee8a3381b085"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "1b69a9b2-9eb4-4f5f-890d-397e3f9ad2c9",
+      "doc_ids": [
+        "1b69a9b2-9eb4-4f5f-890d-397e3f9ad2c9",
+        "bf196743-b5d0-41f2-93c6-262864069658"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "8b1c09ec-737a-4984-ab7c-0e67056e6a8d",
+      "doc_ids": [
+        "8b1c09ec-737a-4984-ab7c-0e67056e6a8d",
+        "b4f41ce5-9f89-41e8-9baf-05e018eb12f2"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "aa05c827-7cdf-435c-b4fb-522b8a01992d",
+      "doc_ids": [
+        "aa05c827-7cdf-435c-b4fb-522b8a01992d",
+        "2974f0f0-28a4-4583-bad7-40bb3f71ab6c"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "f9674f46-5e37-4501-aa26-89dbd92bd4c3",
+      "doc_ids": [
+        "f9674f46-5e37-4501-aa26-89dbd92bd4c3",
+        "b6b6e325-2d05-47a0-80b4-cee093d7cb2e"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "23c9b1b4-890b-4cf4-bdd4-aa88c551800c",
+      "doc_ids": [
+        "23c9b1b4-890b-4cf4-bdd4-aa88c551800c",
+        "f9d7c254-f6df-44da-98c0-39268c7839ea"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "6e7d5eee-8c52-4826-9b74-4574ed917755",
+      "doc_ids": [
+        "6e7d5eee-8c52-4826-9b74-4574ed917755",
+        "7ba3bb2f-46b5-4331-b1d7-3b1a9d0fde10"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "a26375db-dd31-4f5a-9e9e-8897ec1ce3c1",
+      "doc_ids": [
+        "a26375db-dd31-4f5a-9e9e-8897ec1ce3c1",
+        "d8b0c4df-7468-4c5d-b550-c22f418f5557"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "428345f5-f158-4ed6-8c6d-ffb48c917f01",
+      "doc_ids": [
+        "428345f5-f158-4ed6-8c6d-ffb48c917f01",
+        "9931bbad-c4e8-45ab-a9ac-dd153b9089de"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "77b0133e-2b44-4d64-8f3c-0bb43c0fd392",
+      "doc_ids": [
+        "77b0133e-2b44-4d64-8f3c-0bb43c0fd392",
+        "5f1bb281-a6e0-4e58-80a9-05ab68d7f689"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "b5fadd15-42cb-4693-8387-285c8207adbb",
+      "doc_ids": [
+        "b5fadd15-42cb-4693-8387-285c8207adbb",
+        "56180493-8756-44eb-ba10-015a4590abcf"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "f67dbfd2-72ff-44ac-ab35-37bdd62324f9",
+      "doc_ids": [
+        "f67dbfd2-72ff-44ac-ab35-37bdd62324f9",
+        "1d56ef9b-d78a-4d7d-8aae-5d807516d084"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "70874bfd-0aba-445f-9f5b-deba3313e561",
+      "doc_ids": [
+        "70874bfd-0aba-445f-9f5b-deba3313e561",
+        "ff20a9f4-49f6-4a7e-854b-8961bb743432"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "e757a400-628b-4158-a661-59780bbed07e",
+      "doc_ids": [
+        "e757a400-628b-4158-a661-59780bbed07e",
+        "f47df0f6-71ed-4881-9d94-23af9bfe94b0"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "e24bea86-9d90-49ce-bb8c-2d67e57460aa",
+      "doc_ids": [
+        "e24bea86-9d90-49ce-bb8c-2d67e57460aa",
+        "a7d7b792-7716-4596-999d-123deb08709c"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "1859ea3e-b74c-4e73-a7c5-39a62f1a3650",
+      "doc_ids": [
+        "1859ea3e-b74c-4e73-a7c5-39a62f1a3650",
+        "2f1e0e4f-68e3-4c06-be3c-e270cd312110"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "dde6ad1a-a247-4b0e-bd3d-5fc7827e21d6",
+      "doc_ids": [
+        "dde6ad1a-a247-4b0e-bd3d-5fc7827e21d6",
+        "78091a91-38fd-4479-8c8f-b11af6319139"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "da56aaf3-cd55-4ae8-a1d8-66d7ef698d2c",
+      "doc_ids": [
+        "da56aaf3-cd55-4ae8-a1d8-66d7ef698d2c",
+        "e2497176-dff6-48c1-89cb-883709164855"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "c3506dd1-3b3d-43a0-8eab-3c29b78ea5c6",
+      "doc_ids": [
+        "c3506dd1-3b3d-43a0-8eab-3c29b78ea5c6",
+        "56f8ae81-a29a-4bc9-ae08-b7d8fd3d55e8"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "b61350ef-9387-42df-8375-1076703f201a",
+      "doc_ids": [
+        "b61350ef-9387-42df-8375-1076703f201a",
+        "6614e221-f4bc-4514-bb52-435a19402450"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "23d2000c-36d7-4749-a786-eeecdc4f3a5d",
+      "doc_ids": [
+        "23d2000c-36d7-4749-a786-eeecdc4f3a5d",
+        "6ba3fb28-28da-46c2-82aa-840065ab253d"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "09b468e0-03f6-4a3c-a0a9-9025bb4aaf09",
+      "doc_ids": [
+        "09b468e0-03f6-4a3c-a0a9-9025bb4aaf09",
+        "206d5e3b-5571-4d0d-95b2-84ea54d9941f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "bc1fd81c-540c-42ef-b594-d6ca7c24bf07",
+      "doc_ids": [
+        "bc1fd81c-540c-42ef-b594-d6ca7c24bf07",
+        "0f7bb5e4-66b0-4ee4-81d1-0ccb5f2d266e"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "f5a3b4a6-9428-4baa-948f-d344742652fa",
+      "doc_ids": [
+        "f5a3b4a6-9428-4baa-948f-d344742652fa",
+        "d8f2e558-3d3f-4795-9490-4edd0fc6deec"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "0d1c1524-1bd7-405e-bf55-1b9800acc69e",
+      "doc_ids": [
+        "0d1c1524-1bd7-405e-bf55-1b9800acc69e",
+        "06ab5474-d5cf-401f-ac13-4d1f25f01139"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "53705fe4-f61f-4782-ba6d-c2ab33fb4f09",
+      "doc_ids": [
+        "53705fe4-f61f-4782-ba6d-c2ab33fb4f09",
+        "bfe618df-b3da-46b5-a73b-da6ce6d23fe6"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "68d2d4ce-8e64-4616-b6af-897d97f5d17f",
+      "doc_ids": [
+        "68d2d4ce-8e64-4616-b6af-897d97f5d17f",
+        "617d0a29-3700-4ba0-a719-d8cf34e02f9f"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "9831082b-19c1-46a9-9100-a7589a3095a9",
+      "doc_ids": [
+        "9831082b-19c1-46a9-9100-a7589a3095a9",
+        "0e26cb67-4e08-4f3c-985a-a4d07314ee3a"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "5936f82a-ba86-41a0-9b10-208dc11639d0",
+      "doc_ids": [
+        "5936f82a-ba86-41a0-9b10-208dc11639d0",
+        "27304721-6b3d-4706-bf95-820a907ec1ec"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "ee72aeaf-cf8a-4c70-8c95-68c5999822df",
+      "doc_ids": [
+        "ee72aeaf-cf8a-4c70-8c95-68c5999822df",
+        "7890710f-ac31-4315-b17a-8418149df611"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "47bccfaa-f7f6-4967-99b7-6b049c798f01",
+      "doc_ids": [
+        "47bccfaa-f7f6-4967-99b7-6b049c798f01",
+        "a55b9963-1e3c-4dbb-953d-7d0020cabc17"
+      ],
+      "size": 2
+    },
+    {
+      "group_id": "a31a9238-4eee-46a4-bf2e-0eaf5f7aec2b",
+      "doc_ids": [
+        "a31a9238-4eee-46a4-bf2e-0eaf5f7aec2b",
+        "0d9205d2-0683-42f3-a560-b6b3b6044b0f"
+      ],
+      "size": 2
+    }
+  ]
+}

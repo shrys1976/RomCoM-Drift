@@ -1,0 +1,46 @@
+{
+  "decision": "retain_on_source_list_order",
+  "reason": "All five benign ties have a higher same-slot cosine sum than the crossed-slot sum. They missed the 0.05 conflict margin. Reading both languages shows slot 0 is the question and slot 1 is the answer. They are retained on source-list role order and are not quarantined.",
+  "rows": [
+    {
+      "doc_id": "517b4545-acd1-4cb7-a6c7-5beaf461fca2",
+      "source_row_index": 9496,
+      "direct_cosine_sum": 1.8255,
+      "crossed_cosine_sum": 1.7849,
+      "margin": 0.0406,
+      "disposition": "retain_on_source_list_order"
+    },
+    {
+      "doc_id": "9296f4dd-5788-4c3f-b79b-e84b8339cc32",
+      "source_row_index": 9280,
+      "direct_cosine_sum": 1.1868,
+      "crossed_cosine_sum": 1.1394,
+      "margin": 0.0474,
+      "disposition": "retain_on_source_list_order"
+    },
+    {
+      "doc_id": "66c22c12-f4df-44e1-861c-c9aa85c46bed",
+      "source_row_index": 7542,
+      "direct_cosine_sum": 1.5404,
+      "crossed_cosine_sum": 1.4974,
+      "margin": 0.043,
+      "disposition": "retain_on_source_list_order"
+    },
+    {
+      "doc_id": "26ee2179-654f-46c7-8ff6-c9848b794987",
+      "source_row_index": 13458,
+      "direct_cosine_sum": 1.6054,
+      "crossed_cosine_sum": 1.6013,
+      "margin": 0.0041,
+      "disposition": "retain_on_source_list_order"
+    },
+    {
+      "doc_id": "b66f50c4-7e32-4260-8589-7d180b596fcb",
+      "source_row_index": 8541,
+      "direct_cosine_sum": 1.5118,
+      "crossed_cosine_sum": 1.4757,
+      "margin": 0.0361,
+      "disposition": "retain_on_source_list_order"
+    }
+  ]
+}

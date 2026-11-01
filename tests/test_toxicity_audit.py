@@ -42,8 +42,8 @@ def test_recommendation_conditional_on_legacy_benign():
         {"toxic_matrix_config_present": True},
     )
     assert rec["verdict"] == "CONDITIONAL_GO"
-    assert rec["experimental_construction"] == "NOT_APPROVED"
-    assert "dual_license_owner_approval" in rec["blockers"]
+    assert rec["licenses_approved"] is True
+    assert "owner_confirm_source_freeze_checklist" in rec["blockers"]
 
 
 def test_construction_stays_unapproved():
@@ -57,9 +57,22 @@ def test_construction_stays_unapproved():
         {"n": 120},
     )
     assert rec["verdict"] == "CONDITIONAL_GO"
-    assert rec["experimental_construction"] == "NOT_APPROVED"
-    assert "dual_license_owner_approval" in rec["blockers"]
+    assert rec["experimental_construction"] == "SOURCE_MANIFEST_FROZEN_AUGMENTATION_NOT_RUN"
+    assert "owner_confirm_source_freeze_checklist" in rec["blockers"]
     assert "owner_accept_dolly_t_head_slice" not in rec["blockers"]
+
+
+def test_identical_toxic_prompts_share_a_group():
+    from romcom_data.toxicity_freeze import group_user_prompts
+
+    rows = [
+        {"doc_id": "a", "hin_Deva": [["एक ही प्रश्न", "उत्तर"]]},
+        {"doc_id": "b", "hin_Deva": [["एक ही प्रश्न", "दूसरा"]]},
+        {"doc_id": "c", "hin_Deva": [["अलग प्रश्न जो मेल नहीं खाता", "उत्तर"]]},
+    ]
+    grouped = group_user_prompts(rows, None)
+    assert grouped["group_of"]["a"] == grouped["group_of"]["b"]
+    assert grouped["group_of"]["a"] != grouped["group_of"]["c"]
 
 
 def test_hindi_field_is_canonical_and_latn_is_rejected():

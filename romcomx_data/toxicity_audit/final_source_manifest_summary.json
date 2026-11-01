@@ -1,0 +1,65 @@
+{
+  "frozen_utc": "2026-11-01T16:32:48.431544+00:00",
+  "task": "hindi_refusal_response_generation",
+  "claim": "Hindi refusal-response generation with Romanized assistant targets. The Hindi Devanagari user input remains unchanged.",
+  "not_claimed": [
+    "Romanized-input understanding",
+    "general code-mixed safety robustness",
+    "general toxicity detection",
+    "classification accuracy"
+  ],
+  "licenses_approved": {
+    "indic_align": "CC-BY-4.0",
+    "dolly_15k_upstream": "CC-BY-SA-3.0",
+    "flattened": false,
+    "approved_on": "2026-11-01"
+  },
+  "tie_disposition": "retain_on_source_list_order",
+  "tie_count": 5,
+  "excluded_toxic_role_conflicts": [
+    "5b41220a-daba-4be9-98bc-d704d8a1c9b9",
+    "45a79f97-f684-4c1a-a8fe-ed17671db8ad"
+  ],
+  "counts": {
+    "toxic_source_rows": 5000,
+    "toxic_excluded_role_conflict": 2,
+    "toxic_retained": 4998,
+    "benign_seeded_rows": 2000,
+    "benign_ties_retained": 5,
+    "benign_quarantined": 0,
+    "retained_total": 6998,
+    "excluded_total": 2,
+    "manifest_rows": 7000
+  },
+  "frozen_split": {
+    "rule": "90/10 train/validation at prompt-group level, stratified by label, seed 42. No test split is carved.",
+    "ratios": {
+      "train": 0.9,
+      "validation": 0.1,
+      "test": 0.0
+    },
+    "counts": {
+      "train": 6299,
+      "validation": 699,
+      "excluded": 2
+    },
+    "by_label": {
+      "non_toxic:train": 1800,
+      "non_toxic:validation": 200,
+      "toxic:excluded": 2,
+      "toxic:train": 4499,
+      "toxic:validation": 499
+    },
+    "groups_crossing_frozen_splits": 0
+  },
+  "diagnostic_80_10_10": {
+    "purpose": "Check that a later test boundary would not split a near-duplicate group.",
+    "groups_crossing_splits_when_groups_are_atomic": 0,
+    "near_duplicate_groups_that_would_cross_if_split_by_row": 93
+  },
+  "manifest_sha256": "85bddf9a31a24bfff93eca66e6171c7bbeabd8c37e5d20f8cf10a21bca94b830",
+  "manifest_id": "85bddf9a31a24bfff93eca66e6171c7bbeabd8c37e5d20f8cf10a21bca94b830:9ba309c2ed764769",
+  "augmentation": "not_run",
+  "training": "not_run",
+  "scoring": "not_run"
+}

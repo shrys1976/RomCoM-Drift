@@ -1,6 +1,10 @@
 # Data quality and leakage
 
+The frozen split supersedes the simulation below. Toxic user prompts were grouped before assignment. Groups are atomic. Frozen rule: 90/10 train/validation, stratified by label, seed 42, test count 0. Groups crossing the frozen split: 0. A row-wise split of the same near-duplicate groups would cross a diagnostic 80/10/10 boundary in 93 groups. See `prompt_group_leakage.json` and `final_source_manifest.csv`.
+
 {
+
+
   "official_test_split": "not_provided_train_only_configs",
   "recommended_split_unit": "source_id (doc_id) stratified toxic vs non_toxic",
   "recommended_seed": 42,

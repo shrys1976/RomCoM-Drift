@@ -1,6 +1,20 @@
 # Toxicity audit report
 
+The experiment is Hindi refusal-response generation with Romanized assistant targets. The Hindi Devanagari user input remains unchanged. This is not Romanized-input understanding and not general code-mixed safety robustness.
+
+Source manifest frozen 2026-11-01. Verdict remains CONDITIONAL_GO. Augmentation, training, and scoring were not run. The JSON below is the inspection record. The freeze that supersedes its recommendation block is `final_source_manifest_summary.json`.
+
+- Manifest `85bddf9a31a24bfff93eca66e6171c7bbeabd8c37e5d20f8cf10a21bca94b830`.
+- Retained 6998 (toxic 4998, benign seed-42 Dolly 2000). Excluded 2 toxic role conflicts, not flipped.
+- Five benign embedding ties retained on source-list role order.
+- Frozen split: train 6299, validation 699, test 0. Near-duplicate groups do not cross it.
+- Licenses approved separately on 2026-11-01: IndicAlign CC-BY-4.0 and Dolly-15K CC-BY-SA-3.0.
+- Outcome is the generation rubric. Classification accuracy is not an outcome.
+- Remaining blocker: `owner_confirm_source_freeze_checklist`.
+
 {
+
+
   "title": "Phase 2.1 Toxicity (IndicAlign Toxic_Matrix) audit",
   "audit_revision": "2026_11_01_rev3",
   "toccix_investigation": {

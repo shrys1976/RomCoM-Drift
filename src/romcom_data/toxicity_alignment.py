@@ -192,6 +192,7 @@ def embedding_alignment(rows: list[dict[str, Any]], other_field: str) -> dict[st
     vectors = _embed_texts(texts)
     counts: Counter[str] = Counter()
     conflicts: list[dict[str, Any]] = []
+    ties: list[dict[str, Any]] = []
     for i, row in enumerate(rows):
         base = i * 4
         eng_user, eng_asst, other_user, other_asst = vectors[base : base + 4]
@@ -204,17 +205,20 @@ def embedding_alignment(rows: list[dict[str, Any]], other_field: str) -> dict[st
         else:
             status = "embedding_tie"
         counts[status] += 1
+        record = {
+            "doc_id": row.get("doc_id"),
+            "source_row_index": row.get("source_row_index"),
+            "field": other_field,
+            "direct_cosine_sum": round(direct, 4),
+            "crossed_cosine_sum": round(crossed, 4),
+            "margin": round(abs(direct - crossed), 4),
+        }
         if status == "conflicts_with_positional":
-            conflicts.append(
-                {
-                    "doc_id": row.get("doc_id"),
-                    "source_row_index": row.get("source_row_index"),
-                    "field": other_field,
-                    "direct_cosine_sum": round(direct, 4),
-                    "crossed_cosine_sum": round(crossed, 4),
-                    "action": "excluded_from_experiment_ready_set_roles_not_flipped",
-                }
-            )
+            record["action"] = "excluded_from_experiment_ready_set_roles_not_flipped"
+            conflicts.append(record)
+        elif status == "embedding_tie":
+            record["action"] = "pending_tie_disposition"
+            ties.append(record)
     return {
         "field": other_field,
         "model": EMBED_MODEL,
@@ -226,6 +230,8 @@ def embedding_alignment(rows: list[dict[str, Any]], other_field: str) -> dict[st
         "counts": dict(counts),
         "conflict_count": len(conflicts),
         "conflicts": conflicts,
+        "tie_count": len(ties),
+        "ties": ties,
     }
 
 

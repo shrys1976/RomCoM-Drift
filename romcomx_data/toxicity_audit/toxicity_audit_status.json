@@ -1,11 +1,12 @@
 {
   "status": "READY_FOR_OWNER_REVIEW",
   "blockers": [
-    "dual_license_owner_approval",
-    "experimental_construction_not_approved",
-    "template_confound_precludes_classification_claim"
+    "owner_confirm_source_freeze_checklist"
   ],
   "dataset_rebuild_allowed": false,
   "training_allowed": false,
-  "owner_review_scope": "toxicity_hindi_native_target_side_mixing"
+  "owner_review_scope": "toxicity_hindi_native_target_side_mixing",
+  "source_manifest_frozen": true,
+  "augmentation_allowed": false,
+  "scoring_allowed": false
 }

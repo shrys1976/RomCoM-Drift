@@ -755,9 +755,13 @@ def task_definition() -> dict[str, Any]:
                 "interface described for the secondary task."
             ),
         },
-        "text_binding": "hin_Deva is canonical. eng_Latn is an alignment reference. hin_Latn is not a role source.",
+        "text_binding": (
+            "Hindi refusal-response generation. The model receives the unchanged "
+            "Hindi Devanagari user turn. Only the assistant turn is romanized. "
+            "This is not Romanized-input understanding and not general code-mixed safety robustness."
+        ),
         "transformation_constraints_unchanged": True,
-        "experimental_construction": "NOT_APPROVED",
+        "experimental_construction": "SOURCE_MANIFEST_FROZEN_AUGMENTATION_NOT_RUN",
     }
 
 
@@ -778,16 +782,14 @@ def build_recommendation(
         blockers.append("high_empty_prompt_rate")
     if leakage.get("doc_id_overlap_toxic_benign", 0) > 0:
         blockers.append("doc_id_overlap_toxic_benign")
-    blockers.append("dual_license_owner_approval")
-    blockers.append("experimental_construction_not_approved")
-    blockers.append("template_confound_precludes_classification_claim")
+    blockers.append("owner_confirm_source_freeze_checklist")
     owner_decisions.append(
-        "Approve IndicAlign CC-BY-4.0 and, separately, Dolly-15K upstream CC-BY-SA-3.0. "
-        "Do not treat them as one license."
+        "Licenses approved by the owner on 2026-11-01 and kept separate: "
+        "IndicAlign CC-BY-4.0 and Dolly-15K upstream CC-BY-SA-3.0."
     )
     owner_decisions.append(
-        "Approve experimental construction only after accepting the seed-42 benign "
-        "manifest, the excluded role-conflict rows, and the generation-only interface."
+        "Confirm the frozen source manifest, tie-row disposition, prompt-group splits, "
+        "and the generation rubric before any augmentation."
     )
     if refusal_review:
         owner_decisions.append(
@@ -805,7 +807,9 @@ def build_recommendation(
     return {
         "verdict": verdict,
         "scope": "secondary_hindi_refusal_register_generation",
-        "experimental_construction": "NOT_APPROVED",
+        "experimental_construction": "SOURCE_MANIFEST_FROZEN_AUGMENTATION_NOT_RUN",
+        "licenses_approved": True,
+        "licenses_not_flattened": True,
         "english_pivot": "not_applicable",
         "blockers": blockers,
         "owner_decisions": owner_decisions,
@@ -1185,6 +1189,12 @@ def build_audit_zip(zip_path: Path | None = None) -> Path:
         "template_statistics.json",
         "role_alignment_summary.json",
         "excluded_role_conflicts.json",
+        "final_source_manifest.csv",
+        "final_source_manifest_summary.json",
+        "prompt_group_leakage.json",
+        "benign_tie_disposition.json",
+        "generation_evaluation_rubric.json",
+        "owner_decision_checklist.md",
         "audit_log.txt",
     )
     lines: list[str] = []

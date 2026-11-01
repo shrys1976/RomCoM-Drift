@@ -1,5 +1,7 @@
 # RomCoM-X toxicity transformation integrity
 
+The experiment is Hindi refusal-response generation with Romanized assistant targets. The Hindi Devanagari user input remains unchanged. Only the assistant turn may be romanized. This is not Romanized-input understanding and not general code-mixed safety robustness. No transformed rows were built in this freeze.
+
 {
   "policy_source": "data_plan Appendix B.5 / phase2_reports toxicity_data_design_report.md",
   "user_prompt": "Never code-mixed; bytes preserved in input.prompt",

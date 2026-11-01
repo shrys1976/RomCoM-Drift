@@ -1,4 +1,6 @@
-# Task definition
+# Hindi refusal-response generation
+
+The experiment is Hindi refusal-response generation with Romanized assistant targets. The Hindi Devanagari user input remains unchanged. It is not Romanized-input understanding and it is not general code-mixed safety robustness.
 
 {
   "research_claim": "Secondary Hindi refusal-register task. It does not measure general toxicity detection or code-mixed safety robustness.",
@@ -13,9 +15,7 @@
     "assistant_response_refusal_classification": "Would label whether the assistant turn is a refusal. The shared opening makes that separable by template. Not claimed.",
     "refusal_generation": "Given model_input, generate the assistant reply and compare it with model_target under romanization of that target. This is the only interface described for the secondary task."
   },
-  "text_binding": "hin_Deva is canonical. eng_Latn is an alignment reference. hin_Latn is not a role source.",
+  "text_binding": "Hindi refusal-response generation. The model receives the unchanged Hindi Devanagari user turn. Only the assistant turn is romanized. This is not Romanized-input understanding and not general code-mixed safety robustness.",
   "transformation_constraints_unchanged": true,
-  "experimental_construction": "NOT_APPROVED"
+  "experimental_construction": "SOURCE_MANIFEST_FROZEN_AUGMENTATION_NOT_RUN"
 }
-
-Transformation constraints are unchanged. Canonical, realistic-variant, and matched-noise conditions still share source IDs, labels, and splits.

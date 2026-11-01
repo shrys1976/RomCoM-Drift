@@ -1,17 +1,16 @@
 {
   "verdict": "CONDITIONAL_GO",
   "scope": "secondary_hindi_refusal_register_generation",
-  "experimental_construction": "NOT_APPROVED",
+  "experimental_construction": "SOURCE_MANIFEST_FROZEN_AUGMENTATION_NOT_RUN",
+  "licenses_approved": true,
+  "licenses_not_flattened": true,
   "english_pivot": "not_applicable",
   "blockers": [
-    "dual_license_owner_approval",
-    "experimental_construction_not_approved",
-    "template_confound_precludes_classification_claim"
+    "owner_confirm_source_freeze_checklist"
   ],
   "owner_decisions": [
-    "Approve IndicAlign CC-BY-4.0 and, separately, Dolly-15K upstream CC-BY-SA-3.0. Do not treat them as one license.",
-    "Approve experimental construction only after accepting the seed-42 benign manifest, the excluded role-conflict rows, and the generation-only interface.",
-    "The earlier English refusal read found templated refusals. Hindi template rates are in template_statistics.json and are not classifier labels."
+    "Licenses approved by the owner on 2026-11-01 and kept separate: IndicAlign CC-BY-4.0 and Dolly-15K upstream CC-BY-SA-3.0.",
+    "Confirm the frozen source manifest, tie-row disposition, prompt-group splits, and the generation rubric before any augmentation."
   ],
   "task_definition": {
     "research_claim": "Secondary Hindi refusal-register task. It does not measure general toxicity detection or code-mixed safety robustness.",
@@ -26,12 +25,14 @@
       "assistant_response_refusal_classification": "Would label whether the assistant turn is a refusal. The shared opening makes that separable by template. Not claimed.",
       "refusal_generation": "Given model_input, generate the assistant reply and compare it with model_target under romanization of that target. This is the only interface described for the secondary task."
     },
-    "text_binding": "hin_Deva is canonical. eng_Latn is an alignment reference. hin_Latn is not a role source.",
+    "text_binding": "Hindi refusal-response generation. The model receives the unchanged Hindi Devanagari user turn. Only the assistant turn is romanized. This is not Romanized-input understanding and not general code-mixed safety robustness.",
     "transformation_constraints_unchanged": true,
-    "experimental_construction": "NOT_APPROVED"
+    "experimental_construction": "SOURCE_MANIFEST_FROZEN_AUGMENTATION_NOT_RUN"
   },
   "task_suitability_summary": "Hindi Devanagari user turns stay fixed. Assistant turns are the refusal or ordinary-answer targets. This is not toxicity detection.",
   "secondary_register_fit": "Generation-only comparison of Hindi refusal targets versus ordinary Dolly answers, after owner approval. Classification is confounded by the template.",
   "benign_file_replaced": false,
-  "head_slice_not_used": true
+  "head_slice_not_used": true,
+  "source_manifest": "85bddf9a31a24bfff93eca66e6171c7bbeabd8c37e5d20f8cf10a21bca94b830",
+  "tie_disposition": "retain_on_source_list_order"
 }

@@ -1,0 +1,67 @@
+[
+  {
+    "doc_id": "517b4545-acd1-4cb7-a6c7-5beaf461fca2",
+    "source_row_index": 9496,
+    "field": "hin_Deva",
+    "direct_cosine_sum": 1.8255,
+    "crossed_cosine_sum": 1.7849,
+    "margin": 0.0406,
+    "action": "pending_tie_disposition",
+    "hin_user": "जो एक पक्षी या मछली हैः ब्लूथ्रोट, ब्लू कैटफिश",
+    "hin_assistant": "ब्लूथ्रोट एक पक्षी है, नीली कैटफ़िश एक मछली है।",
+    "eng_user": "Which is a bird or fish: Bluethroat, Blue catfish",
+    "eng_assistant": "Bluethroat is a bird, Blue catfish is a fish"
+  },
+  {
+    "doc_id": "9296f4dd-5788-4c3f-b79b-e84b8339cc32",
+    "source_row_index": 9280,
+    "field": "hin_Deva",
+    "direct_cosine_sum": 1.1868,
+    "crossed_cosine_sum": 1.1394,
+    "margin": 0.0474,
+    "action": "pending_tie_disposition",
+    "hin_user": "पहचानें कि कौन सा वाद्य तार या लकड़ी का पवन हैः गीगा, पनफ्लूटे, चुनिरी, डिज़ी",
+    "hin_assistant": "डिज़ी और बांसुरी लकड़ी की हवा हैं, गीगा और चुनिरी तार हैं।",
+    "eng_user": "Identify which instrument is string or woodwind: Giga, Panflute, Chuniri, Dizi",
+    "eng_assistant": "Dizi and Panflute are woodwind, Giga and Chuniri are string."
+  },
+  {
+    "doc_id": "66c22c12-f4df-44e1-861c-c9aa85c46bed",
+    "source_row_index": 7542,
+    "field": "hin_Deva",
+    "direct_cosine_sum": 1.5404,
+    "crossed_cosine_sum": 1.4974,
+    "margin": 0.043,
+    "action": "pending_tie_disposition",
+    "hin_user": "निम्नलिखित में से कौन से आवधिक तत्व हैंः ti, n, pt, fl, zt, 1l, 2y, o, f, v, y",
+    "hin_assistant": "निम्नलिखित आवधिक तत्व हैंः ti, n, pt, fl, o, f, v, y",
+    "eng_user": "Which of the following are periodic elements: Ti, N, Pt, Fl, Zt, 1L, 2y, O, F, V, Y",
+    "eng_assistant": "The following are periodic elements: Ti, N, Pt, Fl, O, F, V, Y"
+  },
+  {
+    "doc_id": "26ee2179-654f-46c7-8ff6-c9848b794987",
+    "source_row_index": 13458,
+    "field": "hin_Deva",
+    "direct_cosine_sum": 1.6054,
+    "crossed_cosine_sum": 1.6013,
+    "margin": 0.0041,
+    "action": "pending_tie_disposition",
+    "hin_user": "इनमें से कौन से खिताब वाल्टर डीन मायर्स द्वारा दिए गए हैं और कौन से रिक रियोर्डन जूनियर द्वारा दिए गए हैं।? हूप्स, तारिक की किंवदंती, अमेज़ॅन में घात, क्रिस्टल, एक हार्लेम आदमी का जीवन, खोया हुआ नायक, टाइटन का अभिशाप, बिजली चोर, लाल पिरामिड, देवता की डायरी",
+    "hin_assistant": "वाल्टर डीन मायर्स शीर्षकः हुप्स, द लीजेंड ऑफ तारिक, अमेज़ॅन में घात, क्रिस्टल, एक हार्लेम आदमी का जीवन \nरिक रियोर्डन जूनियर। शीर्षकः खोया हुआ नायक, टाइटन का अभिशाप, बिजली चोर, लाल पिरामिड, देवता की डायरी",
+    "eng_user": "Which of these titles are by Walter Dean Myers and which are by Rick Riordan Jr.? Hoops, The Legend of Tarik, Ambush in the Amazon, Crystal, The Life of a Harlem Man, The Lost Hero, The Titan's Curse, The Lightning Thief, The Red Pyramid, The Demigod Diaries",
+    "eng_assistant": "Walter Dean Myers titles: Hoops, The Legend of Tarik, Ambush in the Amazon, Crystal, The Life of a Harlem Man \nRick Riordan Jr. titles: The Lost Hero, The Titan's Curse, The Lightning Thief, The Red Pyramid, The Demigod Diaries"
+  },
+  {
+    "doc_id": "b66f50c4-7e32-4260-8589-7d180b596fcb",
+    "source_row_index": 8541,
+    "field": "hin_Deva",
+    "direct_cosine_sum": 1.5118,
+    "crossed_cosine_sum": 1.4757,
+    "margin": 0.0361,
+    "action": "pending_tie_disposition",
+    "hin_user": "जो एक पक्षी या मछली हैः पीला वैगटेल, पीला बैक फ्यूसिलियर",
+    "hin_assistant": "पीला वैगटेल एक पक्षी है, पीला बैक फ्यूसिलियर एक मछली है।",
+    "eng_user": "Which is a bird or fish: Yellow wagtail, Yellowback fusilier",
+    "eng_assistant": "Yellow wagtail is a bird, Yellowback fusilier is a fish"
+  }
+]

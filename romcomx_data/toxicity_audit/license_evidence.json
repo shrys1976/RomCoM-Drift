@@ -39,7 +39,7 @@
     "indic_align": {
       "spdx": "CC-BY-4.0",
       "evidence": "Hugging Face tag license:cc-by-4.0 on ai4bharat/indic-align. Card license field is null.",
-      "owner_approval": "required"
+      "owner_approval": "approved_2026-11-01"
     },
     "dolly_15k_upstream": {
       "spdx": "CC-BY-SA-3.0",
@@ -53,7 +53,9 @@
         ],
         "documented_upstream": "CC-BY-SA-3.0"
       },
-      "owner_approval": "required"
+      "owner_approval": "approved_2026-11-01"
     }
-  }
+  },
+  "owner_approved_on": "2026-11-01",
+  "flattened": false
 }
