@@ -1,0 +1,128 @@
+{
+  "sources": [
+    {
+      "source_dataset": "google-research-datasets/dakshina",
+      "path": "data/raw/dakshina/hi/hi.romanized.rejoined.aligned.cased_nopunct.tsv",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-SA-4.0",
+      "sha256": "f35a1eebc6a9cdf6cb22dc262be122b1be541db8e7de340260e6823a05ac5224",
+      "role": "dakshina_hi"
+    },
+    {
+      "source_dataset": "google-research-datasets/dakshina",
+      "path": "data/raw/dakshina/hi/hi.romanized.rejoined.aligned.tsv",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-SA-4.0",
+      "sha256": "37277a9c4ade24cbde20fd8f235278a62ccc5e0fff7426f7dbee425580a1e7ea",
+      "role": "dakshina_hi"
+    },
+    {
+      "source_dataset": "google-research-datasets/dakshina",
+      "path": "data/raw/dakshina/hi/hi.romanized.rejoined.dev.native.txt",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-SA-4.0",
+      "sha256": "01bc13b653f8ffa3ec0ddfb4cb91c22c908e4d3a40afd39d2bfe48743b57e2b1",
+      "role": "dakshina_hi"
+    },
+    {
+      "source_dataset": "google-research-datasets/dakshina",
+      "path": "data/raw/dakshina/hi/hi.romanized.rejoined.dev.roman.txt",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-SA-4.0",
+      "sha256": "106fbc342d19587a9a7a7687e6bd8a0312669c238511618148c01b49f1c6f881",
+      "role": "dakshina_hi"
+    },
+    {
+      "source_dataset": "google-research-datasets/dakshina",
+      "path": "data/raw/dakshina/hi/hi.romanized.rejoined.test.native.txt",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-SA-4.0",
+      "sha256": "507ad672e15f0d01e44245c89980e3a8370c1c581497d15f3302a1904c20110a",
+      "role": "dakshina_hi"
+    },
+    {
+      "source_dataset": "google-research-datasets/dakshina",
+      "path": "data/raw/dakshina/hi/hi.romanized.rejoined.test.roman.txt",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-SA-4.0",
+      "sha256": "c49ebf67a0f7fdcc69f7f421dd21f6b48491b8db5fe3ef641078d660ce6bf1e7",
+      "role": "dakshina_hi"
+    },
+    {
+      "source_dataset": "google-research-datasets/dakshina",
+      "path": "data/raw/dakshina/hi/hi.romanized.rejoined.tsv",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-SA-4.0",
+      "sha256": "b76ed65680986c8f93552a5946c97f02b1c48a2ed9491fa42cea64f094c12894",
+      "role": "dakshina_hi"
+    },
+    {
+      "source_dataset": "google-research-datasets/dakshina",
+      "path": "data/raw/dakshina/hi/hi.translit.sampled.dev.tsv",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-SA-4.0",
+      "sha256": "62019ba0e046ceffd7211a2797daf2d2970da77586ee056dcecaa34c38392bce",
+      "role": "dakshina_hi"
+    },
+    {
+      "source_dataset": "google-research-datasets/dakshina",
+      "path": "data/raw/dakshina/hi/hi.translit.sampled.test.tsv",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-SA-4.0",
+      "sha256": "37dccdd2ca18a520267588b472f293ce805a1444a5ca2a99169417da17d9bafd",
+      "role": "dakshina_hi"
+    },
+    {
+      "source_dataset": "google-research-datasets/dakshina",
+      "path": "data/raw/dakshina/hi/hi.translit.sampled.train.tsv",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-SA-4.0",
+      "sha256": "4b3f872d3363a91f949dfb640acab6a968ed7d2d65829a22af662c3e99ef7803",
+      "role": "dakshina_hi"
+    },
+    {
+      "source_dataset": "LingoIITGN/COMI-LINGUA",
+      "revision": "0214cb358e59e36da60e01d3d59ddd24df897749",
+      "license_status": "cleared_for_internal_use",
+      "license_ref": "CC-BY-4.0",
+      "role": "comi_lingua_supplementary",
+      "configs_stored": [
+        "MT_train.jsonl",
+        "MT_test.jsonl",
+        "TN_train.jsonl",
+        "TN_test.jsonl",
+        "MLI_train.jsonl",
+        "MLI_test.jsonl"
+      ],
+      "caveat": "Research preview; supplementary reference only."
+    },
+    {
+      "source_dataset": "Indi-RomCoM (paper)",
+      "url": "https://arxiv.org/abs/2606.30790",
+      "license_status": "not_used",
+      "training_access": false,
+      "role": "primary_task_source_pending"
+    },
+    {
+      "source_dataset": "Divyanshu/indicxnli",
+      "revision": "7092c27872e919f31d0496fb8b9c47bd2cba3f6c",
+      "license_status": "unresolved",
+      "role": "fallback_readiness_only",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "source_dataset": "ai4bharat/IndicXParaphrase",
+      "revision": "181031f9e69c465e0c72fc84fd33b66114adb3e8",
+      "license_status": "unresolved",
+      "role": "fallback_readiness_only",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "source_dataset": "ai4bharat/indic-align",
+      "revision": "032b6a9070e7f85f1a38e0506419f4590a20455a",
+      "license_status": "cleared_for_internal_use",
+      "role": "fallback_readiness_only",
+      "status": "ACCESSIBLE"
+    }
+  ]
+}

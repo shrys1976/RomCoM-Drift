@@ -1,0 +1,52 @@
+{
+  "searched_at": "2026-11-01T07:57:55.583235+00:00",
+  "candidates": [
+    {
+      "name": "Indi-RomCoM arXiv paper",
+      "url": "https://arxiv.org/abs/2606.30790",
+      "type": "paper",
+      "official": true,
+      "status_code": 200,
+      "accessible": true
+    },
+    {
+      "name": "Indi-RomCoM arXiv HTML",
+      "url": "https://arxiv.org/html/2606.30790",
+      "type": "paper_html",
+      "official": true,
+      "status_code": 200,
+      "accessible": true
+    },
+    {
+      "name": "HuggingFace search Indi-RomCoM",
+      "url": "https://huggingface.co/datasets?search=Indi-RomCoM",
+      "type": "hf_search",
+      "official": false,
+      "status_code": 200,
+      "accessible": true
+    },
+    {
+      "name": "HuggingFace search indi-romcom",
+      "url": "https://huggingface.co/datasets?search=indi-romcom",
+      "type": "hf_search",
+      "official": false,
+      "status_code": 200,
+      "accessible": true
+    },
+    {
+      "name": "GitHub search Indi-RomCoM",
+      "url": "https://github.com/search?q=Indi-RomCoM&type=repositories",
+      "type": "github_search",
+      "official": false,
+      "status_code": 200,
+      "accessible": true
+    }
+  ],
+  "hf_dataset_ids": [],
+  "training_split_found": false,
+  "evaluation_only_public": true,
+  "notes": [
+    "No Hugging Face dataset ID matching Indi-RomCoM training release was found in automated search.",
+    "Paper describes 395,076-instance fine-tuning corpus vs 8,400 evaluation benchmark; no author training artifact URL in paper body."
+  ]
+}

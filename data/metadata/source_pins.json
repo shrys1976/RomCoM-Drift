@@ -1,0 +1,40 @@
+{
+  "dakshina": {
+    "archive_url": "https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar",
+    "license": "CC-BY-SA-4.0",
+    "repository": "https://github.com/google-research-datasets/dakshina",
+    "members": [
+      "hi.translit.sampled.train.tsv",
+      "hi.translit.sampled.dev.tsv",
+      "hi.translit.sampled.test.tsv",
+      "hi.romanized.rejoined.tsv",
+      "hi.romanized.rejoined.aligned.tsv",
+      "hi.romanized.rejoined.aligned.cased_nopunct.tsv",
+      "hi.romanized.rejoined.dev.native.txt",
+      "hi.romanized.rejoined.dev.roman.txt",
+      "hi.romanized.rejoined.test.native.txt",
+      "hi.romanized.rejoined.test.roman.txt"
+    ]
+  },
+  "comi_lingua": {
+    "repository": "LingoIITGN/COMI-LINGUA",
+    "revision": "0214cb358e59e36da60e01d3d59ddd24df897749",
+    "license": "CC-BY-4.0",
+    "configs": ["MT", "TN", "MLI"]
+  },
+  "indicxnli": {
+    "repository": "Divyanshu/indicxnli",
+    "revision": "7092c27872e919f31d0496fb8b9c47bd2cba3f6c",
+    "license": "CC-BY-4.0"
+  },
+  "indicxparaphrase": {
+    "repository": "ai4bharat/IndicXParaphrase",
+    "revision": "181031f9e69c465e0c72fc84fd33b66114adb3e8",
+    "license": "CC0"
+  },
+  "indic_align": {
+    "repository": "ai4bharat/indic-align",
+    "revision": "032b6a9070e7f85f1a38e0506419f4590a20455a",
+    "license": "CC-BY-4.0"
+  }
+}

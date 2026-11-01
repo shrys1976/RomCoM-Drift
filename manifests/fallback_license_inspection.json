@@ -1,0 +1,30 @@
+[
+  {
+    "repository": "Divyanshu/indicxnli",
+    "revision": "7092c27872e919f31d0496fb8b9c47bd2cba3f6c",
+    "license_metadata": [
+      "cc0-1.0"
+    ],
+    "license_status": "unresolved",
+    "readme_license_snippet": null,
+    "status": "ACCESSIBLE",
+    "notes": "HF metadata lists cc0-1.0; dataset card may state CC BY-NC 4.0 — reconcile before use."
+  },
+  {
+    "repository": "ai4bharat/IndicXParaphrase",
+    "revision": "181031f9e69c465e0c72fc84fd33b66114adb3e8",
+    "license_metadata": null,
+    "license_status": "unresolved",
+    "readme_license_snippet": null,
+    "status": "ACCESSIBLE",
+    "notes": "No license declared in dataset card metadata."
+  },
+  {
+    "repository": "ai4bharat/indic-align",
+    "revision": "032b6a9070e7f85f1a38e0506419f4590a20455a",
+    "license_metadata": "cc-by-4.0",
+    "license_status": "cleared_for_internal_use",
+    "readme_license_snippet": null,
+    "status": "ACCESSIBLE"
+  }
+]

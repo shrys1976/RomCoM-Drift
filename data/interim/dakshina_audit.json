@@ -1,0 +1,126 @@
+{
+  "lexicons": [
+    {
+      "file": "hi.translit.sampled.train.tsv",
+      "split": "train",
+      "rows": 44204,
+      "columns": [
+        "native",
+        "romanized",
+        "count"
+      ],
+      "unique_native": 25000,
+      "unique_romanized": 41344,
+      "missing_romanized_rows": 2,
+      "duplicate_native_roman_pairs": 0,
+      "attestation_min": 1,
+      "attestation_median": 2.0,
+      "attestation_mean": 1.9215908062618767,
+      "attestation_max": 10,
+      "native_with_multiple_variants": 14186,
+      "variant_count_distribution": {
+        "0": 1,
+        "1": 10813,
+        "2": 9927,
+        "3": 3649,
+        "4": 505,
+        "5": 77,
+        "6": 20,
+        "7": 3,
+        "8": 3,
+        "9": 2
+      },
+      "missing_rows": [
+        {
+          "native": "नं",
+          "romanized": NaN,
+          "count": 3
+        },
+        {
+          "native": "नान",
+          "romanized": NaN,
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "hi.translit.sampled.dev.tsv",
+      "split": "dev",
+      "rows": 4358,
+      "columns": [
+        "native",
+        "romanized",
+        "count"
+      ],
+      "unique_native": 2500,
+      "unique_romanized": 4321,
+      "missing_romanized_rows": 0,
+      "duplicate_native_roman_pairs": 0,
+      "attestation_min": 1,
+      "attestation_median": 2.0,
+      "attestation_mean": 1.9006424965580542,
+      "attestation_max": 10,
+      "native_with_multiple_variants": 1395,
+      "variant_count_distribution": {
+        "1": 1105,
+        "2": 994,
+        "3": 356,
+        "4": 34,
+        "5": 7,
+        "6": 3,
+        "8": 1
+      },
+      "missing_rows": []
+    },
+    {
+      "file": "hi.translit.sampled.test.tsv",
+      "split": "test",
+      "rows": 4502,
+      "columns": [
+        "native",
+        "romanized",
+        "count"
+      ],
+      "unique_native": 2500,
+      "unique_romanized": 4442,
+      "missing_romanized_rows": 0,
+      "duplicate_native_roman_pairs": 0,
+      "attestation_min": 1,
+      "attestation_median": 2.0,
+      "attestation_mean": 1.8429586850288762,
+      "attestation_max": 10,
+      "native_with_multiple_variants": 1483,
+      "variant_count_distribution": {
+        "1": 1017,
+        "2": 1045,
+        "3": 371,
+        "4": 56,
+        "5": 8,
+        "6": 3
+      },
+      "missing_rows": []
+    }
+  ],
+  "native_word_overlap": {
+    "train_dev_overlap": 0,
+    "train_test_overlap": 0,
+    "dev_test_overlap": 0
+  },
+  "sentence_level": {
+    "dev": {
+      "native_rows": 5000,
+      "roman_rows": 5000,
+      "length_mismatch": false,
+      "duplicate_native": 28
+    },
+    "test": {
+      "native_rows": 5000,
+      "roman_rows": 5000,
+      "length_mismatch": false,
+      "duplicate_native": 24
+    },
+    "rejoined_note": "rejoined.tsv and aligned files are derived held-out sentence views; not independent training data.",
+    "rejoined_rows": 10000
+  },
+  "attestation_caveat": "Dakshina counts are annotator attestation counts, not social-media typing probabilities."
+}

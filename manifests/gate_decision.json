@@ -1,0 +1,11 @@
+{
+  "cleared": false,
+  "status": "BLOCKED",
+  "reason": "Official Indi-RomCoM task-labelled training split not located or downloaded; fallback upstream datasets are not cleared substitutes without owner approval and code-mix recreation.",
+  "owner_decisions": [
+    "Provide official Indi-RomCoM training artifact URL or local files.",
+    "Or approve fallback from IndicXNLI / IndicXParaphrase / IndicAlign with resolved licenses and faithful code-mix procedure.",
+    "Resolve IndicXNLI license metadata vs card conflict.",
+    "Establish IndicXParaphrase license with owner."
+  ]
+}

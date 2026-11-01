@@ -12,3 +12,19 @@ plan.md
 
 # Local secrets
 .env
+
+# Raw source datasets (local only; restore with scripts/download_raw_datasets.py)
+data/raw/
+romcomx_data/raw/
+
+# Generated lexicons, splits, traces, and augmentation views
+data/interim/romanization/
+data/interim/qa_samples/
+romcomx_data/processed/
+romcomx_data/intermediate/
+romcomx_data/traces/
+romcomx_data/inventories/
+
+# Generated JSONL anywhere except committed samples
+*.jsonl
+!data/samples/**/*.jsonl

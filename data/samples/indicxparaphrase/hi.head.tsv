@@ -1,0 +1,5 @@
+en	sentence1	sentence2	label
+on receiving the information, the police reached the spot, rushed the victims to a local hospital.	सूचना मिलते ही पुलिस मौके पर पहुंची और घायलों को स्थानीय अस्पताल में भर्ती कराया।	पुलिस मौके पर सूचना मिलते ही पहुंची और घायलों को स्थानीय अस्पताल में भर्ती कराया।	1
+on receiving the information, the police reached the spot, rushed the victims to a local hospital.	सूचना मिलते ही पुलिस मौके पर पहुंची और घायलों को स्थानीय अस्पताल में भर्ती कराया।	सूचना मिलते ही घायलों को स्थानीय अस्पताल में भर्ती कराने के बाद पुलिस मौके पर पहुंची।	0
+he won the filmfare award for best supporting actor for his performance in the film.	इस फिल्म में उनके अभिनय के लिए उन्हें सर्वश्रेष्ठ सहायक अभिनेता का फिल्मफेयर पुरस्कार मिला।	सर्वश्रेष्ठ सहायक अभिनेता का फिल्मफेयर पुरस्कार इस फिल्म में उनके अभिनय के लिए उन्हें  मिला।	1
+he won the filmfare award for best supporting actor for his performance in the film.	इस फिल्म में उनके अभिनय के लिए उन्हें सर्वश्रेष्ठ सहायक अभिनेता का फिल्मफेयर पुरस्कार मिला।	उनके अभिनय के लिए उन्हें सर्वश्रेष्ठ सहायक अभिनेता का फिल्मफेयर पुरस्कार इस फिल्म में नहीं मिला।	0

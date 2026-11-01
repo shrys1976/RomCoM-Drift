@@ -1,0 +1,10 @@
+f35a1eebc6a9cdf6cb22dc262be122b1be541db8e7de340260e6823a05ac5224  data/raw/dakshina/hi/hi.romanized.rejoined.aligned.cased_nopunct.tsv
+37277a9c4ade24cbde20fd8f235278a62ccc5e0fff7426f7dbee425580a1e7ea  data/raw/dakshina/hi/hi.romanized.rejoined.aligned.tsv
+01bc13b653f8ffa3ec0ddfb4cb91c22c908e4d3a40afd39d2bfe48743b57e2b1  data/raw/dakshina/hi/hi.romanized.rejoined.dev.native.txt
+106fbc342d19587a9a7a7687e6bd8a0312669c238511618148c01b49f1c6f881  data/raw/dakshina/hi/hi.romanized.rejoined.dev.roman.txt
+507ad672e15f0d01e44245c89980e3a8370c1c581497d15f3302a1904c20110a  data/raw/dakshina/hi/hi.romanized.rejoined.test.native.txt
+c49ebf67a0f7fdcc69f7f421dd21f6b48491b8db5fe3ef641078d660ce6bf1e7  data/raw/dakshina/hi/hi.romanized.rejoined.test.roman.txt
+b76ed65680986c8f93552a5946c97f02b1c48a2ed9491fa42cea64f094c12894  data/raw/dakshina/hi/hi.romanized.rejoined.tsv
+62019ba0e046ceffd7211a2797daf2d2970da77586ee056dcecaa34c38392bce  data/raw/dakshina/hi/hi.translit.sampled.dev.tsv
+37dccdd2ca18a520267588b472f293ce805a1444a5ca2a99169417da17d9bafd  data/raw/dakshina/hi/hi.translit.sampled.test.tsv
+4b3f872d3363a91f949dfb640acab6a968ed7d2d65829a22af662c3e99ef7803  data/raw/dakshina/hi/hi.translit.sampled.train.tsv

@@ -1,0 +1,27 @@
+version: "1.0"
+base_seed: 42
+seed_derivation: "sha256_hex_prefix_8(base_seed || example_id || condition) -> int"
+
+exp02:
+  aggressiveness:
+    distribution: uniform
+    low: 0.10
+    high: 0.35
+
+exp03:
+  dakshina_collision_resample_max: 32
+
+protected:
+  url_pattern: 'https?://\S+|www\.\S+'
+  email_pattern: '\S+@\S+\.\S+'
+  hashtag_pattern: '#\w+'
+  handle_pattern: '@\w+'
+  number_pattern: '\d+(?:\.\d+)?'
+  all_caps_min_len: 2
+
+english_collision_wordlist: configs/english_collision_words.txt
+
+inventory:
+  source_file: data/raw/dakshina/hi/hi.translit.sampled.train.tsv
+  license_ref: CC-BY-SA-4.0
+  source_dataset: google-research-datasets/dakshina
