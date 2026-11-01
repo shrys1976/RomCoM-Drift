@@ -48,12 +48,14 @@
     "requirements_datasets_version": "1.16.1",
     "commit_lookup_error": "HTTP Error 422: Unprocessable Entity"
   },
-  "generation_snapshots": {
-    "current_project_venv": true,
-    "datasets_1_16_1_isolated_env": {
+  "current_reproduction_snapshots": {
+    "verified_2021_generation_snapshot": false,
+    "current_project_venv_export": true,
+    "datasets_1_16_1_isolated_env_export": {
       "path": "indicxnli/snapshots/xnli_en_train_generation_1.16.1.jsonl",
       "sha256": "16173bec3ebced29492c270e969c458b6911f2c4a49ff19f267950070179e649"
-    }
+    },
+    "note": "datasets==1.16.1 reconstruction today is not a verified 2021 generation snapshot."
   },
   "archive_urls": {
     "XNLI-MT-1.0": "https://dl.fbaipublicfiles.com/XNLI/XNLI-MT-1.0.zip",

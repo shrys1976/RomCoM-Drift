@@ -534,7 +534,7 @@ def write_owner_investigation_sample(
     rows_out: list[dict[str, Any]] = []
     for row in dev_pick:
         out = {k: "" for k in fields}
-        out["sample_version"] = "investigation_2026_11_01_rev2"
+        out["sample_version"] = "investigation_2026_11_01_rev3"
         out["sample_row_kind"] = "bilingual_dev"
         out["pair_id_used_for_join"] = "false"
         for key in fields:
@@ -550,7 +550,7 @@ def write_owner_investigation_sample(
         hi = hi_train[i]
         rows_out.append(
             {
-                "sample_version": "investigation_2026_11_01_rev2",
+                "sample_version": "investigation_2026_11_01_rev3",
                 "sample_row_kind": "hindi_only_train",
                 "indic_row_index": i,
                 "english_row_index": "",
@@ -635,6 +635,19 @@ def build_alignment_metrics(
             "label_sequence_train",
             "fuzzy_composite_train",
         ],
+        "root_cause": "unresolved",
+        "train_english_mappings_withheld": 392702,
+        "current_reproduction_snapshot_available": (
+            GENERATION_SNAPSHOT_PATH.is_file() or GENERATION_SNAPSHOT_1161_PATH.is_file()
+        ),
+        "current_reproduction_snapshot_verified_2021_generation": False,
+        "current_reproduction_snapshot_note": (
+            "Any local export (including datasets==1.16.1 run today) is a current reproduction "
+            "attempt, not a verified 2021-generation English artifact."
+        ),
+        "owner_approved": False,
+        "dev_semantic_review_complete": False,
+        "investigation_revision": "2026_11_01_rev3",
     }
 
 
@@ -705,9 +718,13 @@ def build_source_revisions(
         "huggingface_facebook_xnli": hf_meta,
         "huggingface_indicxnli": indic_meta,
         "indicxnli_generation_repo": gen_repo,
-        "generation_snapshots": {
-            "current_project_venv": GENERATION_SNAPSHOT_PATH.is_file(),
-            "datasets_1_16_1_isolated_env": snap_meta,
+        "current_reproduction_snapshots": {
+            "verified_2021_generation_snapshot": False,
+            "current_project_venv_export": GENERATION_SNAPSHOT_PATH.is_file(),
+            "datasets_1_16_1_isolated_env_export": snap_meta,
+            "note": (
+                "datasets==1.16.1 reconstruction today is not a verified 2021 generation snapshot."
+            ),
         },
         "archive_urls": {"XNLI-MT-1.0": XNLI_MT_URL, "XNLI-1.0": XNLI_10_URL},
     }
@@ -743,12 +760,13 @@ def ensure_investigation_artifacts(
             shutil.copy2(src, NLI_INVESTIGATION / name)
     readme = NLI_INVESTIGATION / "README.txt"
     readme.write_text(
-        "RomCoM-X Phase 2.1 NLI alignment investigation bundle (rev2).\n\n"
-        "nli_alignment_sample.csv: 200 rows total = 41 bilingual dev + 159 Hindi-only train.\n"
-        "Dev English comes from same-index XNLI-1.0 en dev (not an independent pairID join).\n"
-        "Owner: fill owner_judgment_premise_aligned, owner_judgment_hypothesis_aligned,\n"
-        "owner_judgment_label_consistent for each bilingual dev row before semantic sign-off.\n\n"
-        "All 392702 train English mappings remain withheld.\n",
+        "RomCoM-X Phase 2.1 NLI alignment investigation bundle (rev3).\n\n"
+        "root_cause: unresolved (known generation procedure != verified historical explanation).\n"
+        "current_reproduction_snapshot_available: see report; not a verified 2021 snapshot.\n\n"
+        "nli_alignment_sample.csv: 200 rows = 41 bilingual dev + 159 Hindi-only train.\n"
+        "Dev English: same-index XNLI-1.0 en dev (not an independent pairID join).\n"
+        "Owner: fill owner_judgment_* on bilingual dev rows only; approval not complete.\n\n"
+        "train_english_mappings_withheld: 392702 (no alternative joins attempted).\n",
         encoding="utf-8",
     )
     return NLI_INVESTIGATION
@@ -858,18 +876,29 @@ def run_investigation() -> dict[str, Any]:
             dev_rows=41,
         )
 
+    repro_snapshot = GENERATION_SNAPSHOT_PATH.is_file() or GENERATION_SNAPSHOT_1161_PATH.is_file()
     report = {
-        "generation_pathway": {
+        "investigation_revision": "2026_11_01_rev3",
+        "root_cause": "unresolved",
+        "known_generation_procedure": {
             "repo": "divyanshuaggarwal/IndicXNLI",
             "script": "src/make_dataset.py",
             "datasets_version_pinned_in_repo": "1.16.1",
-            "english_input": "load_dataset('xnli','en') unpinned at generation time",
+            "documented_english_input": "load_dataset('xnli', 'en') (revision unpinned in script)",
             "indic_fields_saved": ["premise", "hypothesis", "label"],
             "pair_id_persisted_in_indic_release": False,
         },
         "backward_train_available": bool(bwd_path and bwd_train),
-        "generation_snapshot_available": gen_en is not None,
+        "current_reproduction_snapshot_available": repro_snapshot,
+        "current_reproduction_snapshot_verified_2021_generation": False,
+        "current_reproduction_snapshot_note": (
+            "Local exports including datasets==1.16.1 reconstructed today reproduce current "
+            "load_dataset behavior; they are not verified 2021-generation English artifacts."
+        ),
         "train_mapping_method_attempted": train_method,
+        "train_english_mappings_withheld": 392702,
+        "owner_approved": False,
+        "dev_semantic_review_complete": False,
         "indic_train_vs_xnli_mt_same_index_label_rate": indic_vs_mt_label,
         "established_findings": {
             "current_english_sources_agree": (
@@ -882,12 +911,10 @@ def run_investigation() -> dict[str, Any]:
             ),
             "production_train_english_join": "Withheld; do not use HF/XNLI-MT index join for train.",
         },
-        "historical_root_cause": {
-            "status": "unresolved",
+        "unverified_historical_explanation": {
             "summary": (
-                "Evidence shows IndicXNLI train order does not match current English sources; "
-                "the exact historical change (HF revision, cache, or unpublished generation "
-                "artifact) is not identified without generation-time English or revision proof."
+                "Indic forward train order does not match current English sources at same index. "
+                "We do not know the exact generation-time Hugging Face revision or row ordering."
             ),
             "required_to_resolve": [
                 "Original English training artifact used at IndicXNLI translation time",
@@ -907,8 +934,8 @@ def run_investigation() -> dict[str, Any]:
         },
         "owner_next_steps": [
             "Provide Divyanshu/indicxnli backward train JSON locally if recovered from git LFS.",
-            "Or export generation-era English with scripts/export_nli_generation_snapshot.py "
-            "(datasets==1.16.1) into romcomx_data/raw/indicxnli/snapshots/xnli_en_train_generation.jsonl.",
+            "Or supply a verified generation-time English artifact (not a current reproduction export).",
+            "Complete owner_judgment_* columns for 41 bilingual dev rows in nli_alignment_sample.csv.",
         ],
         "hf_train_vs_xnli_mt_tsv": hf_vs_mt,
         "hf_dev_vs_xnli10_dev_label_rate": sum(
@@ -922,7 +949,7 @@ def run_investigation() -> dict[str, Any]:
         "mt_train_duplicate_composite_keys": mt_dup,
         "train_mapping_stats": train_stats,
         "dev_mapping_stats": dev_stats,
-        "train_mapping_reliable": train_reliable,
+        "train_mapping_reliable": False,
         "normalization": "NFC + outer strip; composite_key=sha256(prem\\0hyp)",
         "owner_review_sample_rows": sample_n,
         "owner_review_sample": {
@@ -946,9 +973,12 @@ def run_investigation() -> dict[str, Any]:
             for i, line in enumerate(GENERATION_SNAPSHOT_1161_PATH.open(encoding="utf-8"))
             if line.strip()
         ) / len(hi_train)
-        report["datasets_1_16_1_note"] = (
-            "Re-loading xnli en train with datasets==1.16.1 today yields same row order "
-            "as current HF; does not restore 2021 translation input."
+        report["current_reproduction_datasets_1_16_1_label_agreement_with_indic_train"] = report[
+            "datasets_1_16_1_reload_label_agreement_with_indic_train"
+        ]
+        report["current_reproduction_datasets_1_16_1_note"] = (
+            "datasets==1.16.1 export run today matches current HF row order; "
+            "not a verified 2021 generation snapshot."
         )
 
     metrics = build_alignment_metrics(
@@ -963,8 +993,20 @@ def run_investigation() -> dict[str, Any]:
         mt_dup=mt_dup,
         indic_vs_mt_label=indic_vs_mt_label,
     )
-    source_revisions = build_source_revisions(paths, hf)
-    ensure_investigation_artifacts(paths, hf, metrics, source_revisions)
+    for key in (
+        "investigation_revision",
+        "root_cause",
+        "current_reproduction_snapshot_available",
+        "current_reproduction_snapshot_verified_2021_generation",
+        "current_reproduction_snapshot_note",
+        "train_english_mappings_withheld",
+        "owner_approved",
+        "dev_semantic_review_complete",
+        "known_generation_procedure",
+        "owner_review_sample",
+    ):
+        if key in report:
+            metrics[key] = report[key]
 
     (REPORTS / "nli_alignment_investigation_report.md").write_text(
         "# NLI alignment investigation report\n\n"
@@ -975,7 +1017,10 @@ def run_investigation() -> dict[str, Any]:
     status = {
         "owner_approved": False,
         "investigation_complete": True,
-        "investigation_revision": "2026_11_01_rev2",
+        "investigation_revision": "2026_11_01_rev3",
+        "root_cause": "unresolved",
+        "current_reproduction_snapshot_available": repro_snapshot,
+        "current_reproduction_snapshot_verified_2021_generation": False,
         "train_mapping_reliable": False,
         "train_english_mappings_withheld": 392702,
         "dev_same_index_label_check_complete": dev_label_check_ok,
@@ -985,7 +1030,7 @@ def run_investigation() -> dict[str, Any]:
         "note": (
             "Complete owner_judgment_* fields for 41 bilingual dev rows in "
             "nli_alignment_sample.csv. Label agreement is not semantic sign-off. "
-            "Train English remains fully withheld."
+            "Train English remains fully withheld (392702 mappings)."
         ),
     }
     (MANIFESTS / "nli_alignment_status.json").write_text(
@@ -994,4 +1039,6 @@ def run_investigation() -> dict[str, Any]:
     (MANIFESTS / "nli_investigation_context.json").write_text(
         json.dumps(report, indent=2) + "\n", encoding="utf-8"
     )
+    source_revisions = build_source_revisions(paths, hf)
+    ensure_investigation_artifacts(paths, hf, metrics, source_revisions)
     return report

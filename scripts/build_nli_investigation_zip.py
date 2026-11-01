@@ -46,8 +46,27 @@ def main() -> int:
         raise
 
     log_buf.write("\nvalidation:\n")
+    log_buf.write(f"  investigation_revision={report.get('investigation_revision')}\n")
+    log_buf.write(f"  root_cause={report.get('root_cause')}\n")
+    log_buf.write(
+        f"  current_reproduction_snapshot_available="
+        f"{report.get('current_reproduction_snapshot_available')}\n"
+    )
+    log_buf.write(
+        "  current_reproduction_snapshot_verified_2021_generation="
+        f"{report.get('current_reproduction_snapshot_verified_2021_generation')}\n"
+    )
+    log_buf.write(f"  train_english_mappings_withheld={report.get('train_english_mappings_withheld')}\n")
     log_buf.write(f"  train_mapping_reliable={report.get('train_mapping_reliable')}\n")
+    log_buf.write(f"  owner_approved={report.get('owner_approved')}\n")
+    log_buf.write(f"  dev_semantic_review_complete={report.get('dev_semantic_review_complete')}\n")
     log_buf.write(f"  owner_review_sample_rows={report.get('owner_review_sample_rows')}\n")
+    sample = report.get("owner_review_sample") or {}
+    log_buf.write(
+        f"  owner_review_sample="
+        f"{sample.get('bilingual_dev_rows')} bilingual dev + "
+        f"{sample.get('hindi_only_train_rows')} hindi-only train\n"
+    )
     (NLI_INVESTIGATION / "alignment_audit.log").write_text(log_buf.getvalue(), encoding="utf-8")
 
     zip_path = ROOT / ZIP_NAME
