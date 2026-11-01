@@ -1,0 +1,73 @@
+[
+  {
+    "repository": "Divyanshu/indicxnli",
+    "revision": "7092c27872e919f31d0496fb8b9c47bd2cba3f6c",
+    "license": [
+      "cc0-1.0"
+    ],
+    "number_of_files": 59,
+    "files": [
+      ".gitattributes",
+      ".gitignore",
+      "README.md",
+      "backward/dev/xnli_as.json",
+      "backward/dev/xnli_bn.json",
+      "backward/dev/xnli_gu.json",
+      "backward/dev/xnli_hi.json",
+      "backward/dev/xnli_kn.json",
+      "backward/dev/xnli_ml.json",
+      "backward/dev/xnli_mr.json",
+      "backward/dev/xnli_or.json",
+      "backward/dev/xnli_pa.json",
+      "backward/dev/xnli_ta.json",
+      "backward/dev/xnli_te.json",
+      "backward/test/xnli_as.json"
+    ],
+    "status": "ACCESSIBLE"
+  },
+  {
+    "repository": "ai4bharat/IndicXParaphrase",
+    "revision": "181031f9e69c465e0c72fc84fd33b66114adb3e8",
+    "license": null,
+    "number_of_files": 12,
+    "files": [
+      ".gitattributes",
+      "IndicXParaphrase.py",
+      "data/as.tsv",
+      "data/bn.tsv",
+      "data/gu.tsv",
+      "data/hi.tsv",
+      "data/kn.tsv",
+      "data/ml.tsv",
+      "data/mr.tsv",
+      "data/or.tsv",
+      "data/pa.tsv",
+      "data/te.tsv"
+    ],
+    "status": "ACCESSIBLE"
+  },
+  {
+    "repository": "ai4bharat/indic-align",
+    "revision": "032b6a9070e7f85f1a38e0506419f4590a20455a",
+    "license": "cc-by-4.0",
+    "number_of_files": 52,
+    "files": [
+      ".gitattributes",
+      "README.md",
+      "indicalign-instruct/anudesh/anudesh1.parquet",
+      "indicalign-instruct/dolly/Dolly.parquet",
+      "indicalign-instruct/indicsharellama/indic_sharellama.parquet",
+      "indicalign-instruct/indowordnet/indowordnet_0000_of_0009.parquet",
+      "indicalign-instruct/indowordnet/indowordnet_0001_of_0009.parquet",
+      "indicalign-instruct/indowordnet/indowordnet_0002_of_0009.parquet",
+      "indicalign-instruct/indowordnet/indowordnet_0003_of_0009.parquet",
+      "indicalign-instruct/indowordnet/indowordnet_0004_of_0009.parquet",
+      "indicalign-instruct/indowordnet/indowordnet_0005_of_0009.parquet",
+      "indicalign-instruct/indowordnet/indowordnet_0006_of_0009.parquet",
+      "indicalign-instruct/indowordnet/indowordnet_0007_of_0009.parquet",
+      "indicalign-instruct/indowordnet/indowordnet_0008_of_0009.parquet",
+      "indicalign-instruct/indowordnet/indowordnet_0009_of_0009.parquet"
+    ],
+    "status": "ACCESSIBLE"
+  }
+]
