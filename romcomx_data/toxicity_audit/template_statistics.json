@@ -1,0 +1,59 @@
+{
+  "toxic": {
+    "class_name": "toxic_matrix_local",
+    "n": 5000,
+    "canonical_field": "hin_Deva",
+    "hindi_refusal_opening": "मैं इस संकेत का जवाब नहीं दे सकता",
+    "hindi_opening_slot_counts": {
+      "assistant_slot": 4998,
+      "user_slot": 2
+    },
+    "english_opening_slot_counts": {
+      "assistant_slot": 5000
+    },
+    "english_opening": "I cannot give a response",
+    "assistant_exact_duplicate_row_rate": 0.0032,
+    "assistant_exact_unique": 4992,
+    "assistant_prefix120_near_duplicate_row_rate": 0.4842,
+    "assistant_prefix120_unique": 3066,
+    "assistant_chars": {
+      "mean": 591.6,
+      "min": 147,
+      "max": 2116
+    },
+    "user_chars_mean": 211.5
+  },
+  "benign": {
+    "class_name": "dolly_t_seed42",
+    "n": 2000,
+    "canonical_field": "hin_Deva",
+    "hindi_refusal_opening": "मैं इस संकेत का जवाब नहीं दे सकता",
+    "hindi_opening_slot_counts": {
+      "absent": 2000
+    },
+    "english_opening_slot_counts": {
+      "absent": 2000
+    },
+    "english_opening": "I cannot give a response",
+    "assistant_exact_duplicate_row_rate": 0.0035,
+    "assistant_exact_unique": 1996,
+    "assistant_prefix120_near_duplicate_row_rate": 0.0035,
+    "assistant_prefix120_unique": 1996,
+    "assistant_chars": {
+      "mean": 376.3,
+      "min": 1,
+      "max": 9014
+    },
+    "user_chars_mean": 70.2
+  },
+  "shortcut": {
+    "not_a_trained_model": true,
+    "template_rule": "Predict toxic if the Hindi assistant slot starts with the refusal opening.",
+    "template_rule_in_sample_accuracy": 0.9997,
+    "length_means_assistant_chars": {
+      "toxic": 591.6,
+      "benign": 376.3
+    },
+    "interpretation": "A source-specific refusal opening, or a length cutoff between these means, can separate the classes without modeling refusal semantics. That supports a generation comparison of registers only. It does not support toxicity detection or a claim that a classifier is reading safety behavior."
+  }
+}

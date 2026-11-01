@@ -1,8 +1,9 @@
 {
   "status": "READY_FOR_OWNER_REVIEW",
   "blockers": [
-    "license_confirm_on_card",
-    "owner_accept_dolly_t_head_slice"
+    "dual_license_owner_approval",
+    "experimental_construction_not_approved",
+    "template_confound_precludes_classification_claim"
   ],
   "dataset_rebuild_allowed": false,
   "training_allowed": false,

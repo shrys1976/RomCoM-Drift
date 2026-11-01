@@ -42,10 +42,11 @@ def test_recommendation_conditional_on_legacy_benign():
         {"toxic_matrix_config_present": True},
     )
     assert rec["verdict"] == "CONDITIONAL_GO"
-    assert "benign_not_dolly_t_verify_provenance" in rec["blockers"]
+    assert rec["experimental_construction"] == "NOT_APPROVED"
+    assert "dual_license_owner_approval" in rec["blockers"]
 
 
-def test_dolly_head_keeps_conditional_go():
+def test_construction_stays_unapproved():
     rec = build_recommendation(
         {"row_count": 10, "empty_user_prompt_after_parse": 0},
         {"benign_file": "Indic_ShareLlama_benign_sample.jsonl"},
@@ -56,9 +57,24 @@ def test_dolly_head_keeps_conditional_go():
         {"n": 120},
     )
     assert rec["verdict"] == "CONDITIONAL_GO"
-    assert rec["benign_file_replaced"] is False
-    assert "owner_accept_dolly_t_head_slice" in rec["blockers"]
-    assert "license_confirm_on_card" in rec["blockers"]
+    assert rec["experimental_construction"] == "NOT_APPROVED"
+    assert "dual_license_owner_approval" in rec["blockers"]
+    assert "owner_accept_dolly_t_head_slice" not in rec["blockers"]
+
+
+def test_hindi_field_is_canonical_and_latn_is_rejected():
+    row = {
+        "hin_Deva": [["उपयोगकर्ता", "सहायक"]],
+        "eng_Latn": [["user", "assistant"]],
+        "hin_Latn": [["swapped roman", "other"]],
+    }
+    turns = parse_conversation_turns(row)
+    assert [turn["text"] for turn in turns] == ["उपयोगकर्ता", "सहायक"]
+    try:
+        parse_conversation_turns(row, text_field="hin_Latn")
+    except ValueError:
+        return
+    raise AssertionError("hin_Latn should not be a role source")
 
 
 def test_manual_refusal_exception_is_not_a_keyword_rule():

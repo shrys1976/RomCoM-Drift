@@ -1,0 +1,18 @@
+[
+  {
+    "doc_id": "5b41220a-daba-4be9-98bc-d704d8a1c9b9",
+    "source_row_index": null,
+    "field": "hin_Deva",
+    "direct_cosine_sum": 0.7303,
+    "crossed_cosine_sum": 1.613,
+    "action": "excluded_from_experiment_ready_set_roles_not_flipped"
+  },
+  {
+    "doc_id": "45a79f97-f684-4c1a-a8fe-ed17671db8ad",
+    "source_row_index": null,
+    "field": "hin_Deva",
+    "direct_cosine_sum": 0.6266,
+    "crossed_cosine_sum": 1.4954,
+    "action": "excluded_from_experiment_ready_set_roles_not_flipped"
+  }
+]

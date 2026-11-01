@@ -34,5 +34,26 @@
     "cc-by",
     "license"
   ],
-  "loader_hardcoded_license_warning": "toxic_matrix.py hardcodes CC-BY-4.0; audit uses HF card when available."
+  "loader_hardcoded_license_warning": "toxic_matrix.py hardcodes CC-BY-4.0; audit uses HF card when available.",
+  "declarations_not_flattened": {
+    "indic_align": {
+      "spdx": "CC-BY-4.0",
+      "evidence": "Hugging Face tag license:cc-by-4.0 on ai4bharat/indic-align. Card license field is null.",
+      "owner_approval": "required"
+    },
+    "dolly_15k_upstream": {
+      "spdx": "CC-BY-SA-3.0",
+      "applies_to": "Dolly-derived benign control only",
+      "hf_lookup": {
+        "repository": "databricks/databricks-dolly-15k",
+        "hf_card_license_field": null,
+        "hf_license_attr": null,
+        "tags": [
+          "license:cc-by-sa-3.0"
+        ],
+        "documented_upstream": "CC-BY-SA-3.0"
+      },
+      "owner_approval": "required"
+    }
+  }
 }

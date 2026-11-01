@@ -1,0 +1,49 @@
+{
+  "hin_deva_toxic": {
+    "field": "hin_Deva",
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "rule": "Sum of cosine similarities for same-index slots versus crossed slots. Margin 0.05. String length is not an input. Conflicts are excluded, not swapped.",
+    "used_as_canonical_text": true,
+    "counts": {
+      "supports_positional": 4998,
+      "conflicts_with_positional": 2
+    },
+    "conflict_count": 2
+  },
+  "hin_deva_benign": {
+    "field": "hin_Deva",
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "rule": "Sum of cosine similarities for same-index slots versus crossed slots. Margin 0.05. String length is not an input. Conflicts are excluded, not swapped.",
+    "used_as_canonical_text": true,
+    "counts": {
+      "supports_positional": 1995,
+      "embedding_tie": 5
+    },
+    "conflict_count": 0
+  },
+  "hin_latn_toxic_not_used": {
+    "field": "hin_Latn",
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "rule": "Sum of cosine similarities for same-index slots versus crossed slots. Margin 0.05. String length is not an input. Conflicts are excluded, not swapped.",
+    "used_as_canonical_text": false,
+    "counts": {
+      "supports_positional": 2506,
+      "embedding_tie": 2431,
+      "conflicts_with_positional": 63
+    },
+    "conflict_count": 63
+  },
+  "hin_latn_benign_not_used": {
+    "field": "hin_Latn",
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "rule": "Sum of cosine similarities for same-index slots versus crossed slots. Margin 0.05. String length is not an input. Conflicts are excluded, not swapped.",
+    "used_as_canonical_text": false,
+    "counts": {
+      "embedding_tie": 610,
+      "supports_positional": 1351,
+      "conflicts_with_positional": 39
+    },
+    "conflict_count": 39
+  },
+  "excluded_conflict_count": 2
+}

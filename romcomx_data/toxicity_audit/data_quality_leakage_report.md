@@ -26,8 +26,8 @@
   "empty_user_prompt_after_parse": 0,
   "empty_assistant_response_after_parse": 0,
   "duplicate_doc_id_count": 0,
-  "assistant_responses_with_refusal_markers": 5000,
-  "user_prompts_with_refusal_markers": 76,
+  "assistant_responses_with_refusal_markers": 4999,
+  "user_prompts_with_refusal_markers": 0,
   "script_field_counts": {
     "latin_heavy": 10000,
     "devanagari_heavy": 5000,

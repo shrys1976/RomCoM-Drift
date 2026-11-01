@@ -421,8 +421,10 @@ def audit_transformation_constraints() -> dict[str, Any]:
     }
 
 
-def audit_normalized_pipeline(meta: dict[str, Any]) -> dict[str, Any]:
-    records = load_normalized_toxicity(meta)
+def audit_normalized_pipeline(
+    meta: dict[str, Any], exclude_doc_ids: set[str] | None = None
+) -> dict[str, Any]:
+    records = load_normalized_toxicity(meta, exclude_doc_ids=exclude_doc_ids)
     labels = Counter(r["normalized_label"] for r in records)
     toxic_n = sum(1 for r in records if not r.get("is_benign"))
     benign_n = sum(1 for r in records if r.get("is_benign"))
@@ -596,10 +598,9 @@ def class_confounds(toxic: dict[str, Any], benign: dict[str, Any]) -> dict[str, 
             toxic["assistant_chars_eng"]["mean"],
             benign["assistant_chars_eng"]["mean"],
         ],
-        "language_confound": (
-            "Both classes store English in eng_Latn and Hindi in hin_Deva/hin_Latn. "
-            "The current loader parses eng_Latn while setting language='hi'. "
-            "Romanizing that English assistant text is not Hindi romanization."
+        "language_binding": (
+            "Canonical text is hin_Deva. The loader sets language='hi' only for that field. "
+            "eng_Latn is retained as a parallel reference for role checks."
         ),
         "register_confound": (
             "Toxic_Matrix assistant turns are templated refusals. Dolly_T assistant "
@@ -629,7 +630,7 @@ def sample_refusal_rows(toxic_rows: list[dict[str, Any]], n: int = REFUSAL_SAMPL
     picked: list[dict[str, Any]] = []
     for index in indexes[:n]:
         row = toxic_rows[index]
-        turns = parse_conversation_turns(row)
+        turns = parse_conversation_turns(row, text_field="eng_Latn")
         picked.append(
             {
                 "row_index": index,
@@ -717,24 +718,46 @@ def audit_refusal_sample(toxic_rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 def task_definition() -> dict[str, Any]:
     return {
-        "intended_task": (
-            "Assistant safety/refusal-register robustness under romanization. "
-            "User prompts stay unchanged. Only eligible assistant turns are romanized."
+        "research_claim": (
+            "Secondary Hindi refusal-register task. It does not measure general "
+            "toxicity detection or code-mixed safety robustness."
         ),
-        "not_this_task": (
-            "Not conventional toxic-input classification. The Toxic_Matrix label is "
-            "not a turn-level toxicity tag on the user text. The assistant side of "
-            "the toxic file is a refusal, and the benign side is an ordinary answer."
-        ),
-        "what_a_label_applies_to": (
-            "File-level class on the whole example: toxic source versus Dolly benign "
-            "source. It is not a per-turn toxicity rating."
-        ),
-        "current_text_binding": (
-            "parse_conversation_turns reads eng_Latn. Hindi parallels are present "
-            "but are not the strings the loader currently treats as the conversation."
-        ),
+        "evaluation_interface": {
+            "model_input": (
+                "hin_Deva list slot 0, the user turn. Unchanged in every condition."
+            ),
+            "model_target": (
+                "hin_Deva list slot 1, the assistant turn. This is the only text "
+                "that may be romanized or noised."
+            ),
+            "label": (
+                "Source register kept on the example: toxic for a Toxic_Matrix "
+                "refusal target, non_toxic for a Dolly ordinary-answer target. "
+                "The same label is shared by EXP-01, EXP-02, and EXP-03."
+            ),
+            "scoring": (
+                "Not run in this audit. A generation score would compare the model "
+                "continuation with model_target only. No classifier was trained."
+            ),
+        },
+        "distinctions": {
+            "conversation_classification": (
+                "Would assign one label to the whole dialogue. That is not this task, "
+                "and the source label is not a toxicity rating of the conversation."
+            ),
+            "assistant_response_refusal_classification": (
+                "Would label whether the assistant turn is a refusal. The shared "
+                "opening makes that separable by template. Not claimed."
+            ),
+            "refusal_generation": (
+                "Given model_input, generate the assistant reply and compare it with "
+                "model_target under romanization of that target. This is the only "
+                "interface described for the secondary task."
+            ),
+        },
+        "text_binding": "hin_Deva is canonical. eng_Latn is an alignment reference. hin_Latn is not a role source.",
         "transformation_constraints_unchanged": True,
+        "experimental_construction": "NOT_APPROVED",
     }
 
 
@@ -755,35 +778,21 @@ def build_recommendation(
         blockers.append("high_empty_prompt_rate")
     if leakage.get("doc_id_overlap_toxic_benign", 0) > 0:
         blockers.append("doc_id_overlap_toxic_benign")
-    if not license_evidence.get("hf_card_license_field") and not license_evidence.get(
-        "hf_dataset_info_license_attr"
-    ):
-        blockers.append("license_confirm_on_card")
-        owner_decisions.append(
-            "Confirm CC-BY-4.0. The dataset card license field is null; "
-            "the hub tag is license:cc-by-4.0 and the README mentions cc-by."
-        )
-    if dolly_comparison and dolly_comparison.get("local_file_equals_dolly_t_train_prefix"):
-        owner_decisions.append(
-            "Accept the on-disk benign file as Dolly_T train rows 0-1999 "
-            "(filename Indic_ShareLlama_benign_sample.jsonl is wrong), "
-            "or explicitly request a new seeded sample. Do not treat those as equivalent."
-        )
-        blockers.append("owner_accept_dolly_t_head_slice")
-    elif "ShareLlama" in benign.get("benign_file", ""):
-        blockers.append("benign_not_dolly_t_verify_provenance")
+    blockers.append("dual_license_owner_approval")
+    blockers.append("experimental_construction_not_approved")
+    blockers.append("template_confound_precludes_classification_claim")
     owner_decisions.append(
-        "Accept the task as assistant refusal-register robustness under romanization, "
-        "with user prompts unchanged. Do not approve it as toxic-input classification."
+        "Approve IndicAlign CC-BY-4.0 and, separately, Dolly-15K upstream CC-BY-SA-3.0. "
+        "Do not treat them as one license."
     )
     owner_decisions.append(
-        "Accept the English eng_Latn binding in the current loader, or require a later "
-        "switch to hin_Deva before any Hindi romanization experiment. This audit does not make that switch."
+        "Approve experimental construction only after accepting the seed-42 benign "
+        "manifest, the excluded role-conflict rows, and the generation-only interface."
     )
     if refusal_review:
         owner_decisions.append(
-            "Accept the manual refusal review: templated clear refusals dominate; "
-            "one sampled reply adds a concrete help redirect. Heuristic marker hits are not labels."
+            "The earlier English refusal read found templated refusals. "
+            "Hindi template rates are in template_statistics.json and are not classifier labels."
         )
 
     if blockers and any(b.startswith("toxic_matrix_config") for b in blockers):
@@ -795,21 +804,22 @@ def build_recommendation(
 
     return {
         "verdict": verdict,
-        "scope": "hindi_toxicity_safety_register_secondary_evaluation",
+        "scope": "secondary_hindi_refusal_register_generation",
+        "experimental_construction": "NOT_APPROVED",
         "english_pivot": "not_applicable",
         "blockers": blockers,
         "owner_decisions": owner_decisions,
         "task_definition": task_definition(),
         "task_suitability_summary": (
-            "Toxic_Matrix pairs harmful user prompts with templated assistant refusals. "
-            "Dolly_T supplies ordinary answers. Labels are source-file classes, not "
-            "turn-level toxicity ratings."
+            "Hindi Devanagari user turns stay fixed. Assistant turns are the refusal "
+            "or ordinary-answer targets. This is not toxicity detection."
         ),
         "secondary_register_fit": (
-            "Fits assistant refusal-register robustness if the owner accepts the Dolly_T "
-            "head slice, the license, and whether experiments use English eng_Latn or Hindi hin_Deva."
+            "Generation-only comparison of Hindi refusal targets versus ordinary Dolly "
+            "answers, after owner approval. Classification is confounded by the template."
         ),
         "benign_file_replaced": False,
+        "head_slice_not_used": True,
     }
 
 
@@ -864,6 +874,60 @@ def write_owner_sample(toxic_rows: list[dict[str, Any]], path: Path, n: int = 30
     return len(pick)
 
 
+def _align_summary(result: dict[str, Any]) -> dict[str, Any]:
+    if "counts" not in result:
+        return result
+    return {
+        "field": result.get("field"),
+        "model": result.get("model"),
+        "rule": result.get("rule"),
+        "used_as_canonical_text": result.get("used_as_canonical_text"),
+        "counts": result.get("counts"),
+        "conflict_count": result.get("conflict_count"),
+    }
+
+
+def write_benign_manual_review(seed_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    from romcom_data.toxicity_alignment import _pair
+
+    rng = derive_rng(42, "benign-manual", "sample")
+    indexes = list(range(len(seed_rows)))
+    rng.shuffle(indexes)
+    label_path = TOXICITY_AUDIT / "benign_manual_labels.json"
+    stored = json.loads(label_path.read_text(encoding="utf-8")) if label_path.is_file() else {}
+    rows: list[dict[str, Any]] = []
+    for index in indexes[:120]:
+        row = seed_rows[index]
+        user, assistant = _pair(row, "hin_Deva")
+        key = str(row.get("source_row_index"))
+        rows.append(
+            {
+                "source_row_index": row.get("source_row_index"),
+                "doc_id": row.get("doc_id"),
+                "category": stored.get(key, "unreviewed"),
+                "user_excerpt": user[:180],
+                "assistant_excerpt": assistant[:240],
+            }
+        )
+    counts = Counter(row["category"] for row in rows)
+    n = max(len(rows), 1)
+    keys = (
+        "ordinary_response",
+        "clear_refusal",
+        "partial_refusal",
+        "safety_explanation",
+        "ambiguous",
+        "unreviewed",
+    )
+    return {
+        "method": "derive_rng(42, 'benign-manual', 'sample'); first 120 of the seed-42 Dolly_T draw. Categories were read from hin_Deva assistant text.",
+        "n": len(rows),
+        "counts": {key: counts.get(key, 0) for key in keys},
+        "proportions": {key: round(counts.get(key, 0) / n, 4) for key in keys},
+        "rows": rows,
+    }
+
+
 def run_toxicity_audit(*, refresh_hf: bool = False) -> dict[str, Any]:
     TOXICITY_AUDIT.mkdir(parents=True, exist_ok=True)
     manifest = pin_provenance(refresh_hf=refresh_hf)
@@ -883,15 +947,55 @@ def run_toxicity_audit(*, refresh_hf: bool = False) -> dict[str, Any]:
     language = audit_language_coverage(toxic_rows)
     integrity = audit_integrity_toxic(toxic_rows)
     benign_audit = audit_benign(benign_rows, benign_path.name)
-    leakage = audit_leakage(toxic_rows, benign_rows)
+    from romcom_data.toxicity_alignment import (
+        embedding_alignment,
+        fetch_dolly_upstream_license,
+        prepare_dolly_seed_sample,
+        shortcut_diagnostic,
+        template_statistics,
+    )
+
+    seed_summary = prepare_dolly_seed_sample(
+        manifest["revision"], TOXICITY_AUDIT / "dolly_t_seed42_sample.jsonl"
+    )
+    seed_rows = load_jsonl(TOXICITY_AUDIT / "dolly_t_seed42_sample.jsonl")
+    hin_align_toxic = embedding_alignment(toxic_rows, "hin_Deva")
+    hin_align_benign = embedding_alignment(seed_rows, "hin_Deva")
+    latn_align_toxic = embedding_alignment(toxic_rows, "hin_Latn")
+    latn_align_benign = embedding_alignment(seed_rows, "hin_Latn")
+    toxic_templates = template_statistics(toxic_rows, "toxic_matrix_local")
+    benign_templates = template_statistics(seed_rows, "dolly_t_seed42")
+    template_report = {
+        "toxic": toxic_templates,
+        "benign": benign_templates,
+        "shortcut": shortcut_diagnostic(toxic_templates, benign_templates),
+    }
+    excluded = hin_align_toxic["conflicts"] + hin_align_benign["conflicts"]
+    leakage = audit_leakage(toxic_rows, seed_rows)
     toxic_profile = profile_conversation_class(toxic_rows, "toxic_matrix_local")
-    benign_profile = profile_conversation_class(benign_rows, "benign_local")
+    benign_profile = profile_conversation_class(seed_rows, "dolly_t_seed42")
+    benign_review = write_benign_manual_review(seed_rows)
     dolly_comparison = compare_benign_file_to_dolly(benign_rows, manifest["revision"])
     confounds = class_confounds(toxic_profile, benign_profile)
     refusal_review = audit_refusal_sample(toxic_rows)
     transform = audit_transformation_constraints()
-    normalized = audit_normalized_pipeline(meta)
-    license_evidence = manifest.get("license_evidence", {})
+    excluded_ids = {str(item.get("doc_id")) for item in excluded if item.get("doc_id")}
+    normalized = audit_normalized_pipeline(meta, exclude_doc_ids=excluded_ids)
+    normalized["role_conflict_rows_excluded_not_flipped"] = len(excluded_ids)
+    license_evidence = dict(manifest.get("license_evidence") or {})
+    license_evidence["declarations_not_flattened"] = {
+        "indic_align": {
+            "spdx": "CC-BY-4.0",
+            "evidence": "Hugging Face tag license:cc-by-4.0 on ai4bharat/indic-align. Card license field is null.",
+            "owner_approval": "required",
+        },
+        "dolly_15k_upstream": {
+            "spdx": "CC-BY-SA-3.0",
+            "applies_to": "Dolly-derived benign control only",
+            "hf_lookup": fetch_dolly_upstream_license(),
+            "owner_approval": "required",
+        },
+    }
     discovery = manifest.get("hf_config_discovery", {})
     recommendation = build_recommendation(
         integrity,
@@ -906,7 +1010,7 @@ def run_toxicity_audit(*, refresh_hf: bool = False) -> dict[str, Any]:
 
     report = {
         "title": "Phase 2.1 Toxicity (IndicAlign Toxic_Matrix) audit",
-        "audit_revision": "2026_11_01_rev2",
+        "audit_revision": "2026_11_01_rev3",
         "toccix_investigation": discovery,
         "provenance": manifest,
         "schema": schema,
@@ -919,6 +1023,18 @@ def run_toxicity_audit(*, refresh_hf: bool = False) -> dict[str, Any]:
             "toxic": toxic_profile,
             "benign": benign_profile,
             "confounds": confounds,
+        },
+        "seeded_benign_sample": seed_summary,
+        "role_alignment": {
+            "hin_deva_toxic": _align_summary(hin_align_toxic),
+            "hin_deva_benign": _align_summary(hin_align_benign),
+            "hin_latn_toxic_not_used": _align_summary(latn_align_toxic),
+            "hin_latn_benign_not_used": _align_summary(latn_align_benign),
+            "excluded_conflict_count": len(excluded),
+        },
+        "template_statistics": template_report,
+        "benign_manual_review": {
+            key: value for key, value in benign_review.items() if key != "rows"
         },
         "refusal_manual_review": {
             key: value for key, value in refusal_review.items() if key != "rows"
@@ -950,6 +1066,39 @@ def run_toxicity_audit(*, refresh_hf: bool = False) -> dict[str, Any]:
     (TOXICITY_AUDIT / "license_evidence.json").write_text(
         json.dumps(license_evidence, indent=2) + "\n", encoding="utf-8"
     )
+    (TOXICITY_AUDIT / "template_statistics.json").write_text(
+        json.dumps(template_report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    (TOXICITY_AUDIT / "role_alignment_summary.json").write_text(
+        json.dumps(report["role_alignment"], indent=2) + "\n", encoding="utf-8"
+    )
+    (TOXICITY_AUDIT / "excluded_role_conflicts.json").write_text(
+        json.dumps(excluded, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    with (TOXICITY_AUDIT / "dolly_t_seed42_manifest.csv").open(
+        "w", encoding="utf-8", newline=""
+    ) as fh:
+        writer = csv.DictWriter(fh, fieldnames=["source_row_index", "doc_id"])
+        writer.writeheader()
+        for row in seed_rows:
+            writer.writerow(
+                {"source_row_index": row.get("source_row_index"), "doc_id": row.get("doc_id")}
+            )
+    with (TOXICITY_AUDIT / "benign_manual_review.csv").open(
+        "w", encoding="utf-8", newline=""
+    ) as fh:
+        writer = csv.DictWriter(
+            fh,
+            fieldnames=[
+                "source_row_index",
+                "doc_id",
+                "category",
+                "user_excerpt",
+                "assistant_excerpt",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(benign_review["rows"])
     (TOXICITY_AUDIT / "data_quality_leakage_report.md").write_text(
         "# Data quality and leakage\n\n" + json.dumps(leakage, indent=2) + "\n\n"
         + json.dumps(integrity, indent=2)
@@ -1031,6 +1180,11 @@ def build_audit_zip(zip_path: Path | None = None) -> Path:
         "task_definition.md",
         "refusal_manual_review_summary.json",
         "refusal_manual_review.csv",
+        "benign_manual_review.csv",
+        "dolly_t_seed42_manifest.csv",
+        "template_statistics.json",
+        "role_alignment_summary.json",
+        "excluded_role_conflicts.json",
         "audit_log.txt",
     )
     lines: list[str] = []

@@ -45,29 +45,25 @@
     "eng_row_pct": 100.0
   },
   "benign": {
-    "class_name": "benign_local",
+    "class_name": "dolly_t_seed42",
     "counts": {
       "rows": 2000,
       "single_block": 2000,
       "multi_block": 0,
       "hin_deva_present": 2000,
-      "hin_latn_present": 1994,
+      "hin_latn_present": 0,
       "eng_present": 2000,
-      "deva_order_aligned": 1892,
-      "latn_order_swapped": 21,
+      "deva_order_aligned": 1881,
+      "latn_order_tie": 2000,
       "eng_user_latin_majority": 2000,
-      "eng_assistant_latin_majority": 1994,
+      "eng_assistant_latin_majority": 1980,
       "deva_user_devanagari_majority": 2000,
-      "deva_assistant_devanagari_majority": 1994,
-      "latn_user_latin_majority": 1994,
-      "latn_assistant_latin_majority": 1994,
-      "latn_order_aligned": 1824,
-      "latn_order_tie": 155,
-      "deva_order_tie": 83,
-      "deva_order_swapped": 25,
-      "deva_assistant_code_mixed": 8,
-      "deva_user_code_mixed": 5,
-      "eng_assistant_code_mixed": 1
+      "deva_assistant_devanagari_majority": 1979,
+      "deva_order_swapped": 39,
+      "deva_order_tie": 80,
+      "deva_user_code_mixed": 4,
+      "deva_assistant_code_mixed": 10,
+      "deva_assistant_latin_majority": 2
     },
     "parsed_from": "eng_Latn positional [user, assistant]",
     "num_turns_values": {
@@ -75,31 +71,31 @@
     },
     "prompt_chars_eng": {
       "n": 2000,
-      "mean": 69.4,
-      "p50": 53,
-      "p90": 124
+      "mean": 69.1,
+      "p50": 54,
+      "p90": 122
     },
     "assistant_chars_eng": {
       "n": 2000,
-      "mean": 384.1,
-      "p50": 195,
-      "p90": 817
+      "mean": 370.6,
+      "p50": 185,
+      "p90": 841
     },
     "hin_deva_row_pct": 100.0,
-    "hin_latn_row_pct": 99.7,
+    "hin_latn_row_pct": 0.0,
     "eng_row_pct": 100.0
   },
   "confounds": {
     "same_conversation_shape": true,
     "prompt_mean_chars_toxic_vs_benign": [
       202.7,
-      69.4
+      69.1
     ],
     "assistant_mean_chars_toxic_vs_benign": [
       579.0,
-      384.1
+      370.6
     ],
-    "language_confound": "Both classes store English in eng_Latn and Hindi in hin_Deva/hin_Latn. The current loader parses eng_Latn while setting language='hi'. Romanizing that English assistant text is not Hindi romanization.",
+    "language_binding": "Canonical text is hin_Deva. The loader sets language='hi' only for that field. eng_Latn is retained as a parallel reference for role checks.",
     "register_confound": "Toxic_Matrix assistant turns are templated refusals. Dolly_T assistant turns are ordinary answers. The class contrast is refusal register versus ordinary answer, which matches the intended task and does not match toxic-input classification.",
     "length_confound": "Toxic user prompts and assistant refusals are longer than Dolly answers. Length can confound romanization difficulty across classes.",
     "sampling_confound": "Toxic rows are a 5000-row shuffle from Toxic_Matrix. Benign rows are the first 2000 Dolly_T rows, not a matched shuffle.",

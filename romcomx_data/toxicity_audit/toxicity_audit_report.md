@@ -2,7 +2,7 @@
 
 {
   "title": "Phase 2.1 Toxicity (IndicAlign Toxic_Matrix) audit",
-  "audit_revision": "2026_11_01_rev2",
+  "audit_revision": "2026_11_01_rev3",
   "toccix_investigation": {
     "repository": "ai4bharat/indic-align",
     "revision": "032b6a9070e7f85f1a38e0506419f4590a20455a",
@@ -194,8 +194,8 @@
     "empty_user_prompt_after_parse": 0,
     "empty_assistant_response_after_parse": 0,
     "duplicate_doc_id_count": 0,
-    "assistant_responses_with_refusal_markers": 5000,
-    "user_prompts_with_refusal_markers": 76,
+    "assistant_responses_with_refusal_markers": 4999,
+    "user_prompts_with_refusal_markers": 0,
     "script_field_counts": {
       "latin_heavy": 10000,
       "devanagari_heavy": 5000,
@@ -458,29 +458,25 @@
       "eng_row_pct": 100.0
     },
     "benign": {
-      "class_name": "benign_local",
+      "class_name": "dolly_t_seed42",
       "counts": {
         "rows": 2000,
         "single_block": 2000,
         "multi_block": 0,
         "hin_deva_present": 2000,
-        "hin_latn_present": 1994,
+        "hin_latn_present": 0,
         "eng_present": 2000,
-        "deva_order_aligned": 1892,
-        "latn_order_swapped": 21,
+        "deva_order_aligned": 1881,
+        "latn_order_tie": 2000,
         "eng_user_latin_majority": 2000,
-        "eng_assistant_latin_majority": 1994,
+        "eng_assistant_latin_majority": 1980,
         "deva_user_devanagari_majority": 2000,
-        "deva_assistant_devanagari_majority": 1994,
-        "latn_user_latin_majority": 1994,
-        "latn_assistant_latin_majority": 1994,
-        "latn_order_aligned": 1824,
-        "latn_order_tie": 155,
-        "deva_order_tie": 83,
-        "deva_order_swapped": 25,
-        "deva_assistant_code_mixed": 8,
-        "deva_user_code_mixed": 5,
-        "eng_assistant_code_mixed": 1
+        "deva_assistant_devanagari_majority": 1979,
+        "deva_order_swapped": 39,
+        "deva_order_tie": 80,
+        "deva_user_code_mixed": 4,
+        "deva_assistant_code_mixed": 10,
+        "deva_assistant_latin_majority": 2
       },
       "parsed_from": "eng_Latn positional [user, assistant]",
       "num_turns_values": {
@@ -488,35 +484,187 @@
       },
       "prompt_chars_eng": {
         "n": 2000,
-        "mean": 69.4,
-        "p50": 53,
-        "p90": 124
+        "mean": 69.1,
+        "p50": 54,
+        "p90": 122
       },
       "assistant_chars_eng": {
         "n": 2000,
-        "mean": 384.1,
-        "p50": 195,
-        "p90": 817
+        "mean": 370.6,
+        "p50": 185,
+        "p90": 841
       },
       "hin_deva_row_pct": 100.0,
-      "hin_latn_row_pct": 99.7,
+      "hin_latn_row_pct": 0.0,
       "eng_row_pct": 100.0
     },
     "confounds": {
       "same_conversation_shape": true,
       "prompt_mean_chars_toxic_vs_benign": [
         202.7,
-        69.4
+        69.1
       ],
       "assistant_mean_chars_toxic_vs_benign": [
         579.0,
-        384.1
+        370.6
       ],
-      "language_confound": "Both classes store English in eng_Latn and Hindi in hin_Deva/hin_Latn. The current loader parses eng_Latn while setting language='hi'. Romanizing that English assistant text is not Hindi romanization.",
+      "language_binding": "Canonical text is hin_Deva. The loader sets language='hi' only for that field. eng_Latn is retained as a parallel reference for role checks.",
       "register_confound": "Toxic_Matrix assistant turns are templated refusals. Dolly_T assistant turns are ordinary answers. The class contrast is refusal register versus ordinary answer, which matches the intended task and does not match toxic-input classification.",
       "length_confound": "Toxic user prompts and assistant refusals are longer than Dolly answers. Length can confound romanization difficulty across classes.",
       "sampling_confound": "Toxic rows are a 5000-row shuffle from Toxic_Matrix. Benign rows are the first 2000 Dolly_T rows, not a matched shuffle.",
       "hin_latn_order_caution": "Length alignment finds a minority of hin_Latn pairs swapped relative to eng_Latn. Do not treat hin_Latn slot order as a reliable role encoding."
+    }
+  },
+  "seeded_benign_sample": {
+    "path": "/home/shrys/dev/Romcom-Drift/romcomx_data/toxicity_audit/dolly_t_seed42_sample.jsonl",
+    "n_source_rows": 15011,
+    "n_selected": 2000,
+    "seed": 42,
+    "selector": "derive_rng(42, 'dolly-t', 'benign-shuffle')",
+    "preserves_doc_id": true,
+    "preserves_source_row_index": true,
+    "head_file_replaced": false,
+    "final_dataset_rebuilt": false,
+    "ordering_bias": {
+      "measure": "Pearson correlation of Dolly_T train row index with English user length",
+      "row_index_vs_eng_user_length": 0.0107,
+      "selected_index_min": 1,
+      "selected_index_max": 15006,
+      "selected_index_mean": 7605.2,
+      "note": "The on-disk head is rows 0-1999. A non-zero correlation means a prefix can differ from a seeded draw. The prepared sample is the seeded draw."
+    },
+    "length_comparison_eng_user_chars": {
+      "full_mean": 71.8,
+      "head_0_1999_mean": 69.4,
+      "seed42_mean": 69.1
+    }
+  },
+  "role_alignment": {
+    "hin_deva_toxic": {
+      "field": "hin_Deva",
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "rule": "Sum of cosine similarities for same-index slots versus crossed slots. Margin 0.05. String length is not an input. Conflicts are excluded, not swapped.",
+      "used_as_canonical_text": true,
+      "counts": {
+        "supports_positional": 4998,
+        "conflicts_with_positional": 2
+      },
+      "conflict_count": 2
+    },
+    "hin_deva_benign": {
+      "field": "hin_Deva",
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "rule": "Sum of cosine similarities for same-index slots versus crossed slots. Margin 0.05. String length is not an input. Conflicts are excluded, not swapped.",
+      "used_as_canonical_text": true,
+      "counts": {
+        "supports_positional": 1995,
+        "embedding_tie": 5
+      },
+      "conflict_count": 0
+    },
+    "hin_latn_toxic_not_used": {
+      "field": "hin_Latn",
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "rule": "Sum of cosine similarities for same-index slots versus crossed slots. Margin 0.05. String length is not an input. Conflicts are excluded, not swapped.",
+      "used_as_canonical_text": false,
+      "counts": {
+        "supports_positional": 2506,
+        "embedding_tie": 2431,
+        "conflicts_with_positional": 63
+      },
+      "conflict_count": 63
+    },
+    "hin_latn_benign_not_used": {
+      "field": "hin_Latn",
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "used_as_canonical_text": false,
+      "counts": {
+        "embedding_tie": 610,
+        "supports_positional": 1351,
+        "conflicts_with_positional": 39
+      },
+      "conflict_count": 39,
+      "note": "Validated separately. Not used for roles or as canonical text."
+    },
+    "excluded_conflict_count": 2
+  },
+  "template_statistics": {
+    "toxic": {
+      "class_name": "toxic_matrix_local",
+      "n": 5000,
+      "canonical_field": "hin_Deva",
+      "hindi_refusal_opening": "मैं इस संकेत का जवाब नहीं दे सकता",
+      "hindi_opening_slot_counts": {
+        "assistant_slot": 4998,
+        "user_slot": 2
+      },
+      "english_opening_slot_counts": {
+        "assistant_slot": 5000
+      },
+      "english_opening": "I cannot give a response",
+      "assistant_exact_duplicate_row_rate": 0.0032,
+      "assistant_exact_unique": 4992,
+      "assistant_prefix120_near_duplicate_row_rate": 0.4842,
+      "assistant_prefix120_unique": 3066,
+      "assistant_chars": {
+        "mean": 591.6,
+        "min": 147,
+        "max": 2116
+      },
+      "user_chars_mean": 211.5
+    },
+    "benign": {
+      "class_name": "dolly_t_seed42",
+      "n": 2000,
+      "canonical_field": "hin_Deva",
+      "hindi_refusal_opening": "मैं इस संकेत का जवाब नहीं दे सकता",
+      "hindi_opening_slot_counts": {
+        "absent": 2000
+      },
+      "english_opening_slot_counts": {
+        "absent": 2000
+      },
+      "english_opening": "I cannot give a response",
+      "assistant_exact_duplicate_row_rate": 0.0035,
+      "assistant_exact_unique": 1996,
+      "assistant_prefix120_near_duplicate_row_rate": 0.0035,
+      "assistant_prefix120_unique": 1996,
+      "assistant_chars": {
+        "mean": 376.3,
+        "min": 1,
+        "max": 9014
+      },
+      "user_chars_mean": 70.2
+    },
+    "shortcut": {
+      "not_a_trained_model": true,
+      "template_rule": "Predict toxic if the Hindi assistant slot starts with the refusal opening.",
+      "template_rule_in_sample_accuracy": 0.9997,
+      "length_means_assistant_chars": {
+        "toxic": 591.6,
+        "benign": 376.3
+      },
+      "interpretation": "A source-specific refusal opening, or a length cutoff between these means, can separate the classes without modeling refusal semantics. That supports a generation comparison of registers only. It does not support toxicity detection or a claim that a classifier is reading safety behavior."
+    }
+  },
+  "benign_manual_review": {
+    "method": "derive_rng(42, 'benign-manual', 'sample'); first 120 of the seed-42 Dolly_T draw. Categories were read from hin_Deva assistant text.",
+    "n": 120,
+    "counts": {
+      "ordinary_response": 120,
+      "clear_refusal": 0,
+      "partial_refusal": 0,
+      "safety_explanation": 0,
+      "ambiguous": 0,
+      "unreviewed": 0
+    },
+    "proportions": {
+      "ordinary_response": 1.0,
+      "clear_refusal": 0.0,
+      "partial_refusal": 0.0,
+      "safety_explanation": 0.0,
+      "ambiguous": 0.0,
+      "unreviewed": 0.0
     }
   },
   "refusal_manual_review": {
@@ -545,24 +693,35 @@
     "distress_prompts_refused_without_help_in_sample": "Several distress or self-harm prompts in the sample are clear refusals with no crisis resource. That is a response-quality issue inside clear_refusal, not a separate category."
   },
   "task_definition": {
-    "intended_task": "Assistant safety/refusal-register robustness under romanization. User prompts stay unchanged. Only eligible assistant turns are romanized.",
-    "not_this_task": "Not conventional toxic-input classification. The Toxic_Matrix label is not a turn-level toxicity tag on the user text. The assistant side of the toxic file is a refusal, and the benign side is an ordinary answer.",
-    "what_a_label_applies_to": "File-level class on the whole example: toxic source versus Dolly benign source. It is not a per-turn toxicity rating.",
-    "current_text_binding": "parse_conversation_turns reads eng_Latn. Hindi parallels are present but are not the strings the loader currently treats as the conversation.",
-    "transformation_constraints_unchanged": true
+    "research_claim": "Secondary Hindi refusal-register task. It does not measure general toxicity detection or code-mixed safety robustness.",
+    "evaluation_interface": {
+      "model_input": "hin_Deva list slot 0, the user turn. Unchanged in every condition.",
+      "model_target": "hin_Deva list slot 1, the assistant turn. This is the only text that may be romanized or noised.",
+      "label": "Source register kept on the example: toxic for a Toxic_Matrix refusal target, non_toxic for a Dolly ordinary-answer target. The same label is shared by EXP-01, EXP-02, and EXP-03.",
+      "scoring": "Not run in this audit. A generation score would compare the model continuation with model_target only. No classifier was trained."
+    },
+    "distinctions": {
+      "conversation_classification": "Would assign one label to the whole dialogue. That is not this task, and the source label is not a toxicity rating of the conversation.",
+      "assistant_response_refusal_classification": "Would label whether the assistant turn is a refusal. The shared opening makes that separable by template. Not claimed.",
+      "refusal_generation": "Given model_input, generate the assistant reply and compare it with model_target under romanization of that target. This is the only interface described for the secondary task."
+    },
+    "text_binding": "hin_Deva is canonical. eng_Latn is an alignment reference. hin_Latn is not a role source.",
+    "transformation_constraints_unchanged": true,
+    "experimental_construction": "NOT_APPROVED"
   },
   "normalized_loader_preview": {
-    "normalized_record_count": 7000,
-    "toxic_records": 5000,
+    "normalized_record_count": 6998,
+    "toxic_records": 4998,
     "benign_records": 2000,
     "label_distribution": {
-      "toxic": 5000,
+      "toxic": 4998,
       "non_toxic": 2000
     },
-    "imbalance_ratio": 2.5,
+    "imbalance_ratio": 2.499,
     "loader_skips_empty_prompt_or_response": true,
     "paper_target_n": 10000,
-    "benign_pairing": "min(benign_rows, 10000 - toxic) from benign file"
+    "benign_pairing": "min(benign_rows, 10000 - toxic) from benign file",
+    "role_conflict_rows_excluded_not_flipped": 2
   },
   "transformation_constraints": {
     "policy_source": "data_plan Appendix B.5 / phase2_reports toxicity_data_design_report.md",
@@ -575,35 +734,47 @@
   },
   "recommendation": {
     "verdict": "CONDITIONAL_GO",
-    "scope": "hindi_toxicity_safety_register_secondary_evaluation",
+    "scope": "secondary_hindi_refusal_register_generation",
+    "experimental_construction": "NOT_APPROVED",
     "english_pivot": "not_applicable",
     "blockers": [
-      "license_confirm_on_card",
-      "owner_accept_dolly_t_head_slice"
+      "dual_license_owner_approval",
+      "experimental_construction_not_approved",
+      "template_confound_precludes_classification_claim"
     ],
     "owner_decisions": [
-      "Confirm CC-BY-4.0. The dataset card license field is null; the hub tag is license:cc-by-4.0 and the README mentions cc-by.",
-      "Accept the on-disk benign file as Dolly_T train rows 0-1999 (filename Indic_ShareLlama_benign_sample.jsonl is wrong), or explicitly request a new seeded sample. Do not treat those as equivalent.",
-      "Accept the task as assistant refusal-register robustness under romanization, with user prompts unchanged. Do not approve it as toxic-input classification.",
-      "Accept the English eng_Latn binding in the current loader, or require a later switch to hin_Deva before any Hindi romanization experiment. This audit does not make that switch.",
-      "Accept the manual refusal review: templated clear refusals dominate; one sampled reply adds a concrete help redirect. Heuristic marker hits are not labels."
+      "Approve IndicAlign CC-BY-4.0 and, separately, Dolly-15K upstream CC-BY-SA-3.0. Do not treat them as one license.",
+      "Approve experimental construction only after accepting the seed-42 benign manifest, the excluded role-conflict rows, and the generation-only interface.",
+      "The earlier English refusal read found templated refusals. Hindi template rates are in template_statistics.json and are not classifier labels."
     ],
     "task_definition": {
-      "intended_task": "Assistant safety/refusal-register robustness under romanization. User prompts stay unchanged. Only eligible assistant turns are romanized.",
-      "not_this_task": "Not conventional toxic-input classification. The Toxic_Matrix label is not a turn-level toxicity tag on the user text. The assistant side of the toxic file is a refusal, and the benign side is an ordinary answer.",
-      "what_a_label_applies_to": "File-level class on the whole example: toxic source versus Dolly benign source. It is not a per-turn toxicity rating.",
-      "current_text_binding": "parse_conversation_turns reads eng_Latn. Hindi parallels are present but are not the strings the loader currently treats as the conversation.",
-      "transformation_constraints_unchanged": true
+      "research_claim": "Secondary Hindi refusal-register task. It does not measure general toxicity detection or code-mixed safety robustness.",
+      "evaluation_interface": {
+        "model_input": "hin_Deva list slot 0, the user turn. Unchanged in every condition.",
+        "model_target": "hin_Deva list slot 1, the assistant turn. This is the only text that may be romanized or noised.",
+        "label": "Source register kept on the example: toxic for a Toxic_Matrix refusal target, non_toxic for a Dolly ordinary-answer target. The same label is shared by EXP-01, EXP-02, and EXP-03.",
+        "scoring": "Not run in this audit. A generation score would compare the model continuation with model_target only. No classifier was trained."
+      },
+      "distinctions": {
+        "conversation_classification": "Would assign one label to the whole dialogue. That is not this task, and the source label is not a toxicity rating of the conversation.",
+        "assistant_response_refusal_classification": "Would label whether the assistant turn is a refusal. The shared opening makes that separable by template. Not claimed.",
+        "refusal_generation": "Given model_input, generate the assistant reply and compare it with model_target under romanization of that target. This is the only interface described for the secondary task."
+      },
+      "text_binding": "hin_Deva is canonical. eng_Latn is an alignment reference. hin_Latn is not a role source.",
+      "transformation_constraints_unchanged": true,
+      "experimental_construction": "NOT_APPROVED"
     },
-    "task_suitability_summary": "Toxic_Matrix pairs harmful user prompts with templated assistant refusals. Dolly_T supplies ordinary answers. Labels are source-file classes, not turn-level toxicity ratings.",
-    "secondary_register_fit": "Fits assistant refusal-register robustness if the owner accepts the Dolly_T head slice, the license, and whether experiments use English eng_Latn or Hindi hin_Deva.",
-    "benign_file_replaced": false
+    "task_suitability_summary": "Hindi Devanagari user turns stay fixed. Assistant turns are the refusal or ordinary-answer targets. This is not toxicity detection.",
+    "secondary_register_fit": "Generation-only comparison of Hindi refusal targets versus ordinary Dolly answers, after owner approval. Classification is confounded by the template.",
+    "benign_file_replaced": false,
+    "head_slice_not_used": true
   },
   "handoff_status": {
     "status": "READY_FOR_OWNER_REVIEW",
     "blockers": [
-      "license_confirm_on_card",
-      "owner_accept_dolly_t_head_slice"
+      "dual_license_owner_approval",
+      "experimental_construction_not_approved",
+      "template_confound_precludes_classification_claim"
     ],
     "dataset_rebuild_allowed": false,
     "training_allowed": false,
