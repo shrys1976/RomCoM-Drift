@@ -44,7 +44,7 @@
   "current_reproduction_snapshot_note": "Local exports including datasets==1.16.1 reconstructed today reproduce current load_dataset behavior; they are not verified 2021-generation English artifacts.",
   "owner_approved": false,
   "dev_semantic_review_complete": false,
-  "investigation_revision": "2026_11_01_rev3",
+  "investigation_revision": "2026_11_01_closed",
   "known_generation_procedure": {
     "repo": "divyanshuaggarwal/IndicXNLI",
     "script": "src/make_dataset.py",
@@ -67,5 +67,24 @@
       "owner_judgment_hypothesis_aligned",
       "owner_judgment_label_consistent"
     ]
+  },
+  "investigation_closed": true,
+  "dev_provisional_same_index_rows": 2490,
+  "dev_full_corpus_semantically_verified": false,
+  "owner_independent_review": {
+    "bilingual_dev_rows_reviewed": 41,
+    "pass_all_fields": 34,
+    "hypothesis_fail": [
+      357
+    ],
+    "uncertain_rows": [
+      684,
+      777,
+      844,
+      1027,
+      1327,
+      1841
+    ],
+    "train_hindi_only_rows": 159
   }
 }

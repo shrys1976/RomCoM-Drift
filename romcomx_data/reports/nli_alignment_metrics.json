@@ -1,0 +1,90 @@
+{
+  "manifest_row_counts": {
+    "dev_english_mapped": 2490,
+    "train_english_mapped": 0
+  },
+  "dev": {
+    "mapping_method": "same_index_xnli_10_en",
+    "pair_id_independent_join": false,
+    "pair_id_on_manifest_is_english_reference_only": true,
+    "indic_rows": 2490,
+    "same_index_label_agreement": 2490,
+    "label_conflict": 0,
+    "unmatched": 0,
+    "semantic_alignment": "Not established by label agreement alone; owner must complete owner_judgment_* columns in nli_alignment_sample.csv."
+  },
+  "train": {
+    "indic_rows": 392702,
+    "mapping_reliable": false,
+    "mapping_stats": {
+      "rejected_current_hf_snapshot": 392702,
+      "label_agreement_if_used": 0.3440165825485992
+    },
+    "same_index_hf_label_match": 135096,
+    "same_index_hf_label_mismatch": 257606,
+    "same_index_hf_label_match_rate": 0.3440165825485992,
+    "same_index_xnli_mt_label_match_rate": 0.3440165825485992
+  },
+  "reference_english": {
+    "hf_train_rows": 392702,
+    "xnli_mt_train_rows": 392702,
+    "hf_vs_xnli_mt_composite_key_match_rate": 1.0,
+    "xnli_mt_duplicate_composite_key_groups": 112
+  },
+  "forbidden_for_production": [
+    "hf_index_join_train",
+    "offset_adjusted_train",
+    "label_sequence_train",
+    "fuzzy_composite_train"
+  ],
+  "root_cause": "unresolved",
+  "train_english_mappings_withheld": 392702,
+  "current_reproduction_snapshot_available": true,
+  "current_reproduction_snapshot_verified_2021_generation": false,
+  "current_reproduction_snapshot_note": "Local exports including datasets==1.16.1 reconstructed today reproduce current load_dataset behavior; they are not verified 2021-generation English artifacts.",
+  "owner_approved": false,
+  "dev_semantic_review_complete": false,
+  "investigation_revision": "2026_11_01_closed",
+  "known_generation_procedure": {
+    "repo": "divyanshuaggarwal/IndicXNLI",
+    "script": "src/make_dataset.py",
+    "datasets_version_pinned_in_repo": "1.16.1",
+    "documented_english_input": "load_dataset('xnli', 'en') (revision unpinned in script)",
+    "indic_fields_saved": [
+      "premise",
+      "hypothesis",
+      "label"
+    ],
+    "pair_id_persisted_in_indic_release": false
+  },
+  "owner_review_sample": {
+    "total_rows": 200,
+    "bilingual_dev_rows": 41,
+    "hindi_only_train_rows": 159,
+    "description": "Not 200 bilingual alignment examples. Only 41 dev rows include English; 159 train rows are Hindi-only with English withheld.",
+    "owner_judgment_columns": [
+      "owner_judgment_premise_aligned",
+      "owner_judgment_hypothesis_aligned",
+      "owner_judgment_label_consistent"
+    ]
+  },
+  "investigation_closed": true,
+  "dev_provisional_same_index_rows": 2490,
+  "dev_full_corpus_semantically_verified": false,
+  "owner_independent_review": {
+    "bilingual_dev_rows_reviewed": 41,
+    "pass_all_fields": 34,
+    "hypothesis_fail": [
+      357
+    ],
+    "uncertain_rows": [
+      684,
+      777,
+      844,
+      1027,
+      1327,
+      1841
+    ],
+    "train_hindi_only_rows": 159
+  }
+}

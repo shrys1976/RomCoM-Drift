@@ -1,0 +1,8 @@
+{
+  "verdict": "CONDITIONAL_GO",
+  "scope": "hindi_native_only_paraphrase_without_english_pivot",
+  "blocking_reason": "NO-GO for English-pivot code-mixed path; CONDITIONAL for Hindi-native-only experiment with documented cluster leakage risk and no RomCoM EXP rebuild.",
+  "english_pivot_gate_passed": false,
+  "english_pivot_code_mixed_verdict": "NO_GO",
+  "train_or_processed_rebuild": false
+}

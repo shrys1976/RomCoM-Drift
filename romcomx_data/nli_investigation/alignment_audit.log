@@ -94,3 +94,59 @@ validation:
   dev_semantic_review_complete=False
   owner_review_sample_rows=200
   owner_review_sample=41 bilingual dev + 159 hindi-only train
+
+closure_utc=2026-11-01T13:53:45.181764+00:00
+closure_revision=2026_11_01_closed
+{
+  "investigation_revision": "2026_11_01_closed",
+  "investigation_closed": true,
+  "root_cause": "unresolved",
+  "further_alignment_attempts": "None unless original historical source data (generation-time English artifact or verified revision) becomes available.",
+  "train": {
+    "english_mappings_withheld": 392702,
+    "mapping_reliable": false,
+    "alternative_joins_attempted": false
+  },
+  "dev": {
+    "manifest_rows_provisional_same_index": 2490,
+    "mapping_method": "same_index_xnli_10_en",
+    "full_corpus_semantically_verified": false,
+    "provisional_retention": true,
+    "known_sample_level_exceptions": {
+      "independent_review_sample_size": 41,
+      "hypothesis_fail_indic_row_indices": [
+        357
+      ],
+      "uncertain_indic_row_indices": [
+        684,
+        777,
+        844,
+        1027,
+        1327,
+        1841
+      ],
+      "pass_all_judgment_fields": 34
+    }
+  },
+  "owner_independent_review": {
+    "bilingual_dev_rows_reviewed": 41,
+    "pass_all_fields": 34,
+    "hypothesis_fail": [
+      357
+    ],
+    "uncertain_rows": [
+      684,
+      777,
+      844,
+      1027,
+      1327,
+      1841
+    ],
+    "train_hindi_only_rows": 159
+  },
+  "limitations": [
+    "Train English remains unavailable for RomCoM-X NLI training exports.",
+    "Dev English is provisional same-index XNLI-1.0; not all 2490 rows were semantically reviewed.",
+    "Historical train ordering mismatch cause remains unresolved."
+  ]
+}

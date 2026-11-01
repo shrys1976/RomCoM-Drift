@@ -1,0 +1,16 @@
+{
+  "bilingual_dev_rows_reviewed": 41,
+  "pass_all_fields": 34,
+  "hypothesis_fail": [
+    357
+  ],
+  "uncertain_rows": [
+    684,
+    777,
+    844,
+    1027,
+    1327,
+    1841
+  ],
+  "train_hindi_only_rows": 159
+}

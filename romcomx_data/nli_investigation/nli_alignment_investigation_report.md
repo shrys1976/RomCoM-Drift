@@ -1,7 +1,7 @@
-# NLI alignment investigation report
+# NLI alignment investigation report (closed)
 
 {
-  "investigation_revision": "2026_11_01_rev3",
+  "investigation_revision": "2026_11_01_closed",
   "root_cause": "unresolved",
   "known_generation_procedure": {
     "repo": "divyanshuaggarwal/IndicXNLI",
@@ -80,5 +80,56 @@
   },
   "datasets_1_16_1_reload_label_agreement_with_indic_train": 0.3440165825485992,
   "current_reproduction_datasets_1_16_1_label_agreement_with_indic_train": 0.3440165825485992,
-  "current_reproduction_datasets_1_16_1_note": "datasets==1.16.1 export run today matches current HF row order; not a verified 2021 generation snapshot."
+  "current_reproduction_datasets_1_16_1_note": "datasets==1.16.1 export run today matches current HF row order; not a verified 2021 generation snapshot.",
+  "investigation_closed": true,
+  "further_alignment_attempts": "None unless original historical source data (generation-time English artifact or verified revision) becomes available.",
+  "train": {
+    "english_mappings_withheld": 392702,
+    "mapping_reliable": false,
+    "alternative_joins_attempted": false
+  },
+  "dev": {
+    "manifest_rows_provisional_same_index": 2490,
+    "mapping_method": "same_index_xnli_10_en",
+    "full_corpus_semantically_verified": false,
+    "provisional_retention": true,
+    "known_sample_level_exceptions": {
+      "independent_review_sample_size": 41,
+      "hypothesis_fail_indic_row_indices": [
+        357
+      ],
+      "uncertain_indic_row_indices": [
+        684,
+        777,
+        844,
+        1027,
+        1327,
+        1841
+      ],
+      "pass_all_judgment_fields": 34
+    }
+  },
+  "owner_independent_review": {
+    "bilingual_dev_rows_reviewed": 41,
+    "pass_all_fields": 34,
+    "hypothesis_fail": [
+      357
+    ],
+    "uncertain_rows": [
+      684,
+      777,
+      844,
+      1027,
+      1327,
+      1841
+    ],
+    "train_hindi_only_rows": 159
+  },
+  "limitations": [
+    "Train English remains unavailable for RomCoM-X NLI training exports.",
+    "Dev English is provisional same-index XNLI-1.0; not all 2490 rows were semantically reviewed.",
+    "Historical train ordering mismatch cause remains unresolved."
+  ],
+  "owner_review_sample_completed": true,
+  "dev_full_corpus_semantically_verified": false
 }

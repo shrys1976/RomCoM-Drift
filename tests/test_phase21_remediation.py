@@ -75,6 +75,21 @@ def test_map_dev_rows_same_index_not_pair_id_join():
     assert stats["same_index_label_agreement"] == 1
 
 
+def test_nli_closure_owner_review_judgments():
+    from romcom_data.nli_investigation_close import _apply_owner_judgments
+
+    rows = [
+        {"sample_row_kind": "bilingual_dev", "indic_row_index": "357"},
+        {"sample_row_kind": "bilingual_dev", "indic_row_index": "684"},
+        {"sample_row_kind": "bilingual_dev", "indic_row_index": "100"},
+    ]
+    summary = _apply_owner_judgments(rows)
+    assert rows[0]["owner_judgment_hypothesis_aligned"] == "FAIL"
+    assert rows[1]["owner_judgment_premise_aligned"] == "UNCERTAIN"
+    assert rows[2]["owner_judgment_premise_aligned"] == "PASS"
+    assert summary["pass_all_fields"] == 1
+
+
 def test_nli_alignment_not_approved_by_default(tmp_path: Path):
     p = tmp_path / "nli_alignment_status.json"
     p.write_text(json.dumps({"owner_approved": False}), encoding="utf-8")

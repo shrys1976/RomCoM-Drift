@@ -1,0 +1,38 @@
+---
+description: What to include or exclude when the user runs -commit
+alwaysApply: true
+---
+
+# Git commit policy (Romcom-Drift data repo)
+
+When the user runs **`-commit`**, do **not** run blind `git add .`. Stage only paths that belong in GitHub.
+
+## Commit
+
+- Data preparation, validation, and audit **scripts** (`src/`, `scripts/`, `tests/`)
+- **Dataset schemas and manifests** (`**/manifests/`, small `data/metadata/`, checksum files)
+- **Source URLs and revision IDs** (JSON/CSV provenance, `nli_source_revisions.json`, inventory metadata)
+- **Alignment / audit reports** (`romcomx_data/reports/`, `reports/`, investigation `*.md`, review samples under ~500 rows)
+- **Checksums and review records** (`checksums.sha256`, metrics JSON, owner review summaries)
+- **README and handoff documentation** (not binary zips)
+- Project config: `pyproject.toml`, `uv.lock`, `.env.example`, `load_env.py`
+
+## Never commit
+
+- **Large raw datasets** (`data/raw/`, `romcomx_data/raw/`)
+- **Credentials** (`.env`, tokens, API keys)
+- **Handoff zip archives** (`RomCoM_*.zip`, `romcom_data_handoff_review.zip`)
+- **`_handoff_staging/`** and duplicate **`romcomx_data/src/`** snapshots
+- **Large generated training/processed data** (`romcomx_data/processed/`, huge JSONL/TSV inventories)
+- **Temp/cache** (`.pytest_cache/`, `__pycache__/`, `.ipynb_checkpoints/`, `logs/`)
+- **Unnecessary intermediate artifacts** (duplicate Python copies under `nli_investigation/` that mirror `src/`)
+
+## `-commit` workflow
+
+1. `git status` and `git diff` (unstaged) to see changes.
+2. Stage explicitly, e.g. `git add src/ scripts/ tests/ configs/ romcomx_data/manifests/ romcomx_data/reports/ …` plus any other **allowed** paths that changed.
+3. `git diff --cached` — if staged paths include ignored categories above, **unstage** them (`git restore --staged <path>`).
+4. If nothing eligible remains, tell the user; do not create an empty commit.
+5. Conventional Commit message (under 72 chars); return only `Committed: <message>`.
+
+Historical blobs already in git are unchanged until removed in a dedicated cleanup commit; still **never add** new violations.

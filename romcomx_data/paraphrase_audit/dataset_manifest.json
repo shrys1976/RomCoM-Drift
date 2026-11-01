@@ -1,0 +1,24 @@
+{
+  "repository": "ai4bharat/IndicXParaphrase",
+  "revision": "181031f9e69c465e0c72fc84fd33b66114adb3e8",
+  "revision_fetched_utc": "2026-11-01T14:00:45.266358+00:00",
+  "hf_file": "data/hi.tsv",
+  "local_path": "romcomx_data/raw/indicxparaphrase/hi.tsv",
+  "local_sha256": "e35ac3463c2b7cf19160657b527c624f7f697f44326af3f251a8faf96e9f5c64",
+  "local_size_bytes": 1214125,
+  "card_license": null,
+  "card_license_note": "Taken from HF dataset card; not hardcoded in loader.",
+  "official_splits": "none_single_tsv",
+  "files_on_card": [],
+  "readme_excerpt_chars": 277,
+  "field_definitions_from_card": {
+    "note": "Card/README did not yield explicit per-column definitions; use measured alignment."
+  },
+  "columns_in_tsv": [
+    "en",
+    "sentence1",
+    "sentence2",
+    "label"
+  ],
+  "audit_scope": "inspection_only_no_rebuild"
+}

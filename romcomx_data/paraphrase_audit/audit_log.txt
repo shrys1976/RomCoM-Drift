@@ -1,0 +1,4 @@
+completed_utc=2026-11-01T14:01:13.949145+00:00
+rows=2002
+recommendation=CONDITIONAL_GO
+owner_sample_rows=50

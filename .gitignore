@@ -28,3 +28,22 @@ romcomx_data/inventories/
 # Generated JSONL anywhere except committed samples
 *.jsonl
 !data/samples/**/*.jsonl
+
+# Handoff bundles and zip staging (share outside git)
+_handoff_staging/
+RomCoM_*.zip
+romcom_data_handoff_review.zip
+
+# Duplicate code tree (canonical: src/romcom_data/, scripts/)
+romcomx_data/src/
+
+# Local copies packaged into investigation zips (source: src/ + scripts/)
+romcomx_data/nli_investigation/alignment_method.py
+romcomx_data/nli_investigation/make_dataset.py
+
+# Caches, OS junk, large regenerated logs
+.pytest_cache/
+**/__MACOSX/
+**/.DS_Store
+logs/
+*.ipynb_checkpoints/

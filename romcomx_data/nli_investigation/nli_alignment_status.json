@@ -1,15 +1,32 @@
 {
-  "owner_approved": false,
+  "investigation_closed": true,
   "investigation_complete": true,
-  "investigation_revision": "2026_11_01_rev3",
+  "investigation_revision": "2026_11_01_closed",
   "root_cause": "unresolved",
-  "current_reproduction_snapshot_available": true,
-  "current_reproduction_snapshot_verified_2021_generation": false,
-  "train_mapping_reliable": false,
+  "further_alignment_attempts": "none_unless_historical_source_recovered",
   "train_english_mappings_withheld": 392702,
-  "dev_same_index_label_check_complete": true,
+  "train_mapping_reliable": false,
+  "dev_provisional_same_index_retained": true,
+  "dev_manifest_rows": 2490,
+  "dev_mapping_method": "same_index_xnli_10_en",
+  "dev_full_corpus_semantically_verified": false,
+  "owner_independent_review_sample_size": 41,
+  "owner_review_hypothesis_fail_indices": [
+    357
+  ],
+  "owner_review_uncertain_indices": [
+    684,
+    777,
+    844,
+    1027,
+    1327,
+    1841
+  ],
+  "owner_review_pass_count": 34,
   "dev_semantic_review_complete": false,
   "dev_mapping_reliable": false,
-  "block_reason": "nli_train_blocked_dev_semantic_review_pending",
-  "note": "Complete owner_judgment_* fields for 41 bilingual dev rows in nli_alignment_sample.csv. Label agreement is not semantic sign-off. Train English remains fully withheld (392702 mappings)."
+  "dev_provisional_retention_approved": true,
+  "owner_approved": false,
+  "block_reason": "nli_train_english_unavailable",
+  "note": "Investigation closed. Dev mappings provisional with known sample exceptions. NLI training exports remain blocked (train English withheld)."
 }
