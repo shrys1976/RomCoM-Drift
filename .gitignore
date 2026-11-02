@@ -33,6 +33,10 @@ romcomx_data/toxicity_processed/evaluation_reference/
 # Row-level source manifests (regenerate via audit scripts)
 romcomx_data/nli_hindi_native/hindi_source_manifest.csv
 
+# Full EN–HI alignment tables (local only; checksums in repo)
+romcomx_data/nli_alignment/candidate_alignment.csv
+romcomx_data/nli_alignment/verified_pairs.jsonl
+
 # Generated JSONL anywhere except committed samples
 *.jsonl
 !data/samples/**/*.jsonl

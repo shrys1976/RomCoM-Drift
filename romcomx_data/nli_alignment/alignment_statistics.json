@@ -1,0 +1,176 @@
+{
+  "hindi_train_rows": 392702,
+  "english_train_rows": 392702,
+  "exact_identifier_matches": 0,
+  "status_counts": {
+    "verified": 375805,
+    "ambiguous": 15174,
+    "unmatched": 1723
+  },
+  "method_counts": {
+    "corroborated_premise_translation_and_unique_label": 375805,
+    "corroborated_premise_translation_duplicate_label": 15174,
+    "premise_translation_collision": 1449,
+    "no_corroborated_premise": 268,
+    "premise_label_count_conflict": 6
+  },
+  "verified_label_counts": {
+    "neutral": 125269,
+    "entailment": 125268,
+    "contradiction": 125268
+  },
+  "verified_label_agreement": 375805,
+  "english_in_verified_pair": 375805,
+  "english_only_in_ambiguous_groups": 15174,
+  "english_unmatched": 1723,
+  "premise_map_size": 127552,
+  "premise_disagreements": 5,
+  "premise_collisions": 198,
+  "label_order_skipped_english_rows": 105,
+  "label_order_skipped_english_indexes_head": [
+    6073,
+    10040,
+    11562,
+    16767,
+    21853,
+    23527,
+    26661,
+    30002,
+    30578,
+    30729,
+    33193,
+    36719,
+    42598,
+    48159,
+    57062,
+    65184,
+    73925,
+    75200,
+    76405,
+    78052
+  ],
+  "anchor": 25,
+  "safe_radius": 20,
+  "min_support": 2,
+  "same_index_label_hits": 135096,
+  "exact_cross_lingual_premise_overlaps": 0,
+  "digits": {
+    "verified_fields_with_english_digits": 70302,
+    "exact_digit_sequence": 62311,
+    "english_digits_present_in_hindi": 65407,
+    "mismatch_examples": [
+      {
+        "field": "premise",
+        "english_digits": [
+          "1"
+        ],
+        "hindi_digits": [],
+        "english": "Build environment Engineering Manufacturing Production ( all rate tooling ) ( 1st set of production tooling )",
+        "hindi": "निर्माण पर्यावरण इंजीनियरिंग विनिर्माण उत्पादन (सभी दर टूलिंग) (उत्पादन टूलिंग का पहला सेट)"
+      },
+      {
+        "field": "hypothesis",
+        "english_digits": [
+          "10"
+        ],
+        "hindi_digits": [],
+        "english": "I don 't like waiting , not even for 10 minutes .",
+        "hindi": "मुझे इंतज़ार करना अच्छा नहीं लगता, यहाँ तक कि दस मिनट भी नहीं।"
+      },
+      {
+        "field": "premise",
+        "english_digits": [
+          "73"
+        ],
+        "hindi_digits": [],
+        "english": "Had that piquant gipsy face been at the bottom of the crime , or was it 73 the baser mainspring of money ?",
+        "hindi": "क्या वह जिप्सी चेहरा अपराध की जड़ में था, या क्या वह पैसे का आधारभूत स्रोत था?"
+      },
+      {
+        "field": "hypothesis",
+        "english_digits": [
+          "4"
+        ],
+        "hindi_digits": [
+          "40"
+        ],
+        "english": "4 million will be divided nationwide , according to the German Prime Minister .",
+        "hindi": "जर्मनी के प्रधानमंत्री के मुताबिक देश भर में 40 लाख लोगों को बांटा जाएगा."
+      },
+      {
+        "field": "premise",
+        "english_digits": [
+          "1"
+        ],
+        "hindi_digits": [],
+        "english": "1 . Emergency medicine physicians should increase their knowledge , skills , and confidence in alcohol screening and intervention .",
+        "hindi": "आपात चिकित्सा चिकित्सकों को शराब की जांच और हस्तक्षेप में अपने ज्ञान, कौशल और विश्वास को बढ़ाना चाहिए।"
+      },
+      {
+        "field": "premise",
+        "english_digits": [
+          "197"
+        ],
+        "hindi_digits": [],
+        "english": "I 've always heard you Revolutionists held life cheap , but it seems there 's a difference when it 's your own life 197 in question .",
+        "hindi": "मैंने हमेशा सुना है कि आप क्रांतिकारी सस्ते दाम पर जीवन जीते हैं, लेकिन ऐसा लगता है कि जब आपकी अपनी जिंदगी पर सवाल उठता है तो फर्क पड़ता है।"
+      },
+      {
+        "field": "premise",
+        "english_digits": [
+          "20"
+        ],
+        "hindi_digits": [],
+        "english": "He hasn 't had a new thought for 20 years .",
+        "hindi": "बीस साल से उसका कोई नया विचार नहीं है।"
+      },
+      {
+        "field": "premise",
+        "english_digits": [
+          "1986"
+        ],
+        "hindi_digits": [
+          "१९८६"
+        ],
+        "english": "More a part of Europe than ever before , Spain joined the European Community ( now European Union ) in 1986 , giving further boost to a booming economy .",
+        "hindi": "पहले से कहीं ज़्यादा यूरोप का एक भाग, स्पेन १९८६ में यूरोपीय समुदाय (अब यूरोपीय संघ) में शामिल हो गया, जिसने एक बढ़ती हुई अर्थव्यवस्था को और बढ़ावा दिया।"
+      }
+    ]
+  },
+  "dev": {
+    "rows": 2490,
+    "repeated_english_premises": 830,
+    "unanimous_hindi_premises": 830,
+    "same_index_label_hits": 2490,
+    "split": "dev",
+    "english_path": "romcomx_data/raw/xnli_mt/XNLI-1.0/xnli.dev.tsv",
+    "hindi_path": "romcomx_data/raw/indicxnli/forward__dev__xnli_hi.json",
+    "rows_in_repeated_premises": 2490,
+    "singleton_premise_rows": 0
+  },
+  "test": {
+    "rows": 5010,
+    "repeated_english_premises": 1670,
+    "unanimous_hindi_premises": 1670,
+    "same_index_label_hits": 5010,
+    "split": "test",
+    "english_path": "romcomx_data/raw/xnli_mt/XNLI-1.0/xnli.test.tsv",
+    "hindi_path": "romcomx_data/raw/indicxnli/forward__test__xnli_hi.json",
+    "rows_in_repeated_premises": 5010,
+    "singleton_premise_rows": 0
+  },
+  "source_sha256": {
+    "romcomx_data/raw/xnli_mt/XNLI-MT-1.0/multinli/multinli.train.en.tsv": "bf2f6249149240d79b59ba649829dde49f7c9665efc9c9b818e78334c8f9d627",
+    "romcomx_data/raw/indicxnli/forward__train__xnli_hi.json": "ae4d2d59c807a70e699fbc51ad2cc5bf5b1030c0cdfd443c3fa44c1b446a4b3c"
+  },
+  "verdict": "PARTIALLY_RECOVERED",
+  "verified_dev_rows": 2490,
+  "verified_test_rows": 5010,
+  "verified_train_rows": 375805,
+  "verified_jsonl_rows": 383305,
+  "output_sha256": {
+    "verified_pairs.jsonl": "3a419f15d2ae3ac24f80639239e1ccbb38f972f73b31725b46dd18bcd4942dc6",
+    "candidate_alignment.csv": "ebf2754d466131bba488dd88d8ea9aef91856a1a07897f11d4170561350e16c9",
+    "review_sample.csv": "10783e207eb4541f96f4cc3358285fadea75dd163d0f5f32648eee94aff2a0d2"
+  }
+}

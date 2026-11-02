@@ -1,0 +1,413 @@
+{
+  "sample_ids": 255,
+  "overrides": {
+    "0": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Opening clause dropped; the Lawrence sentence matches."
+    },
+    "1": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "questionable",
+      "notes": "vain rendered as useless, and squashing rendered as finding."
+    },
+    "2": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Abdication became expulsion; proclamation of the Republic was dropped."
+    },
+    "4": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Gore was rendered as fair-skinned (गोर)."
+    },
+    "6": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "An intended return was rendered as already completed."
+    },
+    "10": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "owns up to was rendered as ownership."
+    },
+    "11": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "questionable",
+      "notes": "I've had enough is not what the Hindi premise says."
+    },
+    "12": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Greek family beaches became among Greek families."
+    },
+    "17": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "questionable",
+      "notes": "conjure was rendered as imagine."
+    },
+    "21": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "The unit minutes was dropped from 11 or 12."
+    },
+    "25": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "same here became right here the same way."
+    },
+    "27": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "talking heads became talking chiefs; the first-instance claim remains."
+    },
+    "32": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "not_equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "seat of his pants was literalized, so the contradiction is lost."
+    },
+    "42": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "not_equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "Fascination was reversed into the visitors having a hobby."
+    },
+    "45": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "talk back was weakened to talking."
+    },
+    "47": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "all roads led was lost; the Tokyo rename still contradicts the hypothesis."
+    },
+    "50": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Bedside table became table."
+    },
+    "55": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "stubbled face became a stubborn face."
+    },
+    "57": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "questionable",
+      "label_judgment": "questionable",
+      "notes": "cynicism was rendered as whim (सनक)."
+    },
+    "61": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "wheel and deal was split into wheel and deal."
+    },
+    "64": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "bow out became bend, so it no longer entails retreat."
+    },
+    "65": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "questionable",
+      "label_judgment": "equivalent",
+      "notes": "a year alter was rendered as changed."
+    },
+    "68": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "A long turn was compressed and pretty good job is muddled."
+    },
+    "74": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "disposes of that is only weakly translated."
+    },
+    "76": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "understand and memorize are both present but hard to parse."
+    },
+    "82": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "ran out of time was dropped."
+    },
+    "84": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "not_equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "never been happier became were never happy."
+    },
+    "89": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "questionable",
+      "label_judgment": "questionable",
+      "notes": "Construct validity lost the word construct."
+    },
+    "90": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "garrison and permanently were garbled away."
+    },
+    "93": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "hold the line became support (समर्थन); entailment flips."
+    },
+    "95": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "hour house was translated as a house of hours; the typo was kept."
+    },
+    "98": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "not_equivalent",
+      "label_judgment": "questionable",
+      "notes": "pat down became belittle on the premise and slap on the hypothesis."
+    },
+    "100": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "irreverent became unpleasant."
+    },
+    "107": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "The film title was translated word for word."
+    },
+    "110": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "not_equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "career years became a career that lasts for years."
+    },
+    "111": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "not_equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "Questionnaires are the only method became questions are used only in activity analysis."
+    },
+    "115": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "The painful grip was dropped from the premise."
+    },
+    "119": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "The double negative was weakened."
+    },
+    "121": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "The Piet name was garbled."
+    },
+    "125": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "pottering became making toys, and swell became a swollen head."
+    },
+    "133": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "DILUTION was dropped from the premise."
+    },
+    "135": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "questionable",
+      "label_judgment": "equivalent",
+      "notes": "funny became strange (अजीब)."
+    },
+    "142": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "The method list was merged across clause boundaries."
+    },
+    "144": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Band clauses were crossed."
+    },
+    "148": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "A short stay was dropped; the hypothesis matches the English hypothesis."
+    },
+    "156": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "I always knew it and Rot were dropped, so the entailment no longer follows."
+    },
+    "165": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "not_equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "The hypothesis collapsed into a repeated token."
+    },
+    "180": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Clinton was rendered as Hillary."
+    },
+    "181": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "No John Grisham was parsed as a name."
+    },
+    "192": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "not_equivalent",
+      "label_judgment": "equivalent",
+      "notes": "the financial industry became the world; the relation stays neutral."
+    },
+    "206": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "ended up in jail became put himself in jail."
+    },
+    "213": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Monroe was rendered as मोनकॉर्ड."
+    },
+    "215": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "do not stay put became do not remain; the contradiction moves toward entailment."
+    },
+    "217": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "did not trouble to rise became had no trouble rising."
+    },
+    "219": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "P.S. was rendered as initials; the theatre claim remains."
+    },
+    "230": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "not_equivalent",
+      "label_judgment": "equivalent",
+      "notes": "A bunch of would became a bunch; the relation stays neutral."
+    },
+    "231": {
+      "premise_judgment": "not_equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "not_equivalent",
+      "notes": "after a fashion was literalized, so the entailment fails."
+    },
+    "238": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "muscle hijackers is literal; the counts and Mihdhar remain."
+    },
+    "245": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Two-copy premise. The same Hindi hypothesis Na is also the contradiction row, so both rows are in the conflicting-label exclusion."
+    },
+    "246": {
+      "premise_judgment": "questionable",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Two-copy premise. The heading is reordered in Hindi; the hypothesis matches."
+    },
+    "247": {
+      "premise_judgment": "withheld",
+      "hypothesis_judgment": "withheld",
+      "label_judgment": "withheld",
+      "notes": "Place des Vosges has two contradiction rows. English candidates 9 and 57272. No pair was selected."
+    },
+    "248": {
+      "premise_judgment": "withheld",
+      "hypothesis_judgment": "withheld",
+      "label_judgment": "withheld",
+      "notes": "Second Hindi hypothesis for the same Place des Vosges contradiction slot. Withheld."
+    },
+    "249": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Near-paraphrase English premises share one Hindi premise. This hypothesis stays distinct."
+    },
+    "250": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "questionable",
+      "label_judgment": "equivalent",
+      "notes": "hire it out was rendered as rent it. Same Hindi premise as row 318."
+    },
+    "251": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "not_equivalent",
+      "label_judgment": "questionable",
+      "notes": "approve every deal became complete every deal."
+    },
+    "252": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Hypothesis stays distinct under the shared Hindi premise."
+    },
+    "253": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Hypothesis stays distinct under the shared Hindi premise."
+    },
+    "254": {
+      "premise_judgment": "equivalent",
+      "hypothesis_judgment": "equivalent",
+      "label_judgment": "equivalent",
+      "notes": "Hypothesis stays distinct under the shared Hindi premise."
+    }
+  }
+}
