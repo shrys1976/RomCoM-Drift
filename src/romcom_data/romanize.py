@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
@@ -26,12 +27,12 @@ _CONSONANTS = {
 }
 _INDEPENDENT = {
     "अ": "a", "आ": "aa", "इ": "i", "ई": "ee", "उ": "u", "ऊ": "oo",
-    "ए": "e", "ऐ": "ai", "ओ": "o", "औ": "au", "ऋ": "ri",
+    "ए": "e", "ऐ": "ai", "ओ": "o", "औ": "au", "ऋ": "ri", "ऑ": "o",
 }
 _MATRA = {
     "ा": "aa", "ि": "i", "ी": "ee", "ु": "u", "ू": "oo",
-    "े": "e", "ै": "ai", "ो": "o", "ौ": "au", "ृ": "ri",
-    "ं": "n", "ः": "h", "ँ": "n",
+    "े": "e", "ै": "ai", "ो": "o", "ौ": "au", "ॉ": "o", "ॊ": "o", "ॅ": "e", "ॆ": "e",
+    "ृ": "ri", "ं": "n", "ः": "h", "ँ": "n",
 }
 _VIRAMA = "्"
 
@@ -154,6 +155,15 @@ class DakshinaRomanizer:
         word = nfc(native.strip())
         if word in self.native_to_canonical:
             canon = self.native_to_canonical[word]
+            if DEVANAGARI.search(canon):
+                fb = fallback_transliterate(word)
+                return RomanizationHit(
+                    fb,
+                    "fallback_indic_map_mixed_lexicon_canon",
+                    word,
+                    canon,
+                    True,
+                )
             return RomanizationHit(canon, "dakshina_canonical", word, canon, True)
         if DEVANAGARI.search(word):
             fb = fallback_transliterate(word)
@@ -173,3 +183,62 @@ class DakshinaRomanizer:
 @lru_cache(maxsize=1)
 def default_romanizer() -> DakshinaRomanizer:
     return DakshinaRomanizer()
+
+
+_DEVANAGARI_RUN = re.compile(r"[\u0900-\u097F]+")
+
+
+def romanize_mixed_text(
+    text: str, romanizer: DakshinaRomanizer
+) -> tuple[str, list[dict[str, object]]]:
+    """Romanize contiguous Devanagari runs; preserve Latin and other scripts unchanged."""
+    traces: list[dict[str, object]] = []
+    parts: list[str] = []
+    last = 0
+    for match in _DEVANAGARI_RUN.finditer(text):
+        if match.start() > last:
+            gap = text[last:match.start()]
+            parts.append(gap)
+            if re.search(r"[A-Za-z]", gap):
+                traces.append(
+                    {
+                        "operation": "latin_passthrough",
+                        "token": gap,
+                        "offsets": [last, match.start()],
+                    }
+                )
+        native_run = match.group(0)
+        hit = romanizer.romanize_native(native_run)
+        parts.append(hit.surface)
+        traces.append(
+            {
+                "operation": "devanagari_romanize",
+                "token": native_run,
+                "selected": hit.surface,
+                "method": hit.method,
+                "native": hit.native,
+                "attested": hit.attested,
+                "offsets": [match.start(), match.end()],
+            }
+        )
+        last = match.end()
+    parts.append(text[last:])
+    out = "".join(parts)
+    return _finalize_latin_runs(out), traces
+
+
+def _finalize_latin_runs(text: str) -> str:
+    """Transliterate any remaining Devanagari letters (danda may remain)."""
+
+    def _repl(match: re.Match[str]) -> str:
+        run = match.group(0)
+        if all(ch in ("\u0964", "\u0965", "\u093c", "\u094d") for ch in run):
+            return ""
+        return fallback_transliterate(run)
+
+    cleaned = _DEVANAGARI_RUN.sub(_repl, text)
+    return cleaned.replace("\u093c", "").replace("\u094d", "")
+
+
+def residual_devanagari_chars(text: str) -> int:
+    return len(DEVANAGARI.findall(text))

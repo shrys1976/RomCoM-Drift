@@ -25,6 +25,14 @@ romcomx_data/intermediate/
 romcomx_data/traces/
 romcomx_data/inventories/
 
+# Built toxicity experiment splits and construction traces (local only)
+romcomx_data/toxicity_processed/EXP-*/
+romcomx_data/toxicity_processed/traces/
+romcomx_data/toxicity_processed/evaluation_reference/
+
+# Row-level source manifests (regenerate via audit scripts)
+romcomx_data/nli_hindi_native/hindi_source_manifest.csv
+
 # Generated JSONL anywhere except committed samples
 *.jsonl
 !data/samples/**/*.jsonl

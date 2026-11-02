@@ -13,9 +13,9 @@ Verdict: **CONDITIONAL_GO** (augmentation authorized; training and scoring not a
 
 ## Active constraints for augmentation
 
-- [ ] Apply existing EXP-01/02/03 consistency checks (shared `example_id`, label, `project_split`).
-- [ ] User prompt (hin_Deva slot 0) unchanged; romanize/noise assistant target only.
-- [ ] Do not use validation as the final test split; test is held out for final evaluation.
+- [x] Apply existing EXP-01/02/03 consistency checks (shared `example_id`, label, `project_split`).
+- [x] User prompt (hin_Deva slot 0) unchanged; romanize/noise assistant target only.
+- [x] Do not use validation as the final test split; test is held out for final evaluation.
 - [ ] Generation rubric applies when scoring is run later; classification accuracy is not an outcome.
 
 ## Not authorized

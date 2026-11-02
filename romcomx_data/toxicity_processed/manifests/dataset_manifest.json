@@ -1,0 +1,42 @@
+{
+  "phase": "2.1",
+  "task": "hindi_refusal_response_generation",
+  "constructed_utc": "2026-11-02T06:35:47.911395+00:00",
+  "source_manifest_sha256": "58d85ddaf78bb05600bc802049c8ce12ef8886f4439bfe87b9ca9fd25e1673ae",
+  "config_hash": "edb6448d4a679db665b04d01fcee6f79684e2dea7b1c9fe491746b07114ff54e",
+  "exp_conditions": {
+    "EXP-00": "untrained_base_model_no_dataset",
+    "EXP-01": "canonical_hindi_romanization",
+    "EXP-02": "attested_dakshina_variants_p_variant",
+    "EXP-03": "matched_random_noise_from_exp02_positions"
+  },
+  "p_variant": 0.35,
+  "base_seed": 42,
+  "row_counts": {
+    "EXP-01:train": 5585,
+    "EXP-02:train": 5585,
+    "EXP-03:train": 5585,
+    "EXP-01:test": 723,
+    "EXP-02:test": 723,
+    "EXP-03:test": 723,
+    "EXP-01:validation": 690,
+    "EXP-02:validation": 690,
+    "EXP-03:validation": 690
+  },
+  "retained_examples": 6998,
+  "splits": {
+    "train": 5585,
+    "test": 723,
+    "validation": 690
+  },
+  "training_files": {
+    "EXP-01": "romcomx_data/toxicity_processed/EXP-01_canonical/train.jsonl",
+    "EXP-02": "romcomx_data/toxicity_processed/EXP-02_realistic/train.jsonl",
+    "EXP-03": "romcomx_data/toxicity_processed/EXP-03_matched_noise/train.jsonl"
+  },
+  "evaluation_reference": {
+    "validation": "romcomx_data/toxicity_processed/evaluation_reference/validation.jsonl",
+    "test": "romcomx_data/toxicity_processed/evaluation_reference/test.jsonl",
+    "note": "Devanagari assistant references only; not for training or hyperparameter selection."
+  }
+}

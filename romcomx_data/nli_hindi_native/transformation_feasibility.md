@@ -1,0 +1,27 @@
+# Transformation feasibility
+
+Sample romanization of Hindi premise and hypothesis. Full EXP files were not built.
+
+```json
+{
+  "sample_examples": 300,
+  "sample_fields": 600,
+  "sample_seed": 42,
+  "applies_to": "premise and hypothesis (both Hindi observations)",
+  "conditions": {
+    "EXP-01": "canonical Dakshina romanization of Hindi tokens",
+    "EXP-02": "attested non-canonical Dakshina variants",
+    "EXP-03": "matched-distance noise on EXP-02 selected tokens"
+  },
+  "token_methods": {
+    "dakshina_canonical": 7884,
+    "fallback_indic_map": 1805,
+    "latin_passthrough": 11
+  },
+  "dictionary_coverage_pct": 81.37,
+  "residual_devanagari_chars_excluding_danda": 8,
+  "feasible": true,
+  "pre_build_note": "A few Devanagari characters can remain after the current fallback map. That is a construction fix before EXP generation, not a reason to reject the Hindi-native source strategy.",
+  "not_run": "full EXP dataset generation and training"
+}
+```

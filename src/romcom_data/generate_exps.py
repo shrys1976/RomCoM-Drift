@@ -11,6 +11,12 @@ from romcom_data.augmentation import (
 from romcom_data.romanize import DakshinaRomanizer
 from romcom_data.stable_hash import derive_rng
 
+TARGET_ONLY_TASKS = frozenset({"toxicity", "hindi_refusal_response_generation"})
+
+
+def _target_only(task: str) -> bool:
+    return task in TARGET_ONLY_TASKS
+
 
 def _input_fields(task: str) -> list[tuple[str, str]]:
     if task == "nli":
@@ -40,7 +46,7 @@ def generate_one(
     for container, key in _input_fields(task):
         text = _get(e1, container, key)
         _set(e1, container, key, canonicalize_text(text, romanizer, t1, key))
-    if task == "toxicity":
+    if _target_only(task):
         text = str(e1.get("target", {}).get("response", ""))
         e1.setdefault("target", {})["response"] = canonicalize_text(
             text, romanizer, t1, "target_response"
@@ -59,7 +65,7 @@ def generate_one(
         )
         _set(e2, container, key, new)
         changed_all.extend(changed)
-    if task == "toxicity":
+    if _target_only(task):
         text = str(e2.get("target", {}).get("response", ""))
         new, changed = realistic_from_canonical(
             text, romanizer, rng, p_variant, t2, "target_response"
@@ -76,7 +82,7 @@ def generate_one(
         text = _get(e3, container, key)
         new = noise_from_changes(text, changed_all, romanizer, rng3, t3, key)
         _set(e3, container, key, new)
-    if task == "toxicity":
+    if _target_only(task):
         text = str(e3.get("target", {}).get("response", ""))
         new = noise_from_changes(
             text, changed_all, romanizer, rng3, t3, "target_response"
@@ -112,7 +118,7 @@ def generate_conditions(
         for container, key in _input_fields(task):
             text = _get(e1, container, key)
             _set(e1, container, key, canonicalize_text(text, romanizer, t1, key))
-        if task == "toxicity":
+        if _target_only(task):
             text = str(e1.get("target", {}).get("response", ""))
             e1.setdefault("target", {})["response"] = canonicalize_text(
                 text, romanizer, t1, "target_response"
@@ -135,7 +141,7 @@ def generate_conditions(
             )
             _set(e2, container, key, new)
             changed_all.extend(changed)
-        if task == "toxicity":
+        if _target_only(task):
             text = str(e2.get("target", {}).get("response", ""))
             new, changed = realistic_from_canonical(
                 text, romanizer, rng, p_variant, t2, "target_response"
@@ -157,7 +163,7 @@ def generate_conditions(
             text = _get(e3, container, key)
             new = noise_from_changes(text, changed_all, romanizer, rng3, t3, key)
             _set(e3, container, key, new)
-        if task == "toxicity":
+        if _target_only(task):
             text = str(e3.get("target", {}).get("response", ""))
             new = noise_from_changes(
                 text, changed_all, romanizer, rng3, t3, "target_response"

@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "issues": [],
+  "split_counts_manifest": {
+    "train": 5585,
+    "test": 723,
+    "validation": 690
+  },
+  "exp02_exp03_position_checks": 90126,
+  "exp02_exp03_position_checks_distance_ok": 90126,
+  "train_only_in_train_file": 5585,
+  "examples_with_residual_devanagari_letters": 0
+}

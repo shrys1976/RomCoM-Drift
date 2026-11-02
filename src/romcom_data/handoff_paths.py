@@ -25,6 +25,14 @@ REPORTS = HANDOFF / "reports"
 NLI_INVESTIGATION = HANDOFF / "nli_investigation"
 PARAPHRASE_AUDIT = HANDOFF / "paraphrase_audit"
 TOXICITY_AUDIT = HANDOFF / "toxicity_audit"
+TOXICITY_PROCESSED = HANDOFF / "toxicity_processed"
+TOXICITY_EXP01 = TOXICITY_PROCESSED / "EXP-01_canonical"
+TOXICITY_EXP02 = TOXICITY_PROCESSED / "EXP-02_realistic"
+TOXICITY_EXP03 = TOXICITY_PROCESSED / "EXP-03_matched_noise"
+TOXICITY_TRACES = TOXICITY_PROCESSED / "traces"
+TOXICITY_MANIFESTS = TOXICITY_PROCESSED / "manifests"
+TOXICITY_REPORTS = TOXICITY_PROCESSED / "reports"
+TOXICITY_EVAL_REF = TOXICITY_PROCESSED / "evaluation_reference"
 SRC_MIRROR = HANDOFF / "src"
 
 
@@ -48,6 +56,16 @@ def ensure_handoff_layout() -> None:
         NLI_INVESTIGATION,
         PARAPHRASE_AUDIT,
         TOXICITY_AUDIT,
+        TOXICITY_PROCESSED,
+        TOXICITY_EXP01,
+        TOXICITY_EXP02,
+        TOXICITY_EXP03,
+        TOXICITY_TRACES / "EXP-01",
+        TOXICITY_TRACES / "EXP-02",
+        TOXICITY_TRACES / "EXP-03",
+        TOXICITY_MANIFESTS,
+        TOXICITY_REPORTS,
+        TOXICITY_EVAL_REF,
         SRC_MIRROR / "source_loaders",
         SRC_MIRROR / "preprocessing",
         SRC_MIRROR / "augmentation",

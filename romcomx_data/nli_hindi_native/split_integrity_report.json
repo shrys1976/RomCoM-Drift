@@ -1,0 +1,39 @@
+{
+  "official_files": {
+    "train": {
+      "filename": "forward__train__xnli_hi.json",
+      "json_split_key": "train",
+      "sha256": "ae4d2d59c807a70e699fbc51ad2cc5bf5b1030c0cdfd443c3fa44c1b446a4b3c",
+      "n_rows": 392702
+    },
+    "validation": {
+      "filename": "forward__dev__xnli_hi.json",
+      "json_split_key": "validation",
+      "sha256": "7b0c52e0d0f42625b8128aed61a1bc61929558e78be4bc92b892adfac9726f1b",
+      "n_rows": 2490
+    },
+    "test": {
+      "filename": "forward__test__xnli_hi.json",
+      "json_split_key": "test",
+      "sha256": "8a03e83b031802bb8e2134e9d0ba76097a06f03daf9b70131e3b20b7e508d350",
+      "n_rows": 5010
+    }
+  },
+  "counts": {
+    "train": 392702,
+    "validation": 2490,
+    "test": 5010
+  },
+  "source_id_duplicates": 0,
+  "within_split_duplicate_pairs": {
+    "train": 330,
+    "test": 2
+  },
+  "cross_split_identical_premise_hypothesis": {
+    "train_validation": 0,
+    "train_test": 0,
+    "validation_test": 0
+  },
+  "english_alignment": "not_used",
+  "id_policy": "indicxnli-hi:{official_split}:{row_index} from Hindi JSON order only"
+}

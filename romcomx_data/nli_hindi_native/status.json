@@ -1,0 +1,16 @@
+{
+  "status": "READY_FOR_OWNER_REVIEW",
+  "blockers": [],
+  "audited_utc": "2026-11-02T06:58:20.064510+00:00",
+  "n_examples": 400202,
+  "counts": {
+    "train": 392702,
+    "validation": 2490,
+    "test": 5010
+  },
+  "research_claim": "romanized_hindi_semantic_understanding",
+  "not_claimed": "hindi_english_code_mixed_semantic_understanding",
+  "english_training_alignment": "unresolved_withheld",
+  "rebuild": "not_run",
+  "training": "not_run"
+}

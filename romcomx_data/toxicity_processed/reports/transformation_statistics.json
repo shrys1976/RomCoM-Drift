@@ -1,0 +1,53 @@
+{
+  "token_level": {
+    "EXP-01": {
+      "token_operation_counts": {
+        "unchanged": 389662,
+        "canonical_tie_fallback": 30796,
+        "canonicalize": 1063
+      },
+      "canonical_tie_markers": 30796,
+      "tokens_changed": 1063,
+      "tokens_unchanged": 389662,
+      "exp03_noise_distance_match_rate": 1.0,
+      "exp03_noise_tokens_evaluated": 0
+    },
+    "EXP-02": {
+      "token_operation_counts": {
+        "attested_variant": 90126
+      },
+      "canonical_tie_markers": 0,
+      "tokens_changed": 90126,
+      "tokens_unchanged": 0,
+      "exp03_noise_distance_match_rate": 1.0,
+      "exp03_noise_tokens_evaluated": 0
+    },
+    "EXP-03": {
+      "token_operation_counts": {
+        "random_noise": 90126
+      },
+      "canonical_tie_markers": 0,
+      "tokens_changed": 90126,
+      "tokens_unchanged": 0,
+      "exp03_noise_distance_match_rate": 1.0,
+      "exp03_noise_tokens_evaluated": 90126
+    }
+  },
+  "sentence_level": {
+    "examples": 6998,
+    "pre_romanization_methods": {
+      "dakshina_canonical": 602906,
+      "fallback_indic_map": 96916,
+      "latin_passthrough": 115
+    },
+    "residual_devanagari_in_precanonical_base": 0
+  },
+  "dictionary_coverage": {
+    "devanagari_tokens_lexicon_hit": 602906,
+    "devanagari_tokens_fallback_or_oov": 96916,
+    "latin_passthrough_tokens": 115,
+    "dictionary_coverage_pct": 86.1513,
+    "canonical_tie_markers_exp01": 30796,
+    "note_ties": "canonical_tie_fallback marks frequency ties; lexicographic fallback is reproducibility only, not an empirical preference claim."
+  }
+}
