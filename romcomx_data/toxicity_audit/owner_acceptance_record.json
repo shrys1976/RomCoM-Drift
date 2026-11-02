@@ -1,0 +1,18 @@
+{
+  "decision": "ACCEPT",
+  "decided_on": "2026-11-02",
+  "manifest_sha256": "58d85ddaf78bb05600bc802049c8ce12ef8886f4439bfe87b9ca9fd25e1673ae",
+  "manifest_regrouping_required": false,
+  "cross_class_122_member_group": {
+    "disposition": "retain_on_frozen_manifest",
+    "blocker_closed": "owner_accept_cross_class_supervision_findings"
+  },
+  "augmentation": {
+    "authorized": true,
+    "scope": "EXP-01/02/03 under frozen 6998-row manifest and 80/10/10 split",
+    "consistency_checks": "existing EXP-01/02/03 shared example_id, label, and project_split rules apply"
+  },
+  "training_authorized": false,
+  "scoring_authorized": false,
+  "task": "hindi_refusal_response_generation"
+}

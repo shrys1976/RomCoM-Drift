@@ -1,16 +1,15 @@
 {
   "verdict": "CONDITIONAL_GO",
   "scope": "secondary_hindi_refusal_register_generation",
-  "experimental_construction": "SOURCE_MANIFEST_FROZEN_AUGMENTATION_NOT_RUN",
+  "experimental_construction": "AUGMENTATION_AUTHORIZED_MANIFEST_UNCHANGED",
   "licenses_approved": true,
   "licenses_not_flattened": true,
   "english_pivot": "not_applicable",
-  "blockers": [
-    "owner_confirm_source_freeze_checklist"
-  ],
+  "blockers": [],
   "owner_decisions": [
-    "Licenses approved by the owner on 2026-11-01 and kept separate: IndicAlign CC-BY-4.0 and Dolly-15K upstream CC-BY-SA-3.0.",
-    "Confirm the frozen source manifest, tie-row disposition, prompt-group splits, and the generation rubric before any augmentation."
+    "Owner accepted frozen manifest 58d85ddaf78bb05600bc802049c8ce12ef8886f4439bfe87b9ca9fd25e1673ae on 2026-11-02 with no regrouping.",
+    "Cross-class 122-member train group accepted; conflicting supervision acknowledged.",
+    "Augmentation authorized for EXP-01/02/03 under frozen 6998 rows and 80/10/10 split. Training and scoring not authorized."
   ],
   "task_definition": {
     "research_claim": "Secondary Hindi refusal-register task. It does not measure general toxicity detection or code-mixed safety robustness.",
@@ -27,12 +26,13 @@
     },
     "text_binding": "Hindi refusal-response generation. The model receives the unchanged Hindi Devanagari user turn. Only the assistant turn is romanized. This is not Romanized-input understanding and not general code-mixed safety robustness.",
     "transformation_constraints_unchanged": true,
-    "experimental_construction": "SOURCE_MANIFEST_FROZEN_AUGMENTATION_NOT_RUN"
+    "experimental_construction": "AUGMENTATION_AUTHORIZED_MANIFEST_UNCHANGED"
   },
   "task_suitability_summary": "Hindi Devanagari user turns stay fixed. Assistant turns are the refusal or ordinary-answer targets. This is not toxicity detection.",
   "secondary_register_fit": "Generation-only comparison of Hindi refusal targets versus ordinary Dolly answers, after owner approval. Classification is confounded by the template.",
   "benign_file_replaced": false,
   "head_slice_not_used": true,
   "source_manifest": "58d85ddaf78bb05600bc802049c8ce12ef8886f4439bfe87b9ca9fd25e1673ae",
-  "tie_disposition": "retain_on_source_list_order"
+  "tie_disposition": "retain_on_source_list_order",
+  "augmentation_authorized_on": "2026-11-02"
 }

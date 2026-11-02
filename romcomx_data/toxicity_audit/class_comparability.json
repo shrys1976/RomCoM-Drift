@@ -1,42 +1,61 @@
 {
+  "status": "current",
+  "revision": "2026_11_01_manifest_aligned",
+  "aligned_to_final_manifest": true,
+  "benign_source_file": "dolly_t_seed42_sample.jsonl",
+  "benign_source_row_index_min": 1,
+  "benign_source_row_index_max": 15006,
   "toxic": {
-    "class_name": "toxic_matrix_local",
+    "class_name": "toxic_matrix_retained",
     "counts": {
-      "rows": 5000,
-      "single_block": 5000,
+      "rows": 4998,
+      "single_block": 4998,
       "multi_block": 0,
-      "hin_deva_present": 5000,
-      "hin_latn_present": 5000,
-      "eng_present": 5000,
+      "hin_deva_present": 4998,
+      "hin_latn_present": 4998,
+      "eng_present": 4998,
       "deva_order_aligned": 4949,
       "latn_order_tie": 218,
-      "eng_user_latin_majority": 4999,
-      "eng_assistant_latin_majority": 5000,
-      "deva_user_devanagari_majority": 5000,
-      "deva_assistant_devanagari_majority": 5000,
-      "latn_user_latin_majority": 5000,
-      "latn_assistant_latin_majority": 5000,
-      "latn_order_aligned": 4780,
+      "eng_user_latin_majority": 4997,
+      "eng_assistant_latin_majority": 4998,
+      "deva_user_devanagari_majority": 4998,
+      "deva_assistant_devanagari_majority": 4998,
+      "latn_user_latin_majority": 4998,
+      "latn_assistant_latin_majority": 4998,
+      "latn_order_aligned": 4779,
       "deva_order_tie": 37,
-      "deva_order_swapped": 14,
-      "latn_order_swapped": 2,
+      "deva_order_swapped": 12,
       "deva_user_code_mixed": 5,
       "deva_assistant_code_mixed": 2,
+      "latn_order_swapped": 1,
       "eng_user_devanagari_majority": 1
     },
-    "parsed_from": "eng_Latn positional [user, assistant]",
+    "parsed_from": "hin_Deva positional [user, assistant]; canonical model_input / model_target interface",
+    "eng_latn_reference_only": "eng_Latn lengths and order checks are alignment reference, not the generation interface",
     "num_turns_values": {
-      "None": 5000
+      "None": 4998
     },
-    "prompt_chars_eng": {
-      "n": 5000,
+    "prompt_chars_hin_deva": {
+      "n": 4998,
+      "mean": 211.2,
+      "p50": 183,
+      "p90": 371
+    },
+    "assistant_chars_hin_deva": {
+      "n": 4998,
+      "mean": 591.7,
+      "p50": 579,
+      "p90": 730
+    },
+    "prompt_chars_eng_reference": {
+      "n": 4998,
       "mean": 202.7,
       "p50": 175,
       "p90": 357
     },
-    "assistant_chars_eng": {
-      "n": 5000,
-      "mean": 579.0,
+    "assistant_chars_eng_reference": {
+      "n": 4998,
+      "mean": 578.9,
       "p50": 568,
       "p90": 712
     },
@@ -65,17 +84,30 @@
       "deva_assistant_code_mixed": 10,
       "deva_assistant_latin_majority": 2
     },
-    "parsed_from": "eng_Latn positional [user, assistant]",
+    "parsed_from": "hin_Deva positional [user, assistant]; canonical model_input / model_target interface",
+    "eng_latn_reference_only": "eng_Latn lengths and order checks are alignment reference, not the generation interface",
     "num_turns_values": {
       "1.0": 2000
     },
-    "prompt_chars_eng": {
+    "prompt_chars_hin_deva": {
+      "n": 2000,
+      "mean": 70.2,
+      "p50": 54,
+      "p90": 126
+    },
+    "assistant_chars_hin_deva": {
+      "n": 2000,
+      "mean": 376.3,
+      "p50": 186,
+      "p90": 874
+    },
+    "prompt_chars_eng_reference": {
       "n": 2000,
       "mean": 69.1,
       "p50": 54,
       "p90": 122
     },
-    "assistant_chars_eng": {
+    "assistant_chars_eng_reference": {
       "n": 2000,
       "mean": 370.6,
       "p50": 185,
@@ -87,18 +119,134 @@
   },
   "confounds": {
     "same_conversation_shape": true,
-    "prompt_mean_chars_toxic_vs_benign": [
+    "prompt_mean_chars_hin_deva_toxic_vs_benign": [
+      211.2,
+      70.2
+    ],
+    "assistant_mean_chars_hin_deva_toxic_vs_benign": [
+      591.7,
+      376.3
+    ],
+    "prompt_mean_chars_eng_reference_toxic_vs_benign": [
       202.7,
       69.1
     ],
-    "assistant_mean_chars_toxic_vs_benign": [
-      579.0,
+    "assistant_mean_chars_eng_reference_toxic_vs_benign": [
+      578.9,
       370.6
     ],
     "language_binding": "Canonical text is hin_Deva. The loader sets language='hi' only for that field. eng_Latn is retained as a parallel reference for role checks.",
     "register_confound": "Toxic_Matrix assistant turns are templated refusals. Dolly_T assistant turns are ordinary answers. The class contrast is refusal register versus ordinary answer, which matches the intended task and does not match toxic-input classification.",
     "length_confound": "Toxic user prompts and assistant refusals are longer than Dolly answers. Length can confound romanization difficulty across classes.",
-    "sampling_confound": "Toxic rows are a 5000-row shuffle from Toxic_Matrix. Benign rows are the first 2000 Dolly_T rows, not a matched shuffle.",
+    "sampling_confound": "Toxic rows are a 5000-row local subsample from Toxic_Matrix. Benign rows are a deterministic seed-42 shuffle of Dolly_T train (see dolly_t_seed42_sample.jsonl and dolly_t_seed42_manifest.csv). They are not the Dolly_T train prefix. Source row indices span the full Dolly_T train range.",
     "hin_latn_order_caution": "Length alignment finds a minority of hin_Latn pairs swapped relative to eng_Latn. Do not treat hin_Latn slot order as a reliable role encoding."
+  },
+  "historical_superseded": {
+    "note": "Prior class_comparability.json used eng_Latn length summaries and stated incorrectly that benign rows were the Dolly_T train prefix. That file is preserved here for audit history only.",
+    "prior_revision": "2026_11_01_rev3_eng_latn_interface",
+    "prior_document": {
+      "toxic": {
+        "class_name": "toxic_matrix_local",
+        "counts": {
+          "rows": 5000,
+          "single_block": 5000,
+          "multi_block": 0,
+          "hin_deva_present": 5000,
+          "hin_latn_present": 5000,
+          "eng_present": 5000,
+          "deva_order_aligned": 4949,
+          "latn_order_tie": 218,
+          "eng_user_latin_majority": 4999,
+          "eng_assistant_latin_majority": 5000,
+          "deva_user_devanagari_majority": 5000,
+          "deva_assistant_devanagari_majority": 5000,
+          "latn_user_latin_majority": 5000,
+          "latn_assistant_latin_majority": 5000,
+          "latn_order_aligned": 4780,
+          "deva_order_tie": 37,
+          "deva_order_swapped": 14,
+          "latn_order_swapped": 2,
+          "deva_user_code_mixed": 5,
+          "deva_assistant_code_mixed": 2,
+          "eng_user_devanagari_majority": 1
+        },
+        "parsed_from": "eng_Latn positional [user, assistant]",
+        "num_turns_values": {
+          "None": 5000
+        },
+        "prompt_chars_eng": {
+          "n": 5000,
+          "mean": 202.7,
+          "p50": 175,
+          "p90": 357
+        },
+        "assistant_chars_eng": {
+          "n": 5000,
+          "mean": 579.0,
+          "p50": 568,
+          "p90": 712
+        },
+        "hin_deva_row_pct": 100.0,
+        "hin_latn_row_pct": 100.0,
+        "eng_row_pct": 100.0
+      },
+      "benign": {
+        "class_name": "dolly_t_seed42",
+        "counts": {
+          "rows": 2000,
+          "single_block": 2000,
+          "multi_block": 0,
+          "hin_deva_present": 2000,
+          "hin_latn_present": 0,
+          "eng_present": 2000,
+          "deva_order_aligned": 1881,
+          "latn_order_tie": 2000,
+          "eng_user_latin_majority": 2000,
+          "eng_assistant_latin_majority": 1980,
+          "deva_user_devanagari_majority": 2000,
+          "deva_assistant_devanagari_majority": 1979,
+          "deva_order_swapped": 39,
+          "deva_order_tie": 80,
+          "deva_user_code_mixed": 4,
+          "deva_assistant_code_mixed": 10,
+          "deva_assistant_latin_majority": 2
+        },
+        "parsed_from": "eng_Latn positional [user, assistant]",
+        "num_turns_values": {
+          "1.0": 2000
+        },
+        "prompt_chars_eng": {
+          "n": 2000,
+          "mean": 69.1,
+          "p50": 54,
+          "p90": 122
+        },
+        "assistant_chars_eng": {
+          "n": 2000,
+          "mean": 370.6,
+          "p50": 185,
+          "p90": 841
+        },
+        "hin_deva_row_pct": 100.0,
+        "hin_latn_row_pct": 0.0,
+        "eng_row_pct": 100.0
+      },
+      "confounds": {
+        "same_conversation_shape": true,
+        "prompt_mean_chars_toxic_vs_benign": [
+          202.7,
+          69.1
+        ],
+        "assistant_mean_chars_toxic_vs_benign": [
+          579.0,
+          370.6
+        ],
+        "language_binding": "Canonical text is hin_Deva. The loader sets language='hi' only for that field. eng_Latn is retained as a parallel reference for role checks.",
+        "register_confound": "Toxic_Matrix assistant turns are templated refusals. Dolly_T assistant turns are ordinary answers. The class contrast is refusal register versus ordinary answer, which matches the intended task and does not match toxic-input classification.",
+        "length_confound": "Toxic user prompts and assistant refusals are longer than Dolly answers. Length can confound romanization difficulty across classes.",
+        "sampling_confound": "Toxic rows are a 5000-row shuffle from Toxic_Matrix. Benign rows are the first 2000 Dolly_T rows, not a matched shuffle.",
+        "hin_latn_order_caution": "Length alignment finds a minority of hin_Latn pairs swapped relative to eng_Latn. Do not treat hin_Latn slot order as a reliable role encoding."
+      }
+    }
   }
 }

@@ -1,33 +1,27 @@
 # Owner decision checklist
 
-Verdict remains CONDITIONAL_GO. Task definition and source decisions approved. Licenses were approved on 2026-11-01 and are not flattened.
+Verdict: **CONDITIONAL_GO** (augmentation authorized; training and scoring not authorized).
 
-## Recorded in this freeze
+## Closed
 
-- [x] IndicAlign CC-BY-4.0 approved, kept separate from Dolly-15K CC-BY-SA-3.0.
-- [x] Dolly-15K upstream CC-BY-SA-3.0 approved for the benign control only.
-- [x] Experiment name: Hindi refusal-response generation with Romanized assistant targets.
-- [x] Hindi Devanagari user input stays unchanged.
-- [x] Not Romanized-input understanding. Not general code-mixed safety robustness.
-- [x] Five benign embedding ties retained on source-list role order. Not quarantined.
-- [x] Two toxic role-conflict rows excluded. Roles were not flipped.
-- [x] Toxic and benign user prompts grouped in one union-find before the split.
-- [x] Frozen 80/10/10 train/validation/test. Validation is not the final test.
-- [x] Source manifest frozen. Augmentation, training, and scoring were not run.
-- [x] Future scores use the generation rubric. Benign over-refusal is required. Classification accuracy is not an outcome.
+- [x] Manifest SHA-256 `58d85ddaf78bb05600bc802049c8ce12ef8886f4439bfe87b9ca9fd25e1673ae` accepted **final** (2026-11-02).
+- [x] 6,998 retained / 2 excluded; 80/10/10 split; zero cross-split groups.
+- [x] Seed-42 benign sample matches final manifest.
+- [x] `class_comparability.json` refreshed (historical superseded only).
+- [x] Cross-class 122-member group: **ACCEPT** — keep manifest unchanged; no regrouping.
+- [x] **Augmentation authorized** for EXP-01/02/03 under frozen manifest and split rules.
 
-## Confirm before any augmentation
+## Active constraints for augmentation
 
-- [ ] Accept manifest `58d85ddaf78bb05600bc802049c8ce12ef8886f4439bfe87b9ca9fd25e1673ae` as the freeze.
-- [ ] Accept retained 6998 rows: toxic 4998, benign 2000.
-- [ ] Accept excluded 2 toxic role-conflict rows.
-- [ ] Accept frozen splits: train 5585, validation 690, test 723.
-- [ ] Accept tie disposition: retain_on_source_list_order.
-- [ ] Accept that benign over-refusal is a required generation measure.
+- [ ] Apply existing EXP-01/02/03 consistency checks (shared `example_id`, label, `project_split`).
+- [ ] User prompt (hin_Deva slot 0) unchanged; romanize/noise assistant target only.
+- [ ] Do not use validation as the final test split; test is held out for final evaluation.
+- [ ] Generation rubric applies when scoring is run later; classification accuracy is not an outcome.
 
-## Do not approve
+## Not authorized
 
-- Using validation as the final held-out evaluation split.
-- Classification accuracy as a result.
-- A claim about Romanized-input understanding.
-- A claim of general code-mixed safety robustness.
+- Training.
+- Scoring / model evaluation runs.
+- Manifest regrouping without a new owner-approved hash.
+
+Record: `owner_acceptance_record.json`.

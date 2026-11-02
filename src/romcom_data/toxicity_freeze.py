@@ -67,9 +67,11 @@ def group_user_prompts(
     vectors: list[list[float]] | None,
     *,
     member_ids: list[str] | None = None,
+    record_edges: bool = False,
 ) -> dict[str, Any]:
     """Group user prompts before any split. Roles and source IDs stay unchanged."""
     uf = _UnionFind()
+    edges: list[dict[str, Any]] = []
     prepared: list[dict[str, Any]] = []
     for index, row in enumerate(rows):
         user, _assistant = _pair(row, "hin_Deva")
@@ -103,7 +105,11 @@ def group_user_prompts(
         if template:
             template_buckets[template].append(item["member_id"])
 
-    def _link(buckets: dict[str, list[str]]) -> int:
+    def _link(
+        buckets: dict[str, list[str]],
+        kind: str,
+        detail: dict[str, Any] | None = None,
+    ) -> int:
         linked = 0
         for members in buckets.values():
             if len(members) < 2:
@@ -112,10 +118,15 @@ def group_user_prompts(
             for other in members[1:]:
                 uf.union(head, other)
                 linked += 1
+                if record_edges:
+                    edge = {"left": head, "right": other, "kind": kind}
+                    if detail:
+                        edge.update(detail)
+                    edges.append(edge)
         return linked
 
-    exact_links = _link(exact_buckets)
-    prefix_links = _link(prefix_buckets)
+    exact_links = _link(exact_buckets, "exact_normalized")
+    prefix_links = _link(prefix_buckets, "prefix80")
     by_id = {item["member_id"]: item for item in prepared}
     template_links = 0
     template_family_sizes = Counter(len(members) for members in template_buckets.values())
@@ -129,9 +140,20 @@ def group_user_prompts(
                 union = left_tokens | right_tokens
                 if not union:
                     continue
-                if len(left_tokens & right_tokens) / len(union) >= 0.5:
+                jaccard = len(left_tokens & right_tokens) / len(union)
+                if jaccard >= 0.5:
                     uf.union(left_id, right_id)
                     template_links += 1
+                    if record_edges:
+                        edges.append(
+                            {
+                                "left": left_id,
+                                "right": right_id,
+                                "kind": "first6_tokens_token_jaccard",
+                                "token_jaccard": round(jaccard, 4),
+                                "first6_tokens": " ".join(by_id[left_id]["tokens"][:6]),
+                            }
+                        )
 
     semantic_links = 0
     if vectors is not None:
@@ -142,11 +164,19 @@ def group_user_prompts(
         similarity = matrix @ matrix.T
         pairs = (similarity >= NEAR_DUP_COSINE).triu(diagonal=1).nonzero()
         for pair in pairs.tolist():
-            uf.union(
-                prepared[pair[0]]["member_id"],
-                prepared[pair[1]]["member_id"],
-            )
+            left_id = prepared[pair[0]]["member_id"]
+            right_id = prepared[pair[1]]["member_id"]
+            uf.union(left_id, right_id)
             semantic_links += 1
+            if record_edges:
+                edges.append(
+                    {
+                        "left": left_id,
+                        "right": right_id,
+                        "kind": "embedding_cosine",
+                        "cosine": round(float(similarity[pair[0], pair[1]]), 4),
+                    }
+                )
 
     groups: dict[str, list[str]] = defaultdict(list)
     for item in prepared:
@@ -175,6 +205,8 @@ def group_user_prompts(
         "multi_member_group_ids": {
             key: members for key, members in multi.items()
         },
+        "edges": edges if record_edges else None,
+        "prepared": prepared if record_edges else None,
     }
 
 
@@ -182,6 +214,8 @@ def group_retained_user_prompts(
     toxic_rows: list[dict[str, Any]],
     benign_rows: list[dict[str, Any]],
     vectors: list[list[float]] | None,
+    *,
+    record_edges: bool = False,
 ) -> dict[str, Any]:
     """Group toxic and benign Hindi user prompts in one union-find (cross-source links)."""
     ordered: list[dict[str, Any]] = []
@@ -192,7 +226,9 @@ def group_retained_user_prompts(
     for row in benign_rows:
         ordered.append(row)
         member_ids.append(_member_id_for_row(row, source="benign"))
-    grouped = group_user_prompts(ordered, vectors, member_ids=member_ids)
+    grouped = group_user_prompts(
+        ordered, vectors, member_ids=member_ids, record_edges=record_edges
+    )
     grouped["population"] = (
         "retained toxic and benign user prompts, hin_Deva slot 0, single union-find"
     )
@@ -206,6 +242,122 @@ def group_retained_user_prompts(
             cross_class += 1
     grouped["cross_class_multi_member_groups"] = cross_class
     return grouped
+
+
+def _shortest_paths(
+    nodes: set[str], edges: list[dict[str, Any]]
+) -> dict[str, dict[str, list[dict[str, Any]]]]:
+    adjacency: dict[str, list[tuple[str, dict[str, Any]]]] = defaultdict(list)
+    for edge in edges:
+        left, right = edge["left"], edge["right"]
+        if left not in nodes or right not in nodes:
+            continue
+        adjacency[left].append((right, edge))
+        adjacency[right].append((left, edge))
+    paths: dict[str, dict[str, list[dict[str, Any]]]] = {node: {} for node in nodes}
+    for start in nodes:
+        queue: list[tuple[str, list[dict[str, Any]]]] = [(start, [])]
+        seen = {start}
+        while queue:
+            current, path = queue.pop(0)
+            for neighbor, edge in adjacency[current]:
+                if neighbor in seen:
+                    continue
+                seen.add(neighbor)
+                next_path = path + [edge]
+                paths[start][neighbor] = next_path
+                queue.append((neighbor, next_path))
+    return paths
+
+
+def inspect_cross_class_mixed_group(
+    grouped: dict[str, Any],
+    *,
+    member_ids: list[str],
+    split_by_member: dict[str, str],
+    assistant_by_member: dict[str, str],
+) -> dict[str, Any]:
+    """Link-chain and prompt evidence for a mixed prompt group. Does not change the manifest."""
+    member_set = set(member_ids)
+    edges = [
+        edge
+        for edge in grouped.get("edges") or []
+        if edge["left"] in member_set and edge["right"] in member_set
+    ]
+    prepared = {
+        item["member_id"]: item for item in (grouped.get("prepared") or [])
+    }
+    paths = _shortest_paths(member_set, edges)
+    benign_ids = sorted(member for member in member_set if member.startswith("benign-"))
+    toxic_ids = sorted(member for member in member_set if member.startswith("toxic-"))
+    benign_reports: list[dict[str, Any]] = []
+    for benign_id in benign_ids:
+        item = prepared[benign_id]
+        toxic_neighbors = [
+            {
+                "toxic_member_id": toxic_id,
+                "path": paths[benign_id].get(toxic_id),
+                "path_hops": len(paths[benign_id][toxic_id]) if toxic_id in paths[benign_id] else None,
+            }
+            for toxic_id in toxic_ids
+            if toxic_id in paths[benign_id]
+        ]
+        toxic_neighbors.sort(key=lambda row: row["path_hops"] or 999)
+        closest = toxic_neighbors[0] if toxic_neighbors else None
+        closest_detail = None
+        if closest is not None:
+            toxic_id = closest["toxic_member_id"]
+            closest_detail = {
+                "toxic_member_id": toxic_id,
+                "path_hops": closest["path_hops"],
+                "path": closest["path"],
+                "hin_deva_user_prompt_excerpt": prepared[toxic_id]["user"][:320],
+                "assistant_target_excerpt": (assistant_by_member.get(toxic_id) or "")[:240],
+            }
+        direct_cosines = [
+            edge
+            for edge in edges
+            if edge.get("kind") == "embedding_cosine"
+            and benign_id in (edge["left"], edge["right"])
+            and (
+                edge["left"].startswith("toxic-")
+                or edge["right"].startswith("toxic-")
+            )
+        ]
+        direct_cosines.sort(key=lambda edge: edge.get("cosine", 0), reverse=True)
+        benign_reports.append(
+            {
+                "member_id": benign_id,
+                "doc_id": item["doc_id"],
+                "source_row_index": item.get("source_row_index"),
+                "project_split": split_by_member.get(benign_id),
+                "hin_deva_user_prompt": item["user"],
+                "assistant_target_excerpt": (assistant_by_member.get(benign_id) or "")[:240],
+                "closest_toxic_counterpart": closest_detail,
+                "shortest_paths_to_toxic": toxic_neighbors[:5],
+                "direct_embedding_edges_to_toxic": direct_cosines[:8],
+            }
+        )
+    edge_kind_counts = Counter(edge["kind"] for edge in edges)
+    anchor = next(
+        (member for member in member_ids if member.startswith("benign-")),
+        member_ids[0],
+    )
+    return {
+        "group_id": grouped["group_of"].get(anchor, anchor),
+        "member_count": len(member_ids),
+        "toxic_count": len(toxic_ids),
+        "benign_count": len(benign_ids),
+        "project_split_counts": dict(Counter(split_by_member.get(m, "") for m in member_set)),
+        "intra_group_edges": len(edges),
+        "intra_group_edge_kinds": dict(edge_kind_counts),
+        "edges": edges,
+        "benign_members": benign_reports,
+        "supervision_note": (
+            "Members share a prompt group but toxic rows target refusal register while "
+            "benign rows target ordinary answers. This is not automatic grounds for removal."
+        ),
+    }
 
 
 def _embed_users(texts: list[str]) -> list[list[float]]:

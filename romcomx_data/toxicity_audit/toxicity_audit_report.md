@@ -10,7 +10,7 @@ Source manifest frozen 2026-11-01. Verdict remains CONDITIONAL_GO. Augmentation,
 - Frozen split: 80/10/10 train/validation/test at prompt-group level (see `final_source_manifest_summary.json`). Toxic and benign prompts share one union-find. Validation is not the final test.
 - Licenses approved separately on 2026-11-01: IndicAlign CC-BY-4.0 and Dolly-15K CC-BY-SA-3.0.
 - Outcome is the generation rubric. Classification accuracy is not an outcome.
-- Remaining blocker: `owner_confirm_source_freeze_checklist`.
+- Owner accepted manifest and cross-class group on 2026-11-02. Augmentation authorized; training and scoring not authorized.
 
 {
 

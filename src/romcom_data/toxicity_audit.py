@@ -475,8 +475,10 @@ def _char_summary(values: list[int]) -> dict[str, float | int]:
 def profile_conversation_class(rows: list[dict[str, Any]], name: str) -> dict[str, Any]:
     """Coverage and length profile. Script counts are per side, not refusal labels."""
     counts: Counter[str] = Counter()
-    prompt_lens: list[int] = []
-    response_lens: list[int] = []
+    prompt_lens_deva: list[int] = []
+    response_lens_deva: list[int] = []
+    prompt_lens_eng: list[int] = []
+    response_lens_eng: list[int] = []
     turn_counts: Counter[str] = Counter()
     for row in rows:
         if row.get("__parse_error__"):
@@ -510,16 +512,25 @@ def profile_conversation_class(rows: list[dict[str, Any]], name: str) -> dict[st
             if profile["mixed"]:
                 counts[f"{side}_code_mixed"] += 1
         turn_counts[str(row.get("num_turns"))] += 1
-        prompt_lens.append(len(eng_user))
-        response_lens.append(len(eng_asst))
+        prompt_lens_deva.append(len(deva_user))
+        response_lens_deva.append(len(deva_asst))
+        prompt_lens_eng.append(len(eng_user))
+        response_lens_eng.append(len(eng_asst))
     n = max(counts["rows"], 1)
     return {
         "class_name": name,
         "counts": dict(counts),
-        "parsed_from": "eng_Latn positional [user, assistant]",
+        "parsed_from": (
+            "hin_Deva positional [user, assistant]; canonical model_input / model_target interface"
+        ),
+        "eng_latn_reference_only": (
+            "eng_Latn lengths and order checks are alignment reference, not the generation interface"
+        ),
         "num_turns_values": dict(turn_counts),
-        "prompt_chars_eng": _char_summary(prompt_lens),
-        "assistant_chars_eng": _char_summary(response_lens),
+        "prompt_chars_hin_deva": _char_summary(prompt_lens_deva),
+        "assistant_chars_hin_deva": _char_summary(response_lens_deva),
+        "prompt_chars_eng_reference": _char_summary(prompt_lens_eng),
+        "assistant_chars_eng_reference": _char_summary(response_lens_eng),
         "hin_deva_row_pct": round(100 * counts["hin_deva_present"] / n, 2),
         "hin_latn_row_pct": round(100 * counts["hin_latn_present"] / n, 2),
         "eng_row_pct": round(100 * counts["eng_present"] / n, 2),
@@ -590,13 +601,21 @@ def class_confounds(toxic: dict[str, Any], benign: dict[str, Any]) -> dict[str, 
             toxic["counts"].get("multi_block", 0) == 0
             and benign["counts"].get("multi_block", 0) == 0
         ),
-        "prompt_mean_chars_toxic_vs_benign": [
-            toxic["prompt_chars_eng"]["mean"],
-            benign["prompt_chars_eng"]["mean"],
+        "prompt_mean_chars_hin_deva_toxic_vs_benign": [
+            toxic["prompt_chars_hin_deva"]["mean"],
+            benign["prompt_chars_hin_deva"]["mean"],
         ],
-        "assistant_mean_chars_toxic_vs_benign": [
-            toxic["assistant_chars_eng"]["mean"],
-            benign["assistant_chars_eng"]["mean"],
+        "assistant_mean_chars_hin_deva_toxic_vs_benign": [
+            toxic["assistant_chars_hin_deva"]["mean"],
+            benign["assistant_chars_hin_deva"]["mean"],
+        ],
+        "prompt_mean_chars_eng_reference_toxic_vs_benign": [
+            toxic["prompt_chars_eng_reference"]["mean"],
+            benign["prompt_chars_eng_reference"]["mean"],
+        ],
+        "assistant_mean_chars_eng_reference_toxic_vs_benign": [
+            toxic["assistant_chars_eng_reference"]["mean"],
+            benign["assistant_chars_eng_reference"]["mean"],
         ],
         "language_binding": (
             "Canonical text is hin_Deva. The loader sets language='hi' only for that field. "
@@ -613,13 +632,52 @@ def class_confounds(toxic: dict[str, Any], benign: dict[str, Any]) -> dict[str, 
             "Length can confound romanization difficulty across classes."
         ),
         "sampling_confound": (
-            "Toxic rows are a 5000-row shuffle from Toxic_Matrix. Benign rows are "
-            "the first 2000 Dolly_T rows, not a matched shuffle."
+            "Toxic rows are a 5000-row local subsample from Toxic_Matrix. Benign rows "
+            "are a deterministic seed-42 shuffle of Dolly_T train (see "
+            "dolly_t_seed42_sample.jsonl and dolly_t_seed42_manifest.csv). They are not "
+            "the Dolly_T train prefix. Source row indices span the full Dolly_T train range."
         ),
         "hin_latn_order_caution": (
             "Length alignment finds a minority of hin_Latn pairs swapped relative "
             "to eng_Latn. Do not treat hin_Latn slot order as a reliable role encoding."
         ),
+    }
+
+
+def build_class_comparability_document(
+    toxic_rows: list[dict[str, Any]],
+    benign_seed_rows: list[dict[str, Any]],
+    *,
+    prior: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Manifest-aligned comparability. prior is kept as historical_superseded only."""
+    toxic_profile = profile_conversation_class(toxic_rows, "toxic_matrix_retained")
+    benign_profile = profile_conversation_class(benign_seed_rows, "dolly_t_seed42")
+    confounds = class_confounds(toxic_profile, benign_profile)
+    source_rows = [
+        int(row["source_row_index"])
+        for row in benign_seed_rows
+        if row.get("source_row_index") is not None
+    ]
+    return {
+        "status": "current",
+        "revision": "2026_11_01_manifest_aligned",
+        "aligned_to_final_manifest": True,
+        "benign_source_file": "dolly_t_seed42_sample.jsonl",
+        "benign_source_row_index_min": min(source_rows) if source_rows else None,
+        "benign_source_row_index_max": max(source_rows) if source_rows else None,
+        "toxic": toxic_profile,
+        "benign": benign_profile,
+        "confounds": confounds,
+        "historical_superseded": {
+            "note": (
+                "Prior class_comparability.json used eng_Latn length summaries and stated "
+                "incorrectly that benign rows were the Dolly_T train prefix. That file is "
+                "preserved here for audit history only."
+            ),
+            "prior_revision": "2026_11_01_rev3_eng_latn_interface",
+            "prior_document": prior,
+        },
     }
 
 
@@ -1195,6 +1253,8 @@ def build_audit_zip(zip_path: Path | None = None) -> Path:
         "benign_tie_disposition.json",
         "generation_evaluation_rubric.json",
         "owner_decision_checklist.md",
+        "cross_class_group_inspection.json",
+        "owner_acceptance_record.json",
         "audit_log.txt",
     )
     lines: list[str] = []

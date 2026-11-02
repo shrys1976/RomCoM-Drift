@@ -1,12 +1,15 @@
 {
-  "status": "READY_FOR_OWNER_REVIEW",
-  "blockers": [
-    "owner_confirm_source_freeze_checklist"
-  ],
+  "status": "AUGMENTATION_AUTHORIZED",
+  "blockers": [],
   "dataset_rebuild_allowed": false,
   "training_allowed": false,
+  "augmentation_allowed": true,
+  "scoring_allowed": false,
   "owner_review_scope": "toxicity_hindi_native_target_side_mixing",
   "source_manifest_frozen": true,
-  "augmentation_allowed": false,
-  "scoring_allowed": false
+  "source_manifest_accepted": true,
+  "source_manifest_sha256": "58d85ddaf78bb05600bc802049c8ce12ef8886f4439bfe87b9ca9fd25e1673ae",
+  "class_comparability_refreshed": true,
+  "cross_class_supervision_accepted": true,
+  "exp_consistency": "EXP-01/02/03 share example_id, label, and project_split from frozen manifest"
 }
