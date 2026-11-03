@@ -54,13 +54,13 @@ V1 had **zero** partial fields on all splits (generator bug).
 
 Same conditionally approved EN–HI alignment as V1: **383,059** examples (train 375,565; dev 2,487; test 5,007). `alignment_manifest.json` is copied from V1 unchanged (`alignment_manifest_sha256` matches V1). IDs, labels, and scopes align across EXP-00–03 and English retention.
 
-## 7. EXP-03 collisions and substitution positions
+## 7. EXP-03 diagnostics (do not confuse with EXP-02/03 alignment)
 
-Validation (`validation_report.json`):
+**Matched alignment (EXP-02 vs EXP-03 per selected token):** **100%** — same field, `token_index`, native span, and Levenshtein distance for all **2,036,028** paired traces (`validation_report.json`).
 
-- Attested-collision resamples (expected rare): **454** collision pairs
-- Same-field same-length same-distance token pairs: **410,201** total; **146,867** share identical substitution index tuples (~35.8%, not ~100% as in V1)
-- Independent per-token RNG simulation on dev+test (and train sample) confirms V1-style ~100% identity is **not** reproduced
+**Separate diagnostic — identical noise *edit patterns* among EXP-03 tokens in the same field:** among pairs of EXP-03 noise tokens in one Romanized field with the same canonical length and the same distance, **146,867 / 410,201 (~35.8%)** happen to use the same index tuple where `canonical[i] != selected[i]`. This measures coinciding random edit positions, **not** misalignment between EXP-02 and EXP-03.
+
+**Random-noise string collisions (different canonicals, same noise string in one field):** **454** unordered canonical pairs (`exp03_noise_collision_pairs` in `validation_report.json`).
 
 ## 8. Frozen files (V2 = V1 bytes)
 

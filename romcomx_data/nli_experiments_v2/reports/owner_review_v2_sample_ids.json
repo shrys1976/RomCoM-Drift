@@ -1,0 +1,4102 @@
+{
+  "seed": 20260303,
+  "manual_issues": [],
+  "samples": [
+    {
+      "example_id": "train-225592",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 7,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-134914",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 2,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "साथ",
+          "canon": "saath",
+          "sel": "sath",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-362556",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 2,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "स्वीडन",
+          "canon": "sweden",
+          "sel": "swedan",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "कब्जा",
+          "canon": "kabja",
+          "sel": "kabza",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-247683",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 7,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "जनरल",
+          "canon": "general",
+          "sel": "generali",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "मुद्दों",
+          "canon": "muddon",
+          "sel": "muddhon",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-083485",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "punct_num"
+      ],
+      "n_sel": 2,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-122721",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 1,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "अपरिष्कृत",
+          "canon": "aparishkrit",
+          "sel": "aprishkrat",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-333792",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 1,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "चाहती",
+          "canon": "chahati",
+          "sel": "chahthi",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-314350",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 1,
+      "traces": [
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-205426",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "मिल",
+          "canon": "mil",
+          "sel": "meal",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "ओर",
+          "canon": "or",
+          "sel": "aur",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-117864",
+      "split": "train",
+      "tags": [
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "हूं",
+          "canon": "hoon",
+          "sel": "hun",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "बेहतरीन",
+          "canon": "behtarin",
+          "sel": "behatarin",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-260458",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 11,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "सार्वजनिक",
+          "canon": "sarvajanik",
+          "sel": "saarvjanik",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "निजी",
+          "canon": "niji",
+          "sel": "nijee",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "क्षेत्र",
+          "canon": "kshetra",
+          "sel": "shetr",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "देखा",
+          "canon": "dekha",
+          "sel": "dekhaa",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "योजना",
+          "canon": "yojana",
+          "sel": "yojna",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-364234",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "जिसमें",
+          "canon": "jismein",
+          "sel": "jismen",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "वह",
+          "canon": "vah",
+          "sel": "wah",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "समय",
+          "canon": "samay",
+          "sel": "samaya",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "मूल्य",
+          "canon": "moolya",
+          "sel": "mulya",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-167312",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "समारोह",
+          "canon": "samaroh",
+          "sel": "samaaroh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "भाग",
+          "canon": "bhag",
+          "sel": "bhaag",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लिया",
+          "canon": "liya",
+          "sel": "lia",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "इसमें",
+          "canon": "ismein",
+          "sel": "ismen",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-277056",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 7,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "प्रशंसा",
+          "canon": "prashansa",
+          "sel": "prashansaa",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "काम",
+          "canon": "kaam",
+          "sel": "kam",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "एलन",
+          "canon": "alan",
+          "sel": "allen",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-030488",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 8,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "पुल",
+          "canon": "pul",
+          "sel": "pull",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "प्रसिद्ध",
+          "canon": "prasiddh",
+          "sel": "prasiddha",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "वाली",
+          "canon": "wali",
+          "sel": "vali",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-299906",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 1,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "वह",
+          "canon": "vah",
+          "sel": "woh",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-169563",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 8,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "वास्तव",
+          "canon": "vastav",
+          "sel": "vaastav",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "शांतिपूर्ण",
+          "canon": "shantipurn",
+          "sel": "shantipurna",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "अस्तित्व",
+          "canon": "astitva",
+          "sel": "astitv",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "पुनर्निर्माण",
+          "canon": "punarnirman",
+          "sel": "punarnirmaan",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-295381",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 8,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "टकराव",
+          "canon": "takraav",
+          "sel": "takarav",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "आगे",
+          "canon": "aage",
+          "sel": "age",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "बढ़ाना",
+          "canon": "badhana",
+          "sel": "badhaanaa",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "संघर्ष",
+          "canon": "sangharsh",
+          "sel": "sangharsha",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-221703",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 20,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "तदनुसार",
+          "canon": "tadanusara",
+          "sel": "tadnusar",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "महान",
+          "canon": "mahan",
+          "sel": "mhan",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "क्षेत्र",
+          "canon": "kshetra",
+          "sel": "shetr",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "विश्व",
+          "canon": "vishva",
+          "sel": "vishwa",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "बनाने",
+          "canon": "banane",
+          "sel": "banaane",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-389430",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 12,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "विलय",
+          "canon": "vilay",
+          "sel": "wilay",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "योजना",
+          "canon": "yojana",
+          "sel": "yojna",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "गई",
+          "canon": "gai",
+          "sel": "gayi",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-327740",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 4,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "पाया",
+          "canon": "paya",
+          "sel": "paayaa",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "सक्रिय",
+          "canon": "sakriy",
+          "sel": "sakriya",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "बना",
+          "canon": "bana",
+          "sel": "banaa",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-270848",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 11,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "निश्चित",
+          "canon": "nishchit",
+          "sel": "nischit",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "को",
+          "canon": "ko",
+          "sel": "co",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "नीचा",
+          "canon": "neecha",
+          "sel": "neechaa",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-256054",
+      "split": "train",
+      "tags": [
+        "multi_elig",
+        "punct_num"
+      ],
+      "n_sel": 1,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "पैसे",
+          "canon": "paise",
+          "sel": "pese",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-133719",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "hypothesis",
+          "native": "कैसे",
+          "canon": "kaise",
+          "sel": "kese",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "बारे",
+          "canon": "bare",
+          "sel": "baare",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "कुछ",
+          "canon": "kuchh",
+          "sel": "kuch",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-351105",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 21,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "को",
+          "canon": "ko",
+          "sel": "co",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "इसके",
+          "canon": "iske",
+          "sel": "isake",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "पता",
+          "canon": "pata",
+          "sel": "pataa",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "कुछ",
+          "canon": "kuchh",
+          "sel": "kuch",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-069281",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 5,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "जब",
+          "canon": "jab",
+          "sel": "jb",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "को",
+          "canon": "ko",
+          "sel": "co",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "जब",
+          "canon": "jab",
+          "sel": "jb",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "जाता",
+          "canon": "jata",
+          "sel": "jaataa",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "जाता",
+          "canon": "jata",
+          "sel": "jaata",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-315914",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 12,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "आरक्षण",
+          "canon": "aarakshan",
+          "sel": "arakshan",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "मध्य",
+          "canon": "madhya",
+          "sel": "madhy",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "छुट्टियों",
+          "canon": "chhutiyo",
+          "sel": "chhuttiyon",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-173567",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "पाया",
+          "canon": "paya",
+          "sel": "paayaa",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "जीवित",
+          "canon": "jivit",
+          "sel": "jeevit",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-012901",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "आपने",
+          "canon": "aapane",
+          "sel": "aapne",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "सब्जियां",
+          "canon": "sabjiyaan",
+          "sel": "subjiyan",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "सामान",
+          "canon": "saman",
+          "sel": "samaan",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-182627",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "करती",
+          "canon": "karti",
+          "sel": "karati",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-334598",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 2,
+      "traces": [
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-292640",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 5,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "संगठनों",
+          "canon": "sangathanon",
+          "sel": "sangathnanon",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "रचनात्मक",
+          "canon": "rachnatmak",
+          "sel": "rachnaatmak",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "संगठनों",
+          "canon": "sangathanon",
+          "sel": "sangathnanon",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "जरूरत",
+          "canon": "jarurat",
+          "sel": "jaroorat",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-009609",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 8,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "सकता",
+          "canon": "sakta",
+          "sel": "sakata",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "निष्कर्ष",
+          "canon": "nishkarsh",
+          "sel": "nishkarsha",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "इसे",
+          "canon": "ise",
+          "sel": "isse",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-272931",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "सिंहासन",
+          "canon": "sinhasan",
+          "sel": "singhasan",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-354184",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "समान",
+          "canon": "samaan",
+          "sel": "saman",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "बढ़ती",
+          "canon": "badhati",
+          "sel": "badhti",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लाभ",
+          "canon": "labh",
+          "sel": "laabh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "मूल्य",
+          "canon": "moolya",
+          "sel": "muly",
+          "d": 3
+        },
+        {
+          "field": "premise",
+          "native": "विनिमय",
+          "canon": "vinimay",
+          "sel": "vinimaye",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-035792",
+      "split": "train",
+      "tags": [
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 1,
+      "traces": [
+        {
+          "field": "hypothesis",
+          "native": "पहचाना",
+          "canon": "pehchana",
+          "sel": "pahchana",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-012514",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 9,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "दीर्घकालीन",
+          "canon": "deerghakaleen",
+          "sel": "dirghakaleen",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "बहाल",
+          "canon": "bahal",
+          "sel": "bahaal",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "खर्चों",
+          "canon": "kharchon",
+          "sel": "kharcho",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-224783",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "लगाया",
+          "canon": "lagaya",
+          "sel": "lagaayaa",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "लेते",
+          "canon": "lete",
+          "sel": "lethe",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "लेते",
+          "canon": "lete",
+          "sel": "lethe",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "बलात्कार",
+          "canon": "balatkar",
+          "sel": "balaatkaar",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "आरोप",
+          "canon": "aarop",
+          "sel": "arop",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-338155",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 1,
+      "traces": [
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-102520",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 11,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "कई",
+          "canon": "kai",
+          "sel": "kayi",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "शहरी",
+          "canon": "shahari",
+          "sel": "shehri",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "कारों",
+          "canon": "karon",
+          "sel": "caron",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "बिजली",
+          "canon": "bijali",
+          "sel": "bijli",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-144518",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "punct_num"
+      ],
+      "n_sel": 0,
+      "traces": []
+    },
+    {
+      "example_id": "train-067624",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "अधिकांश",
+          "canon": "adhikansh",
+          "sel": "adhikaansh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "कर्मचारी",
+          "canon": "karmchari",
+          "sel": "karmachari",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "पांच",
+          "canon": "paanch",
+          "sel": "panch",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-172636",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 9,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "महत्वपूर्ण",
+          "canon": "mahatvapoorn",
+          "sel": "mahatvapurn",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "समवर्ती",
+          "canon": "samvarti",
+          "sel": "samavarti",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "योजनाओं",
+          "canon": "yojanaon",
+          "sel": "yojnaon",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-004127",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 4,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "सर",
+          "canon": "sir",
+          "sel": "sar",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "संग्रह",
+          "canon": "sangrah",
+          "sel": "sangrh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "को",
+          "canon": "ko",
+          "sel": "co",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-026723",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 4,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "पकड़ता",
+          "canon": "pakadataa",
+          "sel": "pakdata",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "चित्र",
+          "canon": "chitr",
+          "sel": "chithr",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-298828",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 15,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "ठीक",
+          "canon": "theek",
+          "sel": "thik",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "मैं",
+          "canon": "main",
+          "sel": "maen",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "मैं",
+          "canon": "main",
+          "sel": "maen",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "मैं",
+          "canon": "main",
+          "sel": "maen",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-365121",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "बार",
+          "canon": "bar",
+          "sel": "baar",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "समान",
+          "canon": "samaan",
+          "sel": "saman",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "करती",
+          "canon": "karti",
+          "sel": "karati",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "उन्हें",
+          "canon": "unhen",
+          "sel": "unhein",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-286090",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 7,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "राजनीति",
+          "canon": "raajneeti",
+          "sel": "rajneeti",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "प्रमाणित",
+          "canon": "pramanit",
+          "sel": "pramaanit",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "नैतिकता",
+          "canon": "naitikata",
+          "sel": "naitiktaa",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "train-152280",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 9,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "चलाने",
+          "canon": "chalane",
+          "sel": "chalaane",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "वाले",
+          "canon": "wale",
+          "sel": "waale",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "हुए",
+          "canon": "hue",
+          "sel": "huye",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "train-298307",
+      "split": "train",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 11,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "जीने",
+          "canon": "jeene",
+          "sel": "jine",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "dev-002162",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 5,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "दूसरा",
+          "canon": "dusra",
+          "sel": "doosra",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "को",
+          "canon": "ko",
+          "sel": "co",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "dev-001996",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 7,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "पिता",
+          "canon": "pita",
+          "sel": "pitaa",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "फायदा",
+          "canon": "faayadaa",
+          "sel": "phaayadaa",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "या",
+          "canon": "ya",
+          "sel": "yaa",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-002444",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 8,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "अंतर",
+          "canon": "antar",
+          "sel": "anthar",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "dev-001003",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "फैक्ट्री",
+          "canon": "factory",
+          "sel": "pactory",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "निजी",
+          "canon": "niji",
+          "sel": "nijee",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "बना",
+          "canon": "bana",
+          "sel": "bna",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "सकते",
+          "canon": "sakte",
+          "sel": "sakate",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-000074",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 4,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "मैं",
+          "canon": "main",
+          "sel": "maen",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "विशेष",
+          "canon": "vishesh",
+          "sel": "veshesh",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "काम",
+          "canon": "kaam",
+          "sel": "kam",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "विशेष",
+          "canon": "vishesh",
+          "sel": "veshesh",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-001506",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 10,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "पहले",
+          "canon": "pahle",
+          "sel": "pehle",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "इंस्टॉल",
+          "canon": "install",
+          "sel": "instal",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "को",
+          "canon": "ko",
+          "sel": "co",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-000761",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 12,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "क्योंकि",
+          "canon": "kyunki",
+          "sel": "kyonki",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "मैं",
+          "canon": "main",
+          "sel": "maen",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "कैसे",
+          "canon": "kaise",
+          "sel": "kese",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "जब",
+          "canon": "jab",
+          "sel": "jb",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-000495",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "कुछ",
+          "canon": "kuchh",
+          "sel": "kuch",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "जानते",
+          "canon": "jaante",
+          "sel": "jante",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-000572",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 4,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "बढ़ता",
+          "canon": "badhata",
+          "sel": "badhataa",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "पहुंचता",
+          "canon": "pahunchata",
+          "sel": "pahunchataa",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-000808",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 5,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "समझकर",
+          "canon": "samjhkar",
+          "sel": "samajhkar",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "दाढ़ी",
+          "canon": "dadhi",
+          "sel": "daadhi",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "वह",
+          "canon": "vah",
+          "sel": "woh",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "सालों",
+          "canon": "saalon",
+          "sel": "salon",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "दाढ़ी",
+          "canon": "dadhi",
+          "sel": "daadhi",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-002378",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 1,
+      "traces": [
+        {
+          "field": "hypothesis",
+          "native": "कुछ",
+          "canon": "kuchh",
+          "sel": "kuch",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-000230",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "punct_num"
+      ],
+      "n_sel": 0,
+      "traces": []
+    },
+    {
+      "example_id": "dev-002220",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 8,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "वह",
+          "canon": "vah",
+          "sel": "woh",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "साथ",
+          "canon": "saath",
+          "sel": "sath",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "साथ",
+          "canon": "saath",
+          "sel": "sath",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-001136",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "पीछे",
+          "canon": "peeche",
+          "sel": "pichhe",
+          "d": 3
+        },
+        {
+          "field": "premise",
+          "native": "साथ",
+          "canon": "saath",
+          "sel": "sath",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "अद्वितीय",
+          "canon": "advitiya",
+          "sel": "advitiye",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "संग्रह",
+          "canon": "sangrah",
+          "sel": "sangrh",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-001035",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 2,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "सम्राट",
+          "canon": "samrat",
+          "sel": "samraat",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-002051",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 11,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "हालांकि",
+          "canon": "halanki",
+          "sel": "haalanki",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "आवश्यकता",
+          "canon": "avashyakta",
+          "sel": "aavashykataa",
+          "d": 4
+        },
+        {
+          "field": "premise",
+          "native": "वह",
+          "canon": "vah",
+          "sel": "woh",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "अधिकार",
+          "canon": "adhikar",
+          "sel": "adhikaar",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-001597",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 4,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "आग्रह",
+          "canon": "aagrah",
+          "sel": "aagarh",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "पत्र",
+          "canon": "patr",
+          "sel": "patra",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-001832",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 8,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "शिक्षकों",
+          "canon": "shikshakon",
+          "sel": "shikshkon",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "आवश्यकता",
+          "canon": "avashyakta",
+          "sel": "aavashyakta",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-001225",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "या",
+          "canon": "ya",
+          "sel": "yaa",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "सारे",
+          "canon": "saare",
+          "sel": "sare",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-002150",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 10,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "कौन",
+          "canon": "kaun",
+          "sel": "koun",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "सबसे",
+          "canon": "sabse",
+          "sel": "sabsey",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "जब",
+          "canon": "jab",
+          "sel": "jb",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "dev-001203",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 8,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "पहले",
+          "canon": "pahle",
+          "sel": "pehle",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "स्वाद",
+          "canon": "swad",
+          "sel": "swaad",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "साथ",
+          "canon": "saath",
+          "sel": "sath",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "जंगल",
+          "canon": "jungle",
+          "sel": "jungal",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "dev-001451",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 7,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "साथ",
+          "canon": "saath",
+          "sel": "sath",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "लागत",
+          "canon": "laagat",
+          "sel": "lagat",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-002013",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 5,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "सीडी",
+          "canon": "cd",
+          "sel": "sidi",
+          "d": 3
+        },
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "व्यवहार",
+          "canon": "vyavahar",
+          "sel": "vyawhar",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "dev-002044",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 9,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "तुलना",
+          "canon": "tulna",
+          "sel": "tulana",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "पहले",
+          "canon": "pahle",
+          "sel": "pehle",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "सबसे",
+          "canon": "sabse",
+          "sel": "sabsey",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "सप्ताहांत",
+          "canon": "saptahant",
+          "sel": "saptahaant",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "dev-002070",
+      "split": "dev",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "विश्वविद्यालय",
+          "canon": "vishvavidyalay",
+          "sel": "vishwavidyalay",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "रहा",
+          "canon": "raha",
+          "sel": "rha",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "जबकि",
+          "canon": "jabki",
+          "sel": "jabaki",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "विश्वविद्यालय",
+          "canon": "vishvavidyalay",
+          "sel": "vishwavidyalay",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-004059",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 9,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "बाद",
+          "canon": "baad",
+          "sel": "bad",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "साल",
+          "canon": "saal",
+          "sel": "sal",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "test-004316",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 2,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "सस्ता",
+          "canon": "sasta",
+          "sel": "sastaa",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-001268",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 6,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "ध्यान",
+          "canon": "dhyan",
+          "sel": "dhyaan",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "विशेषताओं",
+          "canon": "visheshtaon",
+          "sel": "visheshtaaon",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लिया",
+          "canon": "liya",
+          "sel": "lia",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-003778",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 2,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "दुनिया",
+          "canon": "duniya",
+          "sel": "duniyaa",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-002518",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 7,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "दावों",
+          "canon": "daavon",
+          "sel": "davon",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "अलग",
+          "canon": "alag",
+          "sel": "alg",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "test-001378",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 4,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "उसके",
+          "canon": "uske",
+          "sel": "usake",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "की",
+          "canon": "ki",
+          "sel": "key",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "पूरा",
+          "canon": "pura",
+          "sel": "puraa",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-000598",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 2,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "लगता",
+          "canon": "lagta",
+          "sel": "lagata",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "रहा",
+          "canon": "raha",
+          "sel": "rha",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-003032",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "को",
+          "canon": "ko",
+          "sel": "co",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "वीजा",
+          "canon": "visa",
+          "sel": "vija",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "दिया",
+          "canon": "diya",
+          "sel": "diyaa",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-004082",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "कई",
+          "canon": "kai",
+          "sel": "kayi",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "दलील",
+          "canon": "dalil",
+          "sel": "daleel",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "test-002124",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 5,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "या",
+          "canon": "ya",
+          "sel": "yaa",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "दौरान",
+          "canon": "dauran",
+          "sel": "dauraan",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "अच्छा",
+          "canon": "achcha",
+          "sel": "achchha",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-002853",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 8,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "को",
+          "canon": "ko",
+          "sel": "co",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "समय",
+          "canon": "samay",
+          "sel": "samaya",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "साथ",
+          "canon": "saath",
+          "sel": "sath",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "को",
+          "canon": "ko",
+          "sel": "co",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-003115",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 10,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "स्थायी",
+          "canon": "sthayi",
+          "sel": "sthaayi",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "अनुबंध",
+          "canon": "anubandh",
+          "sel": "anubandha",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "test-000970",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 4,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "कर्मचारियों",
+          "canon": "karmchariyon",
+          "sel": "karmachariyon",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "वे",
+          "canon": "way",
+          "sel": "ve",
+          "d": 3
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "test-002862",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 9,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "और",
+          "canon": "aur",
+          "sel": "or",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "होते",
+          "canon": "hote",
+          "sel": "hotey",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "स्टडी",
+          "canon": "study",
+          "sel": "steady",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "पैसे",
+          "canon": "paise",
+          "sel": "pese",
+          "d": 2
+        },
+        {
+          "field": "premise",
+          "native": "सकता",
+          "canon": "sakta",
+          "sel": "sakata",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-000674",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 5,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "लगता",
+          "canon": "lagta",
+          "sel": "lagata",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "लगता",
+          "canon": "lagta",
+          "sel": "lagata",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "सकता",
+          "canon": "sakta",
+          "sel": "sakata",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "उम्मीद",
+          "canon": "ummed",
+          "sel": "ummid",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-002160",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "जाती",
+          "canon": "jaatee",
+          "sel": "jaati",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-004702",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 4,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "अगले",
+          "canon": "agale",
+          "sel": "agle",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "लिए",
+          "canon": "liye",
+          "sel": "liai",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "test-002379",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 1,
+      "traces": [
+        {
+          "field": "hypothesis",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-000277",
+      "split": "test",
+      "tags": [
+        "multi_elig",
+        "punct_num"
+      ],
+      "n_sel": 0,
+      "traces": []
+    },
+    {
+      "example_id": "test-001001",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 12,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "इसके",
+          "canon": "iske",
+          "sel": "isake",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "अलावा",
+          "canon": "alava",
+          "sel": "alawa",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "यह",
+          "canon": "yah",
+          "sel": "yeh",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "बर्फ",
+          "canon": "barf",
+          "sel": "burf",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-004441",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 7,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "ऑफ",
+          "canon": "off",
+          "sel": "of",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "को",
+          "canon": "ko",
+          "sel": "co",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "द्वारा",
+          "canon": "dwara",
+          "sel": "dvara",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "जाता",
+          "canon": "jata",
+          "sel": "jaata",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "सबसे",
+          "canon": "sabse",
+          "sel": "sabsey",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-003353",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 4,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "के",
+          "canon": "ke",
+          "sel": "k",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "अधिकाधिक",
+          "canon": "adhikadhik",
+          "sel": "adhikaadhik",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "आतंकवाद",
+          "canon": "aatankvad",
+          "sel": "aatankwad",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "जारी",
+          "canon": "jari",
+          "sel": "jaari",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-000528",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "नहीं",
+          "canon": "nahin",
+          "sel": "nahi",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "दशक",
+          "canon": "dashak",
+          "sel": "dashk",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "बाद",
+          "canon": "baad",
+          "sel": "bad",
+          "d": 1
+        }
+      ]
+    },
+    {
+      "example_id": "test-002179",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "बाद",
+          "canon": "baad",
+          "sel": "bad",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "मूरों",
+          "canon": "muron",
+          "sel": "mooron",
+          "d": 2
+        },
+        {
+          "field": "hypothesis",
+          "native": "से",
+          "canon": "se",
+          "sel": "say",
+          "d": 2
+        }
+      ]
+    },
+    {
+      "example_id": "test-000363",
+      "split": "test",
+      "tags": [
+        "dup_native",
+        "multi_elig",
+        "multi_var",
+        "partial",
+        "punct_num"
+      ],
+      "n_sel": 3,
+      "traces": [
+        {
+          "field": "premise",
+          "native": "मैं",
+          "canon": "main",
+          "sel": "maen",
+          "d": 1
+        },
+        {
+          "field": "premise",
+          "native": "केवल",
+          "canon": "keval",
+          "sel": "kewal",
+          "d": 1
+        },
+        {
+          "field": "hypothesis",
+          "native": "लगाया",
+          "canon": "lagaya",
+          "sel": "lagaayaa",
+          "d": 2
+        }
+      ]
+    }
+  ]
+}
