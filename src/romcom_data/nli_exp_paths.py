@@ -30,6 +30,8 @@ EXPECTED_TOTAL = sum(EXPECTED_COUNTS.values())
 SCOPES_EVAL = ("both", "premise_only", "hypothesis_only")
 SCOPES_TRAIN = ("both",)
 CONDITIONS = ("EXP-01", "EXP-02", "EXP-03")
+ENGLISH_RETENTION_SPLITS = ("dev", "test")
+EXP00_SPLITS = ("dev", "test")
 
 
 def exp_condition_root(condition: str) -> Path:

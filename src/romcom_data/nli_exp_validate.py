@@ -9,11 +9,14 @@ from typing import Any
 
 from romcom_data.augmentation import levenshtein_distance
 from romcom_data.nli_exp_freeze import load_exclusion_keys, load_approved_pairs
+from romcom_data.nli_exp_build import collect_row_counts_from_disk
 from romcom_data.nli_exp_paths import (
     CONDITIONS,
     ENGLISH_RETENTION,
+    ENGLISH_RETENTION_SPLITS,
     EXPECTED_COUNTS,
     EXP00,
+    EXP00_SPLITS,
     NLI_EXPERIMENTS,
     exp_condition_root,
 )
@@ -71,6 +74,10 @@ def validate_experiments(root: Path | None = None) -> dict[str, Any]:
         if split in ("dev", "test"):
             check_file(EXP00 / f"{split}.jsonl", split, "EXP-00", "both")
             eng = _load_jsonl(ENGLISH_RETENTION / f"{split}.jsonl")
+            if len(eng) != EXPECTED_COUNTS[split]:
+                issues.append(
+                    f"english_retention/{split}.jsonl rows {len(eng)} != {EXPECTED_COUNTS[split]}"
+                )
             for row in eng:
                 base = approved[row["example_id"]]
                 if row["premise"] != base["english_premise"]:
@@ -144,21 +151,41 @@ def validate_experiments(root: Path | None = None) -> dict[str, Any]:
                 if DEVANAGARI.search(row["premise"]) or DEVANAGARI.search(row["hypothesis"]):
                     issues.append(f"residual Devanagari {row['example_id']} {cond} both")
 
+    for stale in (ENGLISH_RETENTION / "train.jsonl", EXP00 / "train.jsonl"):
+        if stale.is_file():
+            issues.append(f"unexpected non-training artifact (remove): {stale.relative_to(root)}")
+
+    disk_counts = collect_row_counts_from_disk()
     manifest_path = root / "experiment_manifest.json"
     if manifest_path.is_file():
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest_counts = manifest.get("row_counts") or {}
+        for key, on_disk in disk_counts.items():
+            recorded = manifest_counts.get(key)
+            if recorded != on_disk:
+                issues.append(f"manifest row_counts[{key}]={recorded} != on_disk {on_disk}")
+        for key in manifest_counts:
+            if key not in disk_counts:
+                issues.append(f"manifest row_counts lists missing file: {key}")
         for entry in manifest.get("evaluation_matrix", {}).get("EXP-00_untrained_base", {}).get(
             "evaluation_sets", []
         ):
             rel = entry["path"]
-            if "train" in rel:
+            if "/train.jsonl" in rel and (
+                "english_retention" in rel or "exp00_reference" in rel
+            ):
                 issues.append(f"train file in evaluation matrix: {rel}")
-            path = root.parent.parent / rel if rel.startswith("romcomx_data") else root / rel
             from romcom_data.paths import PROJECT_ROOT
 
             path = PROJECT_ROOT / rel
             if not path.is_file():
                 issues.append(f"eval matrix missing {rel}")
+                continue
+            rows_on_disk = len(_load_jsonl(path))
+            if entry.get("rows") != rows_on_disk:
+                issues.append(
+                    f"eval matrix rows {entry.get('rows')} != {rows_on_disk} for {rel}"
+                )
 
     return {
         "ok": not issues,

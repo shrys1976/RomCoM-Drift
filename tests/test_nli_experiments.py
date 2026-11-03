@@ -105,3 +105,22 @@ def test_mixed_devanagari_digits_in_token(lexicon: NliLexicon) -> None:
     assert not field.fallback_failures
     assert "14" in field.roman
     assert not DEVANAGARI.search(field.roman)
+
+
+def test_experiment_manifest_row_counts_match_disk() -> None:
+    from pathlib import Path
+
+    from romcom_data.nli_exp_build import collect_row_counts_from_disk
+    from romcom_data.nli_exp_paths import NLI_EXPERIMENTS
+
+    manifest_path = NLI_EXPERIMENTS / "experiment_manifest.json"
+    if not manifest_path.is_file():
+        pytest.skip("experiment artifacts not built")
+    import json
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    disk = dict(collect_row_counts_from_disk())
+    assert manifest.get("row_counts") == disk
+    assert manifest["row_counts"]["EXP-00:both:dev"] == 2487
+    assert manifest["row_counts"]["english_retention:both:test"] == 5007
+    assert not Path(NLI_EXPERIMENTS / "english_retention/train.jsonl").is_file()

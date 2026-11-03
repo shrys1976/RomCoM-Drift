@@ -19,8 +19,10 @@ from romcom_data.nli_exp_freeze import (
 from romcom_data.nli_exp_paths import (
     CONDITIONS,
     ENGLISH_RETENTION,
+    ENGLISH_RETENTION_SPLITS,
     EXPECTED_COUNTS,
     EXP00,
+    EXP00_SPLITS,
     NLI_EXPERIMENTS,
     NLI_EXP_LOGS,
     NLI_EXP_REPORTS,
@@ -139,11 +141,44 @@ def _transform_record(
     }
 
 
+def _jsonl_line_count(path: Path) -> int:
+    if not path.is_file() or path.stat().st_size == 0:
+        return 0
+    count = 0
+    with path.open(encoding="utf-8") as handle:
+        for line in handle:
+            if line.strip():
+                count += 1
+    return count
+
+
+def collect_row_counts_from_disk() -> Counter[str]:
+    """Row counts from generated JSONL files (source of truth for manifests)."""
+    counts: Counter[str] = Counter()
+    for split in ("train", "dev", "test"):
+        scopes = SCOPES_TRAIN if split == "train" else SCOPES_EVAL
+        for cond in CONDITIONS:
+            for scope in scopes:
+                path = exp_condition_root(cond) / scope / f"{split}.jsonl"
+                n = _jsonl_line_count(path)
+                if n:
+                    counts[f"{cond}:{scope}:{split}"] = n
+        if split in EXP00_SPLITS:
+            counts[f"EXP-00:both:{split}"] = _jsonl_line_count(EXP00 / f"{split}.jsonl")
+        if split in ENGLISH_RETENTION_SPLITS:
+            counts[f"english_retention:both:{split}"] = _jsonl_line_count(
+                ENGLISH_RETENTION / f"{split}.jsonl"
+            )
+    return counts
+
+
 def _open_outputs(split: str) -> dict[str, TextIO]:
     handles: dict[str, TextIO] = {}
     split_file = f"{split}.jsonl"
-    handles["exp00"] = (EXP00 / split_file).open("w", encoding="utf-8")
-    handles["english"] = (ENGLISH_RETENTION / split_file).open("w", encoding="utf-8")
+    if split in EXP00_SPLITS:
+        handles["exp00"] = (EXP00 / split_file).open("w", encoding="utf-8")
+    if split in ENGLISH_RETENTION_SPLITS:
+        handles["english"] = (ENGLISH_RETENTION / split_file).open("w", encoding="utf-8")
     scopes = SCOPES_TRAIN if split == "train" else SCOPES_EVAL
     for cond in CONDITIONS:
         root = exp_condition_root(cond)
@@ -249,9 +284,6 @@ def run_build() -> dict[str, Any]:
                         ),
                     )
                     row_counts[f"{cond}:{scope}:{split}"] += 1
-                if split in ("dev", "test"):
-                    row_counts[f"EXP-00:both:{split}"] += 1
-                    row_counts[f"english_retention:both:{split}"] += 1
             _write_line(handles[f"log:{split}"], transformed["log"])
     except ValueError as exc:
         status = "BLOCKED"
@@ -264,6 +296,7 @@ def run_build() -> dict[str, Any]:
         return {"status": status, "block_reason": block_reason, "stats": stats}
 
     am_sha = alignment_manifest["_sha256"]
+    row_counts = collect_row_counts_from_disk()
     eval_matrix = _build_evaluation_matrix(row_counts)
     experiment_manifest = {
         "constructed_utc": datetime.now(UTC).isoformat(),
@@ -295,16 +328,7 @@ def run_build() -> dict[str, Any]:
     with oov_path.open("w", encoding="utf-8") as oov_handle:
         for word, count in sorted(stats.oov_words.items(), key=lambda x: (-x[1], x[0])):
             _write_line(oov_handle, {"native_word": word, "token_count": count})
-    rel_files = [
-        p.relative_to(PROJECT_ROOT)
-        for p in NLI_EXPERIMENTS.rglob("*")
-        if p.is_file() and not str(p).endswith(".jsonl")
-    ]
-    rel_files.extend(
-        p.relative_to(PROJECT_ROOT)
-        for p in NLI_EXPERIMENTS.rglob("*.jsonl")
-    )
-    write_checksum_manifest(PROJECT_ROOT, rel_files, NLI_EXPERIMENTS / "checksums.sha256")
+    write_nli_experiment_checksums()
     return {
         "status": status,
         "alignment_manifest": alignment_manifest,
@@ -312,6 +336,43 @@ def run_build() -> dict[str, Any]:
         "stats": transform_stats,
         "row_counts": dict(row_counts),
     }
+
+
+def write_nli_experiment_checksums() -> None:
+    rel_files = [
+        p.relative_to(PROJECT_ROOT)
+        for p in NLI_EXPERIMENTS.rglob("*")
+        if p.is_file() and not str(p).endswith(".jsonl")
+    ]
+    rel_files.extend(
+        p.relative_to(PROJECT_ROOT) for p in NLI_EXPERIMENTS.rglob("*.jsonl")
+    )
+    write_checksum_manifest(PROJECT_ROOT, rel_files, NLI_EXPERIMENTS / "checksums.sha256")
+
+
+def refresh_experiment_manifest() -> dict[str, Any]:
+    """Recompute row counts and evaluation matrix from on-disk JSONL (no rebuild)."""
+    manifest_path = NLI_EXPERIMENTS / "experiment_manifest.json"
+    if not manifest_path.is_file():
+        raise FileNotFoundError(manifest_path)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    row_counts = collect_row_counts_from_disk()
+    manifest["row_counts"] = dict(row_counts)
+    manifest["evaluation_matrix"] = _build_evaluation_matrix(row_counts)
+    manifest["manifest_refreshed_utc"] = datetime.now(UTC).isoformat()
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    write_nli_experiment_checksums()
+    status_path = NLI_EXPERIMENTS / "construction_status.json"
+    if status_path.is_file():
+        status = json.loads(status_path.read_text(encoding="utf-8"))
+        status["row_counts"] = dict(row_counts)
+        status["experiment_manifest"] = manifest
+        status["status"] = "READY_FOR_OWNER_REVIEW"
+        status_path.write_text(json.dumps(status, indent=2, default=str) + "\n", encoding="utf-8")
+    return manifest
 
 
 def _stats_payload(stats: BuildStats, lexicon: NliLexicon) -> dict[str, Any]:
@@ -350,7 +411,9 @@ def _build_evaluation_matrix(row_counts: Counter[str]) -> dict[str, Any]:
         ]
         for cond, scope, path in paths:
             rel = str(path.relative_to(PROJECT_ROOT))
-            count = row_counts.get(f"{cond}:{scope}:{split}", EXPECTED_COUNTS[split])
+            count = row_counts.get(f"{cond}:{scope}:{split}")
+            if count is None:
+                count = _jsonl_line_count(path) or EXPECTED_COUNTS[split]
             sha = sha256_file(path) if path.is_file() else ""
             sets.append(
                 {

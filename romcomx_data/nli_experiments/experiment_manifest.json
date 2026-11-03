@@ -13,25 +13,25 @@
     "EXP-01:both:dev": 2487,
     "EXP-01:premise_only:dev": 2487,
     "EXP-01:hypothesis_only:dev": 2487,
-    "EXP-00:both:dev": 7461,
-    "english_retention:both:dev": 7461,
     "EXP-02:both:dev": 2487,
     "EXP-02:premise_only:dev": 2487,
     "EXP-02:hypothesis_only:dev": 2487,
     "EXP-03:both:dev": 2487,
     "EXP-03:premise_only:dev": 2487,
     "EXP-03:hypothesis_only:dev": 2487,
+    "EXP-00:both:dev": 2487,
+    "english_retention:both:dev": 2487,
     "EXP-01:both:test": 5007,
     "EXP-01:premise_only:test": 5007,
     "EXP-01:hypothesis_only:test": 5007,
-    "EXP-00:both:test": 15021,
-    "english_retention:both:test": 15021,
     "EXP-02:both:test": 5007,
     "EXP-02:premise_only:test": 5007,
     "EXP-02:hypothesis_only:test": 5007,
     "EXP-03:both:test": 5007,
     "EXP-03:premise_only:test": 5007,
-    "EXP-03:hypothesis_only:test": 5007
+    "EXP-03:hypothesis_only:test": 5007,
+    "EXP-00:both:test": 5007,
+    "english_retention:both:test": 5007
   },
   "conditions": {
     "EXP-00": "native_hindi_reference_no_training",
@@ -48,7 +48,7 @@
           "condition": "EXP-00",
           "scope": "both",
           "path": "romcomx_data/nli_experiments/exp00_reference/dev.jsonl",
-          "rows": 7461,
+          "rows": 2487,
           "sha256": "426b5fa55aa25b112bc991f5752c77f1e17b29f1ff41d023013e553b1f34f290",
           "training": "none"
         },
@@ -138,7 +138,7 @@
           "condition": "english_retention",
           "scope": "both",
           "path": "romcomx_data/nli_experiments/english_retention/dev.jsonl",
-          "rows": 7461,
+          "rows": 2487,
           "sha256": "cdf46f70bd9a71b22eb23c0bd00ee271b51338322c99391a497750317afe63ef",
           "training": "none"
         },
@@ -147,7 +147,7 @@
           "condition": "EXP-00",
           "scope": "both",
           "path": "romcomx_data/nli_experiments/exp00_reference/test.jsonl",
-          "rows": 15021,
+          "rows": 5007,
           "sha256": "f1ea74237a315b78ca7bdd73730e1bddeacf2cf52f5116bf6ca831db6b2a072f",
           "training": "none"
         },
@@ -237,12 +237,13 @@
           "condition": "english_retention",
           "scope": "both",
           "path": "romcomx_data/nli_experiments/english_retention/test.jsonl",
-          "rows": 15021,
+          "rows": 5007,
           "sha256": "06fb230d98c1990c412271116c2815ddfa2af17a56ce7dc9f0eb4a307f3328a9",
           "training": "none"
         }
       ]
     },
     "note": "English retention is not code-mixed robustness; no model evaluation is run by this pipeline."
-  }
+  },
+  "manifest_refreshed_utc": "2026-11-03T14:03:38.782296+00:00"
 }
