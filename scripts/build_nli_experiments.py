@@ -15,11 +15,12 @@ from romcom_data.nli_exp_paths import NLI_EXPERIMENTS, NLI_EXP_REPORTS
 
 
 def main() -> int:
-    result = run_build()
+    result = run_build(v2_partial=True)
     status_path = NLI_EXPERIMENTS / "construction_status.json"
     status_path.write_text(json.dumps(result, indent=2, default=str) + "\n", encoding="utf-8")
     print(json.dumps({"status": result["status"], "block_reason": result.get("block_reason", "")}, indent=2))
-    return 0 if result["status"] == "READY_FOR_OWNER_REVIEW" else 1
+    ok = result["status"] in ("READY_FOR_OWNER_REVIEW", "READY_FOR_OWNER_REVIEW_V2")
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":

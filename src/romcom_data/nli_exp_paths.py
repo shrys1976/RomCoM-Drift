@@ -7,7 +7,8 @@ from pathlib import Path
 from romcom_data.paths import PROJECT_ROOT
 
 NLI_ALIGNMENT = PROJECT_ROOT / "romcomx_data" / "nli_alignment"
-NLI_EXPERIMENTS = PROJECT_ROOT / "romcomx_data" / "nli_experiments"
+NLI_EXPERIMENTS_V1 = PROJECT_ROOT / "romcomx_data" / "nli_experiments_v1"
+NLI_EXPERIMENTS = PROJECT_ROOT / "romcomx_data" / "nli_experiments_v2"
 NLI_INVENTORIES = PROJECT_ROOT / "romcomx_data" / "inventories"
 
 VERIFIED_JSONL = NLI_ALIGNMENT / "verified_pairs.jsonl"

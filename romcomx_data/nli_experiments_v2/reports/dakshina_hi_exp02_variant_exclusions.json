@@ -1,0 +1,692 @@
+{
+  "version": "1.0",
+  "source": "owner_followup_audit_2026-11-03",
+  "note": "Exact native/canonical/variant triples excluded from EXP-02 selection only.",
+  "excluded_mappings": [
+    {
+      "native_word": "कुल",
+      "canonical": "kul",
+      "variant": "kulmilakar",
+      "classification": "wrong_word_substitution",
+      "reason": "Adds lexical material (altogether), not spelling of total/kul",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-002070"
+      ]
+    },
+    {
+      "native_word": "एक्सेस",
+      "canonical": "access",
+      "variant": "excess",
+      "classification": "wrong_word_substitution",
+      "reason": "English excess vs access",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-005426"
+      ]
+    },
+    {
+      "native_word": "वार",
+      "canonical": "war",
+      "variant": "warpalatwar",
+      "classification": "wrong_word_substitution",
+      "reason": "Introduces counterattack compound, not spelling of strike/war",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-004766"
+      ]
+    },
+    {
+      "native_word": "स्टारर",
+      "canonical": "starr",
+      "variant": "starter",
+      "classification": "wrong_word_substitution",
+      "reason": "Different English word",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "क्षेत्र",
+      "canonical": "kshetra",
+      "variant": "kshem",
+      "classification": "wrong_word_substitution",
+      "reason": "Different Hindi lemma (welfare vs region/zone)",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-000620"
+      ]
+    },
+    {
+      "native_word": "इनाम",
+      "canonical": "inam",
+      "variant": "imaan",
+      "classification": "wrong_word_substitution",
+      "reason": "Reward vs faith (imaan)",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-011479"
+      ]
+    },
+    {
+      "native_word": "कृतज्ञता",
+      "canonical": "kritadnyataa",
+      "variant": "kritagya",
+      "classification": "wrong_word_substitution",
+      "reason": "Truncated/gratitude vs grateful",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "हैनकॉक",
+      "canonical": "haincock",
+      "variant": "hongkong",
+      "classification": "wrong_word_substitution",
+      "reason": "Proper noun Hancock vs Hong Kong",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-001224"
+      ]
+    },
+    {
+      "native_word": "एयरोस्पेस",
+      "canonical": "aerospace",
+      "variant": "aerosports",
+      "classification": "wrong_word_substitution",
+      "reason": "Aerospace vs aerosports",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "ट्रैक",
+      "canonical": "track",
+      "variant": "taker",
+      "classification": "wrong_word_substitution",
+      "reason": "Track vs taker in English loan context",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-006194"
+      ]
+    },
+    {
+      "native_word": "मोहम्मद",
+      "canonical": "muhammad",
+      "variant": "moihabbat",
+      "classification": "wrong_word_substitution",
+      "reason": "Muhammad vs love (mohabbat)",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-000229"
+      ]
+    },
+    {
+      "native_word": "दब",
+      "canonical": "dab",
+      "variant": "bad",
+      "classification": "wrong_word_substitution",
+      "reason": "Press/sink (dab) vs English bad",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-002320"
+      ]
+    },
+    {
+      "native_word": "बॉर्डर",
+      "canonical": "border",
+      "variant": "borer",
+      "classification": "wrong_word_substitution",
+      "reason": "Border vs borer",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "व्हाट",
+      "canonical": "what",
+      "variant": "shat",
+      "classification": "wrong_word_substitution",
+      "reason": "What loan vs unrelated string",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "फ्रीजिंग",
+      "canonical": "freezing",
+      "variant": "fridging",
+      "classification": "wrong_word_substitution",
+      "reason": "Freezing vs fridging",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "दी",
+      "canonical": "di",
+      "variant": "the",
+      "classification": "wrong_word_substitution",
+      "reason": "Gave (di) vs English the",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-000543"
+      ]
+    },
+    {
+      "native_word": "आय",
+      "canonical": "aay",
+      "variant": "aaya",
+      "classification": "wrong_word_substitution",
+      "reason": "Income (aay) vs came (aaya)",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-000140"
+      ]
+    },
+    {
+      "native_word": "दिलचस्प",
+      "canonical": "dilchasp",
+      "variant": "dilchaspi",
+      "classification": "wrong_word_substitution",
+      "reason": "Adjective interesting vs noun form",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-000368"
+      ]
+    },
+    {
+      "native_word": "रैट",
+      "canonical": "rait",
+      "variant": "rate",
+      "classification": "wrong_word_substitution",
+      "reason": "Rat vs rate",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "साइट",
+      "canonical": "site",
+      "variant": "sight",
+      "classification": "wrong_word_substitution",
+      "reason": "Site vs sight",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "सेवन",
+      "canonical": "sevan",
+      "variant": "seven",
+      "classification": "wrong_word_substitution",
+      "reason": "Consumption vs seven",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "एंटीसेप्टिक",
+      "canonical": "antiseptic",
+      "variant": "anticipate",
+      "classification": "wrong_word_substitution",
+      "reason": "Antiseptic vs anticipate",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "दृग",
+      "canonical": "drag",
+      "variant": "hug",
+      "classification": "wrong_word_substitution",
+      "reason": "Eye/drug sense vs hug",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "वेलेस",
+      "canonical": "veles",
+      "variant": "balance",
+      "classification": "wrong_word_substitution",
+      "reason": "Veles vs balance",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "सायंस",
+      "canonical": "sayans",
+      "variant": "science",
+      "classification": "wrong_word_substitution",
+      "reason": "Hindi science loan vs English science spelling variant only if wrong lemma",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "सोशलिज्म",
+      "canonical": "socialism",
+      "variant": "socialization",
+      "classification": "wrong_word_substitution",
+      "reason": "Socialism vs socialization",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "अर्थात्",
+      "canonical": "arthat",
+      "variant": "arthart",
+      "classification": "garbled_spelling",
+      "reason": "Corrupted arthath/arthat",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "अर्थात",
+      "canonical": "arthaat",
+      "variant": "arthart",
+      "classification": "garbled_spelling",
+      "reason": "Corrupted arthat",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "बोस्निया",
+      "canonical": "bosnia",
+      "variant": "bostriyaa",
+      "classification": "garbled_spelling",
+      "reason": "Bosnia garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "बोस्निया",
+      "canonical": "bosnia",
+      "variant": "bostriya",
+      "classification": "garbled_spelling",
+      "reason": "Bosnia garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "होस्नी",
+      "canonical": "hosanni",
+      "variant": "hostri",
+      "classification": "garbled_spelling",
+      "reason": "Hosanna garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "तोड़फोड़",
+      "canonical": "todfod",
+      "variant": "tormor",
+      "classification": "garbled_spelling",
+      "reason": "Destruction word garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "सप्ताह",
+      "canonical": "saptah",
+      "variant": "satpaah",
+      "classification": "garbled_spelling",
+      "reason": "Week spelling corruption",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": [
+        "train-000319"
+      ]
+    },
+    {
+      "native_word": "पश्चिम",
+      "canonical": "paschim",
+      "variant": "pakshim",
+      "classification": "garbled_spelling",
+      "reason": "West paschim garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "वैकल्पिक",
+      "canonical": "vaikalip",
+      "variant": "vaikplick",
+      "classification": "garbled_spelling",
+      "reason": "Optional vaikalpik garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "निर्दिष्ट",
+      "canonical": "nirdisht",
+      "variant": "nidrisht",
+      "classification": "garbled_spelling",
+      "reason": "Specified nirdisht garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "वक्र",
+      "canonical": "vakra",
+      "variant": "varka",
+      "classification": "garbled_spelling",
+      "reason": "Curve vakra garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "राष्ट्रों",
+      "canonical": "rashtron",
+      "variant": "rashrton",
+      "classification": "garbled_spelling",
+      "reason": "Nations rashtron garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "शैक्षिक",
+      "canonical": "shaikshik",
+      "variant": "sheshik",
+      "classification": "garbled_spelling",
+      "reason": "Educational shaikshik garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "पुनर्स्थापित",
+      "canonical": "punarsthapit",
+      "variant": "punstharpit",
+      "classification": "garbled_spelling",
+      "reason": "Restored punarsthapit garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "महत्वाकांक्षी",
+      "canonical": "mahatvakankshi",
+      "variant": "mahtyakanshi",
+      "classification": "garbled_spelling",
+      "reason": "Ambitious mahatvakankshi garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "अंतर्देशीय",
+      "canonical": "antardeshiy",
+      "variant": "antdreshiya",
+      "classification": "garbled_spelling",
+      "reason": "Domestic antardeshiy garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "मूर्ति",
+      "canonical": "murti",
+      "variant": "mutri",
+      "classification": "garbled_spelling",
+      "reason": "Idol murti garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "चुटकुले",
+      "canonical": "chutkule",
+      "variant": "chukuley",
+      "classification": "garbled_spelling",
+      "reason": "Jokes chutkule garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "महत्वाकांक्षा",
+      "canonical": "mahatvakanksha",
+      "variant": "mahtyakansha",
+      "classification": "garbled_spelling",
+      "reason": "Ambition mahatvakanksha garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "राष्ट्रपतियों",
+      "canonical": "rashtrapatiyon",
+      "variant": "rashpatiyon",
+      "classification": "garbled_spelling",
+      "reason": "Presidents rashtrapatiyon garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "स्वीकार्यता",
+      "canonical": "swikaryata",
+      "variant": "sweekaryakarta",
+      "classification": "garbled_spelling",
+      "reason": "Acceptability swikaryata garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "सप्ताहों",
+      "canonical": "saptahon",
+      "variant": "satpaahon",
+      "classification": "garbled_spelling",
+      "reason": "Weeks saptahon garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "वर्धित",
+      "canonical": "vardhit",
+      "variant": "vadhirt",
+      "classification": "garbled_spelling",
+      "reason": "Increased vardhit garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "शुक्र",
+      "canonical": "shukra",
+      "variant": "surk",
+      "classification": "garbled_spelling",
+      "reason": "Venus shukra garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "आसन्न",
+      "canonical": "aasann",
+      "variant": "asatra",
+      "classification": "garbled_spelling",
+      "reason": "Imminent aasann garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "शिक्षिका",
+      "canonical": "shikshika",
+      "variant": "shishika",
+      "classification": "garbled_spelling",
+      "reason": "Teacher shikshika garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "कारखाना",
+      "canonical": "karkhana",
+      "variant": "kakhana",
+      "classification": "garbled_spelling",
+      "reason": "Factory karkhana garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "पार्श्वनाथ",
+      "canonical": "parshvanaath",
+      "variant": "pasharvnath",
+      "classification": "garbled_spelling",
+      "reason": "Parshvanath garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "भर्त्सना",
+      "canonical": "bhartsana",
+      "variant": "bhatsarna",
+      "classification": "garbled_spelling",
+      "reason": "Rebuke bhartsana garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "वर्साय",
+      "canonical": "varsaaye",
+      "variant": "vasariya",
+      "classification": "garbled_spelling",
+      "reason": "Versailles varsaaye garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "उत्सर्जक",
+      "canonical": "utsarjak",
+      "variant": "utsajark",
+      "classification": "garbled_spelling",
+      "reason": "Emitter utsarjak garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "टेराकोटा",
+      "canonical": "terakota",
+      "variant": "teratoka",
+      "classification": "garbled_spelling",
+      "reason": "Terracotta terakota garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "निवर्तमान",
+      "canonical": "nivartman",
+      "variant": "nirvatamaan",
+      "classification": "garbled_spelling",
+      "reason": "Returning nivartman garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "शियाओं",
+      "canonical": "shiyaon",
+      "variant": "xiaon",
+      "classification": "garbled_spelling",
+      "reason": "Xiao garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "पोर्टल",
+      "canonical": "portal",
+      "variant": "potral",
+      "classification": "garbled_spelling",
+      "reason": "Portal garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "एप्लाइड",
+      "canonical": "applied",
+      "variant": "eplight",
+      "classification": "garbled_spelling",
+      "reason": "Applied garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "बीटल्स",
+      "canonical": "beatles",
+      "variant": "builts",
+      "classification": "garbled_spelling",
+      "reason": "Beatles garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "रेजिस्टेंस",
+      "canonical": "resistance",
+      "variant": "registres",
+      "classification": "garbled_spelling",
+      "reason": "Resistance garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "दक्षिण",
+      "canonical": "dakshin",
+      "variant": "dakshid",
+      "classification": "garbled_spelling",
+      "reason": "South dakshin garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "मील",
+      "canonical": "mil",
+      "variant": "meeley",
+      "classification": "garbled_spelling",
+      "reason": "Mile garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "मिलियन",
+      "canonical": "million",
+      "variant": "millium",
+      "classification": "garbled_spelling",
+      "reason": "Million garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "ट्रेंट",
+      "canonical": "trant",
+      "variant": "trat",
+      "classification": "garbled_spelling",
+      "reason": "Trent garble",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    }
+  ],
+  "quarantine_mappings": [
+    {
+      "native_word": "क्षण",
+      "canonical": "kshan",
+      "variant": "shan",
+      "classification": "quarantine_uncertain",
+      "reason": "Moment vs English Shan; pending owner resolution",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "क्षणों",
+      "canonical": "kshanon",
+      "variant": "shanon",
+      "classification": "quarantine_uncertain",
+      "reason": "Moments vs shanon; pending",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "क्षमा",
+      "canonical": "kshama",
+      "variant": "shma",
+      "classification": "quarantine_uncertain",
+      "reason": "Forgiveness kshama vs shma; pending",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "बंगाल",
+      "canonical": "bangal",
+      "variant": "bangla",
+      "classification": "quarantine_uncertain",
+      "reason": "Bengal bangal vs bangla; pending",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    },
+    {
+      "native_word": "पंचर",
+      "canonical": "punchar",
+      "variant": "puncher",
+      "classification": "quarantine_uncertain",
+      "reason": "Puncture punchar vs puncher; pending",
+      "source": "owner_followup_audit_2026-11-03",
+      "audit_evidence": []
+    }
+  ]
+}

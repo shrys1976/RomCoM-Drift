@@ -11,6 +11,7 @@ from romcom_data.nli_exp_romanize import (
     audit_devanagari_codepoints,
     tokenize_and_romanize_field,
 )
+from romcom_data.nli_exp_variant_exclusions import excluded_variant_keys
 from romcom_data.nli_exp_variants import (
     VariantPools,
     _apply_replacements,
@@ -105,6 +106,66 @@ def test_mixed_devanagari_digits_in_token(lexicon: NliLexicon) -> None:
     assert not field.fallback_failures
     assert "14" in field.roman
     assert not DEVANAGARI.search(field.roman)
+
+
+def test_excluded_variant_not_in_pool(lexicon: NliLexicon) -> None:
+    pools = VariantPools(lexicon)
+    banned = excluded_variant_keys()
+    for native, variant in list(banned)[:20]:
+        alts = {v for v, _ in pools.pool(native)}
+        assert variant not in alts
+
+
+def test_quarantine_variant_still_in_pool(lexicon: NliLexicon) -> None:
+    import json
+    from romcom_data.nli_exp_variant_exclusions import EXCLUSIONS_JSON
+
+    doc = json.loads(EXCLUSIONS_JSON.read_text(encoding="utf-8"))
+    pools = VariantPools(lexicon)
+    for row in doc["quarantine_mappings"]:
+        native = nfc(row["native_word"])
+        variant = row["variant"].casefold()
+        alts = {v for v, _ in pools.pool(native)}
+        assert variant in alts
+
+
+def test_exp02_token_level_selection_possible(lexicon: NliLexicon) -> None:
+    pools = VariantPools(lexicon)
+    text = nfc(
+        "यह एक परीक्षण वाक्य है जो कई शब्दों के साथ लंबा है और "
+        "अधिक शब्दों के लिए उपयुक्त है।"
+    )
+    field = tokenize_and_romanize_field(text, "premise", lexicon)
+    _, t2 = apply_exp02(field, pools, "train-999999")
+    eligible = sum(1 for t in field.tokens if pools.eligible(t))
+    if eligible >= 4:
+        assert 0 < len(t2) < eligible
+
+
+def test_exp02_deterministic(lexicon: NliLexicon) -> None:
+    pools = VariantPools(lexicon)
+    text = nfc("वह स्कूल जाता है और वहाँ पढ़ता है।")
+    field = tokenize_and_romanize_field(text, "premise", lexicon)
+    a, ta = apply_exp02(field, pools, "dev-000001")
+    b, tb = apply_exp02(field, pools, "dev-000001")
+    assert a == b
+    assert ta == tb
+
+
+def test_exp03_noise_positions_not_all_identical(lexicon: NliLexicon) -> None:
+    pools = VariantPools(lexicon)
+    text = nfc("यह वह वहाँ है और वे भी यहाँ हैं।")
+    field = tokenize_and_romanize_field(text, "premise", lexicon)
+    _, t2 = apply_exp02(field, pools, "test-000020")
+    _, t3 = apply_exp03(field, t2, pools, "test-000020")
+    same_len = [t for t in t3 if len(t["canonical"]) == len(t["selected"])]
+    if len(same_len) >= 2:
+        positions = []
+        for t in same_len:
+            positions.append(
+                tuple(i for i, (a, b) in enumerate(zip(t["canonical"], t["selected"])) if a != b)
+            )
+        assert len(set(positions)) > 1 or len(positions) == 1
 
 
 def test_experiment_manifest_row_counts_match_disk() -> None:

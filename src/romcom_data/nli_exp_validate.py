@@ -8,21 +8,29 @@ from pathlib import Path
 from typing import Any
 
 from romcom_data.augmentation import levenshtein_distance
+from romcom_data.checksums import sha256_file
 from romcom_data.nli_exp_freeze import load_exclusion_keys, load_approved_pairs
 from romcom_data.nli_exp_build import collect_row_counts_from_disk
 from romcom_data.nli_exp_paths import (
     CONDITIONS,
     ENGLISH_RETENTION,
-    ENGLISH_RETENTION_SPLITS,
     EXPECTED_COUNTS,
     EXP00,
-    EXP00_SPLITS,
     NLI_EXPERIMENTS,
+    NLI_EXPERIMENTS_V1,
     exp_condition_root,
 )
 from romcom_data.nli_exp_romanize import NliLexicon, tokenize_and_romanize_field
-from romcom_data.nli_exp_variants import VariantPools, apply_exp02, apply_exp03
-from romcom_data.text_utils import DEVANAGARI
+from romcom_data.nli_exp_variant_exclusions import excluded_variant_keys
+from romcom_data.nli_exp_variants import (
+    VariantPools,
+    _noise_at_distance,
+    apply_exp02,
+    apply_exp03,
+)
+from romcom_data.paths import PROJECT_ROOT
+from romcom_data.stable_hash import derive_rng
+from romcom_data.text_utils import DEVANAGARI, nfc
 
 
 def _load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -107,39 +115,163 @@ def validate_experiments(root: Path | None = None) -> dict[str, Any]:
                 if ho[eid]["premise"] != base["hindi_premise"]:
                     issues.append(f"hypothesis_only premise not native {eid} {cond}")
 
-    # EXP-02/03 trace match from logs
+    lexicon = NliLexicon()
+    pools = VariantPools(lexicon)
+    banned = excluded_variant_keys()
+    exp02_rows: dict[str, dict[str, dict[str, Any]]] = {}
+    exp03_rows: dict[str, dict[str, dict[str, Any]]] = {}
+    for split in ("train", "dev", "test"):
+        exp02_rows[split] = {
+            r["example_id"]: r
+            for r in _load_jsonl(exp_condition_root("EXP-02") / "both" / f"{split}.jsonl")
+        }
+        exp03_rows[split] = {
+            r["example_id"]: r
+            for r in _load_jsonl(exp_condition_root("EXP-03") / "both" / f"{split}.jsonl")
+        }
+
+    selection_stats: dict[str, dict[str, int | float]] = {}
+    field_mix: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     exp02_exp03_checks = 0
     exp02_exp03_ok = 0
+    exp03_collision_pairs = 0
+    exp03_identical_pos_pairs = 0
+    exp03_pos_pair_total = 0
+    excluded_hits = 0
+
+    def _eligible_count(toks: list[dict[str, Any]]) -> int:
+        n = 0
+        for t in toks:
+            if t.get("method") != "dakshina_canonical" or not t.get("canonical"):
+                continue
+            key = nfc(str(t.get("native_text", "")).rstrip("।॥").strip())
+            if pools.pool(key):
+                n += 1
+        return n
+
     for split in ("train", "dev", "test"):
         log_path = root / "logs" / f"transformation_log.{split}.jsonl"
+        elig_tok = sel_tok = 0
         if not log_path.is_file():
             issues.append(f"missing log {log_path}")
             continue
         with log_path.open(encoding="utf-8") as handle:
             for line in handle:
                 rec = json.loads(line)
+                eid = rec["example_id"]
                 t2 = [t for t in rec.get("exp02_traces", []) if t.get("operation") == "attested_variant"]
                 t3 = [t for t in rec.get("exp03_traces", []) if t.get("operation") == "random_noise"]
                 if len(t2) != len(t3):
-                    issues.append(f"EXP02/03 count mismatch {rec['example_id']}")
+                    issues.append(f"EXP02/03 count mismatch {eid}")
                     continue
+                row2 = exp02_rows[split].get(eid)
+                row3 = exp03_rows[split].get(eid)
+                for field in ("premise", "hypothesis"):
+                    toks = rec.get(f"{field}_exp01_tokens") or []
+                    n_e = _eligible_count(toks)
+                    n_s = len([t for t in t2 if t["field"] == field])
+                    elig_tok += n_e
+                    sel_tok += n_s
+                    if n_e == 0:
+                        continue
+                    if n_s == 0:
+                        field_mix[split]["untouched"] += 1
+                    elif n_s == n_e:
+                        field_mix[split]["all"] += 1
+                    else:
+                        field_mix[split]["partial"] += 1
+                for tr in t2:
+                    native_key = None
+                    for tok in (rec.get("premise_exp01_tokens") or []) + (
+                        rec.get("hypothesis_exp01_tokens") or []
+                    ):
+                        if tok.get("token_index") == tr["token_index"] and tok.get("field") == tr["field"]:
+                            native_key = nfc(str(tok.get("native_text", "")).rstrip("।॥").strip())
+                            break
+                    sel = tr["selected"].rstrip(".")
+                    if native_key and (native_key, sel.casefold()) in banned:
+                        excluded_hits += 1
+                        issues.append(f"excluded variant selected {eid} {native_key}->{sel}")
+                    if row2 and sel not in row2["premise"] + row2["hypothesis"]:
+                        issues.append(f"EXP-02 selected not in sentence {eid} {sel}")
+                for tr in t3:
+                    if row3 and tr["selected"] not in row3["premise"] + row3["hypothesis"]:
+                        issues.append(f"EXP-03 selected not in sentence {eid} {tr['selected']}")
                 for a, b in zip(t2, t3, strict=True):
                     exp02_exp03_checks += 1
                     if a["field"] != b["field"] or a["token_index"] != b["token_index"]:
-                        issues.append(f"token index mismatch {rec['example_id']}")
+                        issues.append(f"token index mismatch {eid}")
                         continue
                     if a["native_offsets"] != b["native_offsets"]:
-                        issues.append(f"native span mismatch {rec['example_id']}")
+                        issues.append(f"native span mismatch {eid}")
                         continue
                     da = int(a["levenshtein_distance"])
                     db = int(b["levenshtein_distance"])
                     if da != db or da < 1:
-                        issues.append(f"distance mismatch {rec['example_id']}")
+                        issues.append(f"distance mismatch {eid}")
                         continue
                     exp02_exp03_ok += 1
                 for row in t2:
                     if row["levenshtein_distance"] < 1:
-                        issues.append(f"EXP-02 d=0 {rec['example_id']}")
+                        issues.append(f"EXP-02 d=0 {eid}")
+                by_field: dict[str, list[dict[str, Any]]] = defaultdict(list)
+                for t in t3:
+                    by_field[t["field"]].append(t)
+                for field_name, ts in by_field.items():
+                    by_noise: dict[str, set[str]] = defaultdict(set)
+                    for t in ts:
+                        by_noise[t["selected"]].add(t["canonical"])
+                    for noise, canons in by_noise.items():
+                        if len(canons) > 1:
+                            exp03_collision_pairs += len(canons) * (len(canons) - 1) // 2
+                    for i in range(len(ts)):
+                        for j in range(i + 1, len(ts)):
+                            a, b = ts[i], ts[j]
+                            if len(a["canonical"]) != len(b["canonical"]):
+                                continue
+                            if a["levenshtein_distance"] != b["levenshtein_distance"]:
+                                continue
+                            exp03_pos_pair_total += 1
+                            pa = tuple(
+                                k
+                                for k, (x, y) in enumerate(zip(a["canonical"], a["selected"]))
+                                if x != y
+                            )
+                            pb = tuple(
+                                k
+                                for k, (x, y) in enumerate(zip(b["canonical"], b["selected"]))
+                                if x != y
+                            )
+                            if pa == pb:
+                                exp03_identical_pos_pairs += 1
+        empirical_p = sel_tok / elig_tok if elig_tok else 0.0
+        selection_stats[split] = {
+            "eligible_tokens": elig_tok,
+            "selected_tokens": sel_tok,
+            "empirical_p_variant": round(empirical_p, 6),
+        }
+        if field_mix[split]["partial"] == 0:
+            issues.append(f"no partial fields in {split} (token-level selection check)")
+        if not (0.33 <= empirical_p <= 0.37):
+            issues.append(f"empirical p out of band for {split}: {empirical_p:.4f}")
+
+    if exp03_pos_pair_total and exp03_identical_pos_pairs / exp03_pos_pair_total > 0.95:
+        issues.append(
+            f"EXP-03 identical substitution positions {exp03_identical_pos_pairs}/{exp03_pos_pair_total}"
+        )
+
+    if NLI_EXPERIMENTS_V1.is_dir():
+        for rel in ("exp00_reference", "exp01", "english_retention"):
+            v1_root = NLI_EXPERIMENTS_V1 / rel
+            v2_root = root / rel
+            for path in sorted(v1_root.rglob("*.jsonl")):
+                rel_path = path.relative_to(NLI_EXPERIMENTS_V1)
+                v2_path = root / rel_path
+                if not v2_path.is_file():
+                    issues.append(f"missing frozen v2 file {rel_path}")
+                    continue
+                if sha256_file(path) != sha256_file(v2_path):
+                    issues.append(f"frozen file hash mismatch {rel_path}")
 
     # Residual Devanagari in romanized fields
     for split in ("train", "dev", "test"):
@@ -193,6 +325,12 @@ def validate_experiments(root: Path | None = None) -> dict[str, Any]:
         "issue_count": len(issues),
         "exp02_exp03_checks": exp02_exp03_checks,
         "exp02_exp03_ok": exp02_exp03_ok,
+        "exp02_selection_by_split": selection_stats,
+        "field_mix_by_split": {k: dict(v) for k, v in field_mix.items()},
+        "excluded_variant_selections": excluded_hits,
+        "exp03_noise_collision_pairs": exp03_collision_pairs,
+        "exp03_identical_substitution_position_pairs": exp03_identical_pos_pairs,
+        "exp03_substitution_position_pair_total": exp03_pos_pair_total,
     }
 
 

@@ -1,0 +1,264 @@
+{
+  "constructed_utc": "2026-11-03T16:49:19.417552+00:00",
+  "dataset_version": "v2",
+  "parent_v1_dir": "romcomx_data/nli_experiments_v1",
+  "config_hash": "edb6448d4a679db665b04d01fcee6f79684e2dea7b1c9fe491746b07114ff54e",
+  "base_seed": 42,
+  "p_variant": 0.35,
+  "lexicon_sha256": "f6a3db77d491c68c3957f183c2f35c6371dc5fbb70cef519e359a1a3c7aebba9",
+  "noncanonical_pool_table_sha256": "ffd0c5c9dc66044c0e3cb0a1e63bc9ea9c479952cb08b75cfed2a01061e65a2e",
+  "excluded_variant_inventory_sha256": "c15edd730f451d71c81d8aa8c1c9de2cf06c359ecb4a04a105b4dc4bb264af9f",
+  "alignment_manifest_sha256": "6e6aa7cd2761f83287cc07cca8c9e784618ef25b739c183a17e3fdd8f4911f37",
+  "row_counts": {
+    "EXP-01:both:train": 375565,
+    "EXP-02:both:train": 375565,
+    "EXP-03:both:train": 375565,
+    "EXP-01:both:dev": 2487,
+    "EXP-01:premise_only:dev": 2487,
+    "EXP-01:hypothesis_only:dev": 2487,
+    "EXP-02:both:dev": 2487,
+    "EXP-02:premise_only:dev": 2487,
+    "EXP-02:hypothesis_only:dev": 2487,
+    "EXP-03:both:dev": 2487,
+    "EXP-03:premise_only:dev": 2487,
+    "EXP-03:hypothesis_only:dev": 2487,
+    "EXP-00:both:dev": 2487,
+    "english_retention:both:dev": 2487,
+    "EXP-01:both:test": 5007,
+    "EXP-01:premise_only:test": 5007,
+    "EXP-01:hypothesis_only:test": 5007,
+    "EXP-02:both:test": 5007,
+    "EXP-02:premise_only:test": 5007,
+    "EXP-02:hypothesis_only:test": 5007,
+    "EXP-03:both:test": 5007,
+    "EXP-03:premise_only:test": 5007,
+    "EXP-03:hypothesis_only:test": 5007,
+    "EXP-00:both:test": 5007,
+    "english_retention:both:test": 5007
+  },
+  "frozen_from_v1_sha256": {
+    "exp00_reference/dev.jsonl": "426b5fa55aa25b112bc991f5752c77f1e17b29f1ff41d023013e553b1f34f290",
+    "exp00_reference/test.jsonl": "f1ea74237a315b78ca7bdd73730e1bddeacf2cf52f5116bf6ca831db6b2a072f",
+    "exp01/both/dev.jsonl": "de6ede4f6c7ba135698501211570a8e927951d39f0b70b43284e6465971f8452",
+    "exp01/both/test.jsonl": "cb4fad61818df7cfb8e2f6ae66238590e591c01a0df8bbaa9f5f8989fe046b6d",
+    "exp01/both/train.jsonl": "a07f89416b017cb580046a188b1e48d6a03aa7396aadc21ed5f52a89d98a31f9",
+    "exp01/hypothesis_only/dev.jsonl": "65a2845bc00fc67d561dfbb7744f35f172fe17241a06c919a69110a66375db04",
+    "exp01/hypothesis_only/test.jsonl": "fc52bb10f43af588989cd9d486b3fba167a3e4e837715d51d162bfac97c4cb85",
+    "exp01/premise_only/dev.jsonl": "a6c755a28a873421990837f1084cbce2df4ef9b5a0c5d609fa9285cdc8ceb3ae",
+    "exp01/premise_only/test.jsonl": "9aca120ee38f79e6d6d64486ed28807bbbaa464918b44ba9481df6a990617288",
+    "english_retention/dev.jsonl": "cdf46f70bd9a71b22eb23c0bd00ee271b51338322c99391a497750317afe63ef",
+    "english_retention/test.jsonl": "06fb230d98c1990c412271116c2815ddfa2af17a56ce7dc9f0eb4a307f3328a9"
+  },
+  "conditions": {
+    "EXP-00": "native_hindi_reference_no_training",
+    "EXP-01": "dakshina_canonical_romanization",
+    "EXP-02": "attested_noncanonical_dakshina_variants",
+    "EXP-03": "matched_random_noise_control"
+  },
+  "evaluation_matrix": {
+    "EXP-00_untrained_base": {
+      "training": "none",
+      "evaluation_sets": [
+        {
+          "split": "dev",
+          "condition": "EXP-00",
+          "scope": "both",
+          "path": "romcomx_data/nli_experiments_v2/exp00_reference/dev.jsonl",
+          "rows": 2487,
+          "sha256": "426b5fa55aa25b112bc991f5752c77f1e17b29f1ff41d023013e553b1f34f290",
+          "training": "none"
+        },
+        {
+          "split": "dev",
+          "condition": "EXP-01",
+          "scope": "both",
+          "path": "romcomx_data/nli_experiments_v2/exp01/both/dev.jsonl",
+          "rows": 2487,
+          "sha256": "de6ede4f6c7ba135698501211570a8e927951d39f0b70b43284e6465971f8452",
+          "training": "none"
+        },
+        {
+          "split": "dev",
+          "condition": "EXP-01",
+          "scope": "premise_only",
+          "path": "romcomx_data/nli_experiments_v2/exp01/premise_only/dev.jsonl",
+          "rows": 2487,
+          "sha256": "a6c755a28a873421990837f1084cbce2df4ef9b5a0c5d609fa9285cdc8ceb3ae",
+          "training": "none"
+        },
+        {
+          "split": "dev",
+          "condition": "EXP-01",
+          "scope": "hypothesis_only",
+          "path": "romcomx_data/nli_experiments_v2/exp01/hypothesis_only/dev.jsonl",
+          "rows": 2487,
+          "sha256": "65a2845bc00fc67d561dfbb7744f35f172fe17241a06c919a69110a66375db04",
+          "training": "none"
+        },
+        {
+          "split": "dev",
+          "condition": "EXP-02",
+          "scope": "both",
+          "path": "romcomx_data/nli_experiments_v2/exp02/both/dev.jsonl",
+          "rows": 2487,
+          "sha256": "0721ccccaa56df5fc8c732eab0c90d06f3d4471cc4e84b76f2365e1facb5a4d4",
+          "training": "none"
+        },
+        {
+          "split": "dev",
+          "condition": "EXP-02",
+          "scope": "premise_only",
+          "path": "romcomx_data/nli_experiments_v2/exp02/premise_only/dev.jsonl",
+          "rows": 2487,
+          "sha256": "34dab0659d5986bc5eb74a9c90baccb0d0d4e29c0745633b993e60d5c2ea24d9",
+          "training": "none"
+        },
+        {
+          "split": "dev",
+          "condition": "EXP-02",
+          "scope": "hypothesis_only",
+          "path": "romcomx_data/nli_experiments_v2/exp02/hypothesis_only/dev.jsonl",
+          "rows": 2487,
+          "sha256": "bcc29975a5835b181fb84179451392d2a17ade468e1ad8c9ea46081a38cc8432",
+          "training": "none"
+        },
+        {
+          "split": "dev",
+          "condition": "EXP-03",
+          "scope": "both",
+          "path": "romcomx_data/nli_experiments_v2/exp03/both/dev.jsonl",
+          "rows": 2487,
+          "sha256": "03d63dcf42941aa519360e92afcf619e2ab43f06a37faa7a8248cceef915e4b3",
+          "training": "none"
+        },
+        {
+          "split": "dev",
+          "condition": "EXP-03",
+          "scope": "premise_only",
+          "path": "romcomx_data/nli_experiments_v2/exp03/premise_only/dev.jsonl",
+          "rows": 2487,
+          "sha256": "ef49d4812dc20f376288104d36579968f7342bea561430306412048879b0b78f",
+          "training": "none"
+        },
+        {
+          "split": "dev",
+          "condition": "EXP-03",
+          "scope": "hypothesis_only",
+          "path": "romcomx_data/nli_experiments_v2/exp03/hypothesis_only/dev.jsonl",
+          "rows": 2487,
+          "sha256": "d0994faa01781cb3196018020df72727d341720294ec1533274899fb20b39d31",
+          "training": "none"
+        },
+        {
+          "split": "dev",
+          "condition": "english_retention",
+          "scope": "both",
+          "path": "romcomx_data/nli_experiments_v2/english_retention/dev.jsonl",
+          "rows": 2487,
+          "sha256": "cdf46f70bd9a71b22eb23c0bd00ee271b51338322c99391a497750317afe63ef",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "EXP-00",
+          "scope": "both",
+          "path": "romcomx_data/nli_experiments_v2/exp00_reference/test.jsonl",
+          "rows": 5007,
+          "sha256": "f1ea74237a315b78ca7bdd73730e1bddeacf2cf52f5116bf6ca831db6b2a072f",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "EXP-01",
+          "scope": "both",
+          "path": "romcomx_data/nli_experiments_v2/exp01/both/test.jsonl",
+          "rows": 5007,
+          "sha256": "cb4fad61818df7cfb8e2f6ae66238590e591c01a0df8bbaa9f5f8989fe046b6d",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "EXP-01",
+          "scope": "premise_only",
+          "path": "romcomx_data/nli_experiments_v2/exp01/premise_only/test.jsonl",
+          "rows": 5007,
+          "sha256": "9aca120ee38f79e6d6d64486ed28807bbbaa464918b44ba9481df6a990617288",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "EXP-01",
+          "scope": "hypothesis_only",
+          "path": "romcomx_data/nli_experiments_v2/exp01/hypothesis_only/test.jsonl",
+          "rows": 5007,
+          "sha256": "fc52bb10f43af588989cd9d486b3fba167a3e4e837715d51d162bfac97c4cb85",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "EXP-02",
+          "scope": "both",
+          "path": "romcomx_data/nli_experiments_v2/exp02/both/test.jsonl",
+          "rows": 5007,
+          "sha256": "d1857cfcf73395c355131a466985008d31c53f1df71ccf77d15f756c7350fb32",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "EXP-02",
+          "scope": "premise_only",
+          "path": "romcomx_data/nli_experiments_v2/exp02/premise_only/test.jsonl",
+          "rows": 5007,
+          "sha256": "226ce8a56f94d92eb9d5b83d6d9e04192cb5029f70624272b8aaf1a5b5d6e19c",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "EXP-02",
+          "scope": "hypothesis_only",
+          "path": "romcomx_data/nli_experiments_v2/exp02/hypothesis_only/test.jsonl",
+          "rows": 5007,
+          "sha256": "79e118867a2b4f19b05e5c1383c3d8ce0474a157d75c9372532d1d07f4e17729",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "EXP-03",
+          "scope": "both",
+          "path": "romcomx_data/nli_experiments_v2/exp03/both/test.jsonl",
+          "rows": 5007,
+          "sha256": "f9b8a94bb5c14fdc73a0116b04de980342631b12f7dcc79279be87435fcc8d12",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "EXP-03",
+          "scope": "premise_only",
+          "path": "romcomx_data/nli_experiments_v2/exp03/premise_only/test.jsonl",
+          "rows": 5007,
+          "sha256": "6879519bfa116f3f718ee8055ecea23c8aabbda263c18d58e1f097d3bd2293b3",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "EXP-03",
+          "scope": "hypothesis_only",
+          "path": "romcomx_data/nli_experiments_v2/exp03/hypothesis_only/test.jsonl",
+          "rows": 5007,
+          "sha256": "c56f5238945188a55c052a424b987e44c33a1075fd5e1906c177ad02f92633e3",
+          "training": "none"
+        },
+        {
+          "split": "test",
+          "condition": "english_retention",
+          "scope": "both",
+          "path": "romcomx_data/nli_experiments_v2/english_retention/test.jsonl",
+          "rows": 5007,
+          "sha256": "06fb230d98c1990c412271116c2815ddfa2af17a56ce7dc9f0eb4a307f3328a9",
+          "training": "none"
+        }
+      ]
+    },
+    "note": "English retention is not code-mixed robustness; no model evaluation is run by this pipeline."
+  }
+}

@@ -7,8 +7,9 @@ from typing import Any
 
 from romcom_data.augmentation import levenshtein_distance
 from romcom_data.nli_exp_romanize import FieldRomanization, HindiToken, NliLexicon
+from romcom_data.nli_exp_variant_exclusions import excluded_variant_keys
 from romcom_data.stable_hash import derive_rng
-from romcom_data.text_utils import DEVANAGARI
+from romcom_data.text_utils import DEVANAGARI, nfc
 
 LATIN = "abcdefghijklmnopqrstuvwxyz"
 P_VARIANT = 0.35
@@ -16,10 +17,16 @@ BASE_SEED = 42
 MAX_NOISE_ATTEMPTS = 64
 
 
-def build_noncanonical_pools(lexicon: NliLexicon) -> dict[str, list[list[Any]]]:
+def build_noncanonical_pools(
+    lexicon: NliLexicon,
+    *,
+    drop_variants: set[tuple[str, str]] | None = None,
+) -> dict[str, list[list[Any]]]:
     """native -> [[variant, count], ...] excluding canonical with d>=1."""
+    drop = drop_variants if drop_variants is not None else excluded_variant_keys()
     pools: dict[str, list[list[Any]]] = {}
     for native, pairs in lexicon.native_to_variants.items():
+        native_key = nfc(native)
         canon = lexicon.native_to_canonical.get(native, "").casefold()
         alts: list[list[Any]] = []
         for variant, count in pairs:
@@ -28,9 +35,11 @@ def build_noncanonical_pools(lexicon: NliLexicon) -> dict[str, list[list[Any]]]:
                 continue
             if levenshtein_distance(canon, v) < 1:
                 continue
+            if (native_key, v) in drop:
+                continue
             alts.append([v, count])
         if alts:
-            pools[native] = alts
+            pools[native_key] = alts
     return pools
 
 
@@ -115,14 +124,15 @@ def apply_exp02(
 ) -> tuple[str, list[dict[str, Any]]]:
     repl: dict[tuple[int, int], str] = {}
     traces: list[dict[str, Any]] = []
+    field_name = (
+        field.tokens[0].field if field.tokens else "premise"
+    )
+    rng = derive_rng(BASE_SEED, example_id, "EXP-02", salt=field_name)
     for token in field.tokens:
         if not pools.eligible(token):
             continue
-        rng = derive_rng(BASE_SEED, example_id, "EXP-02", salt=token.field)
         if rng.random() > P_VARIANT:
             continue
-        from romcom_data.text_utils import nfc
-
         native_key = nfc(token.native_text.rstrip("।॥").strip())
         pool = pools.pool(native_key)
         if not pool:
@@ -162,35 +172,37 @@ def apply_exp03(
 ) -> tuple[str, list[dict[str, Any]]]:
     repl: dict[tuple[int, int], str] = {}
     traces: list[dict[str, Any]] = []
+    by_field: dict[str, list[dict[str, Any]]] = {}
     for change in exp02_traces:
         if change.get("operation") != "attested_variant":
             continue
-        field_name = change["field"]
+        by_field.setdefault(change["field"], []).append(change)
+    for field_name, changes in by_field.items():
+        changes.sort(key=lambda c: c["token_index"])
         rng = derive_rng(BASE_SEED, example_id, "EXP-03", salt=field_name)
-        token_index = change["token_index"]
-        token = next(t for t in field.tokens if t.token_index == token_index)
-        canon = change["canonical"]
-        exp02_sel = change["selected"]
-        d = int(change["levenshtein_distance"])
-        native_key = token.native_text.rstrip("।॥").strip()
-        from romcom_data.text_utils import nfc
-
-        forbidden = pools.attested_all(nfc(native_key))
-        noisy, ok, attempts = _noise_at_distance(canon, d, rng, forbidden, exp02_sel)
-        if not ok:
-            raise ValueError(f"EXP-03 failed for {example_id} field={field_name} token={token_index}")
-        repl[(token.roman_start, token.roman_end)] = noisy
-        traces.append(
-            {
-                "field": field_name,
-                "token_index": token_index,
-                "native_offsets": change["native_offsets"],
-                "canonical": canon,
-                "exp02_selected": exp02_sel,
-                "selected": noisy,
-                "operation": "random_noise",
-                "levenshtein_distance": d,
-                "resample_attempts": attempts,
-            }
-        )
+        for change in changes:
+            token_index = change["token_index"]
+            token = next(t for t in field.tokens if t.token_index == token_index)
+            canon = change["canonical"]
+            exp02_sel = change["selected"]
+            d = int(change["levenshtein_distance"])
+            native_key = token.native_text.rstrip("।॥").strip()
+            forbidden = pools.attested_all(nfc(native_key))
+            noisy, ok, attempts = _noise_at_distance(canon, d, rng, forbidden, exp02_sel)
+            if not ok:
+                raise ValueError(f"EXP-03 failed for {example_id} field={field_name} token={token_index}")
+            repl[(token.roman_start, token.roman_end)] = noisy
+            traces.append(
+                {
+                    "field": field_name,
+                    "token_index": token_index,
+                    "native_offsets": change["native_offsets"],
+                    "canonical": canon,
+                    "exp02_selected": exp02_sel,
+                    "selected": noisy,
+                    "operation": "random_noise",
+                    "levenshtein_distance": d,
+                    "resample_attempts": attempts,
+                }
+            )
     return _apply_replacements(field.roman, repl), traces

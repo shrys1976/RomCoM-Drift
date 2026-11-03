@@ -1,0 +1,65 @@
+{
+  "rows_by_split": {
+    "train": 375565,
+    "dev": 2487,
+    "test": 5007
+  },
+  "token_methods": {
+    "fallback_charmap": 1890342,
+    "dakshina_canonical": 11061305,
+    "digit_map": 2431
+  },
+  "dictionary_coverage_pct": 85.4046,
+  "oov_rate_pct": 14.5954,
+  "fallback_failure_count": 0,
+  "exp02_eligible_tokens": 5821353,
+  "exp02_selected_tokens": 2036028,
+  "exp02_distance_distribution": {
+    "2": 614918,
+    "1": 1342208,
+    "3": 67100,
+    "4": 8247,
+    "6": 689,
+    "5": 2831,
+    "7": 35
+  },
+  "exp03_resample_histogram": {
+    "1": 2032127,
+    "2": 3836,
+    "3": 64,
+    "4": 1
+  },
+  "unique_oov_native_words": 49424,
+  "exp02_selection_by_split": {
+    "train": {
+      "eligible_tokens": 5717089,
+      "selected_tokens": 1999519,
+      "empirical_p_variant": 0.349744,
+      "fields_with_eligible_tokens": 738264,
+      "fields_untouched": 108412,
+      "fields_partial": 602973,
+      "fields_all_selected": 26879,
+      "partial_field_fraction": 0.816744
+    },
+    "dev": {
+      "eligible_tokens": 34512,
+      "selected_tokens": 12123,
+      "empirical_p_variant": 0.351269,
+      "fields_with_eligible_tokens": 4896,
+      "fields_untouched": 722,
+      "fields_partial": 4019,
+      "fields_all_selected": 155,
+      "partial_field_fraction": 0.820874
+    },
+    "test": {
+      "eligible_tokens": 69752,
+      "selected_tokens": 24386,
+      "empirical_p_variant": 0.34961,
+      "fields_with_eligible_tokens": 9879,
+      "fields_untouched": 1428,
+      "fields_partial": 8096,
+      "fields_all_selected": 355,
+      "partial_field_fraction": 0.819516
+    }
+  }
+}

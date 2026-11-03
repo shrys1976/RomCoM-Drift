@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "issues": [],
+  "issue_count": 0,
+  "exp02_exp03_checks": 2047971,
+  "exp02_exp03_ok": 2047971,
+  "reproducibility": {
+    "reproducibility_checked": 6000,
+    "fallback_failures_in_sample": 0
+  }
+}

@@ -40,6 +40,12 @@ romcomx_data/nli_alignment/verified_pairs.jsonl
 # NLI experiment splits and construction logs (local only)
 romcomx_data/nli_experiments/exp*/
 romcomx_data/nli_experiments/logs/
+romcomx_data/nli_experiments_v1/exp*/
+romcomx_data/nli_experiments_v1/logs/
+romcomx_data/nli_experiments_v1/english_retention/
+romcomx_data/nli_experiments_v2/exp*/
+romcomx_data/nli_experiments_v2/logs/
+romcomx_data/nli_experiments_v2/english_retention/
 
 # Generated JSONL anywhere except committed samples
 *.jsonl
