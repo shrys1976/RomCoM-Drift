@@ -1,0 +1,36 @@
+{
+  "rows_by_split": {
+    "train": 375565,
+    "dev": 2487,
+    "test": 5007
+  },
+  "token_methods": {
+    "fallback_charmap": 1890342,
+    "dakshina_canonical": 11061305,
+    "digit_map": 2431
+  },
+  "dictionary_coverage_pct": 85.4046,
+  "oov_rate_pct": 14.5954,
+  "fallback_failure_count": 0,
+  "exp02_eligible_tokens": 5857043,
+  "exp02_selected_tokens": 2047971,
+  "exp02_distance_distribution": {
+    "2": 616111,
+    "1": 1345462,
+    "3": 72535,
+    "4": 9518,
+    "6": 629,
+    "5": 2923,
+    "7": 764,
+    "8": 29
+  },
+  "exp03_resample_histogram": {
+    "1": 2043379,
+    "2": 4389,
+    "3": 153,
+    "4": 32,
+    "5": 10,
+    "6": 8
+  },
+  "unique_oov_native_words": 49424
+}

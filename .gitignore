@@ -37,6 +37,10 @@ romcomx_data/nli_hindi_native/hindi_source_manifest.csv
 romcomx_data/nli_alignment/candidate_alignment.csv
 romcomx_data/nli_alignment/verified_pairs.jsonl
 
+# NLI experiment splits and construction logs (local only)
+romcomx_data/nli_experiments/exp*/
+romcomx_data/nli_experiments/logs/
+
 # Generated JSONL anywhere except committed samples
 *.jsonl
 !data/samples/**/*.jsonl

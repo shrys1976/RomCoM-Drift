@@ -35,6 +35,7 @@ _MATRA = {
     "ृ": "ri", "ं": "n", "ः": "h", "ँ": "n",
 }
 _VIRAMA = "्"
+_NUKTA = "\u093c"
 
 
 @dataclass(frozen=True)
@@ -76,6 +77,9 @@ def fallback_transliterate(native: str) -> str:
             i += 1
             continue
         if ch == _VIRAMA:
+            i += 1
+            continue
+        if ch == _NUKTA:
             i += 1
             continue
         out.append(ch)
