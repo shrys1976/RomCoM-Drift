@@ -69,3 +69,4 @@ romcomx_data/nli_investigation/make_dataset.py
 **/.DS_Store
 logs/
 *.ipynb_checkpoints/
+kaggle_upload/
